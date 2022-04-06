@@ -44,18 +44,11 @@ class AccountManager(BaseUserManager):
             password=password,
         )
         user.is_admin = True
-        user.status = "approved"
         user.save(using=self._db)
         return user
 
 
 class Account(AbstractBaseUser):
-    STATUS = [
-        ("unapproved", "Unapproved"),
-        ("approved", "Approved"),
-        ("banned", "Banned"),
-    ]
-
     email = models.EmailField(
         verbose_name="email address",
         max_length=255,
@@ -64,7 +57,6 @@ class Account(AbstractBaseUser):
 
     first_name = models.CharField(max_length=200, default="")
     last_name = models.CharField(max_length=200, default="")
-    status = models.CharField(max_length=15, choices=STATUS, default="unapproved")
     date_registered = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     bio = models.TextField(blank=True, max_length=500)
