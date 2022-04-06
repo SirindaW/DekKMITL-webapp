@@ -1,4 +1,4 @@
-{% extends 'components/base.html' %} {% block site_title%} Home {% endblock %}
+{% extends 'components/base.html' %} {% load static%} {% block site_title%} Home {% endblock %}
 
 <!-- Prompt Messages -->
 {% block content %} {% if messages %} {% for message in messages %}
@@ -45,5 +45,6 @@
     {% lorem 4 b random %}
   </p>
 </div>
+<img src="{% static 'images/dog.jpg'%}">
 
 {% endblock %}
