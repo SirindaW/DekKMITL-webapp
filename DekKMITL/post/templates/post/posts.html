@@ -1,0 +1,21 @@
+{% extends 'components/base.html' %}
+
+{% block content %}
+
+<!--   This is Posts page  -->
+
+
+{% for post in posts%}
+---------
+    <div> POST_ID :{{post.id}} </div>
+    <div> POST_TITLE{{post.title}} </div>
+    <div> POST_CONTENT{{post.content}} </div>
+    <div> POST_AUTHOR{{post.author}} </div>
+---------
+{% endfor %}
+
+
+
+
+
+{% endblock %}
