@@ -21,5 +21,5 @@ class Post(models.Model):
     post_likes = models.PositiveIntegerField(default=0,null=False)
     post_fav = models.PositiveBigIntegerField(default=0,null=False)
     slug = models.SlugField(unique=True,max_length=300)
-    author = models.ForeignKey(Account,on_delete=models.models.CASCADE)
+    author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE)
     # tags = TaggableManager()

@@ -70,7 +70,7 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = ["first_name", "last_name"]
 
     def __str__(self) -> str:
-        return self.email
+        return str(self.first_name) + " " +str(self.last_name)
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
