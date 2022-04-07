@@ -14,16 +14,22 @@
 /*————————————*
 $CONTENTS
 *————————————
+* often use…………
 * navbar…………
 * footer…………
 */
 
 
+/* ---------------------------------often use--------------------------------------- */
+
+
 /* main background */
 
 .mainbg {
+    width: 100%;
     background-repeat: repeat;
-    background-image: url("/statics/images/mainbg.jpg");
+    background-image: url("/statics/images/mainbg.svg");
+    padding: 50px 250px 250px 250px;
 }
 
 
@@ -64,6 +70,24 @@ $CONTENTS
 .blogfont {
     font-size: 20px;
     font-family: 'Bai Jamjuree', sans-serif;
+}
+
+
+/*effect-underline*/
+
+.effect-underline:after {
+    background: none repeat scroll 0 0 transparent;
+    content: "";
+    display: block;
+    height: 1.5px;
+    margin-left: 3px;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+}
+
+.effect-underline:hover:after {
+    width: 100%;
 }
 
 
@@ -108,7 +132,6 @@ $CONTENTS
 .tag-text a {
     font-weight: 400;
     text-decoration: none;
-    color: #fff;
     font-size: 21px;
     margin-left: 6px;
 }
@@ -122,14 +145,25 @@ $CONTENTS
     border-radius: 40px;
     height: 45px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    transition: background-color .3s ease-in-out;
 }
 
 .login-text a {
     text-decoration: none;
-    color: #fff;
     font-size: 23px;
     font-weight: 700;
     margin: 0 20px 0 20px;
+    transition: color .3s ease-in-out;
+}
+
+.login-text a:hover,
+.login-frame:hover .login-text a {
+    color: #E05F4C;
+}
+
+.login-frame:hover,
+.login-text a:hover .login-frame {
+    background-color: #fff;
 }
 
 
@@ -152,7 +186,6 @@ $CONTENTS
     transition: all .5s ease-in-out;
     padding-right: 40px;
     background-color: transparent;
-    color: #fff;
 }
 
 .input-search::placeholder {
@@ -237,9 +270,20 @@ $CONTENTS
     margin-bottom: 15px;
 }
 
+.footer-effect-color {
+    transition: all .3s ease;
+}
+
 .social li a,
 .contactus li a {
     font-size: 18px;
+    transition: all .3s ease;
+}
+
+.social li a:hover,
+.contactus li a:hover,
+.footer-effect-color:hover {
+    text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.411);
 }
 
 .footer-pic {
