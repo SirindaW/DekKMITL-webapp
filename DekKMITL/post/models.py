@@ -15,3 +15,15 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+        
+class Comment(models.Model):
+    post= models.ForeignKey(Post,blank=True,null=True,on_delete=models.CASCADE)
+    content = models.TextField(max_length=1200)
+    author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True,blank=True)
+    comment_likes = models.PositiveIntegerField(default=0,null=False)
+    replies = models.ForeignKey('post.Comment',blank=True,null=True,on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"comment id_{self.id} : " + str(self.post)

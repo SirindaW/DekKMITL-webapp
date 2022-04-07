@@ -1,22 +1,12 @@
 {% extends 'components/base.html' %}
 
-{% block content %}
 
-<!--   This is Posts page  -->
-
-
-{% for post in posts%}
----------
+{% block content%}
+this is post detail - {{post.title}}
     <div> POST_ID :{{post.id}} </div>
     <div> POST_TITLE{{post.title}} </div>
     <div> POST_CONTENT{{post.content}} </div>
     <div> POST_AUTHOR{{post.author}} </div>
-    <div><a href="{% url 'post_detail_view' post.slug%}"> {{post.slug}}</a> </div>
----------
-{% endfor %}
-
-
-
-
+    <div> LINK-TO-THIS-POST=<a href="{% url 'post_detail_view' post.slug%}"> {{post.slug}}</a> </div>
 
 {% endblock %}
