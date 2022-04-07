@@ -2,29 +2,17 @@
 
 <!-- Prompt Messages -->
 {% block content %} {% if messages %} {% for message in messages %}
-<div
-  class="bg-warning pb-0"
-  {%
-  if
-  message.tags
-  %}
-  class="{{ message.tags }}"
-  {%
-  endif
-  %}
->
-  <div class="container">{{ message }}</div>
+<div class="bg-warning pb-0" {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+    <div class="container">{{ message }}</div>
 </div>
 {% endfor %} {% endif %}
 
 <div class="bg">
-  <!-- Body -->
-  <h1 class="container fw-bold pt-5">MySite Home Page</h1>
-  <p class="text-dark container">
-    Home page content (ข้อความหน้าหลัก) 
-    {% lorem 4 b random %}
-  </p>
+    <!-- Body -->
+    <h1 class="container fw-bold pt-5">MySite Home Page</h1>
+    <p class="text-dark container">
+        Home page content (ข้อความหน้าหลัก) {% lorem 4 b random %}
+    </p>
 </div>
-<img src="{% static 'images/dog.jpg'%}">
 
 {% endblock %}
