@@ -1,35 +1,35 @@
 {% load static%}
-<nav class="navbar">
-    <div class="navbar-container">
-        <div class="logo">
+<nav class="redorange">
+    <div class="navbar-container vcenter">
+        <div class="logo vcenter">
             <a href="/"><img src="{% static 'images/logotop.svg'%}" style="width:100%"></a>
         </div>
-        <div class="toolbar-container">
-            <div class="createblog">
+        <div class="toolbar-container vcenter">
+            <div class="createblog vcenter">
                 <div class="createblog-icon">
-                    <a href="#"><img src="{% static 'images/createblog.svg'%}" style="width:100%"></a>
+                    <a href="#" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:100%"></a>
                 </div>
                 <div class="createblog-text"><a href="#">ตั้งกระทู้</a></div>
             </div>
-            <div class="chooseroom">
+            <div class="chooseroom vcenter">
                 <div class="chooseroom-icon">
-                    <a href="#"><img src="{% static 'images/room.svg'%}" style="width:100%"></a>
+                    <a href="#" class="vcenter"><img src="{% static 'images/room.svg'%}" style="width:100%"></a>
                 </div>
                 <div class="chooseroom-text"><a href="#">เลือกห้อง</a></div>
             </div>
-            <div class="tag">
+            <div class="tag vcenter">
                 <div class="tag-icon">
-                    <a href="#"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
+                    <a href="#" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
                 </div>
                 <div class="tag-text"><a href="#">แท็ก</a></div>
             </div>
         </div>
-        <div class="searchlogin-container">
-            <div class="login-frame">
+        <div class="searchlogin-container vcenter">
+            <div class="login-frame vcenter">
                 <div class="login-text"><a href="{% url 'login_view' %}">Login ></a></div>
             </div>
             <div class="search-box">
-                <button class="btn-search"></button>
+                <button class="btn-search vhcenter"></button>
                 <input type="text" id="mysearch" class="input-search" placeholder="ค้นหาบน Dek-KMITL">
             </div>
         </div>
@@ -37,7 +37,7 @@
 </nav>
 
 <!-- search script -->
-<script>
+<!-- <script>
     var input = document.getElementById("mysearch");
     input.addEventListener("keyup", function(event) {
         if (event.keyCode === 13) {
@@ -46,4 +46,4 @@
             location.replace(q)
         }
     });
-</script>
+</script> -->
