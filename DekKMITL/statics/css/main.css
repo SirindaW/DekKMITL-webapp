@@ -30,7 +30,7 @@ $CONTENTS
     width: 100%;
     background-repeat: repeat;
     background-image: url("/statics/images/mainbg.svg");
-    padding: 50px 250px 250px 250px;
+    padding: 50px 0 250px 0;
 }
 
 
@@ -69,7 +69,7 @@ $CONTENTS
 /* blog font */
 
 .blogfont {
-    font-size: 20px;
+    font-size: 19px;
     font-family: 'Bai Jamjuree', sans-serif;
 }
 
@@ -314,6 +314,42 @@ $CONTENTS
     border: 1px solid #FFFFFFBF;
     border-radius: 33px;
     padding: 20px 25px 20px 25px;
+    margin-bottom: 40px;
+}
+
+.allpopblog {
+    display: block;
+    justify-content: center;
+    padding-bottom: 25px;
+}
+
+.all-latest-blog {
+    display: block;
+    justify-content: center;
+}
+
+.tempblog {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 25px;
+}
+
+.all-poproom {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 25px;
+    gap: 15px;
+}
+
+.edublog {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding-bottom: 30px;
 }
 
 
@@ -323,6 +359,17 @@ $CONTENTS
     font-size: 35px;
     font-weight: 600;
     border-bottom: 2px solid #FFFFFFBF;
+}
+
+.top3-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #FFFFFFBF;
+}
+
+.title-top3 {
+    font-size: 35px;
+    font-weight: 600;
 }
 
 
@@ -353,16 +400,32 @@ $CONTENTS
 }
 
 
-/* ---top(3) popular blog--- */
+/* blog not found */
 
-.allpopblog {
-    display: block;
-    justify-content: center;
+.notfound-blog {
+    height: 300px;
+    font-size: 40px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.308);
 }
 
-.popblog {
-    padding: 25px;
+
+/* blog with thumbnail */
+
+.thumbnail-blog {
+    padding: 30px;
     height: 400px;
+}
+
+
+/* small blog no thumbnail */
+
+.no-thumbnail-blog {
+    height: 120px;
+    padding: 20px;
+    background-color: #131313B2;
+    border: 1px solid #FFFFFFBF;
+    border-radius: 33px;
 }
 
 
@@ -385,7 +448,7 @@ $CONTENTS
 .blog-detail-container {
     background: #8a858534;
     padding: 20px;
-    height: auto;
+    max-height: 110px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
 }
@@ -394,8 +457,8 @@ $CONTENTS
 /* user profile picture */
 
 .user-profile-pic {
-    height: 3vw;
-    width: 3vw;
+    height: 70px;
+    width: 70px;
     border-radius: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -405,15 +468,73 @@ $CONTENTS
 
 /* blog detail */
 
+.blog-name {
+    line-height: 0.7cm;
+}
+
 .blog-detail-1,
 .blog-detail-2 {
     display: flex;
     justify-content: space-between;
 }
 
-.blog-username-date,
+.blog-username-date a,
 .blog-like-comment {
     color: rgba(255, 255, 255, 0.596);
     font-size: 15px;
     font-weight: 300;
+}
+
+
+/* choose time dropdown */
+
+.time-choose-dropbtn {
+    background: transparent;
+    padding: 16px;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+.time-choose-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.time-choose-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.time-choose-dropdown-content a {
+    color: rgb(43, 43, 43);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: all .2s ease-in;
+}
+
+.time-choose-dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
+}
+
+
+/* -----popular room----- */
+
+.poproom {
+    transition: all .15s ease-in;
+    border-radius: 10%;
+}
+
+.poproom:hover {
+    background-color: rgba(255, 255, 255, 0.096);
 }

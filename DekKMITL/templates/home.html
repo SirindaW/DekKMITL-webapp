@@ -7,33 +7,49 @@
 </div>
 {% endfor %} {% endif %}
 
-<div class="home-container">
+<div class="home-container" style="max-width:1400px;margin:auto">
     <div class="topblog-container">
         <div class="homeblog-container" style="width:49%">
-            <div class="home-title">TOP3 กระทู้ยอดนิยม</div>
-            <div class="allpopblog">
+            <div class="top3-container">
+                <div class="title-top3" style="width:70%">TOP3 กระทู้ยอดนิยม</div>
+                <div class="time-choose vhcenter">
+                    <div class="in" style="font-size:19px">ใน</div>
+                    <div class="time-choose-dropdown">
+                        <button onclick="myFunction()" class="time-choose-dropbtn">หนึ่งสัปดาห์ ▾</button>
+                        <div id="time_choose_dropdown" class="time-choose-dropdown-content">
+                            <a href="#">หนึ่งวัน</a>
+                            <a href="#">หนึ่งสัปดาห์</a>
+                            <a href="#">หนึ่งเดือน</a>
+                            <a href="#">เวลาทั้งหมด</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="allpopblog" style="min-height:300px">
+                <!-- ******************blog not found*****************8 -->
+                <!-- <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div> -->
                 <!-- ********************loop blog*********************** -->
-                <div class="popblog">
+                <div class="thumbnail-blog">
                     <div class="blog-cover-container">
                         <a href="#link to blog">
-                            <div class="blog-cover" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                            <div class="blog-cover" style="background-image: url('/statics/images/defaultcover.png')"></div>
                         </a>
                     </div>
                     <div class="blog-detail-container vhcenter">
                         <div class="user-profile-container vcenter" style="width:15%">
                             <a href="#link to user profile">
-                                <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                                <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png');height:60px;width:60px"></div>
                             </a>
                         </div>
                         <div class="blog-detail" style="width:85%">
                             <div class="blog-detail-1">
-                                <div class="blog-name"><a href="#link to blog">ขอรีวิววิชา softdev</a></div>
+                                <div class="blog-name" style="max-width:80%"><a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริ</a></div>
                                 <div class="blog-view">
                                     <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
                                 </div>
                             </div>
                             <div class="blog-detail-2">
-                                <div class="blog-username-date">user11234 : 29 01 65</div>
+                                <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
                                 <div class="blog-like-comment vhcenter">
                                     <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
                                     <img src="{% static 'images/comment.png'%}" style="width:15px">50
@@ -42,29 +58,145 @@
                         </div>
                     </div>
                 </div>
+                <!-- ************************************************* -->
             </div>
         </div>
         <div class="latest-blog-container" style="width:49%;padding: 20px">
             <div class="home-title" style="border:0">กระทู้ล่าสุด</div>
-            <div class="latest-blog">???</div>
+            <div class="all-latest-blog" style="min-height:300px">
+                <!-- ******************blog not found*****************8 -->
+                <!-- <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้ล่าสุด</div> -->
+                <!-- ********************loop blog*********************** -->
+                <div class="no-thumbnail-blog vhcenter">
+                    <div class="user-profile-container vcenter" style="width:15%">
+                        <a href="#link to user profile">
+                            <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                        </a>
+                    </div>
+                    <div class="blog-detail" style="width:85%">
+                        <div class="blog-detail-1">
+                            <div class="blog-name" style="max-width:80%"><a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ</a></div>
+                            <div class="blog-view">
+                                <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
+                            </div>
+                        </div>
+                        <div class="blog-detail-2">
+                            <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
+                            <div class="blog-like-comment vhcenter">
+                                <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
+                                <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ************************************************* -->
+            </div>
         </div>
     </div>
     <div class="homeblog-container">
         <div class="home-title">กระทู้ชั่วคราว</div>
-        <div class="tempblog">???</div>
+        <div class="tempblog" style="min-height:150px">
+            <!-- ******************blog not found*****************8 -->
+            <!-- <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้</div> -->
+            <!-- ********************loop blog*********************** -->
+            <div class="no-thumbnail-blog vhcenter">
+                <div class="user-profile-container vcenter" style="width:15%">
+                    <a href="#link to user profile">
+                        <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                    </a>
+                </div>
+                <div class="blog-detail" style="width:85%">
+                    <div class="blog-detail-1">
+                        <div class="blog-name" style="max-width:80%"><a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ</a></div>
+                        <div class="blog-view">
+                            <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
+                        </div>
+                    </div>
+                    <div class="blog-detail-2">
+                        <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
+                        <div class="blog-like-comment vhcenter">
+                            <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
+                            <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ************************************************* -->
+        </div>
         <div class="see-all redorange vhcenter"><a href="#" class="see-all-text">ดูทั้งหมด ></a></div>
     </div>
     <div class="homeblog-container">
         <div class="home-title">ห้องยอดนิยม</div>
-        <div class="poproom">???</div>
+        <div class="all-poproom">
+            <!-- ********************loop room*********************** -->
+            <div class="poproom">
+                <div class="poproom-pic vhcenter">
+                    <img src="{% static 'images/music.png'%}" style="width:90px;height:90px">
+                </div>
+                <div class="poproom-name vhcenter" style="padding-top:10px">เพลง</div>
+            </div>
+            <!-- ************************************************* -->
+        </div>
         <div class="see-all redorange vhcenter"><a href="#" class="see-all-text">ดูทั้งหมด ></a></div>
     </div>
     <div class="homeblog-container">
         <div class="home-title ">Update เรื่องเรียน</div>
-        <div class="edublog ">???</div>
+        <div class="edublog ">
+            <!-- ******************blog not found*****************8 -->
+            <!-- <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div> -->
+            <!-- ********************loop blog*********************** -->
+            <div class="thumbnail-blog">
+                <div class="blog-cover-container">
+                    <a href="#link to blog">
+                        <div class="blog-cover" style="background-image: url('/statics/images/defaultcover.png')"></div>
+                    </a>
+                </div>
+                <div class="blog-detail-container vhcenter">
+                    <div class="user-profile-container vcenter" style="width:15%">
+                        <a href="#link to user profile">
+                            <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png');height:60px;width:60px"></div>
+                        </a>
+                    </div>
+                    <div class="blog-detail" style="width:85%">
+                        <div class="blog-detail-1">
+                            <div class="blog-name" style="max-width:80%"><a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริ</a></div>
+                            <div class="blog-view">
+                                <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
+                            </div>
+                        </div>
+                        <div class="blog-detail-2">
+                            <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
+                            <div class="blog-like-comment vhcenter">
+                                <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
+                                <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ************************************************* -->
+        </div>
         <div class="see-all redorange vhcenter "><a href="# " class="see-all-text">ดูทั้งหมด ></a>
         </div>
     </div>
 </div>
+<script>
+    function myFunction() {
+        document.getElementById("time_choose_dropdown").classList.toggle("show");
+    }
 
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.time-choose-dropbtn')) {
+            var dropdowns = document.getElementsByClassName("time-choose-dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
 {% endblock %}
