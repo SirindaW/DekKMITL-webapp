@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'IBM Plex Sans Thai', sans-serif;
+    font-size: 21px;
+    color: #fff;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+/*————————————*
+$CONTENTS
+*————————————
+* navbar…………
+* footer…………
+*/
+
+
+/* main background */
+
+.mainbg {
+    background-repeat: repeat;
+    background-image: url("/statics/images/mainbg.jpg");
+}
+
+
+/* vertical(|) center only */
+
+.vcenter {
+    display: flex;
+    align-items: center;
+}
+
+
+/* horizontal(|) center only */
+
+.hcenter {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* vertical(|) horizontal(—) center */
+
+.vhcenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* web theme color */
+
+.redorange {
+    background-color: #E05F4C;
+}
+
+
+/* blog font */
+
+.blogfont {
+    font-size: 20px;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+
+
+/* ---------------------------------navbar--------------------------------------- */
+
+
+/* container */
+
+.navbar-container {
+    height: 100px;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 30%;
+    justify-content: left;
+    margin-left: 20px;
+}
+
+.searchlogin-container {
+    width: 30%;
+    justify-content: right;
+    margin-right: 30px;
+}
+
+
+/* toolbar */
+
+.toolbar-container {
+    width: 25%;
+}
+
+.createblog,
+.chooseroom,
+.tag {
+    justify-content: left;
+    margin: 0 auto;
+}
+
+.createblog-text a,
+.chooseroom-text a,
+.tag-text a {
+    font-weight: 400;
+    text-decoration: none;
+    color: #fff;
+    font-size: 21px;
+    margin-left: 6px;
+}
+
+
+/* login */
+
+.login-frame {
+    margin-left: 10px;
+    border: 2px solid #fff;
+    border-radius: 40px;
+    height: 45px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.login-text a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 23px;
+    font-weight: 700;
+    margin: 0 20px 0 20px;
+}
+
+
+/* search */
+
+.search-box {
+    width: fit-content;
+    height: fit-content;
+    position: relative;
+}
+
+.input-search {
+    height: 50px;
+    width: 40px;
+    border-style: none;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    border-radius: 25px;
+    transition: all .5s ease-in-out;
+    padding-right: 40px;
+    background-color: transparent;
+    color: #fff;
+}
+
+.input-search::placeholder {
+    color: rgba(255, 255, 255, 0.637);
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 100;
+}
+
+.btn-search {
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    font-size: 20px;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    background-color: transparent;
+    pointer-events: painted;
+}
+
+.btn-search::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    transform: translate(-4px, -4px);
+}
+
+.btn-search::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 12px;
+    background: #fff;
+    transform: translate(6px, 6px) rotate(315deg);
+}
+
+.btn-search:focus~.input-search {
+    width: 280px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 1.5);
+}
+
+.input-search:focus {
+    width: 280px;
+    border-radius: 0px;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, .5);
+    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 1.5);
+}
+
+
+/* ---------------------------------footer--------------------------------------- */
+
+
+/* container */
+
+.footer-container {
+    height: 300px;
+    justify-content: space-between;
+}
+
+.footer-content {
+    width: 50%;
+}
+
+.footer-toolbar,
+.social-container,
+.contactus-container {
+    margin: 40px;
+}
+
+.footer-margin {
+    margin-bottom: 15px;
+}
+
+.social li a,
+.contactus li a {
+    font-size: 18px;
+}
+
+.footer-pic {
+    align-self: flex-end;
+}

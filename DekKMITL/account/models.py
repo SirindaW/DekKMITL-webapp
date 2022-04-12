@@ -1,3 +1,4 @@
+from unittest.util import _MAX_LENGTH
 from django.db import models
 
 # Create your models here.
@@ -47,6 +48,11 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+def get_profile_image_filepath(self):
+    return f'profile_image/{self.pk}/profile_image.png'
+
+def get_default_profile_image():
+    return "account/default_profile_image.png"
 
 class Account(AbstractBaseUser):
     email = models.EmailField(
@@ -60,6 +66,8 @@ class Account(AbstractBaseUser):
     date_registered = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     bio = models.TextField(blank=True, max_length=500)
+    profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image)
+    hide_email = models.BooleanField(default=True)
 
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
@@ -68,6 +76,7 @@ class Account(AbstractBaseUser):
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]
+
 
     def __str__(self) -> str:
         return str(self.first_name) + " " +str(self.last_name)

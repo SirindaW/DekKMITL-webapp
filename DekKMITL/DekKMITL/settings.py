@@ -41,7 +41,11 @@ INSTALLED_APPS = [
     'account',
     'post',
     # 'taggit',
+
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 
 MIDDLEWARE = [
@@ -120,7 +124,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'statics/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'statics')
@@ -136,3 +139,10 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
     'account.backends.CaseInsensitiveModelBackend',
 )
+STATIC_URL = 'statics/'
+MEDIA_URL = '/images/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+
+TEMP = os.path.join(BASE_DIR,'media_cdn/temp')
+

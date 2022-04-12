@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 from account.models import Account
@@ -15,6 +16,10 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("post:details_view", kwargs={"post_slug": self.slug})
+    
 
         
 class Comment(models.Model):

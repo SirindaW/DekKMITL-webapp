@@ -4,9 +4,9 @@ from django.contrib import messages
 
 from account.forms import RegistrationForm, LoginForm
 
-# Create your views here.
-
 def profile_view(request, *args, **kwargs):
+    if not request.user.is_authenticated:
+        return redirect('login_view')
     user_ip = request.META.get('REMOTE_ADDR')
 
     context = {

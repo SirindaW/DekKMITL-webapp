@@ -1,0 +1,27 @@
+{% extends 'components/base.html' %}
+
+{% block content %}
+
+<!--   This is Posts page  -->
+
+
+{% for post in posts%}
+---------
+    <div> POST_ID :{{post.id}} </div>
+    <div> POST_TITLE{{post.title}} </div>
+    <div> POST_CONTENT{{post.content}} </div>
+    <div> POST_AUTHOR{{post.author}} </div>
+    {% if post.slug %}
+    <div> <a href="{{ post.get_absolute_url }}">LINK</a></div>
+    
+    {% endif%}
+    {% comment %} <div><a href="{% url 'post_detail_view' post.slug %}"> {{post.slug}}</a> </div> {% endcomment %}
+    {% comment %} <div> LINK-TO-THIS-POST=<a href="{% url 'post:details_view' {{post.slug}} %}"> {{post.slug}}</a> </div> {% endcomment %}
+---------
+{% endfor %}
+
+
+
+
+
+{% endblock %}

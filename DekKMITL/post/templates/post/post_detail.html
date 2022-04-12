@@ -7,6 +7,6 @@ this is post detail - {{post.title}}
     <div> POST_TITLE{{post.title}} </div>
     <div> POST_CONTENT{{post.content}} </div>
     <div> POST_AUTHOR{{post.author}} </div>
-    <div> LINK-TO-THIS-POST=<a href="{% url 'post_detail_view' post.slug%}"> {{post.slug}}</a> </div>
+    <div> LINK-TO-THIS-POST(ABSOLUTE_URL)=<a href="{{ post.get_absolute_url }}"> {{post.get_absolute_url}}</a> </div>
 
 {% endblock %}
