@@ -17,6 +17,7 @@ $CONTENTS
 * often use…………
 * navbar…………
 * footer…………
+* home…………
 */
 
 
@@ -41,7 +42,7 @@ $CONTENTS
 }
 
 
-/* horizontal(|) center only */
+/* horizontal(—) center only */
 
 .hcenter {
     display: flex;
@@ -131,7 +132,6 @@ $CONTENTS
 .chooseroom-text a,
 .tag-text a {
     font-weight: 400;
-    text-decoration: none;
     font-size: 21px;
     margin-left: 6px;
 }
@@ -149,7 +149,6 @@ $CONTENTS
 }
 
 .login-text a {
-    text-decoration: none;
     font-size: 23px;
     font-weight: 700;
     margin: 0 20px 0 20px;
@@ -260,6 +259,9 @@ $CONTENTS
     width: 50%;
 }
 
+
+/* toolbar */
+
 .footer-toolbar,
 .social-container,
 .contactus-container {
@@ -270,7 +272,10 @@ $CONTENTS
     margin-bottom: 15px;
 }
 
-.footer-effect-color {
+
+/* effect */
+
+.footer-effect-shadow {
     transition: all .3s ease;
 }
 
@@ -282,10 +287,133 @@ $CONTENTS
 
 .social li a:hover,
 .contactus li a:hover,
-.footer-effect-color:hover {
+.footer-effect-shadow:hover {
     text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.411);
 }
 
+
+/* girl pic */
+
 .footer-pic {
     align-self: flex-end;
+}
+
+
+/* ---------------------------------home--------------------------------------- */
+
+
+/* container */
+
+.topblog-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.homeblog-container {
+    background-color: #131313B2;
+    border: 1px solid #FFFFFFBF;
+    border-radius: 33px;
+    padding: 20px 25px 20px 25px;
+}
+
+
+/* title */
+
+.home-title {
+    font-size: 35px;
+    font-weight: 600;
+    border-bottom: 2px solid #FFFFFFBF;
+}
+
+
+/* see all */
+
+.see-all {
+    font-weight: 500;
+    width: 150px;
+    height: 50px;
+    border: 2px solid #FFFFFF;
+    border-radius: 39px;
+    margin: auto;
+    transition: background-color .3s ease-in-out;
+}
+
+.see-all-text {
+    transition: color .3s ease-in-out;
+}
+
+.see-all-text:hover,
+.see-all:hover .see-all-text {
+    color: #E05F4C;
+}
+
+.see-all:hover,
+.see-all-text:hover .see-all {
+    background-color: #fff;
+}
+
+
+/* ---top(3) popular blog--- */
+
+.allpopblog {
+    display: block;
+    justify-content: center;
+}
+
+.popblog {
+    padding: 25px;
+    height: 400px;
+}
+
+
+/* blog cover */
+
+.blog-cover-container {
+    background: #8a858534;
+}
+
+.blog-cover {
+    height: 270px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+
+/* blog detail container*/
+
+.blog-detail-container {
+    background: #8a858534;
+    padding: 20px;
+    height: auto;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+
+/* user profile picture */
+
+.user-profile-pic {
+    height: 3vw;
+    width: 3vw;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+}
+
+
+/* blog detail */
+
+.blog-detail-1,
+.blog-detail-2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.blog-username-date,
+.blog-like-comment {
+    color: rgba(255, 255, 255, 0.596);
+    font-size: 15px;
+    font-weight: 300;
 }
