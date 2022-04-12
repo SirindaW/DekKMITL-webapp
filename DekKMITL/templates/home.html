@@ -7,12 +7,64 @@
 </div>
 {% endfor %} {% endif %}
 
-<div class="bg">
-    <!-- Body -->
-    <h1 class="container fw-bold pt-5">MySite Home Page</h1>
-    <p class="text-dark container">
-        Home page content (ข้อความหน้าหลัก) {% lorem 4 b random %}
-    </p>
+<div class="home-container">
+    <div class="topblog-container">
+        <div class="homeblog-container" style="width:49%">
+            <div class="home-title">TOP3 กระทู้ยอดนิยม</div>
+            <div class="allpopblog">
+                <!-- ********************loop blog*********************** -->
+                <div class="popblog">
+                    <div class="blog-cover-container">
+                        <a href="#link to blog">
+                            <div class="blog-cover" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                        </a>
+                    </div>
+                    <div class="blog-detail-container vhcenter">
+                        <div class="user-profile-container vcenter" style="width:15%">
+                            <a href="#link to user profile">
+                                <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                            </a>
+                        </div>
+                        <div class="blog-detail" style="width:85%">
+                            <div class="blog-detail-1">
+                                <div class="blog-name"><a href="#link to blog">ขอรีวิววิชา softdev</a></div>
+                                <div class="blog-view">
+                                    <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
+                                </div>
+                            </div>
+                            <div class="blog-detail-2">
+                                <div class="blog-username-date">user11234 : 29 01 65</div>
+                                <div class="blog-like-comment vhcenter">
+                                    <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
+                                    <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="latest-blog-container" style="width:49%;padding: 20px">
+            <div class="home-title" style="border:0">กระทู้ล่าสุด</div>
+            <div class="latest-blog">???</div>
+        </div>
+    </div>
+    <div class="homeblog-container">
+        <div class="home-title">กระทู้ชั่วคราว</div>
+        <div class="tempblog">???</div>
+        <div class="see-all redorange vhcenter"><a href="#" class="see-all-text">ดูทั้งหมด ></a></div>
+    </div>
+    <div class="homeblog-container">
+        <div class="home-title">ห้องยอดนิยม</div>
+        <div class="poproom">???</div>
+        <div class="see-all redorange vhcenter"><a href="#" class="see-all-text">ดูทั้งหมด ></a></div>
+    </div>
+    <div class="homeblog-container">
+        <div class="home-title ">Update เรื่องเรียน</div>
+        <div class="edublog ">???</div>
+        <div class="see-all redorange vhcenter "><a href="# " class="see-all-text">ดูทั้งหมด ></a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
