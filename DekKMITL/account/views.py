@@ -1,17 +1,25 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
 from account.forms import RegistrationForm, LoginForm
+from .models import Account
 
-def profile_view(request, *args, **kwargs):
+
+def profile_view(request,user_id=None,*args, **kwargs):
+
     if not request.user.is_authenticated:
         return redirect('login_view')
-    user_ip = request.META.get('REMOTE_ADDR')
+
+    if user_id is None:
+        account = request.user
+    else:
+        account = get_object_or_404(Account,id=user_id)
+        # account = Account.objects.get(id=user_id)
 
     context = {
-        'user_ip': user_ip
-    } 
+        'account':account,
+    }
     return render(request,'account/profile.html',context)
     
 def logout_view(request, *args, **kwargs):
@@ -50,7 +58,6 @@ def register_view(request, *args, **kwargs):
     if request.user.is_authenticated:
         messages.info(request, "You are already logged in.")
         return redirect("home_view")
-
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():

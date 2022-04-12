@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.urls import reverse
 
 # Account Model
 
@@ -48,7 +49,7 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-def get_profile_image_filepath(self):
+def get_profile_image_filepath(self,*args,**kwargs):
     return f'profile_image/{self.pk}/profile_image.png'
 
 def get_default_profile_image():
@@ -80,6 +81,10 @@ class Account(AbstractBaseUser):
 
     def __str__(self) -> str:
         return str(self.first_name) + " " +str(self.last_name)
+
+    def get_absolute_url(self):
+        return reverse("profile_view", kwargs={"user_id": self.id})
+    
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
