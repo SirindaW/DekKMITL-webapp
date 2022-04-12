@@ -10,7 +10,7 @@ class PostForm(forms.ModelForm):
         })
     )
     
-    body = forms.CharField(
+    content = forms.CharField(
         label='' ,
         widget=forms.Textarea(attrs={
             'placeholder': 'Say something...'
@@ -19,5 +19,5 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model= Post
-        fields = ['title','body']
+        fields = ['title','content']
 

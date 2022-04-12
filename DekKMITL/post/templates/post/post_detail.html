@@ -1,12 +1,22 @@
 {% extends 'components/base.html' %}
-
+{% load post_tags %}
 
 {% block content%}
 this is post detail - {{post.title}}
     <div> POST_ID :{{post.id}} </div>
     <div> POST_TITLE{{post.title}} </div>
+    <div> POST_VIEWS {{post.views}} </div>
+    <div> POST_LIKES {{post.likes.count}} </div>
     <div> POST_CONTENT{{post.content}} </div>
     <div> POST_AUTHOR{{post.author}} </div>
     <div> LINK-TO-THIS-POST(ABSOLUTE_URL)=<a href="{{ post.get_absolute_url }}"> {{post.get_absolute_url}}</a> </div>
 
+    <!-- Like Button -->
+    <form action="{% url 'post:like_view' post.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" name="post_id" value="{{post.id}}"> Like </button>
+    </form> 
+
+    <!-- Like Status -->
+    <div> Liked :  {% like_status request post.pk%}</div>
 {% endblock %}
