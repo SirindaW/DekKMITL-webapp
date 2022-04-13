@@ -1,11 +1,7 @@
 {% extends 'components/base.html' %} {% load static%} {% block site_title%} Home {% endblock %}
 
 <!-- Prompt Messages -->
-{% block content %} {% if messages %} {% for message in messages %}
-<div class="bg-warning pb-0" {% if message.tags %} class="{{ message.tags }}" {% endif %}>
-    <div class="container">{{ message }}</div>
-</div>
-{% endfor %} {% endif %}
+{% block content %}
 
 <div class="home-container" style="max-width:1400px;margin:auto">
     <div class="topblog-container">
@@ -182,7 +178,7 @@
 </div>
 <script>
     function myFunction() {
-        document.getElementById("time_choose_dropdown").classList.toggle("show");
+        document.getElementById("time_choose_dropdown").classList.toggle("time-choose-show");
     }
 
     // Close the dropdown if the user clicks outside of it
@@ -192,8 +188,8 @@
             var i;
             for (i = 0; i < dropdowns.length; i++) {
                 var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
+                if (openDropdown.classList.contains('time-choose-show')) {
+                    openDropdown.classList.remove('time-choose-show');
                 }
             }
         }

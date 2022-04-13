@@ -18,6 +18,7 @@ $CONTENTS
 * navbar…………
 * footer…………
 * home…………
+* login…………
 */
 
 
@@ -145,14 +146,14 @@ $CONTENTS
     border-radius: 40px;
     height: 45px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-    transition: background-color .3s ease-in-out;
+    transition: background-color .2s ease-in-out;
 }
 
 .login-text a {
     font-size: 23px;
     font-weight: 700;
     margin: 0 20px 0 20px;
-    transition: color .3s ease-in-out;
+    transition: color .2s ease-in-out;
 }
 
 .login-text a:hover,
@@ -276,13 +277,13 @@ $CONTENTS
 /* effect */
 
 .footer-effect-shadow {
-    transition: all .3s ease;
+    transition: all .2s ease;
 }
 
 .social li a,
 .contactus li a {
     font-size: 18px;
-    transition: all .3s ease;
+    transition: all .2s ease;
 }
 
 .social li a:hover,
@@ -382,11 +383,11 @@ $CONTENTS
     border: 2px solid #FFFFFF;
     border-radius: 39px;
     margin: auto;
-    transition: background-color .3s ease-in-out;
+    transition: background-color .2s ease-in-out;
 }
 
 .see-all-text {
-    transition: color .3s ease-in-out;
+    transition: color .2s ease-in-out;
 }
 
 .see-all-text:hover,
@@ -523,7 +524,7 @@ $CONTENTS
     background-color: #ddd;
 }
 
-.show {
+.time-choose-show {
     display: block;
 }
 
@@ -537,4 +538,93 @@ $CONTENTS
 
 .poproom:hover {
     background-color: rgba(255, 255, 255, 0.096);
+}
+
+
+/* ---------------------------------login--------------------------------------- */
+
+.login-form {
+    background-color: #FFFFFF82;
+    border-radius: 30px;
+    padding: 25px 50px 25px 50px;
+}
+
+.login-input {
+    font-weight: 400;
+    font-size: 20px;
+    color: #404040;
+    width: 100%;
+    height: 60px;
+    padding: 12px 20px;
+    border: 2px solid #404040;
+    border-radius: 25px;
+    box-sizing: border-box;
+    margin-bottom: 8px;
+}
+
+.info-title {
+    font-weight: 500;
+    color: #404040;
+    margin-left: 10px;
+}
+
+.login-detail {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-wrong {
+    margin-left: 10px;
+    font-size: 19px;
+    font-weight: 500;
+    color: rgb(167, 1, 1);
+    width: 40%;
+}
+
+.signup-forgotpw {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+.login-signup {
+    color: #404040;
+    font-size: 19px;
+    border-right: 1px solid #404040;
+    margin-right: 6px;
+    padding-right: 6px;
+}
+
+.singup-forgotpw-text,
+.login-forgotpw {
+    color: #404040;
+    font-weight: 500;
+    font-size: 19px;
+    transition: all .2s ease;
+}
+
+.login-btn {
+    font-weight: 500;
+    font-size: 22px;
+    border: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    box-sizing: border-box;
+    width: 445px;
+    height: 55px;
+    cursor: pointer;
+    margin: 30px 0 15px 0;
+    transition: all .2s ease;
+}
+
+.singup-forgotpw-text:hover,
+.login-forgotpw:hover {
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.253);
+}
+
+.login-btn:hover {
+    background-color: #fff;
+    color: #E05F4C;
+    font-weight: 600;
 }
