@@ -36,7 +36,6 @@ def login_view(request, *args, **kwargs):
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
-            print("DETECTED")
             email = form.cleaned_data.get("email")
             raw_password = form.cleaned_data.get("password")
             user = authenticate(email=email, password=raw_password)
@@ -47,6 +46,9 @@ def login_view(request, *args, **kwargs):
             else:
                 messages.error(request,"Invalid Login.")
                 form = LoginForm() 
+        else:
+            messages.error(request,"Invalid Login.")
+            form = LoginForm() 
 
     else:
         form = LoginForm()
