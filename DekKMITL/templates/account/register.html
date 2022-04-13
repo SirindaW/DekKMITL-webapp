@@ -10,13 +10,15 @@
     <div class="signup-form">
         <!-- Form -->
         <form method="POST">{% csrf_token %}
-            <div class="info-container">
-                <div class="info-title">ชื่อจริง</div>
-                <input class="info-input" type="text" name="first_name" id="inputFirstname" placeholder="ระบุชื่อจริง" autofocus>
-            </div>
-            <div class="info-container">
-                <div class="info-title">นามสกุล</div>
-                <input class="info-input" type="text" name="last_name" id="inputLastname" placeholder="ระบุนามสกุล">
+            <div class="name-info" style="display:flex;justify-content:space-between">
+                <div class="info-container" style="width:49%">
+                    <div class="info-title">ชื่อจริง</div>
+                    <input class="info-input" type="text" name="first_name" id="inputFirstname" placeholder="ระบุชื่อจริง" autofocus>
+                </div>
+                <div class="info-container" style="width:49%">
+                    <div class="info-title">นามสกุล</div>
+                    <input class="info-input" type="text" name="last_name" id="inputLastname" placeholder="ระบุนามสกุล">
+                </div>
             </div>
             <div class="info-container">
                 <div class="info-title">อีเมล</div>
