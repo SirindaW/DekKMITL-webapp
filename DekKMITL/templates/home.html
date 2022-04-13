@@ -4,10 +4,13 @@
 {% block content %}
 
 <div class="home-container" style="max-width:1400px;margin:auto">
+
+    <!-- 1.top3 and latest blog -->
     <div class="topblog-container">
-        <div class="homeblog-container" style="width:49%">
+        <!-- 1.1 top3 blog -->
+        <div class="homeblog-container" style="min-width:49%">
             <div class="top3-container">
-                <div class="title-top3" style="width:70%">TOP3 กระทู้ยอดนิยม</div>
+                <div class="title-top3" style="max-width:70%">TOP3 กระทู้ยอดนิยม</div>
                 <div class="time-choose vhcenter">
                     <div class="in" style="font-size:19px">ใน</div>
                     <div class="time-choose-dropdown">
@@ -41,7 +44,7 @@
                             <div class="blog-detail-1">
                                 <div class="blog-name" style="max-width:80%"><a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริ</a></div>
                                 <div class="blog-view">
-                                    <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
+                                    <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" class="view-img">1060</div>
                                 </div>
                             </div>
                             <div class="blog-detail-2">
@@ -57,14 +60,15 @@
                 <!-- ************************************************* -->
             </div>
         </div>
-        <div class="latest-blog-container" style="width:49%;padding: 20px">
+        <!-- 1.2 latest blog -->
+        <div class="latest-blog-container" style="min-width:49%">
             <div class="home-title" style="border:0">กระทู้ล่าสุด</div>
-            <div class="all-latest-blog" style="min-height:300px">
+            <div class="all-latest-blog" style="min-height:170px">
                 <!-- ******************blog not found*****************8 -->
                 <!-- <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้ล่าสุด</div> -->
                 <!-- ********************loop blog*********************** -->
                 <div class="no-thumbnail-blog vhcenter">
-                    <div class="user-profile-container vcenter" style="width:15%">
+                    <div class="user-profile-container profile-center vcenter" style="width:15%">
                         <a href="#link to user profile">
                             <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png')"></div>
                         </a>
@@ -73,7 +77,7 @@
                         <div class="blog-detail-1">
                             <div class="blog-name" style="max-width:80%"><a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ</a></div>
                             <div class="blog-view">
-                                <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
+                                <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" class="view-img">1060</div>
                             </div>
                         </div>
                         <div class="blog-detail-2">
@@ -89,6 +93,8 @@
             </div>
         </div>
     </div>
+
+    <!-- 2. temporary blog -->
     <div class="homeblog-container">
         <div class="home-title">กระทู้ชั่วคราว</div>
         <div class="tempblog" style="min-height:150px">
@@ -105,7 +111,7 @@
                     <div class="blog-detail-1">
                         <div class="blog-name" style="max-width:80%"><a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ</a></div>
                         <div class="blog-view">
-                            <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
+                            <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" class="view-img">1060</div>
                         </div>
                     </div>
                     <div class="blog-detail-2">
@@ -121,6 +127,8 @@
         </div>
         <div class="see-all redorange vhcenter"><a href="#" class="see-all-text">ดูทั้งหมด ></a></div>
     </div>
+
+    <!-- 3. poppular room -->
     <div class="homeblog-container">
         <div class="home-title">ห้องยอดนิยม</div>
         <div class="all-poproom">
@@ -135,6 +143,8 @@
         </div>
         <div class="see-all redorange vhcenter"><a href="#" class="see-all-text">ดูทั้งหมด ></a></div>
     </div>
+
+    <!-- 4. education info -->
     <div class="homeblog-container">
         <div class="home-title ">Update เรื่องเรียน</div>
         <div class="edublog ">
@@ -150,14 +160,14 @@
                 <div class="blog-detail-container vhcenter">
                     <div class="user-profile-container vcenter" style="width:15%">
                         <a href="#link to user profile">
-                            <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png');height:60px;width:60px"></div>
+                            <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png')"></div>
                         </a>
                     </div>
                     <div class="blog-detail" style="width:85%">
                         <div class="blog-detail-1">
                             <div class="blog-name" style="max-width:80%"><a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริ</a></div>
                             <div class="blog-view">
-                                <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" style="width:25px">1060</div>
+                                <div class="blog-view-pic "><img src="{% static 'images/view.png'%}" class="view-img">1060</div>
                             </div>
                         </div>
                         <div class="blog-detail-2">
@@ -176,23 +186,5 @@
         </div>
     </div>
 </div>
-<script>
-    function myFunction() {
-        document.getElementById("time_choose_dropdown").classList.toggle("time-choose-show");
-    }
 
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-        if (!event.target.matches('.time-choose-dropbtn')) {
-            var dropdowns = document.getElementsByClassName("time-choose-dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('time-choose-show')) {
-                    openDropdown.classList.remove('time-choose-show');
-                }
-            }
-        }
-    }
-</script>
 {% endblock %}

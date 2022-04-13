@@ -1,10 +1,17 @@
 {% load static%}
 <nav class="redorange">
     <div class="navbar-container vcenter">
-        <div class="logo vcenter">
-            <a href="/"><img src="{% static 'images/logotop.svg'%}" style="width:100%"></a>
+        <!-- 0. hide toolbar -->
+        <div class="hide-navbar">
+            <img src="{% static 'images/hidebar.svg'%}" onclick="showToolbar()" class="hide-toolbar" style="width:100%">
         </div>
-        <div class="toolbar-container vcenter">
+        <!-- 1. logo -->
+        <div class="logo vcenter">
+            <a href="/"><img src="{% static 'images/logotop.svg'%}" class="logotop-pic"></a>
+        </div>
+
+        <!-- 2. toolbar -->
+        <div class="toolbar-container vcenter" id="toolbar_container">
             <div class="createblog vcenter">
                 <div class="createblog-icon">
                     <a href="#" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:100%"></a>
@@ -24,26 +31,37 @@
                 <div class="tag-text"><a href="#" class="effect-underline">แท็ก</a></div>
             </div>
         </div>
+
+        <!-- 3. search and login -->
         <div class="searchlogin-container vcenter">
-            <div class="login-frame vcenter">
+            <!-- *3.1 login -->
+            <!-- <div class="login-frame vcenter" id="login_frame">
                 <div class="login-text"><a href="{% url 'login_view' %}">เข้าสู่ระบบ ></a></div>
+            </div> -->
+            <!-- *3.1 already login -->
+            <div class="already-login-container" id="already_login" style="min-width:100%">
+                <div class="user-profile-container vcenter" style="width:15%">
+                    <div class="user-profile-navbar" onclick="showDropdown()" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                    <div class="profile-dropdown-content" id="profile_dropdown">
+                        <a href="#">ดูหน้าโปรไฟล์ของคุณ</a>
+                        <a href="{%url 'logout_view'%}">ออกจากระบบ</a>
+                    </div>
+                </div>
+                <div class="chat-logo" style="width:32px">
+                    <a href="#link to chat"><img src="{% static 'images/chatlogo.png'%}" class="chat-logo-pic"> </a>
+                </div>
+                <div class="notification-logo" style="width:32px">
+                    <a href="#link to notification"><img src="{% static 'images/notification.png'%}" class="noti-logo-pic"> </a>
+                </div>
             </div>
+            <!-- 3.2 search -->
             <div class="search-box">
-                <button class="btn-search vhcenter"></button>
+                <button class="btn-search vhcenter" onclick="showSearch()"></button>
                 <input type="text" id="mysearch" class="input-search" placeholder="ค้นหาบน Dek-KMITL">
             </div>
         </div>
     </div>
 </nav>
 
-<!-- search script -->
-<!-- <script>
-    var input = document.getElementById("mysearch");
-    input.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            var q = input.value
-            location.replace(q)
-        }
-    });
-</script> -->
+<!-- javascript -->
+<script src="{% static 'js/main.js'%}"></script>

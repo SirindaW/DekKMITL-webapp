@@ -1,36 +1,43 @@
 {% load static%}
 <footer class="redorange">
     <div class="footer-container vcenter">
-        <div class="logo">
+
+        <!-- 1. logo -->
+        <div class="logo footer-logo">
             <a href="/"><img src="{% static 'images/logotop.svg'%}" style="width:100%"></a>
         </div>
+
+        <!-- 2. toolbar -->
         <div class="footer-content hcenter">
+            <!-- 2.1 blog toolbar -->
             <div class="footer-toolbar">
                 <div class="createblog vcenter footer-margin">
                     <div class="createblog-icon">
-                        <a href="#" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:100%"></a>
+                        <a href="#" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="max-width:100%"></a>
                     </div>
                     <div class="createblog-text"><a href="#" class="footer-effect-shadow">ตั้งกระทู้</a></div>
                 </div>
                 <div class="chooseroom vcenter footer-margin">
                     <div class="chooseroom-icon">
-                        <a href="#" class="vcenter"><img src="{% static 'images/room.svg'%}" style="width:100%"></a>
+                        <a href="#" class="vcenter"><img src="{% static 'images/room.svg'%}" style="max-width:100%"></a>
                     </div>
                     <div class="chooseroom-text"><a href="#" class="footer-effect-shadow">เลือกห้อง</a></div>
                 </div>
                 <div class="tag vcenter footer-margin">
                     <div class="tag-icon">
-                        <a href="#" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
+                        <a href="#" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="max-width:100%"></a>
                     </div>
                     <div class="tag-text"><a href="#" class="footer-effect-shadow">แท็ก</a></div>
                 </div>
             </div>
+            <!-- 2.2 social -->
             <div class="social-container">
                 <h3 class="social-title">SOCIAL</h3>
                 <ul class="social">
                     <li><a href="#">Dek-KMITL</a></li>
                 </ul>
             </div>
+            <!-- 2.3 contact -->
             <div class="contactus-container">
                 <h3 class="contactus-title">CONTACT US</h3>
                 <ul class="contactus">
@@ -39,6 +46,8 @@
                 </ul>
             </div>
         </div>
-        <div class="footer-pic"><img src="{% static 'images/footerlogo.svg'%}" style="width:100%"></div>
+
+        <!-- 3. child pic -->
+        <div class="footer-pic"><img src="{% static 'images/footerlogo.svg'%}" style="max-width:100%"></div>
     </div>
 </footer>

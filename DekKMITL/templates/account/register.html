@@ -1,15 +1,16 @@
 {% extends 'components/base.html' %} {% load static %} {% block content %}
 
-<!-- Register Form -->
-<!-- Form -->
-<!--div class="col-12 col-sm-7 col-md-3 m-auto mt-5"-->
-<div class="login-container" style="width:700px;margin:auto">
+<div class="login-container">
+
+    <!-- 1. logo -->
     <div class="login-logo">
         <img src="{% static 'images/logotop.svg'%}" style="width:100%">
     </div>
+
+    <!-- 2. signup form -->
     <div class="signup-form">
-        <!-- Form -->
         <form method="POST">{% csrf_token %}
+            <!-- 2.1 name info -->
             <div class="name-info" style="display:flex;justify-content:space-between">
                 <div class="info-container" style="width:49%">
                     <div class="info-title">ชื่อจริง</div>
@@ -20,23 +21,28 @@
                     <input class="info-input" type="text" name="last_name" id="inputLastname" placeholder="ระบุนามสกุล">
                 </div>
             </div>
+            <!-- 2.2 email info -->
             <div class="info-container">
                 <div class="info-title">อีเมล</div>
                 <input class="info-input" type="email" name="email" id="inputEmail" placeholder="ระบุอีเมล">
             </div>
+            <!-- 2.3 password info -->
             <div class="info-container">
                 <div class="info-title">รหัสผ่าน</div>
                 <input class="info-input" type="password" name="password1" id="inputPassword1" placeholder="ระบุรหัสผ่าน">
             </div>
+            <!-- 2.4 confirm password info -->
             <div class="info-container">
                 <div class="info-title">ยืนยันรหัสผ่าน</div>
                 <input class="info-input" type="password" name="password2" id="inputPassword1" placeholder="ยืนยันรหัสผ่าน">
             </div>
+            <!-- *2.5 password wrong -->
             <div class="info-detail">
                 <div class="info-wrong">
                     {% for field in form %}{% for error in field.errors %}กรุณากรอกข้อมูลให้ครบ{% endfor %}{% endfor %}
                 </div>
             </div>
+            <!-- 2.6 sign up button -->
             <div class="signup-btn-container" style="width: 445px;margin:auto">
                 <button type="submit" class="login-signup-btn redorange">สมัครสมาชิก</button>
             </div>
