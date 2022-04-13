@@ -1,70 +1,47 @@
-{% extends 'components/base.html' %}
-{% load static %}
-
-{% block content %}
-
-
-
-<!-- Background Image -->
-<style>
-  body,
-  html {
-    height: 100%;
-  }
-  .bg {
-    /* The image used */
-    /* background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).webp"); */
-    background-image: url("https://images.unsplash.com/photo-1616544567842-573ff1565c54?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-
-    /* Full height */
-    height: 100%;
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-</style>
-<div class="bg">
+{% extends 'components/base.html' %} {% load static %} {% block content %}
 
 <!-- Register Form -->
 <!-- Form -->
 <!--div class="col-12 col-sm-7 col-md-3 m-auto mt-5"-->
-<div class="m-auto pt-5" style="max-width:480px;">
-<div class="card border-0 shadow" style="background-color:mistyrose;">
-<div class="card-body">
-<div class="h3" >Sign in to My Site</div>
-<form  method="POST">{% csrf_token %}
-<input class="form-control my-4 py-2" type="text" name="first_name" id="inputFirstname" placeholder="First Name" required>
-<input class="form-control my-4 py-2" type="text" name="last_name" id="inputLastname" placeholder="Last Name" required>
-<input class="form-control my-4 py-2" type="email" name="email" id="inputEmail" placeholder="Email address" required autofocus>
-<input class="form-control my-4 py-2" type="password" name="password1" id="inputPassword1" placeholder="Password" required>
-<input class="form-control my-4 py-2" type="password" name="password2" id="inputPassword1" placeholder="Confirm Password" required>
-
-{% for field in form %}
-<p>
-{% for error in field.errors %}
-<p style="color: red">{{ error }}</p>
-{% endfor %}
-</p>
-{% endfor %}
-{% if form.non_field_errors %}
-<div style="color: red">
-	<p>{{form.non_field_errors}}</p>
+<div class="login-container" style="width:700px;margin:auto">
+    <div class="login-logo">
+        <img src="{% static 'images/logotop.svg'%}" style="width:100%">
+    </div>
+    <div class="signup-form">
+        <!-- Form -->
+        <form method="POST">{% csrf_token %}
+            <div class="info-container">
+                <div class="info-title">ชื่อจริง</div>
+                <input class="info-input" type="text" name="first_name" id="inputFirstname" placeholder="ระบุชื่อจริง" autofocus>
+            </div>
+            <div class="info-container">
+                <div class="info-title">นามสกุล</div>
+                <input class="info-input" type="text" name="last_name" id="inputLastname" placeholder="ระบุนามสกุล">
+            </div>
+            <div class="info-container">
+                <div class="info-title">อีเมล</div>
+                <input class="info-input" type="email" name="email" id="inputEmail" placeholder="ระบุอีเมล">
+            </div>
+            <div class="info-container">
+                <div class="info-title">รหัสผ่าน</div>
+                <input class="info-input" type="password" name="password1" id="inputPassword1" placeholder="ระบุรหัสผ่าน">
+            </div>
+            <div class="info-container">
+                <div class="info-title">ยืนยันรหัสผ่าน</div>
+                <input class="info-input" type="password" name="password2" id="inputPassword1" placeholder="ยืนยันรหัสผ่าน">
+            </div>
+            <div class="info-detail">
+                <div class="info-wrong">
+                    {% for field in form %}{% for error in field.errors %}กรุณากรอกข้อมูลให้ครบ{% endfor %}{% endfor %}
+                </div>
+            </div>
+            <div class="signup-btn-container" style="width: 445px;margin:auto">
+                <button type="submit" class="login-signup-btn redorange">สมัครสมาชิก</button>
+            </div>
+        </form>
+    </div>
 </div>
 
-{% endif %}
-
-<div class="mt-3 text-center">
-<!-- Button -->
-<button type="submit" class="btn btn-primary">Sign Up</button>
-<div class="mt-3"> Already have an account?  </div>
-	<a href="{% url 'login_view' %}" class="nav-link">Sign In</a> 
-</div>
-</form>
-</div>
-</div>
-</div>
 
 
 

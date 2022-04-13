@@ -10,20 +10,15 @@
         <form method="POST">{% csrf_token %}
             <div class="email-container" style="margin-bottom:15px">
                 <div class="info-title">อีเมล</div>
-                <input class="login-input" type="text" name="email" id="inputEmail" placeholder="ระบุอีเมล" required autofocus>
+                <input class="info-input" type="text" name="email" id="inputEmail" placeholder="ระบุอีเมล" autofocus>
             </div>
             <div class="password-container">
                 <div class="info-title">รหัสผ่าน</div>
-                <input class="login-input" type="password" name="password" id="inputPassword1" placeholder="ระบุรหัสผ่าน" required> {% for field in form %}
+                <input class="info-input" type="password" name="password" id="inputPassword1" placeholder="ระบุรหัสผ่าน">
             </div>
-            <div class="login-detail">
-                <div class="login-wrong">
-                    {% for error in field.errors %}
-                        อีเมลหรือรหัสผ่านไม่ถูกต้อง
-                    {% endfor %}
-                    {% for message in messages %}
-                        อีเมลหรือรหัสผ่านไม่ถูกต้อง
-                    {% endfor %}
+            <div class="info-detail">
+                <div class="info-wrong">
+                    {% for error in field.errors %} อีเมลหรือรหัสผ่านไม่ถูกต้อง {% endfor %} {% for message in messages %} อีเมลหรือรหัสผ่านไม่ถูกต้อง {% endfor %}
                 </div>
                 <div class="signup-forgotpw">
                     <div class="login-signup">
@@ -34,21 +29,9 @@
                     </div>
                 </div>
             </div>
-            <!-- <p>
-                {% for error in field.errors %}
-                <p style="color: red">{{ error }}</p>
-                {% endfor %}
-            </p>
-            {% endfor %} {% if form.non_field_errors %}
-            <div style="color: red">
-                <p>{{form.non_field_errors}}</p>
-            </div>
-
-            {% endif %} -->
 
             <div class="login-btn-container" style="width: 445px;margin:auto">
-                <!-- Button -->
-                <button type="submit" class="login-btn redorange">เข้าสู่ระบบ</button>
+                <button type="submit" class="login-signup-btn redorange">เข้าสู่ระบบ</button>
             </div>
 
         </form>

@@ -18,7 +18,7 @@ $CONTENTS
 * navbar…………
 * footer…………
 * home…………
-* login…………
+* login & singup…………
 */
 
 
@@ -541,15 +541,16 @@ $CONTENTS
 }
 
 
-/* ---------------------------------login--------------------------------------- */
+/* ---------------------------------login & singup--------------------------------------- */
 
-.login-form {
+.login-form,
+.signup-form {
     background-color: #FFFFFF82;
     border-radius: 30px;
     padding: 25px 50px 25px 50px;
 }
 
-.login-input {
+.info-input {
     font-weight: 400;
     font-size: 20px;
     color: #404040;
@@ -568,12 +569,12 @@ $CONTENTS
     margin-left: 10px;
 }
 
-.login-detail {
+.info-detail {
     display: flex;
     justify-content: space-between;
 }
 
-.login-wrong {
+.info-wrong {
     margin-left: 10px;
     font-size: 19px;
     font-weight: 500;
@@ -604,7 +605,7 @@ $CONTENTS
     transition: all .2s ease;
 }
 
-.login-btn {
+.login-signup-btn {
     font-weight: 500;
     font-size: 22px;
     border: none;
@@ -623,7 +624,7 @@ $CONTENTS
     text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.253);
 }
 
-.login-btn:hover {
+.login-signup-btn:hover {
     background-color: #fff;
     color: #E05F4C;
     font-weight: 600;
