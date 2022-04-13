@@ -10,7 +10,7 @@
         <form method="POST">{% csrf_token %}
             <div class="email-container" style="margin-bottom:15px">
                 <div class="info-title">อีเมล</div>
-                <input class="login-input" type="email" name="email" id="inputEmail" placeholder="ระบุอีเมล" required autofocus>
+                <input class="login-input" type="text" name="email" id="inputEmail" placeholder="ระบุอีเมล" required autofocus>
             </div>
             <div class="password-container">
                 <div class="info-title">รหัสผ่าน</div>
@@ -18,7 +18,12 @@
             </div>
             <div class="login-detail">
                 <div class="login-wrong">
-                    {% for error in field.errors %}อีเมลหรือรหัสผ่านไม่ถูกต้อง{% endfor %} {% if form.non_field_errors %}กรุณากรอกข้อมูลให้ครบ{% endif %}
+                    {% for error in field.errors %}
+                        อีเมลหรือรหัสผ่านไม่ถูกต้อง
+                    {% endfor %}
+                    {% for message in messages %}
+                        อีเมลหรือรหัสผ่านไม่ถูกต้อง
+                    {% endfor %}
                 </div>
                 <div class="signup-forgotpw">
                     <div class="login-signup">
