@@ -3,6 +3,16 @@ import random
 
 from django.utils.text import slugify
 
+# For send_activation_email
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+import six
+
+class TokenGenerator(PasswordResetTokenGenerator)
+    def _make_hash_value(self,user,timestamp):
+        return six.text_type(user.pk)+six.text_type(timestamp)+six.text_type(user.is_email_verified)
+
+generate_token = TokenGenerator()
+
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))

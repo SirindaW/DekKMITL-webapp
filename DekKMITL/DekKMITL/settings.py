@@ -143,6 +143,15 @@ STATIC_URL = 'statics/'
 MEDIA_URL = '/images/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
-
 TEMP = os.path.join(BASE_DIR,'media_cdn/temp')
+
+# EMAIL CONFIG
+EMAIL_FROM_USER=''
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOT_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USER_TLS = True
+EMAIL_PORT = 587
+
+
 

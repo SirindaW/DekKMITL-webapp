@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from pages.views import home_view, about_view
-from account.views import register_view,login_view,logout_view,profile_view
+from account.views import register_view,login_view,logout_view,profile_view,activate_user_view
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -15,6 +15,7 @@ urlpatterns = [
     
     path("about/", about_view, name="about_view"),
     path("register/", register_view, name="register_view"),
+    path('activate-user/<uidb64>/<token>/',activate_user_view,name="activate_user_view"),
     path("login/", login_view, name="login_view"),
     path("logout/", logout_view, name="logout_view"),
     path("profile/<int:user_id>", profile_view, name="profile_view"),
