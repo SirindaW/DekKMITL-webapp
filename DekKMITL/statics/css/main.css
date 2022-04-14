@@ -81,6 +81,24 @@ $CONTENTS
     .effect-underline:hover:after {
         width: 100%;
     }
+    /* box shadow effect */
+    
+    .box-shadow-effect {
+        transition: all .2s ease;
+    }
+    
+    .box-shadow-effect:hover {
+        box-shadow: 0px 8px 13px 0px rgba(0, 0, 0, 0.356);
+    }
+    /* brightness effect */
+    
+    .brightness-effect {
+        transition: all .2s ease;
+    }
+    
+    .brightness-effect:hover {
+        filter: brightness(80%);
+    }
     /* ---------------------------------navbar--------------------------------------- */
     /* container */
     
@@ -111,6 +129,7 @@ $CONTENTS
         min-width: 30%;
     }
     
+    .myfeed,
     .createblog,
     .chooseroom,
     .tag {
@@ -118,6 +137,7 @@ $CONTENTS
         margin: 0 auto;
     }
     
+    .myfeed a,
     .createblog-text a,
     .chooseroom-text a,
     .tag-text a {
@@ -181,7 +201,7 @@ $CONTENTS
         background-repeat: no-repeat;
         background-size: cover;
         background-position: 50% 50%;
-        cursor: pointer
+        cursor: pointer;
     }
     /* profile dropdown */
     
@@ -459,6 +479,7 @@ $CONTENTS
         background-color: #131313B2;
         border: 1px solid #FFFFFFBF;
         border-radius: 33px;
+        transition: all .2s ease;
     }
     /* blog cover */
     
@@ -480,6 +501,7 @@ $CONTENTS
         max-height: 110px;
         border-bottom-left-radius: 30px;
         border-bottom-right-radius: 30px;
+        transition: all .2s ease;
     }
     /* user profile picture */
     
@@ -500,6 +522,19 @@ $CONTENTS
     
     .blog-name {
         line-height: 0.7cm;
+    }
+    
+    .two-line-wrap {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    .wrap-name {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
     
     .blog-detail-1,
@@ -563,11 +598,20 @@ $CONTENTS
     
     .poproom {
         transition: all .15s ease-in;
-        border-radius: 10%;
+        border-radius: 15%;
     }
     
     .poproom:hover {
         background-color: rgba(255, 255, 255, 0.096);
+    }
+    /* hover blog effect */
+    
+    .thumbnail-blog:hover .blog-detail-container {
+        background: #afa9a952;
+    }
+    
+    .no-thumbnail-blog:hover {
+        background-color: #464646b2;
     }
     /* ---------------------------------login & singup--------------------------------------- */
     
@@ -734,6 +778,7 @@ $CONTENTS
             width: 100%;
             z-index: 10;
         }
+        .myfeed,
         .createblog,
         .chooseroom,
         .tag {
@@ -887,6 +932,7 @@ $CONTENTS
             width: 100%;
             z-index: 10;
         }
+        .myfeed,
         .createblog,
         .chooseroom,
         .tag {
@@ -1067,6 +1113,7 @@ $CONTENTS
             width: 100%;
             z-index: 10;
         }
+        .myfeed,
         .createblog,
         .chooseroom,
         .tag {
