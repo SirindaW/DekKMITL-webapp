@@ -3,11 +3,6 @@ function showDropdown() {
     document.getElementById("profile_dropdown").classList.toggle("profile-show");
 }
 
-// show dropdown choose time
-function myFunction() {
-    document.getElementById("time_choose_dropdown").classList.toggle("time-choose-show");
-}
-
 // show search
 function showSearch() {
     document.getElementById("mysearch").classList.toggle("search-show");
@@ -28,16 +23,6 @@ window.onclick = function(event) {
             var openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('profile-show')) {
                 openDropdown.classList.remove('profile-show');
-            }
-        }
-    }
-    if (!event.target.matches('.time-choose-dropbtn')) {
-        var dropdowns = document.getElementsByClassName("time-choose-dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('time-choose-show')) {
-                openDropdown.classList.remove('time-choose-show');
             }
         }
     }
