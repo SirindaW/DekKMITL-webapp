@@ -25,7 +25,7 @@ def profile_view(request,user_id=None,*args, **kwargs):
 def logout_view(request, *args, **kwargs):
     logout(request)
     # messages.success(request,'You have been logged out.')
-    return redirect("home_view")
+    return redirect("login_view")
 
 
 def login_view(request, *args, **kwargs):
