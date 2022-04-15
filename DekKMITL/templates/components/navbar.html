@@ -12,30 +12,30 @@
         </div>
 
         <!-- 2. toolbar -->
-        <div class="toolbar-container vcenter" id="toolbar_container">
-            <div class="myfeed vcenter">
+        <div class="toolbar-container vhcenter" id="toolbar_container">
+            <div class="myfeed vhcenter effect-block">
                 <div class="myfeed-icon">
-                    <a href="#" class="vcenter"><img src="{% static 'images/feed.svg'%}" style="width:100%"></a>
+                    <a href="/" class="vcenter toolbar-icon"><img src="{% static 'images/feed.svg'%}" style="width:100%"></a>
                 </div>
-                <div class="myfeed-text"><a href="#" class="effect-underline">หน้าฟีด</a></div>
+                <div class="myfeed-text"><a href="/">หน้าหลัก</a></div>
             </div>
-            <div class="createblog vcenter">
+            <div class="createblog vhcenter effect-block">
                 <div class="createblog-icon">
                     <a href="{%url 'post:create_view'%}" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:100%"></a>
                 </div>
-                <div class="createblog-text"><a href="{%url 'post:create_view'%}" class="effect-underline">ตั้งกระทู้</a></div>
+                <div class="createblog-text"><a href="{%url 'post:create_view'%}">ตั้งกระทู้</a></div>
             </div>
-            <div class="chooseroom vcenter">
+            <div class="chooseroom vhcenter effect-block">
                 <div class="chooseroom-icon">
-                    <a href="#" class="vcenter"><img src="{% static 'images/room.svg'%}" style="width:100%"></a>
+                    <a href="#link to choose room" class="vcenter"><img src="{% static 'images/room.svg'%}" style="width:100%"></a>
                 </div>
-                <div class="chooseroom-text"><a href="#" class="effect-underline">เลือกห้อง</a></div>
+                <div class="chooseroom-text"><a href="#link to choose room">เลือกห้อง</a></div>
             </div>
-            <div class="tag vcenter">
+            <div class="tag vhcenter effect-block">
                 <div class="tag-icon">
-                    <a href="#" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
+                    <a href="#link to choose tag" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
                 </div>
-                <div class="tag-text"><a href="#" class="effect-underline">แท็ก</a></div>
+                <div class="tag-text"><a href="#link to choose tag">แท็ก</a></div>
             </div>
         </div>
         <!-- 3. search and login -->
@@ -43,10 +43,11 @@
             <!-- *3.1 already login -->
             {% if request.user.is_authenticated %}
             <div class="already-login-container" id="already_login" style="min-width:100%">
-                <div class="user-profile-container vcenter" style="width:15%">
+                <div class="user-profile-container vcenter" style="min-width:15%">
                     <div class="user-profile-navbar box-shadow-effect" onclick="showDropdown()" style="background-image: url({{request.user.profile_image.url}})"></div>
                     <div class="profile-dropdown-content" id="profile_dropdown">
-                        <a href="{%url 'profile_view'%}">ดูหน้าโปรไฟล์ของคุณ</a>
+                        <a href="#link to user's following blog">หน้าฟีดของคุณ</a>
+                        <a href="{%url 'profile_view'%}">หน้าโปรไฟล์ของคุณ</a>
                         <a href="{%url 'logout_view'%}">ออกจากระบบ</a>
                     </div>
                 </div>

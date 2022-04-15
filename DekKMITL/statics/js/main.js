@@ -11,8 +11,6 @@ function showSearch() {
 // show search
 function showToolbar() {
     document.getElementById("toolbar_container").classList.toggle("toolbar-show");
-    document.getElementById("already_login").classList.toggle("already-login-show");
-    // document.getElementById("login_frame").classList.toggle("login-show");
 }
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {

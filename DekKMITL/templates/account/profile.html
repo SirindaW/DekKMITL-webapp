@@ -26,7 +26,7 @@
     </div>
 
     <!-- 3. profile bio -->
-    <div class="profile-bio profile-margin">{{account.bio}}</div>
+    <div class="profile-bio profile-margin" style="overflow-wrap:anywhere;">{{account.bio}}</div>
 
     <!-- 4. user follower and following -->
     <div class="profile-follow profile-margin">
@@ -51,7 +51,7 @@
         <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%">
             <div class="user-profile-container vhcenter" style="width:15%">
                 <a href="#link to user profile">
-                    <div class="user-profile-pic" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                    <div class="user-profile-pic" style="background-image: url({{account.profile_image.url}})"></div>
                 </a>
             </div>
             <div class="blog-detail" style="width:85%;margin-right:20px">
@@ -71,35 +71,5 @@
 
     </div>
 </div>
-
-<!-- Profile Card -->
-<!-- <div class="container pt-5">
-    <div class="card mb-4" style="width: 30rem">
-        <img class="card-img-top" src="{{account.profile_image.url}}" style="max-width:100px;" alt="Card image cap" />
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-                Some quick example text to build on the card title and make up the bulk of the card's content.
-
-                <ul class="content">
-                    <li>Firstname: {{account.first_name}}</li>
-                    <li>Lastname : {{account.last_name}}</li>
-                    <li>Email : {{account.email}}</li>
-                    <li>profile image url: <a style="text-decoration: underline;" href="{{account.profile_image.url}}">{{request.user.profile_image.url}}</a></li>
-                    <li>Bio: {{account.bio}}</li>
-                    <li>Last login : {{account.last_login}}</li>
-                    <li>Date registered: {{account.date_registered}}</li>
-                    <li>is_admin: {{account.is_admin}}</li>
-
-                </ul>
-
-
-
-            </p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-    </div>
-</div> -->
-
 
 {% endblock %}

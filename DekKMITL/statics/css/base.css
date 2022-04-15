@@ -80,21 +80,15 @@ body {
 }
 
 
-/*effect-underline*/
+/*effect-block*/
 
-.effect-underline:after {
-    background: none repeat scroll 0 0 transparent;
-    content: "";
-    display: block;
-    height: 1.5px;
-    margin-left: 3px;
-    background: #fff;
-    transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    width: 0;
+.effect-block {
+    transition: all .2s ease;
+    width: 130px;
 }
 
-.effect-underline:hover:after {
-    width: 100%;
+.effect-block:hover {
+    background-color: rgba(255, 255, 255, 0.247);
 }
 
 
@@ -160,11 +154,12 @@ body {
 .createblog,
 .chooseroom,
 .tag {
-    justify-content: left;
-    margin: 0 auto;
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
 }
 
-.myfeed a,
+.myfeed-text a,
 .createblog-text a,
 .chooseroom-text a,
 .tag-text a {
@@ -366,6 +361,11 @@ body {
     min-width: 50%;
 }
 
+.footer-margin {
+    height: auto;
+    padding-bottom: 20px;
+}
+
 
 /* toolbar */
 
@@ -373,10 +373,6 @@ body {
 .social-container,
 .contactus-container {
     margin: 40px;
-}
-
-.footer-margin {
-    margin-bottom: 15px;
 }
 
 
