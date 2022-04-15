@@ -1,4 +1,5 @@
 import os
+from re import sub
 import subprocess
 import signal
 
@@ -31,7 +32,12 @@ while True:
 
     if command.lower() in ['stop',]:
         for proc in subproc:
-            os.kill(proc.pid, signal.CTRL_C_EVENT)
+            print(f'killing {proc.pid}')
+            proc.kill()
+            # os.kill(proc.pid, signal.CTRL_C_EVENT)
+
+    if command.lower() in ['restart',]:
+        proc = subprocess.Popen('py manageserver.py')
 
     if command.lower() == 'exit':
         print("exit ")
@@ -39,6 +45,9 @@ while True:
 
     if command.lower() == 'proc':
         print('processes running : [\n')
+        for proc in subproc:
+            if proc.returncode == 0:
+                subproc.remove(proc)
         for proc in subproc:
             print(proc)
         print('\n]')

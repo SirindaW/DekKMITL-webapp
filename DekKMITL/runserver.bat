@@ -1,1 +1,0 @@
-powershell wt -d . pipenv shell "/c py manage.py runserver"
