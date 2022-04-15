@@ -38,14 +38,13 @@
                 <div class="tag-text"><a href="#" class="effect-underline">แท็ก</a></div>
             </div>
         </div>
-
         <!-- 3. search and login -->
         <div class="searchlogin-container vcenter">
             <!-- *3.1 already login -->
             {% if request.user.is_authenticated %}
             <div class="already-login-container" id="already_login" style="min-width:100%">
                 <div class="user-profile-container vcenter" style="width:15%">
-                    <div class="user-profile-navbar box-shadow-effect" onclick="showDropdown()" style="background-image: url('/statics/images/testblogpic.png')"></div>
+                    <div class="user-profile-navbar box-shadow-effect" onclick="showDropdown()" style="background-image: url({{request.user.profile_image.url}})"></div>
                     <div class="profile-dropdown-content" id="profile_dropdown">
                         <a href="{%url 'profile_view'%}">ดูหน้าโปรไฟล์ของคุณ</a>
                         <a href="{%url 'logout_view'%}">ออกจากระบบ</a>

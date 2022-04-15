@@ -1,24 +1,32 @@
 {% extends 'components/base.html'%} {% load static %} {% block content %}
-
+<link rel="stylesheet" href="{%static '/css/profile.css'%}">
+<link rel="stylesheet" href="{%static '/css/home.css'%}">
 
 <div class="profile-container">
 
     <!-- 1. cover photo  -->
-    <div class="profile-cover" style="background-image: url('/statics/images/covertest.jpg')"></div>
+    <div class="profile-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div>
 
     <!-- 2. profile image, name and edit profile button -->
     <div class="profile-detail-pic-name">
         <!-- 2.1 profile image -->
-        <div class="profile-picture" style="background-image: url('/statics/images/profiletest.jpg')"></div>
+        <div class="profile-picture" style="background-image: url({{account.profile_image.url}})"></div>
         <!-- 2.2 profile name and edit profile button -->
         <div class="profile-detail">
-            <div class="profile-name">แง๊วแง๊ว</div>
+            <div class="profile-name">
+                <div class="profile-first-name">{{account.first_name}}</div>
+                <div class="profile-last-name">{{account.last_name}}</div>
+            </div>
+            <!-- ------------ *if your profile use edit profile button ------------------ -->
             <div class="profile-edit vhcenter"><a href="#" class="profile-edit-link">แก้ไขโปรไฟล์</a></div>
+            <!-- ------------ *if not your profile use follow button ------------------ -->
+            <!-- **if already follow use this class "unfollow-button" at div and "unfollow-button-link" at a -->
+            <!-- <div class="profile-edit vhcenter"><a href="#" class="profile-edit-link " style="font-size:20px">ติดตาม</a></div> -->
         </div>
     </div>
 
     <!-- 3. profile bio -->
-    <div class="profile-bio profile-margin">ฉวัดดีเลาเปงแงวนะงื้อ ฝวากติดตูมกระตู๊เลาโด้ยน้าาาา</div>
+    <div class="profile-bio profile-margin">{{account.bio}}</div>
 
     <!-- 4. user follower and following -->
     <div class="profile-follow profile-margin">
@@ -27,6 +35,7 @@
     </div>
 
     <!-- 5. create blog button -->
+    <!-- *if not your profile don't have this button -->
     <div class="profile-create-blog profile-margin vhcenter">
         <div class="createblog-icon vhcenter">
             <a href="{%url 'post:create_view'%}" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:20px"></a>
@@ -35,7 +44,7 @@
     </div>
 
     <!-- 6. user blog -->
-    <div class="profile-margin" style="display:block">
+    <div class="profile-margin" style="display:block;margin-top:25px">
         <!-- ******************blog not found*****************8 -->
         <!-- <div class="notfound-blog no-thumbnail-blog vhcenter" style="width:100%;font-size:35px">ยังไม่มีกระทู้</div> -->
         <!-- ********************loop blog*********************** -->
@@ -59,6 +68,7 @@
             </div>
         </div>
         <!-- ************************************************* -->
+
     </div>
 </div>
 

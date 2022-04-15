@@ -53,7 +53,7 @@ def get_profile_image_filepath(self,*args,**kwargs):
     return f'profile_image/{self.pk}/profile_image.png'
 
 def get_default_profile_image():
-    return "account/default_profile_image.png"
+    return "account/default_profile_image.svg"
 
 class Account(AbstractBaseUser):
     email = models.EmailField(
