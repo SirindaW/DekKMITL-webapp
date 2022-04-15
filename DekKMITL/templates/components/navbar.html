@@ -1,49 +1,80 @@
 {% load static%}
 <nav class="redorange">
     <div class="navbar-container vcenter">
+        <!-- 0. hide toolbar (media query) -->
+        <div class="hide-navbar">
+            <img src="{% static 'images/hidebar.svg'%}" onclick="showToolbar()" class="hide-toolbar" style="width:100%">
+        </div>
+
+        <!-- 1. logo -->
         <div class="logo vcenter">
-            <a href="/"><img src="{% static 'images/logotop.svg'%}" style="width:100%"></a>
+            <a href="/"><img src="{% static 'images/logotop.svg'%}" class="logotop-pic"></a>
         </div>
-        <div class="toolbar-container vcenter">
-            <div class="createblog vcenter">
+
+        <!-- 2. toolbar -->
+        <div class="toolbar-container vhcenter" id="toolbar_container">
+            <div class="myfeed vhcenter effect-block">
+                <div class="myfeed-icon">
+                    <a href="/" class="vcenter toolbar-icon"><img src="{% static 'images/feed.svg'%}" style="width:100%"></a>
+                </div>
+                <div class="myfeed-text"><a href="/">หน้าหลัก</a></div>
+            </div>
+            <div class="createblog vhcenter effect-block">
                 <div class="createblog-icon">
-                    <a href="#" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:100%"></a>
+                    <a href="{%url 'post:create_view'%}" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:100%"></a>
                 </div>
-                <div class="createblog-text"><a href="#" class="effect-underline">ตั้งกระทู้</a></div>
+                <div class="createblog-text"><a href="{%url 'post:create_view'%}">ตั้งกระทู้</a></div>
             </div>
-            <div class="chooseroom vcenter">
+            <div class="chooseroom vhcenter effect-block">
                 <div class="chooseroom-icon">
-                    <a href="#" class="vcenter"><img src="{% static 'images/room.svg'%}" style="width:100%"></a>
+                    <a href="#link to choose room" class="vcenter"><img src="{% static 'images/room.svg'%}" style="width:100%"></a>
                 </div>
-                <div class="chooseroom-text"><a href="#" class="effect-underline">เลือกห้อง</a></div>
+                <div class="chooseroom-text"><a href="#link to choose room">เลือกห้อง</a></div>
             </div>
-            <div class="tag vcenter">
+            <div class="tag vhcenter effect-block">
                 <div class="tag-icon">
-                    <a href="#" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
+                    <a href="#link to choose tag" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
                 </div>
-                <div class="tag-text"><a href="#" class="effect-underline">แท็ก</a></div>
+                <div class="tag-text"><a href="#link to choose tag">แท็ก</a></div>
             </div>
         </div>
+        <!-- 3. search and login -->
         <div class="searchlogin-container vcenter">
-            <div class="login-frame vcenter">
+            <!-- *3.1 already login -->
+            {% if request.user.is_authenticated %}
+            <div class="already-login-container" id="already_login" style="min-width:100%">
+                <div class="user-profile-container vcenter" style="min-width:15%">
+                    <div class="user-profile-navbar box-shadow-effect" onclick="showDropdown()" style="background-image: url({{request.user.profile_image.url}})"></div>
+                    <div class="profile-dropdown-content" id="profile_dropdown">
+                        <a href="#link to user's following blog">หน้าฟีดของคุณ</a>
+                        <a href="{%url 'profile_view'%}">หน้าโปรไฟล์ของคุณ</a>
+                        <a href="{%url 'logout_view'%}">ออกจากระบบ</a>
+                    </div>
+                </div>
+                <div class="chat-logo" style="width:32px">
+                    <a href="#link to chat"><img src="{% static 'images/chatlogo.png'%}" class="chat-logo-pic brightness-effect"> </a>
+                </div>
+                <div class="notification-logo" style="width:32px">
+                    <a href="#link to notification"><img src="{% static 'images/notification.png'%}" class="noti-logo-pic brightness-effect"> </a>
+                </div>
+            </div>
+
+            {%else%}
+            <!-- *3.1 not login -->
+            <div class="login-frame vcenter" id="login_frame">
                 <div class="login-text"><a href="{% url 'login_view' %}">เข้าสู่ระบบ ></a></div>
             </div>
+
+            {% endif %}
+
+            <!-- 3.2 search -->
             <div class="search-box">
-                <button class="btn-search vhcenter"></button>
+                <button class="btn-search vhcenter brightness-effect" onclick="showSearch()"></button>
                 <input type="text" id="mysearch" class="input-search" placeholder="ค้นหาบน Dek-KMITL">
             </div>
         </div>
     </div>
 </nav>
 
-<!-- search script -->
-<!-- <script>
-    var input = document.getElementById("mysearch");
-    input.addEventListener("keyup", function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            var q = input.value
-            location.replace(q)
-        }
-    });
-</script> -->
+<!-- javascript -->
+<script src="{% static 'js/main.js'%}"></script>

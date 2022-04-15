@@ -1,39 +1,75 @@
 {% extends 'components/base.html'%} {% load static %} {% block content %}
+<link rel="stylesheet" href="{%static '/css/profile.css'%}">
+<link rel="stylesheet" href="{%static '/css/home.css'%}">
 
-<!-- Profile Card -->
-<div class="container pt-5">
-<div class="card mb-4" style="width: 30rem">
-  <img
-    class="card-img-top"
-    src="{{account.profile_image.url}}"
-    style="max-width:100px;"
-    alt="Card image cap"
-  />
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
+<div class="profile-container">
 
-<ul class="content">
-  <li>Firstname: {{account.first_name}}</li>
-  <li>Lastname : {{account.last_name}}</li>
-  <li>Email : {{account.email}}</li>
-  <li>profile image url: <a style="text-decoration: underline;" href="{{account.profile_image.url}}">{{request.user.profile_image.url}}</a></li>
-  <li>Bio: {{account.bio}}</li>
-  <li>Last login : {{account.last_login}}</li>
-  <li>Date registered: {{account.date_registered}}</li>
-  <li>is_admin: {{account.is_admin}}</li>
+    <!-- 1. cover photo  -->
+    <div class="profile-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div>
 
-</ul>
+    <!-- 2. profile image, name and edit profile button -->
+    <div class="profile-detail-pic-name">
+        <!-- 2.1 profile image -->
+        <div class="profile-picture" style="background-image: url({{account.profile_image.url}})"></div>
+        <!-- 2.2 profile name and edit profile button -->
+        <div class="profile-detail">
+            <div class="profile-name">
+                <div class="profile-first-name">{{account.first_name}}</div>
+                <div class="profile-last-name">{{account.last_name}}</div>
+            </div>
+            <!-- ------------ *if your profile use edit profile button ------------------ -->
+            <div class="profile-edit vhcenter"><a href="#" class="profile-edit-link">แก้ไขโปรไฟล์</a></div>
+            <!-- ------------ *if not your profile use follow button ------------------ -->
+            <!-- **if already follow use this class "unfollow-button" at div and "unfollow-button-link" at a -->
+            <!-- <div class="profile-edit vhcenter"><a href="#" class="profile-edit-link " style="font-size:20px">ติดตาม</a></div> -->
+        </div>
+    </div>
 
+    <!-- 3. profile bio -->
+    <div class="profile-bio profile-margin" style="overflow-wrap:anywhere;">{{account.bio}}</div>
 
+    <!-- 4. user follower and following -->
+    <div class="profile-follow profile-margin">
+        <div class="profile-follow-text">xxx&nbsp;กำลังติดตาม</div>
+        <div class="profile-follow-text">xxx&nbsp;ผู้ติดตาม</div>
+    </div>
 
-    </p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
+    <!-- 5. create blog button -->
+    <!-- *if not your profile don't have this button -->
+    <div class="profile-create-blog profile-margin vhcenter">
+        <div class="createblog-icon vhcenter">
+            <a href="{%url 'post:create_view'%}" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:20px"></a>
+        </div>
+        <div class="createblog-text"><a href="{%url 'post:create_view'%}" style="font-size:19px">ตั้งกระทู้</a></div>
+    </div>
+
+    <!-- 6. user blog -->
+    <div class="profile-margin" style="display:block;margin-top:25px">
+        <!-- ******************blog not found*****************8 -->
+        <!-- <div class="notfound-blog no-thumbnail-blog vhcenter" style="width:100%;font-size:35px">ยังไม่มีกระทู้</div> -->
+        <!-- ********************loop blog*********************** -->
+        <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%">
+            <div class="user-profile-container vhcenter" style="width:15%">
+                <a href="#link to user profile">
+                    <div class="user-profile-pic" style="background-image: url({{account.profile_image.url}})"></div>
+                </a>
+            </div>
+            <div class="blog-detail" style="width:85%;margin-right:20px">
+                <div class="blog-name wrap-name" style="max-width:100%">
+                    <a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริhihi</a>
+                </div>
+                <div class="blog-detail-2">
+                    <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
+                    <div class="blog-like-comment vhcenter">
+                        <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
+                        <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ************************************************* -->
+
+    </div>
 </div>
-</div>
-
 
 {% endblock %}
