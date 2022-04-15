@@ -1,10 +1,11 @@
 {% load static%}
 <nav class="redorange">
     <div class="navbar-container vcenter">
-        <!-- 0. hide toolbar -->
+        <!-- 0. hide toolbar (media query) -->
         <div class="hide-navbar">
             <img src="{% static 'images/hidebar.svg'%}" onclick="showToolbar()" class="hide-toolbar" style="width:100%">
         </div>
+
         <!-- 1. logo -->
         <div class="logo vcenter">
             <a href="/"><img src="{% static 'images/logotop.svg'%}" class="logotop-pic"></a>
