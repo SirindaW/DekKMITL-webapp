@@ -79,3 +79,7 @@ def register_view(request, *args, **kwargs):
     context = {"form": form}
 
     return render(request, "account/register.html", context)
+
+def profile_edit_view(request):
+    context = {}
+    return render(request,'account/profile_edit.html',context)
