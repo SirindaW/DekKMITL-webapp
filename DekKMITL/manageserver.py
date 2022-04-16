@@ -12,6 +12,12 @@ batch_file = 'server.bat'
 
 subproc = list()
 command = ''
+def dir_path():
+    path = os.path.dirname(os.path.realpath(__file__))
+    dir_= pathlib.PurePath(path)
+    return dir_.name
+
+HEADLINE= f'(console) {dir_path()}> '
 
 def execute_arg():
     try:
@@ -24,16 +30,19 @@ def execute_arg():
 
 def main_loop():
     while True:
-        command = input('console> ') 
+        print(HEADLINE,end='')
+        command = input()
         try:
             exec_command(command)
         except Exception as e:
             print(f'{str(e)}')
+
             
 def welcome_message(hide=False):
     if not hide:
         text = """Django server management shell """
         print(text)
+        print(pathlib.Path(__file__).parent.resolve())
     
 def help_message():
     text = """ 
@@ -41,6 +50,7 @@ def help_message():
     migrate          Synchronizes the database state with the current set of models and migrations [python manage.py migrate].
     makemigrations   Creates new migrations based on the changes detected to your models [python manage.py migrate].
     shell            Starts the Python interactive interpreter.
+    createsupseruser Creates a superuser account [python manage.py createsuperuser].
     code             Open project in vs code.
     web              Open http://127.0.0.1:8000 in default web browser.
     restart          to restart this shell using Windows Terminal.
@@ -60,6 +70,33 @@ def help_message():
 #     proc = subprocess.Popen(a, shell)
 #     subproc.append(proc)
 #     return proc
+
+global urls
+urls = [
+    '',
+    '/admin',
+]
+
+def read_urls_from_file():
+    global urls
+    from_file = []
+    try:
+        with open('urls.txt','r') as file:
+            data = file.readlines()
+            for url in data:
+                from_file.append(url.strip())
+    except FileNotFoundError:
+        pass
+
+    urls += from_file
+
+    return from_file
+
+def write_urls_to_file(url_):
+    global urls
+    with open('urls.txt','w') as file:
+        rv = file.write(str(url))
+    return rv
     
 def exec_command(command=''):
     command = command.lower()
@@ -74,12 +111,18 @@ def exec_command(command=''):
         return
 
     if command in ['makemigrations','mkmigrations','mkmig','mkmg','mm']:
-        proc = subprocess.Popen('python manage.py migrate',shell=True)
+        proc = subprocess.Popen('python manage.py makemigrations',shell=True)
         print('process id :',proc.pid)
         return
 
     if command in ['shell','sh']:
-        proc = subprocess.Popen('python manage.py shell',shell=True)
+        exec_command('.start cmd /k python manage.py shell')
+        # proc = subprocess.Popen('start /wait python manage.py shell',shell=True)
+        return
+
+    if command in ['createsuperuser','superuser','super','createsup','createsuper']:
+        exec_command('.start cmd /k python manage.py createsuperuser')
+        # proc = subprocess.Popen('start /wait python manage.py createsuperuser',shell=True)
         print('process id :',proc.pid)
         return
 
@@ -89,12 +132,21 @@ def exec_command(command=''):
             proc.kill()
         return
 
-    if command in ['vs code','code','code .','open code','opencode']:
+    if command in ['vs code','code','code .','opencode']:
         exec_command('.code .')
         return
 
-    if command in ['web','webbrowser','open web','openweb']:
+    if command.split()[0] in ['web','webbrowser','openweb',]:
+        try:
+            url = command.split()[1]        
+        except IndexError:
+            url = "http://127.0.0.1:8000/"
+        webbrowser.open(url, new=0, autoraise=True)
+        return
+
+    if command[0] in ['/']:
         url = "http://127.0.0.1:8000/"
+        url += command[1:]
         webbrowser.open(url, new=0, autoraise=True)
         return
 
@@ -102,12 +154,21 @@ def exec_command(command=''):
         exec_command('.start .')
         return
 
+    if command in ['native','pipenv shell','pipshell']:
+        exec_command('.start cmd /k pipenv shell')
+        return
+
     if command in ['dir','ls',]:
-        exec_command('.dir .')
+        os.system('dir')
         return
 
     if command in ['windows terminal','wt']:
         exec_command('.start wt ')
+        return
+
+    if command in ['cls','clear']:
+        # not call on new thread
+        os.system('cls')
         return
 
     if command in ['restart','reset']:
@@ -152,8 +213,8 @@ def exec_command(command=''):
 
 
 if __name__ == "__main__":
-    print(pathlib.Path(__file__).parent.resolve())
     welcome_message()
+    # read_urls_from_file()
     execute_arg()
     main_loop()
     
