@@ -1,10 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
 from account.forms import RegistrationForm, LoginForm
-from .models import Account,UserFollowing
+from .models import Account
 
 
 def profile_view(request,user_id=None,*args, **kwargs):
