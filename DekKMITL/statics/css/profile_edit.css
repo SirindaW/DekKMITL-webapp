@@ -1,0 +1,160 @@
+/* ---------------------------------profile edit--------------------------------------- */
+
+
+/* mutual class */
+
+.margin {
+    margin-left: 45px;
+    margin-right: 45px;
+}
+
+
+/* container */
+
+.upload-container {
+    display: flex;
+    min-width: 80%;
+}
+
+.img-upload-container {
+    margin-right: 50px;
+}
+
+.name-info,
+.bio-edit {
+    margin-top: 15px;
+}
+
+
+/* upload button */
+
+input[type="file"] {
+    display: none;
+}
+
+.text {
+    font-size: 20px;
+    margin-bottom: 3px;
+    margin-left: 6px;
+}
+
+.custom-file-upload {
+    cursor: pointer;
+    color: #fff;
+}
+
+.custom-file-upload-container {
+    width: 250px;
+    height: 36px;
+    border-radius: 30px;
+    border: 1px solid #fff;
+    background-color: #131313;
+    transition: all .2s ease;
+}
+
+
+/* remove button */
+
+.remove-img {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 6px;
+    width: 100%;
+}
+
+.remove-btn {
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 300;
+    color: rgb(172, 171, 171);
+}
+
+.remove-btn:hover {
+    text-decoration-line: underline;
+}
+
+
+/* info */
+
+.info-title {
+    font-size: 20px;
+}
+
+.info-input {
+    width: 100%;
+    padding: 10px 20px 10px 20px;
+    border: 0;
+    border-radius: 25px;
+    color: #131313;
+    font-size: 20px;
+}
+
+
+/* password edit button */
+
+.password-edit {
+    background-color: #131313;
+    border: 1px solid #fff;
+    border-radius: 33px;
+    height: 37px;
+    width: 180px;
+    margin-top: 25px;
+    transition: all .2s ease;
+}
+
+.pw-edit {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+/* button save cancel */
+
+.button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.submit-btn,
+.cancel-btn {
+    cursor: pointer;
+    border: 0;
+    padding: 5px 40px 5px 40px;
+    font-size: 22px;
+    border: 1.5px solid #fff;
+    border-radius: 33px;
+    transition: all .2s ease;
+    font-weight: 500;
+}
+
+.cancel-btn {
+    background-color: #131313;
+    margin-left: 15px;
+}
+
+
+/* effect hover */
+
+.password-edit:hover,
+.custom-file-upload-container:hover,
+.change-bg {
+    background-color: #fff;
+}
+
+.pw-edit:hover,
+.password-edit:hover .pw-edit,
+.custom-file-upload-container:hover .custom-file-upload,
+.change-text {
+    color: #131313;
+    font-weight: 500;
+}
+
+.color-effect:hover {
+    background-color: #fff;
+    color: #131313;
+}
+
+.shadow-effect:hover {
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.644);
+}

@@ -10,7 +10,7 @@
     <!-- 2. profile image, name and edit profile button -->
     <div class="profile-detail-pic-name">
         <!-- 2.1 profile image -->
-        <div class="profile-picture" style="background-image: url({{account.profile_image.url}})"></div>
+        <div class="profile-picture" style="background-image: url({{account.profile_image.url}});background-color:#282828"></div>
         <!-- 2.2 profile name and edit profile button -->
         <div class="profile-detail">
             <div class="profile-name">
@@ -18,7 +18,7 @@
                 <div class="profile-last-name">{{account.last_name}}</div>
             </div>
             <!-- ------------ *if your profile use edit profile button ------------------ -->
-            <div class="profile-edit vhcenter"><a href="#" class="profile-edit-link">แก้ไขโปรไฟล์</a></div>
+            <div class="profile-edit vhcenter"><a href="{%url 'profile_edit_view'%}" class="profile-edit-link">แก้ไขโปรไฟล์</a></div>
             <!-- ------------ *if not your profile use follow button ------------------ -->
             <!-- **if already follow use this class "unfollow-button" at div and "unfollow-button-link" at a -->
             <!-- <div class="profile-edit vhcenter"><a href="#" class="profile-edit-link " style="font-size:20px">ติดตาม</a></div> -->
