@@ -17,10 +17,11 @@ urlpatterns = [
     path("register/", register_view, name="register_view"),
     path("login/", login_view, name="login_view"),
     path("logout/", logout_view, name="logout_view"),
-    path("profile/<int:user_id>", profile_view, name="profile_view"),
+    path("profile/<int:user_id>", profile_view, name="profile_account_view"),
     path("profile/", profile_view, name="profile_view"),
     path("profile/edit",profile_edit_view,name="profile_edit_view"),
     path("post/",include('post.urls')),
+    path("account/",include('account.urls')),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

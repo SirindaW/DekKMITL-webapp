@@ -83,8 +83,11 @@ class Account(AbstractBaseUser):
         return str(self.first_name) + " " +str(self.last_name)
 
     def get_absolute_url(self):
-        return reverse("profile_view", kwargs={"user_id": self.id})
+        return reverse("profile_account_view", kwargs={"user_id": self.id})
     
+    def get_follow_url(self):
+        # request.user wants to follow this user
+        return reverse("account:follow_make_view",kwargs={"user_id":self.id})
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -101,3 +104,14 @@ class Account(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+
+class UserFollowing(models.Model):
+    # https://stackoverflow.com/questions/58794639/how-to-make-follower-following-system-with-django-model
+    user_id = models.ForeignKey("Account", related_name="following",on_delete=models.CASCADE)
+    following_user_id = models.ForeignKey("Account", related_name="followers",on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user_id} follow {self.following_user_id}'
+    
+
