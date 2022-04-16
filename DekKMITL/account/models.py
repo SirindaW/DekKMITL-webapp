@@ -54,6 +54,9 @@ class AccountFollowing(models.Model):
     sp = models.ForeignKey('account.Account',on_delete=models.CASCADE,blank=True,null=True,related_name='y')
     date_created = models.DateTimeField(auto_now_add=True,null=True,blank=True)
 
+    def __str__(self) -> str:
+        return f'{str(self.fp)} - follows - {str(self.sp)}'
+
 
 def get_profile_image_filepath(self,*args,**kwargs):
     return f'profile_image/{self.pk}/profile_image.png'
@@ -126,6 +129,15 @@ class Account(AbstractBaseUser):
     def unfollow_all(self):
         instance = AccountFollowing.objects.filter(fp=self)
         return instance.delete()
+
+    def toggle_follow(self,user):
+        if self.is_following(user):
+            return self.unfollow(user)
+        else:
+            return self.follow(user)
+
+    def get_toggle_follow_url(self):
+        return reverse('account:toggle_follow_view',kwargs={'user_id':self.id})
 
     def __str__(self) -> str:
         return str(self.first_name) + " " +str(self.last_name)

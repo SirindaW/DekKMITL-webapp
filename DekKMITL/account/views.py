@@ -12,15 +12,21 @@ def profile_view(request,user_id=None,*args, **kwargs):
         return redirect('login_view')
 
     if user_id is None:
-        account = request.user
+        instance = request.user
     else:
-        account = get_object_or_404(Account,id=user_id)
+        instance = get_object_or_404(Account,id=user_id)
         # account = Account.objects.get(id=user_id)
 
     context = {
-        'account':account,
+        'instance':instance,
     }
     return render(request,'account/profile.html',context)
+
+def toggle_follow_view(request,user_id):
+    user = get_object_or_404(Account,id=user_id)
+    request.user.toggle_follow(user)
+    print("TOGGLE")
+    return redirect(user.get_absolute_url())
     
 def logout_view(request, *args, **kwargs):
     logout(request)
