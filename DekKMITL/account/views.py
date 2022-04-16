@@ -90,18 +90,3 @@ def register_view(request, *args, **kwargs):
 def profile_edit_view(request):
     context = {}
     return render(request,'account/profile_edit.html',context)
-
-def follow_make_view(request,user_id):
-    user = Account.objects.get(pk=user_id)
-    
-    # user_followers = UserFollowing.objects.all()
-    user_followers = []
-    for instance in user.followers.all():
-        user_followers.append(instance.user_id)
-    if request.user not in user_followers:
-        UserFollowing.objects.create(user_id=request.user, following_user_id=user)
-        print("created")
-    
-    context = {}
-
-    return redirect(user.get_absolute_url())

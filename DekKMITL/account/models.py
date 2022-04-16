@@ -1,4 +1,3 @@
-from unittest.util import _MAX_LENGTH
 from django.db import models
 
 # Create your models here.
@@ -157,14 +156,4 @@ class Account(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-
-class UserFollowing(models.Model):
-    # https://stackoverflow.com/questions/58794639/how-to-make-follower-following-system-with-django-model
-    user_id = models.ForeignKey("Account", related_name="following",on_delete=models.CASCADE)
-    following_user_id = models.ForeignKey("Account", related_name="followers",on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{self.user_id} follow {self.following_user_id}'
-    
 
