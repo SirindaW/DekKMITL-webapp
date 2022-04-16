@@ -87,7 +87,7 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = ["first_name", "last_name"]
 
     def get_absolute_url(self):
-        return reverse("profile_view", kwargs={"user_id": self.id})
+        return reverse("profile_account_view", kwargs={"user_id": self.id})
 
     def followings(self):
         table = AccountFollowing.objects.filter(fp=self) 
