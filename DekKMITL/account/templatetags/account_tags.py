@@ -7,8 +7,18 @@ from ..models import Account
 
 register = template.Library()
 
+@register.simple_tag
+def total_followers(user):
+    return user.followers().count()
 
 @register.simple_tag
-def is_following(request,pk,*args,**kwargs):
-    # Not yet implemented
-    return False
+def total_followings(user):
+    return user.followings().count()
+
+@register.filter
+def is_following(request, user):
+    return request.user.is_following(user)
+
+@register.filter
+def toggle_follow_url(request, user):
+    return request.user.is_following(user)

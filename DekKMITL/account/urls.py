@@ -1,13 +1,7 @@
 from django.urls import path
-
 from . import views
-from .models import Account
 
-
-app_name = 'account' # use at the begining of the name account:followers_view
+app_name = 'account'
 urlpatterns = [
-    
-    path('follow-make/<int:user_id>',views.follow_make_view,name='follow_make_view'),
-    
-    
+    path('toggle-follow/<int:user_id>',views.toggle_follow_view,name='toggle_follow_view')
 ]

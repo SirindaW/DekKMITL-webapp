@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from account.models import Account
+from account.models import Account,AccountFollowing
 # Register your models here.
 
 class AccountAdmin(UserAdmin):
@@ -14,5 +14,8 @@ class AccountAdmin(UserAdmin):
     list_filter = ()
     fieldsets =  ()
 
+class AccountFollowingAdmin(UserAdmin):
+    ordering = ('-date_created')
 
 admin.site.register(Account, AccountAdmin)
+admin.site.register(AccountFollowing)

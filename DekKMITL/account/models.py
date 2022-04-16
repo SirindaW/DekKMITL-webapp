@@ -49,6 +49,15 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+class AccountFollowing(models.Model):
+    fp = models.ForeignKey('account.Account',on_delete=models.CASCADE,blank=True,null=True,related_name='x')
+    sp = models.ForeignKey('account.Account',on_delete=models.CASCADE,blank=True,null=True,related_name='y')
+    date_created = models.DateTimeField(auto_now_add=True,null=True,blank=True)
+
+    def __str__(self) -> str:
+        return f'{str(self.fp)} - follows - {str(self.sp)}'
+
+
 def get_profile_image_filepath(self,*args,**kwargs):
     return f'profile_image/{self.pk}/profile_image.png'
 
@@ -78,16 +87,60 @@ class Account(AbstractBaseUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["first_name", "last_name"]
 
+    def get_absolute_url(self):
+        return reverse("profile_view", kwargs={"user_id": self.id})
+
+    def followings(self):
+        table = AccountFollowing.objects.filter(fp=self) 
+        user_ids = table.values_list('sp',flat=True)
+        followings_ = Account.objects.filter(pk__in=user_ids)
+        return followings_
+
+    def followers(self):
+        table = AccountFollowing.objects.filter(sp=self) 
+        user_ids = table.values_list('fp',flat=True)
+        followers_ = Account.objects.filter(pk__in=user_ids)
+        return followers_
+
+    def is_following(self,user):
+        return user in self.followings() 
+
+    def is_followed_by(self,user):
+        return self in user.followers() 
+
+    def follow(self,user=None):
+        if self.id == user.id:
+            # Cannot follow yourself
+            return False
+        if self.is_following(user):
+            # Already followed
+            return False
+        instance = AccountFollowing(fp=self,sp=user)
+        instance.save()
+        return instance
+
+    def unfollow(self,user=None):
+        if not self.is_following(user):
+            # Not currently following
+            return False
+        instance = AccountFollowing.objects.get(fp=self,sp=user)
+        return instance.delete()
+
+    def unfollow_all(self):
+        instance = AccountFollowing.objects.filter(fp=self)
+        return instance.delete()
+
+    def toggle_follow(self,user):
+        if self.is_following(user):
+            return self.unfollow(user)
+        else:
+            return self.follow(user)
+
+    def get_toggle_follow_url(self):
+        return reverse('account:toggle_follow_view',kwargs={'user_id':self.id})
 
     def __str__(self) -> str:
         return str(self.first_name) + " " +str(self.last_name)
-
-    def get_absolute_url(self):
-        return reverse("profile_account_view", kwargs={"user_id": self.id})
-    
-    def get_follow_url(self):
-        # request.user wants to follow this user
-        return reverse("account:follow_make_view",kwargs={"user_id":self.id})
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

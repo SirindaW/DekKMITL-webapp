@@ -1,4 +1,4 @@
-{% extends 'components/base.html'%} {% load static %} {% block content %}
+{% extends 'components/base.html'%} {% load static %} {% block content %} {%load account_tags %}
 <link rel="stylesheet" href="{%static '/css/profile.css'%}">
 <link rel="stylesheet" href="{%static '/css/home.css'%}">
 
@@ -10,32 +10,36 @@
     <!-- 2. profile image, name and edit profile button -->
     <div class="profile-detail-pic-name">
         <!-- 2.1 profile image -->
-        <div class="profile-picture" style="background-image: url({{account.profile_image.url}})"></div>
+        <div class="profile-picture" style="background-image: url({{instance.profile_image.url}})"></div>
         <!-- 2.2 profile name and edit profile button -->
         <div class="profile-detail">
             <div class="profile-name">
-                <div class="profile-first-name">{{account.first_name}}</div>
-                <div class="profile-last-name">{{account.last_name}}</div>
+                <div class="profile-first-name">{{instance.first_name}}</div>
+                <div class="profile-last-name">{{instance.last_name}}</div>
             </div>
-            {% if request.user is account %}
+            
+            {% if request.user is instance %}
             <!-- ------------ *if your profile use edit profile button ------------------ -->
             <div class="profile-edit vhcenter"><a href="#" class="profile-edit-link">แก้ไขโปรไฟล์</a></div>
             {% else %}
-
             <!-- ------------ *if not your profile use follow button ------------------ -->
             <!-- **if already follow use this class "unfollow-button" at div and "unfollow-button-link" at a -->
-            <div class="profile-edit vhcenter"><a href="{{account.get_follow_url}}" class="profile-edit-link " style="font-size:20px">ติดตาม</a></div>
+            {% if request|is_following:instance %} 
+            <div class="profile-edit vhcenter"><a href="{{ instance.get_toggle_follow_url }}" class="profile-edit-link " style="font-size:20px">เลิกติดตาม</a></div> 
+            {% else %} 
+            <div class="profile-edit vhcenter"><a href="{{ instance.get_toggle_follow_url}}" class="profile-edit-link " style="font-size:20px">ติดตาม</a></div> 
+            {% endif %} 
             {% endif %}
         </div>
     </div>
 
     <!-- 3. profile bio -->
-    <div class="profile-bio profile-margin" style="overflow-wrap:anywhere;">{{account.bio}}</div>
+    <div class="profile-bio profile-margin" style="overflow-wrap:anywhere;">{{instance.bio}}</div>
 
     <!-- 4. user follower and following -->
     <div class="profile-follow profile-margin">
-        <div class="profile-follow-text">xxx&nbsp;กำลังติดตาม</div>
-        <div class="profile-follow-text">xxx&nbsp;ผู้ติดตาม</div>
+        <div class="profile-follow-text">{% total_followings instance %} กำลังติดตาม</div>
+        <div class="profile-follow-text">{% total_followers instance %} ผู้ติดตาม</div>
     </div>
 
     <!-- 5. create blog button -->
@@ -55,7 +59,7 @@
         <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%">
             <div class="user-profile-container vhcenter" style="width:15%">
                 <a href="#link to user profile">
-                    <div class="user-profile-pic" style="background-image: url({{account.profile_image.url}})"></div>
+                    <div class="user-profile-pic" style="background-image: url({{instance.profile_image.url}})"></div>
                 </a>
             </div>
             <div class="blog-detail" style="width:85%;margin-right:20px">

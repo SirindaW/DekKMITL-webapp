@@ -118,7 +118,6 @@ def exec_command(command=''):
     if command in ['shell','sh']:
         exec_command('.start cmd /k python manage.py shell')
         # proc = subprocess.Popen('start /wait python manage.py shell',shell=True)
-        print('process id :',proc.pid)
         return
 
     if command in ['createsuperuser','superuser','super','createsup','createsuper']:
