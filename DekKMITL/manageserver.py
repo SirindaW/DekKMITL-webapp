@@ -215,8 +215,7 @@ def exec_command(command=''):
 
 if __name__ == "__main__":
     welcome_message()
-    read_urls_from_file()
-    print(urls)
+    # read_urls_from_file()
     execute_arg()
     main_loop()
     
