@@ -40,7 +40,7 @@ def login_view(request, *args, **kwargs):
         return redirect("home_view")
 
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        form = LoginForm(request.POST,request.FILES)
         if form.is_valid():
             email = form.cleaned_data.get("email")
             raw_password = form.cleaned_data.get("password")
@@ -52,6 +52,7 @@ def login_view(request, *args, **kwargs):
             else:
                 messages.error(request,"Invalid Login.")
                 form = LoginForm() 
+            
         else:
             messages.error(request,"Invalid Login.")
             form = LoginForm() 
@@ -89,11 +90,16 @@ def register_view(request, *args, **kwargs):
 def profile_edit_view(request):
     form = ProfileEditForm(instance=request.user)    
     if request.method == "POST": 
-        form = ProfileEditForm(request.POST,instance=request.user) 
+        form = ProfileEditForm(request.POST,request.FILES,instance=request.user) 
+
+        print(request.FILES)        
+
         if form.is_valid():        
             form.save()
-            return redirect(request.user.get_absolute_url())
+        else:
+            print("Form is not valid")
 
+        return redirect(request.user.get_absolute_url())
     context = {
         'form':form,
     }

@@ -77,11 +77,11 @@ class Account(AbstractBaseUser):
         unique=True,
     )
 
-    first_name = models.CharField(max_length=200, default="")
-    last_name = models.CharField(max_length=200, default="")
+    first_name = models.CharField(max_length=50, default="")
+    last_name = models.CharField(max_length=50, default="")
     date_registered = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
-    bio = models.TextField(blank=True, max_length=500)
+    bio = models.TextField(blank=True, max_length=160)
     profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_filepath,   default=get_default_profile_image)
     cover_image = models.ImageField(max_length=255, upload_to=get_cover_image_filepath,   default=get_default_cover_image)
     hide_email = models.BooleanField(default=True)

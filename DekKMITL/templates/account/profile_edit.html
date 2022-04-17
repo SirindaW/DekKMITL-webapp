@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{%static '/css/profile.css'%}">
 <link rel="stylesheet" href="{%static '/css/profile_edit.css'%}">
 
-<form method="POST" class="profile-container">{%csrf_token%}
+<form method="POST" class="profile-container" enctype="multipart/form-data">{%csrf_token%}
     <!-- 1. cover photo  -->
     <div id="cover_preview_img" class="profile-cover" style="cursor:initial;background-image: url({{request.user.get_cover_image_url}})"></div>
 
@@ -18,7 +18,8 @@
                 <div class="text">แก้ไขรูปโปรไฟล์</div>
                 <div class="custom-file-upload-container vhcenter" id="change_p_bg">
                     <label class="custom-file-upload" id="change_p_text">
-                        <input type="file" accept="image/*" id="profile_input_img">
+                        <input type="file" accept="image/*"  name="profile_image" id="profile_input_img">
+                        <!-- {{form.profile_image}} -->
                         อัปโหลดรูปโปรไฟล์
                     </label>
                 </div>
@@ -31,7 +32,7 @@
                 <div class="text">แก้ไขรูปปก</div>
                 <div class="custom-file-upload-container vhcenter" id="change_c_bg">
                     <label class="custom-file-upload" id="change_c_text">
-                        <input type="file" accept="image/*" id="cover_input_img">
+                        <input type="file" accept="image/*" name="cover_image" id="cover_input_img">
                         อัปโหลดรูปปก
                     </label>
                 </div>
