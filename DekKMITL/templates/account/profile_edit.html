@@ -46,18 +46,21 @@
     <div class="name-info margin" style="display:flex;justify-content:space-between">
         <div class="info-container" style="width:49%">
             <div class="info-title">ชื่อจริง</div>
-            <input class="info-input" type="text" name="first_name" id="inputFirstname" placeholder="ระบุชื่อจริง">
+            {{form.first_name}}
+            <!-- <input class="info-input" type="text" name="first_name" id="inputFirstname" placeholder="ระบุชื่อจริง"> -->
         </div>
         <div class="info-container" style="width:49%">
             <div class="info-title">นามสกุล</div>
-            <input class="info-input" type="text" name="last_name" id="inputLastname" placeholder="ระบุนามสกุล">
+            {{form.last_name}}
+            <!-- <input class="info-input" type="text" name="last_name" id="inputLastname" placeholder="ระบุนามสกุล"> -->
         </div>
     </div>
 
     <!-- 4. bio edit -->
     <div class="bio-edit margin">
         <div class="info-title">คำอธิบายตัวเอง</div>
-        <input class="info-input" type="text" name="bio" id="inputBio" placeholder="ระบุคำอธิบายตัวเอง">
+        <!-- <input class="info-input" type="text" name="bio" id="inputBio" placeholder="ระบุคำอธิบายตัวเอง"> -->
+        {{form.bio}}
     </div>
 
     <!-- 5. password edit button -->

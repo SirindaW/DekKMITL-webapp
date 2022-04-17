@@ -1,4 +1,5 @@
 from cProfile import label
+from dataclasses import field
 from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib.auth import authenticate
@@ -46,3 +47,43 @@ class RegistrationForm(UserCreationForm):
         except:
             return email
         raise forms.ValidationError(f"Account with email {email} is already existed.")
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = ('first_name','last_name','bio')
+
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class':'info-input', 'name':'first_name', 'id':'inputFirstname', 'placeholder':'ระบุชื่อจริง', }),
+            'last_name': forms.TextInput(attrs={'class':'info-input', 'name':'last_name', 'id':'inputLastname', 'placeholder':'ระบุนามสกุล', }),
+            'bio': forms.TextInput(attrs={ 'class':'info-input', 'type':'text', 'name':'bio', 'id':'inputBio', 'placeholder':'ระบุคำอธิบายตัวเอง', }),
+        }
+
+    # def save(self, commit=True):
+        
+    #     self.instance.first_name = self.cleaned_data['first_name']
+    #     self.instance.last_name = self.cleaned_data['last_name']
+    #     self.instance.bio= self.cleaned_data['bio']
+    #     if commit:
+    #         self.instance.save()        
+    #     return self.instance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
