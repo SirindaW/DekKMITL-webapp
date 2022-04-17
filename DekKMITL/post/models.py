@@ -11,7 +11,7 @@ class Post(models.Model):
     content = models.TextField(max_length=1200)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     last_modified = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(Account,related_name='post_likes')
+    likes = models.ManyToManyField(Account,related_name='post_likes',null=True,blank=True)
     post_fav = models.PositiveBigIntegerField(default=0,null=False)
     views = models.PositiveIntegerField(null=True,blank=True,default=0)
     slug = models.SlugField(unique=True,max_length=300,blank=False)
