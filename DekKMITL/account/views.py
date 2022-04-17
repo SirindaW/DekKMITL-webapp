@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 
-from account.forms import RegistrationForm, LoginForm
+from account.forms import RegistrationForm, LoginForm, ProfileEditForm
 from .models import Account
 
 
@@ -87,7 +87,16 @@ def register_view(request, *args, **kwargs):
     return render(request, "account/register.html", context)
 
 def profile_edit_view(request):
-    context = {}
+    form = ProfileEditForm(instance=request.user)    
+    if request.method == "POST": 
+        form = ProfileEditForm(request.POST,instance=request.user) 
+        if form.is_valid():        
+            form.save()
+            return redirect(request.user.get_absolute_url())
+
+    context = {
+        'form':form,
+    }
     return render(request,'account/profile_edit.html',context)
 
 def profile_edit_password_view(request):

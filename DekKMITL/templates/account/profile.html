@@ -5,11 +5,11 @@
 <div class="profile-container">
 
     <!-- 1. cover photo  -->
-    <div class="profile-cover" id="cover_img" onclick="fullCoverImg()" style="background-image: url('/statics/images/defaultcover.svg')"></div>
+    <div class="profile-cover" id="cover_img" onclick="fullCoverImg()" style="background-image: url({{instance.get_cover_image_url}})"></div>
     <!-- *popup cover image -->
     <div class="popup popup_cover_img" id="full_cover_img">
         <div class="close" onclick="closeFullCoverImg()" id="close_cover_img">✕</div>
-        <img src="/statics/images/defaultcover.svg" class="large-image">
+        <img src="{{instance.get_cover_image_url}}" class="large-image">
     </div>
     <!-- 2. profile image, name and edit profile button -->
     <div class="profile-detail-pic-name">
