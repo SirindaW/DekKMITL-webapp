@@ -79,6 +79,8 @@ def register_view(request, *args, **kwargs):
                 # request, f'Account created for {form.cleaned_data.get("email")}.'
             # )
             return redirect("home_view")
+        else:
+            messages.error(request,'')
     else:
         form = RegistrationForm()
 

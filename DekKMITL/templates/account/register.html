@@ -41,7 +41,36 @@
             <!-- *2.5 password wrong -->
             <div class="info-detail">
                 <div class="info-wrong">
-                    {% for field in form %}{% for error in field.errors %}กรุณากรอกข้อมูลให้ครบ{% endfor %}{% endfor %}
+
+                    <!-- Field error messages -->      
+                    {% if form.errors.first_name %}
+                    *กรุณากรอกชื่อจริง <br>
+                    {% endif %}
+
+                    {% if form.errors.last_name%}
+                    *กรุณากรอกนามสกุล <br>
+                    {% endif %}
+
+                    {% if form.errors.email%}
+                    *อีเมลนี้ไม่สามารถใช้ได้<br>
+                    {% endif %}
+
+                    {% if form.errors.password1%}
+                    {% for e in form.errors.password1 %}
+                    {{e}}<br>
+                    {% endfor %}
+
+                    {% for e in form.errors.password2 %}
+                    {{e}}<br>
+                    {% endfor %}
+                    
+
+                    {% endif %}
+
+
+                    {% for message in messages %}
+                    {{message}}
+                    {% endfor %}
                 </div>
             </div>
             <!-- 2.6 sign up button -->
