@@ -5,12 +5,13 @@
 <div class="profile-container">
 
     <!-- 1. cover photo  -->
-    <div class="profile-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div>
+    <!-- <div class="profile-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div> -->
+    <div class="profile-cover" style="background-image: url({{instance.get_cover_image_url}})"></div>
 
     <!-- 2. profile image, name and edit profile button -->
     <div class="profile-detail-pic-name">
         <!-- 2.1 profile image -->
-        <div class="profile-picture" style="background-image: url({{instance.profile_image.url}})"></div>
+        <div class="profile-picture" style="background-image: url({{instance.get_profile_image_url}})"></div>
         <!-- 2.2 profile name and edit profile button -->
         <div class="profile-detail">
             <div class="profile-name">

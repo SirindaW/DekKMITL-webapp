@@ -5,7 +5,7 @@
 
 <form method="POST" class="profile-container">{%csrf_token%}
     <!-- 1. cover photo  -->
-    <div id="cover_preview_img" class="profile-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div>
+    <div id="cover_preview_img" class="profile-cover" style="background-image: url({{request.user.get_cover_image_url}})"></div>
 
     <!-- 2. profile image and upload -->
     <div class="profile-detail-pic-name">

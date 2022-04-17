@@ -60,8 +60,15 @@ class AccountFollowing(models.Model):
 def get_profile_image_filepath(self,*args,**kwargs):
     return f'profile_image/{self.pk}/profile_image.png'
 
+def get_cover_image_filepath(self,*args,**kwargs):
+    # same dir as profile image
+    return f'profile_image/{self.pk}/cover_image.png'
+
 def get_default_profile_image():
     return "account/default_profile_image.svg"
+
+def get_default_cover_image():
+    return "account/defaultcover.svg"
 
 class Account(AbstractBaseUser):
     email = models.EmailField(
@@ -75,7 +82,8 @@ class Account(AbstractBaseUser):
     date_registered = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(verbose_name="last login", auto_now=True)
     bio = models.TextField(blank=True, max_length=500)
-    profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image)
+    profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_filepath,   default=get_default_profile_image)
+    cover_image = models.ImageField(max_length=255, upload_to=get_cover_image_filepath,   default=get_default_cover_image)
     hide_email = models.BooleanField(default=True)
 
     is_active = models.BooleanField(default=True)
@@ -88,6 +96,12 @@ class Account(AbstractBaseUser):
 
     def get_absolute_url(self):
         return reverse("profile_account_view", kwargs={"user_id": self.id})
+
+    def get_profile_image_url(self):
+        return self.profile_image.url
+    
+    def get_cover_image_url(self):
+        return self.cover_image.url
 
     def followings(self):
         table = AccountFollowing.objects.filter(fp=self) 
