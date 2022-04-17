@@ -19,3 +19,8 @@ def like_status(request,pk,*args,**kwargs):
     else:
         status = False
     return status
+
+@register.filter
+def post_list(user):
+    posts = user.post.order_by('-date_created')
+    return posts

@@ -1,4 +1,4 @@
-{% extends 'components/base.html'%} {% load static %} {% block content %} {%load account_tags %}
+{% extends 'components/base.html'%} {% load static %} {% block content %} {%load account_tags %} {% load post_tags %} {% load humanize %}
 <link rel="stylesheet" href="{%static '/css/profile.css'%}">
 <link rel="stylesheet" href="{%static '/css/home.css'%}">
 
@@ -15,8 +15,8 @@
         <!-- 2.2 profile name and edit profile button -->
         <div class="profile-detail">
             <div class="profile-name">
-                <div class="profile-first-name">{{instance.first_name}}</div>
-                <div class="profile-last-name">{{instance.last_name}}</div>
+                <div class="profile-first-name">{{instance.first_name|title}}</div>
+                <div class="profile-last-name">{{instance.last_name|title}}</div>
             </div>
             
             {% if request.user.pk == instance.pk %}
@@ -59,24 +59,33 @@
     {% endif %}
 
     <!-- 6. user blog -->
-    <div class="profile-margin" style="display:block;margin-top:25px">
+    
+
+    {% if not instance.post.all %}
         <!-- ******************blog not found*****************8 -->
-        <!-- <div class="notfound-blog no-thumbnail-blog vhcenter" style="width:100%;font-size:35px">ยังไม่มีกระทู้</div> -->
+        <div class="notfound-blog no-thumbnail-blog vhcenter" style="width:100%;font-size:35px">ยังไม่มีกระทู้</div>
+    {% endif %}
+
+    {% for post in instance|post_list %}
+    
+    <div class="profile-margin" style="display:block;margin-top:25px">
         <!-- ********************loop blog*********************** -->
         <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%">
             <div class="user-profile-container vhcenter" style="width:15%">
-                <a href="#link to user profile">
-                    <div class="user-profile-pic" style="background-image: url({{instance.profile_image.url}})"></div>
+                <a href="{{post.author.get_absolute_url}}">
+                    <div class="user-profile-pic" style="background-image: url({{post.author.profile_image.url}})"></div>
                 </a>
             </div>
             <div class="blog-detail" style="width:85%;margin-right:20px">
                 <div class="blog-name wrap-name" style="max-width:100%">
-                    <a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริhihi</a>
+
+                    <a href="{{post.get_absolute_url}}" class="blogfont">{{post.title}}</a>
+
                 </div>
                 <div class="blog-detail-2">
-                    <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
+                    <div class="blog-username-date"><a href="{{post.author.get_absolute_url}}">{{post.author.first_name|title}} : {{post.date_created|naturaltime}}</a></div>
                     <div class="blog-like-comment vhcenter">
-                        <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
+                        <img src="{% static 'images/like.png'%}" style="width:15px">{{post.likes.count}} &nbsp;
                         <img src="{% static 'images/comment.png'%}" style="width:15px">50
                     </div>
                 </div>
@@ -85,6 +94,13 @@
         <!-- ************************************************* -->
 
     </div>
+    
+
+    {% endfor %}
+
+
+
+
 </div>
 
 {% endblock %}

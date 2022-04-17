@@ -20,6 +20,7 @@ def profile_view(request,user_id=None,*args, **kwargs):
     context = {
         'instance':instance,
     }
+
     return render(request,'account/profile.html',context)
 
 def toggle_follow_view(request,user_id):
