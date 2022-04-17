@@ -32,6 +32,36 @@ function closeFullProfileImg() {
     document.getElementById("full_profile_img").classList.remove("img-show");
 }
 
+//change unfollow button html text
+function changeText(text) {
+    var display = document.getElementById('unfollow_btn');
+    display.innerHTML = "";
+    display.innerHTML = text;
+}
+
+function changeBack(text) {
+    var display = document.getElementById('unfollow_btn');
+    display.innerHTML = "";
+    display.innerHTML = text;
+}
+
+//search
+
+// function selectElement(selector) {
+//     return document.querySelector(selector)
+// }
+
+// function getResults() {
+
+//     const search = selectElement('#user_name').value;
+//     for (let i = 0; i < name.length; i++) {
+//         if (name[i].toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+//             selectElement('.user-info').innerHTML = '';
+//             selectElement('.user-info').innerHTML = '';
+//         }
+//     }
+// }
+
 window.onclick = function(event) {
     // Close the dropdown if the user clicks outside of it
     if (!event.target.matches('.user-profile-navbar')) {

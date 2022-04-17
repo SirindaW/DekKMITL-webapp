@@ -1,0 +1,89 @@
+/* ---------------------------------follower and following list--------------------------------------- */
+
+
+/* container */
+
+.container {
+    max-width: 650px;
+    min-height: 720px;
+    margin: auto;
+    background: #282828;
+    border-radius: 50px;
+    padding: 25px;
+}
+
+.follow-count {
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.back-to-profile {
+    font-size: 18px;
+    border-bottom: 1px solid #fff;
+}
+
+.follow-search {
+    margin: 15px 0;
+    width: 100%;
+    background-color: #E4D8D840;
+    border-radius: 9px;
+    padding: 5px;
+}
+
+.user-search {
+    background: transparent;
+    outline: none;
+    border: 0;
+    padding: 1px 10px 1px 4px;
+    margin: 0 10px;
+    width: 100%;
+    max-height: 35px;
+    font-size: 20px;
+}
+
+.user-search:focus {
+    border-bottom: 1px solid #acacacd7;
+}
+
+.user-info {
+    overflow: auto;
+    max-height: 500px;
+}
+
+.user {
+    padding: 15px;
+    border-radius: 10px;
+    transition: all .15s ease;
+}
+
+.user:hover {
+    background-color: #E4D8D840;
+}
+
+.user-detail {
+    min-width: 85%;
+    justify-content: space-between;
+}
+
+.username {
+    font-weight: 500;
+    width: 300px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.user-not-found {
+    font-size: 30px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.507);
+    text-align: center;
+    padding: 10px;
+}
+
+.resize-btn {
+    height: 35px;
+    width: 140px;
+}

@@ -109,3 +109,10 @@ def profile_edit_password_view(request):
     context = {}
     return render(request,'account/password_edit.html',context)
     
+def follower_list_view(request):
+    context = {}
+    return render(request,'account/follower_list.html',context)
+
+def following_list_view(request):
+    context = {}
+    return render(request,'account/following_list.html',context)

@@ -26,17 +26,16 @@
                 <div class="profile-first-name">{{instance.first_name}}</div>
                 <div class="profile-last-name">{{instance.last_name}}</div>
             </div>
-            
+
             {% if request.user.pk == instance.pk %}
             <!-- ------------ *if your profile use edit profile button ------------------ -->
             <div class="profile-edit vhcenter"><a href="{% url 'profile_edit_view' %}" class="profile-edit-link">แก้ไขโปรไฟล์</a></div>
             {% else %}
             <!-- ------------ *if not your profile use follow button ------------------ -->
-            <!-- **if already follow use this class "unfollow-button" at div and "unfollow-button-link" at a -->
             {% if request|is_following:instance %}
-            <div class="profile-edit vhcenter"><a href="{{ instance.get_toggle_follow_url }}" class="profile-edit-link " style="font-size:20px">เลิกติดตาม</a></div>
+            <div class="unfollow-button vhcenter"><a href="{{ instance.get_toggle_follow_url }}" class="unfollow-button-link " id="unfollow_btn" style="font-size:20px" onmouseover="changeText('เลิกติดตาม')" onmouseout="changeBack('ติดตามอยู่')">ติดตามอยู่</a></div>
             {% else %}
-            <div class="profile-edit vhcenter"><a href="{{ instance.get_toggle_follow_url}}" class="profile-edit-link " style="font-size:20px">ติดตาม</a></div>
+            <div class="follow-button vhcenter"><a href="{{ instance.get_toggle_follow_url}}" class="follow-button-link " style="font-size:20px">ติดตาม</a></div>
             {% endif %} {% endif %}
         </div>
     </div>
@@ -46,8 +45,12 @@
 
     <!-- 4. user follower and following -->
     <div class="profile-follow profile-margin">
-        <div class="profile-follow-text">{% total_followings instance %} กำลังติดตาม</div>
-        <div class="profile-follow-text">{% total_followers instance %} ผู้ติดตาม</div>
+        <a href="{% url 'account:following_list_view' %}">
+            <div class="profile-follow-text">{% total_followings instance %} กำลังติดตาม</div>
+        </a>
+        <a href="{% url 'account:follower_list_view' %}">
+            <div class="profile-follow-text">{% total_followers instance %} ผู้ติดตาม</div>
+        </a>
     </div>
 
     <!-- 5. create blog button -->
@@ -87,5 +90,4 @@
 
     </div>
 </div>
-
 {% endblock %}

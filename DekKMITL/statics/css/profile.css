@@ -110,15 +110,43 @@
 }
 
 
-/* profile unfollow button  */
+/* follow button */
+
+.follow-button {
+    background-color: #fff;
+    border: 1px solid #FFFFFF;
+    border-radius: 33px;
+    height: 40px;
+    width: 150px;
+    margin: 5px 5px 0 0;
+    transition: all .2s ease;
+}
+
+.follow-button-link {
+    font-size: 19px;
+    font-weight: 500;
+    color: #131313;
+    transition: all .2s ease;
+}
+
+
+/* unfollow button  */
 
 .unfollow-button {
-    background-color: #fff;
+    background-color: #1313138c;
+    border: 1px solid #FFFFFF;
+    border-radius: 33px;
+    height: 40px;
+    width: 150px;
+    margin: 5px 5px 0 0;
+    transition: all .2s ease;
 }
 
 .unfollow-button-link {
-    color: #131313;
-    font-weight: 500;
+    font-size: 19px;
+    font-weight: 400;
+    color: #fff;
+    transition: all .2s ease;
 }
 
 
@@ -126,7 +154,14 @@
 
 .profile-follow-text {
     font-size: 18px;
-    margin-right: 20px;
+    border-radius: 30px;
+    text-align: center;
+    padding: 0 12px;
+    transition: all .2s ease;
+}
+
+.profile-follow-text:hover {
+    background-color: #68686844;
 }
 
 
@@ -192,6 +227,20 @@
 .profile-edit:hover .profile-edit-link {
     color: #131313;
     font-weight: 500;
+}
+
+.follow-button:hover {
+    border: 0;
+    box-shadow: inset 0 5px 10px rgba(36, 36, 36, 0.486);
+}
+
+.unfollow-button:hover {
+    background: #320707;
+    border: 1px solid #FF0000;
+}
+
+.unfollow-button:hover .unfollow-button-link {
+    color: #FF0000;
 }
 
 .profile-create-blog:hover {
