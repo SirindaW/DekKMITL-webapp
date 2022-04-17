@@ -1,16 +1,16 @@
 {% extends 'components/base.html'%} {% load static %} {% block content %}
 
-<link rel="stylesheet" href="{%static '/css/profile_edit.css'%}">
 <link rel="stylesheet" href="{%static '/css/profile.css'%}">
+<link rel="stylesheet" href="{%static '/css/profile_edit.css'%}">
 
 <form method="POST" class="profile-container">{%csrf_token%}
     <!-- 1. cover photo  -->
-    <div id="cover_preview_img" class="profile-cover" style="background-image: url({{request.user.get_cover_image_url}})"></div>
+    <div id="cover_preview_img" class="profile-cover" style="cursor:initial;background-image: url({{request.user.get_cover_image_url}})"></div>
 
     <!-- 2. profile image and upload -->
     <div class="profile-detail-pic-name">
         <!-- 2.1 profile image -->
-        <div id="profile_preview_img" class="profile-picture" style="background-image: url({{request.user.profile_image.url}});background-color:#282828;min-width:150px;width:0"></div>
+        <div id="profile_preview_img" class="profile-picture" style="cursor:initial;background-image: url({{request.user.profile_image.url}});background-color:#282828;min-width:150px;width:0"></div>
         <!-- 2.2 upload profile image and cover image input -->
         <div class="upload-container">
             <!-- 2.2.1 upload profile image -->

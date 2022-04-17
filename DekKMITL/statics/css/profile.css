@@ -53,7 +53,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;
-    transition: all .15s ease;
+    transition: all .2s ease;
 }
 
 
@@ -70,7 +70,7 @@
     background-position: 50% 50%;
     align-self: flex-end;
     margin-left: 20px;
-    transition: all .15s ease;
+    transition: all .2s ease;
 }
 
 
@@ -198,7 +198,6 @@
     background-color: #5050508c;
 }
 
-.profile-cover:hover,
-.profile-picture:hover {
+.cover-effect:hover {
     box-shadow: inset 0 500px 15px rgba(36, 36, 36, 0.486);
 }
