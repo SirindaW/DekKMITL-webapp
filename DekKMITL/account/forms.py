@@ -51,13 +51,15 @@ class RegistrationForm(UserCreationForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ('first_name','last_name','bio')
+        fields = ('first_name','last_name','bio','profile_image','cover_image')
 
         widgets = {
             'first_name': forms.TextInput(attrs={'class':'info-input', 'name':'first_name', 'id':'inputFirstname', 'placeholder':'ระบุชื่อจริง', }),
             'last_name': forms.TextInput(attrs={'class':'info-input', 'name':'last_name', 'id':'inputLastname', 'placeholder':'ระบุนามสกุล', }),
             'bio': forms.TextInput(attrs={ 'class':'info-input', 'type':'text', 'name':'bio', 'id':'inputBio', 'placeholder':'ระบุคำอธิบายตัวเอง', }),
         }
+
+
 
     # def save(self, commit=True):
         
