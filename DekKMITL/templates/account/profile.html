@@ -61,7 +61,7 @@
             <a href="{%url 'post:create_view'%}" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:20px"></a>
         </div>
 
-        
+
         <div class="createblog-text"><a href="{%url 'post:create_view'%}" style="font-size:19px">ตั้งกระทู้</a></div>
 
 
@@ -69,15 +69,13 @@
     {% endif %}
 
     <!-- 6. user blog -->
-    
+
 
     {% if not instance.post.all %}
-        <!-- ******************blog not found*****************8 -->
-        <div class="notfound-blog no-thumbnail-blog vhcenter" style="width:100%;font-size:35px">ยังไม่มีกระทู้</div>
-    {% endif %}
+    <!-- ******************blog not found*****************8 -->
+    <div class="notfound-blog no-thumbnail-blog vhcenter profile-margin" style="font-size:35px;margin-top:25px">ยังไม่มีกระทู้</div>
+    {% endif %} {% for post in instance|post_list %}
 
-    {% for post in instance|post_list %}
-    
     <div class="profile-margin" style="display:block;margin-top:25px">
         <!-- ********************loop blog*********************** -->
         <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%">
@@ -104,7 +102,7 @@
         <!-- ************************************************* -->
 
     </div>
-    
+
 
     {% endfor %}
 
