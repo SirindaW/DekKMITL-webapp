@@ -254,6 +254,16 @@
     .edublog {
         display: block;
     }
+    /* ---------------------------------profile edit--------------------------------------- */
+    .custom-file-upload-container {
+        width: 160px;
+    }
+    .custom-file-upload {
+        font-size: 15px;
+    }
+    .img-upload-container {
+        margin-right: 20px;
+    }
 }
 
 
@@ -395,5 +405,15 @@
     }
     .edublog {
         display: block;
+    }
+    /* ---------------------------------profile edit--------------------------------------- */
+    .custom-file-upload-container {
+        width: 160px;
+    }
+    .custom-file-upload {
+        font-size: 15px;
+    }
+    .img-upload-container {
+        margin-right: 20px;
     }
 }

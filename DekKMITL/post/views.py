@@ -53,3 +53,7 @@ def like_view(request,pk):
     else:
         post.likes.add(request.user)
     return HttpResponseRedirect(reverse('post:details_view',args=[str(post.slug)]))
+
+def tag_view(request):
+    return render(request,'post/tag.html')
+    

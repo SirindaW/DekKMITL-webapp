@@ -7,12 +7,13 @@
     <!-- 1. cover photo  -->
     <div id="cover_preview_img" class="profile-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div>
 
-    <!-- 2. profile image -->
+    <!-- 2. profile image and upload -->
     <div class="profile-detail-pic-name">
         <!-- 2.1 profile image -->
-        <div id="profile_preview_img" class="profile-picture" style="background-image: url({{request.user.profile_image.url}});background-color:#282828"></div>
+        <div id="profile_preview_img" class="profile-picture" style="background-image: url({{request.user.profile_image.url}});background-color:#282828;min-width:150px;width:0"></div>
         <!-- 2.2 upload profile image and cover image input -->
         <div class="upload-container">
+            <!-- 2.2.1 upload profile image -->
             <div class="img-upload-container">
                 <div class="text">แก้ไขรูปโปรไฟล์</div>
                 <div class="custom-file-upload-container vhcenter" id="change_p_bg">
@@ -25,6 +26,7 @@
                     <div class="remove-btn" type="text" onclick="removeProfileImg()">ลบรูปโปรไฟล์</div>
                 </div>
             </div>
+            <!-- 2.2.2 upload cover image -->
             <div class="img-upload-container">
                 <div class="text">แก้ไขรูปปก</div>
                 <div class="custom-file-upload-container vhcenter" id="change_c_bg">
@@ -39,6 +41,8 @@
             </div>
         </div>
     </div>
+
+    <!-- 3. name edit -->
     <div class="name-info margin" style="display:flex;justify-content:space-between">
         <div class="info-container" style="width:49%">
             <div class="info-title">ชื่อจริง</div>
@@ -49,13 +53,19 @@
             <input class="info-input" type="text" name="last_name" id="inputLastname" placeholder="ระบุนามสกุล">
         </div>
     </div>
+
+    <!-- 4. bio edit -->
     <div class="bio-edit margin">
         <div class="info-title">คำอธิบายตัวเอง</div>
         <input class="info-input" type="text" name="bio" id="inputBio" placeholder="ระบุคำอธิบายตัวเอง">
     </div>
+
+    <!-- 5. password edit button -->
     <div class="password-edit vhcenter margin">
-        <a href="#link to password edit" class="pw-edit">แก้ไขรหัสผ่าน</a>
+        <a href="{%url 'profile_edit_password_view'%}" class="pw-edit">แก้ไขรหัสผ่าน</a>
     </div>
+
+    <!-- 6. cancel and save button -->
     <div class="button margin">
         <button type="submit" class="submit-btn redorange shadow-effect">บันทึก</button>
         <a href="{%url 'profile_view'%}">
@@ -65,6 +75,7 @@
 </form>
 
 <script>
+    //preview image function
     function previewImg(inputImg, outputImg) {
         let input = document.querySelector(inputImg);
         let preview = document.querySelector(outputImg);
@@ -75,6 +86,7 @@
         }
     }
 
+    //function add and remove class
     function addClass(bgID, textID) {
         document.getElementById(bgID).classList.add("change-bg");
         document.getElementById(textID).classList.add("change-text");
@@ -85,6 +97,7 @@
         document.getElementById(textID).classList.remove("change-text");
     }
 
+    //function for onclick button
     function removeProfileImg() {
         document.querySelector("#profile_preview_img").style.backgroundImage = "url('/statics/images/default_profile_image.svg')";
         removeClass("change_p_bg", "change_p_text");
@@ -94,10 +107,13 @@
         document.querySelector("#cover_preview_img").style.backgroundImage = "url('/statics/images/defaultcover.svg')";
         removeClass("change_c_bg", "change_c_text");
     }
+
+    //image uploaded event
     document.querySelector("#profile_input_img").onchange = evt => {
         previewImg("#profile_input_img", "#profile_preview_img")
         addClass("change_p_bg", "change_p_text");
     }
+
     document.querySelector("#cover_input_img").onchange = evt => {
         previewImg("#cover_input_img", "#cover_preview_img")
         addClass("change_c_bg", "change_c_text");

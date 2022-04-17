@@ -15,12 +15,19 @@
                 <div class="time-choose vhcenter">
                     <div class="in" style="font-size:19px">ใน</div>
                     <div class="time-choose-dropdown">
-                        <select id="period" class="choose-period">
+                        <button onclick="showTime()" class="time-choose-dropbtn" id="period">หนึ่งสัปดาห์ ▾</button>
+                        <div id="time_choose_dropdown" class="time-choose-dropdown-content">
+                            <a href="#" id="oneday">หนึ่งวัน</a>
+                            <a href="#" id="oneweek">หนึ่งสัปดาห์</a>
+                            <a href="#" id="onemonth">หนึ่งเดือน</a>
+                            <a href="#" id="alltime">เวลาทั้งหมด</a>
+                        </div>
+                        <!-- <select id="period" class="choose-period">
                             <option value="oneday">หนึ่งวัน</option>
-                            <option value="oneweek" selected>หนึ่งสัปดาห์</option>
-                            <option value="onemonth">หนึ่งเดือน</option>
+                            <option value="oneweek" >หนึ่งสัปดาห์</option>
+                            <option value="onemonth"selected>หนึ่งเดือน</option>
                             <option value="alltime">เวลาทั้งหมด</option>
-                        </select>
+                        </select> -->
                     </div>
                 </div>
             </div>

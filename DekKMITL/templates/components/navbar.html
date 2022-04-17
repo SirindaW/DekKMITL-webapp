@@ -33,9 +33,9 @@
             </div>
             <div class="tag vhcenter effect-block">
                 <div class="tag-icon">
-                    <a href="#link to choose tag" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
+                    <a href="{%url 'post:tag_view'%}" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="width:100%"></a>
                 </div>
-                <div class="tag-text"><a href="#link to choose tag">แท็ก</a></div>
+                <div class="tag-text"><a href="{%url 'post:tag_view'%}">แท็ก</a></div>
             </div>
         </div>
         <!-- 3. search and login -->
@@ -46,8 +46,9 @@
                 <div class="user-profile-container vcenter" style="min-width:15%">
                     <div class="user-profile-navbar box-shadow-effect" onclick="showDropdown()" style="background-image: url({{request.user.profile_image.url}})"></div>
                     <div class="profile-dropdown-content" id="profile_dropdown">
-                        <a href="#link to user's following blog">หน้าฟีดของคุณ</a>
+                        <div class="navbar-name">{{request.user.first_name}}&nbsp;{{request.user.last_name}}</div>
                         <a href="{%url 'profile_view'%}">หน้าโปรไฟล์ของคุณ</a>
+                        <a href="#link to user's following blog">หน้าฟีดของคุณ</a>
                         <a href="{%url 'logout_view'%}">ออกจากระบบ</a>
                     </div>
                 </div>

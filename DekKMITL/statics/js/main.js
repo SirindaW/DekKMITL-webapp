@@ -3,15 +3,16 @@ function showDropdown() {
     document.getElementById("profile_dropdown").classList.toggle("profile-show");
 }
 
-// show search
-function showSearch() {
-    document.getElementById("mysearch").classList.toggle("search-show");
-}
-
-// show search
+// show toolbar
 function showToolbar() {
     document.getElementById("toolbar_container").classList.toggle("toolbar-show");
 }
+
+function showTime() {
+    document.getElementById("time_choose_dropdown").classList.toggle("time-show");
+}
+
+
 // Close the dropdown if the user clicks outside of it
 window.onclick = function(event) {
     if (!event.target.matches('.user-profile-navbar')) {
@@ -24,13 +25,13 @@ window.onclick = function(event) {
             }
         }
     }
-    if (!event.target.matches('.btn-search') && !event.target.matches('.input-search')) {
-        var dropdowns = document.getElementsByClassName("input-search");
+    if (!event.target.matches('.time-choose-dropbtn')) {
+        var dropdowns = document.getElementsByClassName("time-choose-dropdown-content");
         var i;
         for (i = 0; i < dropdowns.length; i++) {
             var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('search-show')) {
-                openDropdown.classList.remove('search-show');
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
             }
         }
     }

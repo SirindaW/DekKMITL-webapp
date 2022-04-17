@@ -89,3 +89,8 @@ def register_view(request, *args, **kwargs):
 def profile_edit_view(request):
     context = {}
     return render(request,'account/profile_edit.html',context)
+
+def profile_edit_password_view(request):
+    context = {}
+    return render(request,'account/password_edit.html',context)
+    
