@@ -19,7 +19,7 @@
                 <div class="profile-last-name">{{instance.last_name}}</div>
             </div>
             
-            {% if request.user is instance %}
+            {% if request.user.pk == instance.pk %}
             <!-- ------------ *if your profile use edit profile button ------------------ -->
             <div class="profile-edit vhcenter"><a href="{% url 'profile_edit_view' %}" class="profile-edit-link">แก้ไขโปรไฟล์</a></div>
             {% else %}
