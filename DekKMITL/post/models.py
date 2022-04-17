@@ -7,8 +7,8 @@ from DekKMITL.utils import unique_slug_generator
 from account.models import Account
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField(max_length=1200)
+    title = models.CharField(max_length=120)
+    content = models.TextField(max_length=4000)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     last_modified = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(Account,related_name='post_likes',null=True,blank=True)
