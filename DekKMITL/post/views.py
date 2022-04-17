@@ -18,7 +18,7 @@ def post_create_view(request):
             instance.author = request.user
             instance.save()
             messages.success(request,"Post created successfully.")
-            return redirect('home_view')
+            return redirect(reverse('profile_view'))
         
     context = {
         'form':form,

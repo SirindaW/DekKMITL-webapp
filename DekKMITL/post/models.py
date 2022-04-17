@@ -14,8 +14,8 @@ class Post(models.Model):
     likes = models.ManyToManyField(Account,related_name='post_likes')
     post_fav = models.PositiveBigIntegerField(default=0,null=False)
     views = models.PositiveIntegerField(null=True,blank=True,default=0)
-    slug = models.SlugField(unique=True,max_length=300)
-    author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE)
+    slug = models.SlugField(unique=True,max_length=300,blank=False)
+    author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE,related_name='post')
 
     def __str__(self) -> str:
         return self.title
