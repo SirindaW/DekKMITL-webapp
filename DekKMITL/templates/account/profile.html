@@ -45,12 +45,18 @@
 
     <!-- 5. create blog button -->
     <!-- *if not your profile don't have this button -->
+    {% if request.user.pk == instance.id %}
     <div class="profile-create-blog profile-margin vhcenter">
         <div class="createblog-icon vhcenter">
             <a href="{%url 'post:create_view'%}" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:20px"></a>
         </div>
+
+        
         <div class="createblog-text"><a href="{%url 'post:create_view'%}" style="font-size:19px">ตั้งกระทู้</a></div>
+
+
     </div>
+    {% endif %}
 
     <!-- 6. user blog -->
     <div class="profile-margin" style="display:block;margin-top:25px">

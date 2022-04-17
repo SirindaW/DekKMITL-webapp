@@ -123,7 +123,7 @@ def exec_command(command=''):
     if command in ['createsuperuser','superuser','super','createsup','createsuper']:
         exec_command('.start cmd /k python manage.py createsuperuser')
         # proc = subprocess.Popen('start /wait python manage.py createsuperuser',shell=True)
-        print('process id :',proc.pid)
+        # print('process id :',proc.pid)
         return
 
     if command in ['stop',]:
