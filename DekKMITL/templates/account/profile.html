@@ -83,7 +83,14 @@
 
                 </div>
                 <div class="blog-detail-2">
-                    <div class="blog-username-date"><a href="{{post.author.get_absolute_url}}">{{post.author.first_name|title}} : {{post.date_created|naturaltime}}</a></div>
+                    <div class="blog-username-date"><a href="{{post.get_absolute_url}}">
+                        {{post.author.first_name|title}} : 
+                        {{post.date_created|naturaltime}} 
+                        {% if post|is_expired %}
+                         กระทู้หมดอายุแล้ว
+                         {% endif %}
+                        
+                        </a></div>
                     <div class="blog-like-comment vhcenter">
                         <img src="{% static 'images/like.png'%}" style="width:15px">{{post.likes.count}} &nbsp;
                         <img src="{% static 'images/comment.png'%}" style="width:15px">50
