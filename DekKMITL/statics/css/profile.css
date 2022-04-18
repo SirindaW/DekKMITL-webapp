@@ -45,6 +45,7 @@
 /* cover image */
 
 .profile-cover {
+    cursor: pointer;
     width: 100%;
     height: 250px;
     border-top-left-radius: 30px;
@@ -52,12 +53,14 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;
+    transition: all .2s ease;
 }
 
 
 /* profile image */
 
 .profile-picture {
+    cursor: pointer;
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -67,6 +70,7 @@
     background-position: 50% 50%;
     align-self: flex-end;
     margin-left: 20px;
+    transition: all .2s ease;
 }
 
 
@@ -106,15 +110,43 @@
 }
 
 
-/* profile unfollow button  */
+/* follow button */
+
+.follow-button {
+    background-color: #fff;
+    border: 1px solid #FFFFFF;
+    border-radius: 33px;
+    height: 40px;
+    width: 150px;
+    margin: 5px 5px 0 0;
+    transition: all .2s ease;
+}
+
+.follow-button-link {
+    font-size: 19px;
+    font-weight: 500;
+    color: #131313;
+    transition: all .2s ease;
+}
+
+
+/* unfollow button  */
 
 .unfollow-button {
-    background-color: #fff;
+    background-color: #1313138c;
+    border: 1px solid #FFFFFF;
+    border-radius: 33px;
+    height: 40px;
+    width: 150px;
+    margin: 5px 5px 0 0;
+    transition: all .2s ease;
 }
 
 .unfollow-button-link {
-    color: #131313;
-    font-weight: 500;
+    font-size: 19px;
+    font-weight: 400;
+    color: #fff;
+    transition: all .2s ease;
 }
 
 
@@ -122,7 +154,14 @@
 
 .profile-follow-text {
     font-size: 18px;
-    margin-right: 20px;
+    border-radius: 30px;
+    text-align: center;
+    padding: 0 12px;
+    transition: all .2s ease;
+}
+
+.profile-follow-text:hover {
+    background-color: #68686844;
 }
 
 
@@ -140,6 +179,45 @@
 }
 
 
+/* popup image */
+
+.popup {
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background-color: #282828de;
+}
+
+.close {
+    background-color: #fff;
+    text-align: center;
+    color: #282828;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-weight: 600;
+    margin: 1%;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.large-image {
+    display: block;
+    margin: auto;
+    height: 40%;
+    margin-top: 11%;
+}
+
+.img-show {
+    display: block;
+}
+
+
 /* effect animation hover*/
 
 .profile-edit:hover {
@@ -151,6 +229,24 @@
     font-weight: 500;
 }
 
+.follow-button:hover {
+    border: 0;
+    box-shadow: inset 0 5px 10px rgba(36, 36, 36, 0.486);
+}
+
+.unfollow-button:hover {
+    background: #320707;
+    border: 1px solid #FF0000;
+}
+
+.unfollow-button:hover .unfollow-button-link {
+    color: #FF0000;
+}
+
 .profile-create-blog:hover {
     background-color: #5050508c;
+}
+
+.cover-effect:hover {
+    box-shadow: inset 0 500px 15px rgba(36, 36, 36, 0.486);
 }

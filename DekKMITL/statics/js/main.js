@@ -12,9 +12,58 @@ function showTime() {
     document.getElementById("time_choose_dropdown").classList.toggle("time-show");
 }
 
+// show full cover image
+function fullCoverImg() {
+    document.getElementById("full_cover_img").classList.add("img-show");
+}
 
-// Close the dropdown if the user clicks outside of it
+// close full cover image
+function closeFullCoverImg() {
+    document.getElementById("full_cover_img").classList.remove("img-show");
+}
+
+// show full profile image
+function fullProfileImg() {
+    document.getElementById("full_profile_img").classList.add("img-show");
+}
+
+// close full profile image
+function closeFullProfileImg() {
+    document.getElementById("full_profile_img").classList.remove("img-show");
+}
+
+//change unfollow button html text
+function changeText(text) {
+    var display = document.getElementById('unfollow_btn');
+    display.innerHTML = "";
+    display.innerHTML = text;
+}
+
+function changeBack(text) {
+    var display = document.getElementById('unfollow_btn');
+    display.innerHTML = "";
+    display.innerHTML = text;
+}
+
+//search
+
+// function selectElement(selector) {
+//     return document.querySelector(selector)
+// }
+
+// function getResults() {
+
+//     const search = selectElement('#user_name').value;
+//     for (let i = 0; i < name.length; i++) {
+//         if (name[i].toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
+//             selectElement('.user-info').innerHTML = '';
+//             selectElement('.user-info').innerHTML = '';
+//         }
+//     }
+// }
+
 window.onclick = function(event) {
+    // Close the dropdown if the user clicks outside of it
     if (!event.target.matches('.user-profile-navbar')) {
         var dropdowns = document.getElementsByClassName("profile-dropdown-content");
         var i;
@@ -25,6 +74,8 @@ window.onclick = function(event) {
             }
         }
     }
+
+    // Close the dropdown if the user clicks outside of it
     if (!event.target.matches('.time-choose-dropbtn')) {
         var dropdowns = document.getElementsByClassName("time-choose-dropdown-content");
         var i;
@@ -35,13 +86,39 @@ window.onclick = function(event) {
             }
         }
     }
+
+    // Close toolbar if the user clicks outside of it
     if (!event.target.matches('.hide-toolbar')) {
-        var dropdowns = document.getElementsByClassName("toolbar-container");
+        var toolbar = document.getElementsByClassName("toolbar-container");
         var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('toolbar-show')) {
-                openDropdown.classList.remove('toolbar-show');
+        for (i = 0; i < toolbar.length; i++) {
+            var temp = toolbar[i];
+            if (temp.classList.contains('toolbar-show')) {
+                temp.classList.remove('toolbar-show');
+            }
+        }
+    }
+
+    // Close profile cover if the user clicks outside of it
+    if (!event.target.matches('.profile-cover')) {
+        var img = document.getElementsByClassName("popup_cover_img");
+        var i;
+        for (i = 0; i < img.length; i++) {
+            var temp = img[i];
+            if (temp.classList.contains('img-show')) {
+                temp.classList.remove('img-show');
+            }
+        }
+    }
+
+    // Close profile picture if the user clicks outside of it
+    if (!event.target.matches('.profile-picture')) {
+        var img = document.getElementsByClassName("popup_profile_img");
+        var i;
+        for (i = 0; i < img.length; i++) {
+            var temp = img[i];
+            if (temp.classList.contains('img-show')) {
+                temp.classList.remove('img-show');
             }
         }
     }

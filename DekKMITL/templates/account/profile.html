@@ -5,32 +5,38 @@
 <div class="profile-container">
 
     <!-- 1. cover photo  -->
-    <!-- <div class="profile-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div> -->
-    <div class="profile-cover" style="background-image: url({{instance.get_cover_image_url}})"></div>
-
+    <div class="profile-cover cover-effect" id="cover_img" onclick="fullCoverImg()" style="background-image: url({{instance.get_cover_image_url}})"></div>
+    <!-- *popup cover image -->
+    <div class="popup popup_cover_img" id="full_cover_img">
+        <div class="close" onclick="closeFullCoverImg()" id="close_cover_img">✕</div>
+        <img src="{{instance.get_cover_image_url}}" class="large-image">
+    </div>
     <!-- 2. profile image, name and edit profile button -->
     <div class="profile-detail-pic-name">
         <!-- 2.1 profile image -->
-        <div class="profile-picture" style="background-image: url({{instance.get_profile_image_url}})"></div>
+        <div class="profile-picture cover-effect" id="profile_img" onclick="fullProfileImg()" style="background-image: url({{instance.profile_image.url}})"></div>
+        <!-- *popup profile image -->
+        <div class="popup popup_profile_img" id="full_profile_img">
+            <div class="close" onclick="closeFullProfileImg()" id="close_profile_img">✕</div>
+            <img src="{{instance.profile_image.url}}" class="large-image">
+        </div>
         <!-- 2.2 profile name and edit profile button -->
         <div class="profile-detail">
             <div class="profile-name">
                 <div class="profile-first-name">{{instance.first_name|title}}</div>
                 <div class="profile-last-name">{{instance.last_name|title}}</div>
             </div>
-            
+
             {% if request.user.pk == instance.pk %}
             <!-- ------------ *if your profile use edit profile button ------------------ -->
             <div class="profile-edit vhcenter"><a href="{% url 'profile_edit_view' %}" class="profile-edit-link">แก้ไขโปรไฟล์</a></div>
             {% else %}
             <!-- ------------ *if not your profile use follow button ------------------ -->
-            <!-- **if already follow use this class "unfollow-button" at div and "unfollow-button-link" at a -->
-            {% if request|is_following:instance %} 
-            <div class="profile-edit vhcenter"><a href="{{ instance.get_toggle_follow_url }}" class="profile-edit-link " style="font-size:20px">เลิกติดตาม</a></div> 
-            {% else %} 
-            <div class="profile-edit vhcenter"><a href="{{ instance.get_toggle_follow_url}}" class="profile-edit-link " style="font-size:20px">ติดตาม</a></div> 
-            {% endif %} 
-            {% endif %}
+            {% if request|is_following:instance %}
+            <div class="unfollow-button vhcenter"><a href="{{ instance.get_toggle_follow_url }}" class="unfollow-button-link " id="unfollow_btn" style="font-size:20px" onmouseover="changeText('เลิกติดตาม')" onmouseout="changeBack('ติดตามอยู่')">ติดตามอยู่</a></div>
+            {% else %}
+            <div class="follow-button vhcenter"><a href="{{ instance.get_toggle_follow_url}}" class="follow-button-link " style="font-size:20px">ติดตาม</a></div>
+            {% endif %} {% endif %}
         </div>
     </div>
 
@@ -39,8 +45,12 @@
 
     <!-- 4. user follower and following -->
     <div class="profile-follow profile-margin">
-        <div class="profile-follow-text">{% total_followings instance %} กำลังติดตาม</div>
-        <div class="profile-follow-text">{% total_followers instance %} ผู้ติดตาม</div>
+        <a href="{% url 'account:following_list_view' %}">
+            <div class="profile-follow-text">{% total_followings instance %} กำลังติดตาม</div>
+        </a>
+        <a href="{% url 'account:follower_list_view' %}">
+            <div class="profile-follow-text">{% total_followers instance %} ผู้ติดตาม</div>
+        </a>
     </div>
 
     <!-- 5. create blog button -->
@@ -51,7 +61,7 @@
             <a href="{%url 'post:create_view'%}" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="width:20px"></a>
         </div>
 
-        
+
         <div class="createblog-text"><a href="{%url 'post:create_view'%}" style="font-size:19px">ตั้งกระทู้</a></div>
 
 
@@ -59,15 +69,13 @@
     {% endif %}
 
     <!-- 6. user blog -->
-    
+
 
     {% if not instance.post.all %}
-        <!-- ******************blog not found*****************8 -->
-        <div class="notfound-blog no-thumbnail-blog vhcenter" style="width:100%;font-size:35px">ยังไม่มีกระทู้</div>
-    {% endif %}
+    <!-- ******************blog not found*****************8 -->
+    <div class="notfound-blog no-thumbnail-blog vhcenter profile-margin" style="font-size:35px;margin-top:25px">ยังไม่มีกระทู้</div>
+    {% endif %} {% for post in instance|post_list %}
 
-    {% for post in instance|post_list %}
-    
     <div class="profile-margin" style="display:block;margin-top:25px">
         <!-- ********************loop blog*********************** -->
         <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%">
@@ -101,7 +109,7 @@
         <!-- ************************************************* -->
 
     </div>
-    
+
 
     {% endfor %}
 
@@ -109,5 +117,4 @@
 
 
 </div>
-
 {% endblock %}
