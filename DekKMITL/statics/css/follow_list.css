@@ -12,6 +12,9 @@
     padding: 25px;
 }
 
+
+/* follow user count */
+
 .follow-count {
     width: 100%;
     text-align: center;
@@ -19,10 +22,16 @@
     font-weight: 500;
 }
 
+
+/* back to profile button */
+
 .back-to-profile {
     font-size: 18px;
     border-bottom: 1px solid #fff;
 }
+
+
+/* search follow */
 
 .follow-search {
     margin: 15px 0;
@@ -46,6 +55,9 @@
 .user-search:focus {
     border-bottom: 1px solid #acacacd7;
 }
+
+
+/* user info list */
 
 .user-info {
     overflow: auto;
@@ -75,6 +87,9 @@
     overflow: hidden;
 }
 
+
+/* user not found if no user follow */
+
 .user-not-found {
     font-size: 30px;
     font-weight: 300;
@@ -82,6 +97,9 @@
     text-align: center;
     padding: 10px;
 }
+
+
+/* resize follow button */
 
 .resize-btn {
     height: 35px;

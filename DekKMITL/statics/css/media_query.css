@@ -127,7 +127,7 @@
 /* ****************************************************************** 
  ****************************************************************** */
 
-@media screen and (min-width:600px) and (max-width: 919px) {
+@media screen and (min-width:820px) and (max-width: 919px) {
     .mainbg {
         padding-bottom: 150px;
     }
@@ -270,9 +270,9 @@
 /* ****************************************************************** 
  ****************************************************************** */
 
-@media screen and (max-width:599px) {
+@media screen and (max-width:819px) {
     body {
-        width: 599px;
+        width: 819px;
         min-height: 100%;
         margin: 0;
         background-color: #E05F4C;
@@ -415,5 +415,9 @@
     }
     .img-upload-container {
         margin-right: 20px;
+    }
+    .large-image {
+        height: auto;
+        width: 50%;
     }
 }

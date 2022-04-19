@@ -37,7 +37,7 @@
                 </div>
                 <div class="tag-text"><a href="{%url 'post:tag_view'%}">แท็ก</a></div>
             </div>
-            
+
             {% if request.user.is_admin %}
 
             <div class="tag vhcenter effect-block">
@@ -55,7 +55,7 @@
             </div>
 
             {%endif%}
-            
+
         </div>
         <!-- 3. search and login -->
         <div class="searchlogin-container vcenter">
@@ -89,7 +89,7 @@
 
             <!-- 3.2 search -->
             <div class="search-box">
-                <button class="btn-search vhcenter brightness-effect" onclick="showSearch()"></button>
+                <button class="btn-search vhcenter brightness-effect"></button>
                 <input type="text" id="mysearch" class="input-search" placeholder="ค้นหาบน Dek-KMITL">
             </div>
         </div>
@@ -97,4 +97,5 @@
 </nav>
 
 <!-- javascript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{% static 'js/main.js'%}"></script>

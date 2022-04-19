@@ -1,3 +1,13 @@
+// prevent form submit by enter key
+jQuery(function($) {
+    $('form').on('keydown', function(ev) {
+        if (ev.key === "Enter" && !$(ev.target).is('textarea')) {
+            ev.preventDefault();
+        }
+    });
+
+});
+
 // show dropdown profile
 function showDropdown() {
     document.getElementById("profile_dropdown").classList.toggle("profile-show");
@@ -45,22 +55,6 @@ function changeBack(text) {
     display.innerHTML = text;
 }
 
-//search
-
-// function selectElement(selector) {
-//     return document.querySelector(selector)
-// }
-
-// function getResults() {
-
-//     const search = selectElement('#user_name').value;
-//     for (let i = 0; i < name.length; i++) {
-//         if (name[i].toLocaleLowerCase().includes(search.toLocaleLowerCase())) {
-//             selectElement('.user-info').innerHTML = '';
-//             selectElement('.user-info').innerHTML = '';
-//         }
-//     }
-// }
 
 window.onclick = function(event) {
     // Close the dropdown if the user clicks outside of it

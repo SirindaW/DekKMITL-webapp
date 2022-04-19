@@ -1,7 +1,244 @@
 {% extends 'components/base.html' %} {% load static %} {% block content %}
 <link rel="stylesheet" href="{%static '/css/create_post.css'%}">
 <form method="POST"> {% csrf_token %}
+    <div class="container">
+        <div class="blog-header-container style-container">
+            <div class="title">
+                <div class="title-text">หัวข้อกระทู้</div>
+                <div id="header_count" class="count-text">0/120</div>
+            </div>
+            <div class="blog-header">
+                <input type="text" id="header_text" class="header-input blogfont" autocomplete="off" placeholder="หัวข้อกระทู้" required>
+            </div>
+        </div>
+        <div class="blog-body-container style-container">
+            <div class="title">
+                <div class="title-text">เนื้อหากระทู้</div>
+                <div id="body_count" class="count-text">0/4000</div>
+            </div>
+            <div class="blog-body">
+                <textarea id="body_text" class="body-input blogfont" rows="10" placeholder="เนื้อหากระทู้" required></textarea>
+            </div>
+        </div>
+        <div class="chooseroom-container style-container">
+            <div class="title-text">เลือกห้อง</div>
+            <div class="all-room">
+                <input type="radio" class="input" id="review" name="room" value="room_review">
+                <div class="room-container">
+                    <label for="review"><img src="/statics/images/review.png"><br>รีวิว</label>
+                </div>
 
+                <input type="radio" class="input" id="news" name="room" value="room_news">
+                <div class="room-container">
+                    <label for="news"><img src="/statics/images/news.png"><br>ข่าวสาร</label>
+                </div>
+
+                <input type="radio" class="input" id="educate" name="room" value="room_educate">
+                <div class="room-container">
+                    <label for="educate"><img src="/statics/images/educate.png"><br>เด็กเรียน</label>
+                </div>
+
+                <input type="radio" class="input" id="dorm" name="room" value="room_dorm">
+                <div class="room-container">
+                    <label for="dorm"><img src="/statics/images/dorm.png"><br>หอพัก</label>
+                </div>
+
+                <input type="radio" class="input" id="food" name="room" value="room_food">
+                <div class="room-container">
+                    <label for="food"><img src="/statics/images/food.png"><br>มุมอร่อย</label>
+                </div>
+
+                <input type="radio" class="input" id="sport" name="room" value="room_sport">
+                <div class="room-container">
+                    <label for="sport"><img src="/statics/images/sport.png"><br>กีฬา</label>
+                </div>
+
+                <input type="radio" class="input" id="travel" name="room" value="room_travel">
+                <div class="room-container">
+                    <label for="travel"><img src="/statics/images/travel.png"><br>ท่องเที่ยว</label>
+                </div>
+
+                <input type="radio" class="input" id="art" name="room" value="room_art">
+                <div class="room-container">
+                    <label for="art"><img src="/statics/images/art.png"><br>งานอาร์ต</label>
+                </div>
+
+                <input type="radio" class="input" id="pet" name="room" value="room_pet">
+                <div class="room-container">
+                    <label for="pet"><img src="/statics/images/pet.png"><br>สัตว์เลี้ยง</label>
+                </div>
+
+                <input type="radio" class="input" id="fashion" name="room" value="room_fashion">
+                <div class="room-container">
+                    <label for="fashion"><img src="/statics/images/fashion.png"><br>แฟชั่น</label>
+                </div>
+
+                <input type="radio" class="input" id="camera" name="room" value="room_camera">
+                <div class="room-container">
+                    <label for="camera"><img src="/statics/images/camera.png"><br>ถ่ายรูป</label>
+                </div>
+
+                <input type="radio" class="input" id="party" name="room" value="room_party">
+                <div class="room-container">
+                    <label for="party"><img src="/statics/images/party.png"><br>ปาร์ตี้</label>
+                </div>
+
+                <input type="radio" class="input" id="talk" name="room" value="room_talk">
+                <div class="room-container">
+                    <label for="talk"><img src="/statics/images/talk.png"><br>คุยเล่น</label>
+                </div>
+
+                <input type="radio" class="input" id="other" name="room" value="room_other">
+                <div class="room-container">
+                    <label for="other"><img src="/statics/images/other.png"><br>อื่น ๆ</label>
+                </div>
+            </div>
+        </div>
+        <div class="tag-container style-container">
+            <div class="title">
+                <div class="title-text">แท็ก</div>
+                <div class="count-text">0/50</div>
+            </div>
+            <div class="blog-tag-container">
+                <div class="all-tag">
+                    <textarea maxlength="50" rows="1" id="tag_input" class="tag-input" placeholder="เพิ่มแท็ก" autocomplete="off"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="blog-cover-container style-container">
+            <div class="title-text" style="margin-bottom:5px">ปกกระทู้</div>
+            <label for="cover_blog_img" class="add-cover">เพิ่มรูปปก</label>
+            <input type="file" accept="image/*" name="cover_image" id="cover_blog_img" style="pointer-events: none;">
+        </div>
+        <div class="blog-set-time-container style-container">
+            <div class="title-text">ตั้งเวลากระทู้</div>
+            <div class="set-time"></div>
+        </div>
+        <button type="submit" id="submit_form" class="create-blog-btn redorange vhcenter" disabled>ตั้งกระทู้เลย</button>
+    </div>
 </form>
 
+<script>
+    //----------------limit text---------------------
+    function count_word(val) {
+        var wom = val.match(/.+/g);
+        var len = 0;
+        if (wom) {
+            len = wom[0].length;
+        }
+        return len;
+    }
+
+    var header, body, room = false;
+    //-----------room checked------------
+    var roomArray = document.querySelectorAll('input[name=room]');
+    for (var i = 0; i < roomArray.length; i++) {
+        roomArray[i].addEventListener("click", function() {
+            room = true;
+            console.log(header, body, room)
+                //---------------enable disable submit button-------------
+            if (header && body && room) {
+                console.log(header, body, room)
+                document.getElementById("submit_form").disabled = false;
+            } else {
+                console.log(header, body, room)
+                document.getElementById("submit_form").disabled = true;
+            }
+        });
+    }
+
+    //----------------limit header text---------------------
+    var headerTextContent = document.getElementById("header_text");
+    var headerShowWordCount = document.getElementById("header_count");
+    headerTextContent.addEventListener("input", function() {
+        var len = count_word(this.value);
+        var limit_text_min = 4;
+        var limit_text_max = 120;
+        headerShowWordCount.innerHTML = String(len) + "/" + String(limit_text_max);
+        if (len > limit_text_max || (len < limit_text_min && len != 0)) {
+            headerShowWordCount.classList.add("overflow-text");
+        } else {
+            headerShowWordCount.classList.remove("overflow-text");
+        }
+        //---------------enable disable submit button-------------
+        if (len > limit_text_max || len < limit_text_min) {
+            header = false;
+            console.log(header, body, room)
+        } else {
+            header = true;
+            console.log(header, body, room)
+        }
+        if (header && body && room) {
+            document.getElementById("submit_form").disabled = false;
+        } else {
+            document.getElementById("submit_form").disabled = true;
+        }
+    });
+
+    //----------------limit body text---------------------
+    var bodyTextContent = document.getElementById("body_text");
+    var bodyShowWordCount = document.getElementById("body_count");
+    bodyTextContent.addEventListener("input", function() {
+        var len = count_word(this.value);
+        var limit_text_min = 6;
+        var limit_text_max = 4000;
+        bodyShowWordCount.innerHTML = String(len) + "/" + String(limit_text_max);
+        if (len > limit_text_max || (len < limit_text_min && len != 0)) {
+            bodyShowWordCount.classList.add("overflow-text");
+        } else {
+            bodyShowWordCount.classList.remove("overflow-text");
+        }
+        //---------------enable disable submit button-------------
+        if (len > limit_text_max || len < limit_text_min) {
+            body = false;
+            console.log(header, body, room)
+        } else {
+            body = true;
+            console.log(header, body, room)
+        }
+        if (header && body && room) {
+            document.getElementById("submit_form").disabled = false;
+        } else {
+            document.getElementById("submit_form").disabled = true;
+        }
+    });
+
+    //---------------tag--------------------
+    let container = document.querySelector('.all-tag')
+    let input = document.getElementById('tag_input');
+    input.addEventListener('keyup', (event) => {
+        input.classList.remove('no-sp-text');
+        if ((event.which == 32 || event.which == 13) && input.value.length > 0) {
+            var p = document.createElement('p');
+            var text = input.value;
+            text = text.replace(/[&\/\\#^+()$~%.'":;, ฿=_\-*?\n<>{}!@`\[\]|]/g, '');
+            if (text) {
+                text = '#' + text;
+                var text_node = document.createTextNode(text);
+                input.parentNode.insertBefore(p, input);
+                p.appendChild(text_node);
+                p.classList.add('post-tag');
+                input.value = '';
+            } else {
+                input.classList.add('no-sp-text');
+            }
+
+            let deleteTags = document.querySelectorAll('.post-tag');
+
+            for (let i = 0; i < deleteTags.length; i++) {
+                deleteTags[i].addEventListener('click', () => {
+                    container.removeChild(deleteTags[i]);
+                });
+            }
+        }
+    });
+    //----------------prevent form submit---------------
+    $('form').submit(function(event) {
+        if (header && body && room) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+</script>
 {% endblock content %}
