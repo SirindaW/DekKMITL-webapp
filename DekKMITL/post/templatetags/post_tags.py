@@ -21,6 +21,17 @@ def like_status(request,pk,*args,**kwargs):
     return status
 
 @register.filter
-def post_list(user):
+def post_list(user,only_active=False):
     posts = user.post.order_by('-date_created')
+    if only_active:
+        active_posts = [post for post in posts if post.is_active()]
+        return active_posts
     return posts
+
+@register.filter
+def is_active(post):
+    return post.is_active()
+
+@register.filter
+def is_expired(post):
+    return post.is_expired()
