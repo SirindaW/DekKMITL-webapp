@@ -38,12 +38,10 @@
 
 .title-text {
     font-size: 18px;
-    color: rgb(255, 255, 255);
 }
 
 .count-text {
     font-size: 15px;
-    color: rgb(255, 255, 255);
 }
 
 .header-input {
@@ -63,6 +61,11 @@
     padding: 5px 1px 10px 5px;
     font-size: 20px;
     resize: none;
+}
+
+.need {
+    font-size: 15px;
+    color: #8f8f8f;
 }
 
 .overflow-text {
@@ -110,7 +113,7 @@
     background-color: rgba(179, 179, 179, 0.26);
 }
 
-input[type=radio]:checked+.room-container {
+.input:checked+.room-container {
     background-color: rgba(179, 179, 179, 0.26);
 }
 
@@ -136,6 +139,7 @@ input[type=radio]:checked+.room-container {
     resize: none;
     overflow-wrap: unset;
     overflow: hidden;
+    white-space: nowrap;
 }
 
 .post-tag {
@@ -187,7 +191,7 @@ input[type=radio]:checked+.room-container {
 
 input[type=file] {
     font-size: 18px;
-    margin-left: 16px;
+    margin-left: 19px;
     color: rgba(255, 255, 255, 0.473);
 }
 
@@ -195,6 +199,7 @@ input[type=file] {
     cursor: pointer;
     font-size: 17px;
     background-color: #131313;
+    margin-left: 3px;
     border: 1px solid #fff;
     border-radius: 10px;
     padding: 1px 30px;
@@ -204,6 +209,79 @@ input[type=file] {
 
 .add-cover:hover {
     background-color: #363636;
+}
+
+
+/* set blog delete time */
+
+.set-time {
+    padding: 10px 10px 10px 3px;
+}
+
+.choose-set-time {
+    display: flex;
+    flex-wrap: wrap;
+    width: 45%;
+}
+
+.time-container label {
+    font-size: 19px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+}
+
+.time-container {
+    width: 150px;
+    border-radius: 30px;
+    margin-right: 10px;
+    background-color: #131313;
+    border: 1px solid #fff;
+    transition: all .2s ease;
+}
+
+.time-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.time-container:hover {
+    background-color: rgba(179, 179, 179, 0.26);
+}
+
+.time-input:checked+.time-container {
+    background-color: rgba(179, 179, 179, 0.26);
+}
+
+
+/* if choose set time */
+
+.date-time {
+    display: none;
+    pointer-events: none;
+    margin: 10px;
+    margin-left: 0;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: #ffffff;
+    outline: none;
+    color: #2b2b2b;
+    border: 0;
+    border-radius: 30px;
+    padding: 3px 10px;
+    transition: all .2s ease;
+}
+
+.date-time::-webkit-calendar-picker-indicator {
+    pointer-events: all;
+    cursor: pointer;
+}
+
+#set_time:checked~.date-time {
+    display: block;
 }
 
 

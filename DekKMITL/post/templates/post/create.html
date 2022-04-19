@@ -21,7 +21,10 @@
             </div>
         </div>
         <div class="chooseroom-container style-container">
-            <div class="title-text">เลือกห้อง</div>
+            <div class="title">
+                <div class="title-text">เลือกห้อง</div>
+                <div class="need">*จำเป็น</div>
+            </div>
             <div class="all-room">
                 <input type="radio" class="input" id="review" name="room" value="room_review">
                 <div class="room-container">
@@ -97,7 +100,7 @@
         <div class="tag-container style-container">
             <div class="title">
                 <div class="title-text">แท็ก</div>
-                <div class="count-text">0/50</div>
+                <div id="tag_count" class="count-text">0/50</div>
             </div>
             <div class="blog-tag-container">
                 <div class="all-tag">
@@ -111,14 +114,172 @@
             <input type="file" accept="image/*" name="cover_image" id="cover_blog_img" style="pointer-events: none;">
         </div>
         <div class="blog-set-time-container style-container">
-            <div class="title-text">ตั้งเวลากระทู้</div>
-            <div class="set-time"></div>
+            <div class="title">
+                <div class="title-text">ตั้งเวลาลบกระทู้</div>
+                <div class="need">*จำเป็น</div>
+            </div>
+            <div class="set-time">
+                <div class="choose-set-time">
+                    <input type="radio" class="time-input" id="set_time" name="time" value="time_set">
+                    <div class="time-container">
+                        <label for="set_time">กำหนดเวลา</label>
+                    </div>
+
+                    <input type="radio" class="time-input" id="unset_time" name="time" value="time_unset">
+                    <div class="time-container">
+                        <label for="unset_time">ไม่กำหนด</label>
+                    </div>
+                    <input type="datetime-local" class="date-time" id="date_time">
+                </div>
+            </div>
         </div>
         <button type="submit" id="submit_form" class="create-blog-btn redorange vhcenter" disabled>ตั้งกระทู้เลย</button>
     </div>
 </form>
 
 <script>
+    //var for enable disable submit
+    var header, body,
+        room = false,
+        unsetTime = false,
+        setTime = false;
+    //----------------set min max date today (+7 day from today)---------------------
+    var dateTime = document.getElementById("date_time")
+    dateTime.addEventListener("click", function() {
+        //today date
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        var hours = today.getHours();
+        var minutes = today.getMinutes();
+        //max date
+        var adddate = today.setDate(today.getDate() + 7);
+        var maxdate = new Date(adddate);
+        var maxdd = maxdate.getDate();
+        var maxmm = maxdate.getMonth() + 1; //January is 0!
+        var maxyyyy = maxdate.getFullYear();
+        var maxhours = maxdate.getHours();
+        var maxminutes = maxdate.getMinutes();
+        //check today date
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+
+        if (hours < 10) {
+            hours = '0' + hours;
+        }
+
+        if (minutes < 10) {
+            minutes = '0' + minutes;
+        }
+        //check max date
+        if (maxdd < 10) {
+            maxdd = '0' + maxdd;
+        }
+
+        if (maxmm < 10) {
+            maxmm = '0' + maxmm;
+        }
+
+        if (maxhours < 10) {
+            maxhours = '0' + maxhours;
+        }
+
+        if (maxminutes < 10) {
+            maxminutes = '0' + maxminutes;
+        }
+        today = yyyy + '-' + mm + '-' + dd + 'T' + hours + ":" + minutes;
+        maxdate = maxyyyy + '-' + maxmm + '-' + maxdd + 'T' + maxhours + ":" + maxminutes;
+        dateTime.setAttribute('min', today)
+        dateTime.setAttribute('max', maxdate)
+
+    });
+    //----------------set min time today (+10min from now)---------------------
+    dateTime.addEventListener("input", function() {
+        //today plus 10 minutes date
+        var today = new Date();
+        var adddate = today.setMinutes(today.getMinutes() + 10);
+        var todayPlus = new Date(adddate);
+        var ddPlus = todayPlus.getDate();
+        var mmPlus = todayPlus.getMonth() + 1; //January is 0!
+        var yyyyPlus = todayPlus.getFullYear();
+        var hoursPlus = todayPlus.getHours();
+        var minutesPlus = todayPlus.getMinutes();
+        //check today plus 10 minutes date
+        if (ddPlus < 10) {
+            ddPlus = '0' + ddPlus;
+        }
+
+        if (mmPlus < 10) {
+            mmPlus = '0' + mmPlus;
+        }
+
+        if (hoursPlus < 10) {
+            hoursPlus = '0' + hoursPlus;
+        }
+
+        if (minutesPlus < 10) {
+            minutesPlus = '0' + minutesPlus;
+        }
+        var todayPlusFullDate = yyyyPlus + '-' + mmPlus + '-' + ddPlus + 'T' + hoursPlus + ':' + minutesPlus;
+        var todayPlusDate = yyyyPlus + '-' + mmPlus + '-' + ddPlus;
+        //input date
+        if (dateTime.value) {
+            var input = dateTime.value;
+            var inputDate = input.split('T')[0];
+            var inputTime = input.split('T')[1];
+            var inputdd = inputDate.split('-')[2];
+            var inputmm = inputDate.split('-')[1];
+            var inputyyyy = inputDate.split('-')[0];
+            var inputMinutes = inputTime.split(':')[1];
+            var inputHours = inputTime.split(':')[0];
+            if (inputyyyy <= yyyyPlus) {
+                if (inputmm <= mmPlus) {
+                    if (inputdd <= ddPlus) {
+                        if (inputHours <= hoursPlus) {
+                            if (inputMinutes <= minutesPlus) {
+                                $('#date_time').val(todayPlusFullDate);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //-----------time set checked------------
+        console.log(dateTime.value);
+        if (dateTime.value == '') {
+            setTime = false;
+        } else {
+            setTime = true;
+        }
+        if (header && body && room && (unsetTime || setTime)) {
+            document.getElementById("submit_form").disabled = false;
+        } else {
+            document.getElementById("submit_form").disabled = true;
+        }
+    });
+
+    //-----------time set checked------------
+    var unset = document.querySelector('#unset_time');
+    var set = document.querySelector('#set_time');
+    unset.addEventListener("click", function() {
+        if (unset.checked == true) {
+            dateTime.value = '';
+            setTime = false;
+            unsetTime = true;
+        }
+    });
+    set.addEventListener("click", function() {
+        if (set.checked == true) {
+            unsetTime = false;
+        }
+    });
+
     //----------------limit text---------------------
     function count_word(val) {
         var wom = val.match(/.+/g);
@@ -129,23 +290,16 @@
         return len;
     }
 
-    var header, body, room = false;
     //-----------room checked------------
     var roomArray = document.querySelectorAll('input[name=room]');
     for (var i = 0; i < roomArray.length; i++) {
         roomArray[i].addEventListener("click", function() {
+            console.log(header, body, room, unsetTime, setTime);
+            console.log(header && body && room && (unsetTime || setTime));
             room = true;
-            console.log(header, body, room)
-                //---------------enable disable submit button-------------
-            if (header && body && room) {
-                console.log(header, body, room)
-                document.getElementById("submit_form").disabled = false;
-            } else {
-                console.log(header, body, room)
-                document.getElementById("submit_form").disabled = true;
-            }
         });
     }
+
 
     //----------------limit header text---------------------
     var headerTextContent = document.getElementById("header_text");
@@ -163,12 +317,10 @@
         //---------------enable disable submit button-------------
         if (len > limit_text_max || len < limit_text_min) {
             header = false;
-            console.log(header, body, room)
         } else {
             header = true;
-            console.log(header, body, room)
         }
-        if (header && body && room) {
+        if (header && body && room && (unsetTime || setTime)) {
             document.getElementById("submit_form").disabled = false;
         } else {
             document.getElementById("submit_form").disabled = true;
@@ -191,18 +343,23 @@
         //---------------enable disable submit button-------------
         if (len > limit_text_max || len < limit_text_min) {
             body = false;
-            console.log(header, body, room)
         } else {
             body = true;
-            console.log(header, body, room)
         }
-        if (header && body && room) {
+        if (header && body && room && (unsetTime || setTime)) {
             document.getElementById("submit_form").disabled = false;
         } else {
             document.getElementById("submit_form").disabled = true;
         }
     });
-
+    //----------------limit tag text---------------------
+    var TagTextContent = document.getElementById("tag_input");
+    var TagShowWordCount = document.getElementById("tag_count");
+    TagTextContent.addEventListener("input", function() {
+        var len = count_word(this.value);
+        var limit_text_max = 50;
+        TagShowWordCount.innerHTML = String(len) + "/" + String(limit_text_max);
+    });
     //---------------tag--------------------
     let container = document.querySelector('.all-tag')
     let input = document.getElementById('tag_input');
@@ -232,9 +389,17 @@
             }
         }
     });
-    //----------------prevent form submit---------------
+    //----------------prevent form submit---------------   
+    document.querySelector('form').addEventListener("click", function() {
+        //---------------enable disable submit button-------------
+        if (header && body && room && (unsetTime || setTime)) {
+            document.getElementById("submit_form").disabled = false;
+        } else {
+            document.getElementById("submit_form").disabled = true;
+        }
+    });
     $('form').submit(function(event) {
-        if (header && body && room) {
+        if (header && body && room && (unsetTime || setTime)) {
             return true;
         } else {
             return false;
