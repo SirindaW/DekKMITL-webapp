@@ -3,22 +3,61 @@ from django.urls import reverse,reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
-from .models import Post
-from .forms import PostForm
+from .models import Post, Room, Tag
+from .forms import PostCreateForm, PostForm
 
 def post_create_view(request):
-    form = PostForm()
+    form = PostCreateForm()
     if request.method == "POST":
-        form = PostForm(request.POST) 
+        form = PostCreateForm(request.POST) 
+        
         if form.is_valid():
             form.save(commit=False)
             instance = Post()
-            instance.title= form.cleaned_data['title']
+            instance.title = form.cleaned_data['title']
             instance.content = form.cleaned_data['content']
             instance.author = request.user
-            instance.save()
-            messages.success(request,"Post created successfully.")
-            return redirect(reverse('profile_view'))
+
+            # ROOM
+            room_value = request.POST.get('room')
+            room = Room.objects.filter(title=room_value)
+            if room.exists():
+                room = room.first()
+            else:
+                # selected room does not match any existed room
+                room = Room.objects.get(title='other')
+            instance.room = room
+            
+            # Save to db
+            instance.save()     
+            
+            # TAGS
+            ts = form.cleaned_data.get('tag_string').split(',')
+            ts = list(set(ts))
+            for tag in ts:
+                if Tag.objects.filter(title=tag).exists():
+                    # Tag already existed
+                    instance.tag.add(Tag.objects.get(title=tag))
+                else:
+                    new_tag = Tag(title=tag)
+                    new_tag.save()
+                    instance.tag.add(new_tag)
+            
+        else:
+            print("FORM IS NOT VALID")
+
+        # print(form.errors)
+
+
+        # if form.is_valid():
+        #     form.save(commit=False)
+        #     instance = Post()
+        #     instance.title= form.cleaned_data['title']
+        #     instance.content = form.cleaned_data['content']
+        #     instance.author = request.user
+        #     instance.save()
+        #     messages.success(request,"Post created successfully.")
+        #     return redirect(reverse('profile_view'))
         
     context = {
         'form':form,

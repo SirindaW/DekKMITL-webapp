@@ -48,10 +48,13 @@ class Post(models.Model):
     author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE,related_name='post')
     cover_image = models.ImageField(max_length=255, upload_to=get_cover_image_filepath, default=get_default_cover_image)
     room = models.ForeignKey('post.Room',on_delete=models.SET_NULL,null=True,blank=True,related_name='post')
-    tag = models.ForeignKey('post.Tag',on_delete=models.SET_NULL,null=True,blank=True,related_name='post',default=None)
-
+    tag = models.ManyToManyField('post.Tag',related_name='posts',blank=True)
     expire_date = models.DateTimeField(null=True,blank=True,default=None)
     is_expirable = models.BooleanField(null=True,blank=True,default=False)
+
+    ### Tag ###
+    # to get all tags in a particular post use post.tag.all()
+    # to get all posts in a particular tag use Post.objects.filter(tag__title='tagname')
     
     # active_posts = PostActiveManager()
     objects = PostManager()
