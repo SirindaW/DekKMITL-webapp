@@ -30,3 +30,12 @@ class PostCreateForm(forms.ModelForm):
         model = Post
         fields = ['title','content','room','tag','cover_image','is_expirable','expire_date']
 
+    widgets = {
+        'title':forms.TextInput(),
+        'content':forms.Textarea(),
+        'room':forms.RadioSelect(),
+        'tag':forms.TextInput(),
+        'cover_image':forms.FileInput(),
+        'is_expirable':forms.CheckboxInput(),
+        'expire_date':forms.DateTimeInput(),
+    }
