@@ -26,8 +26,8 @@ class Post(models.Model):
     views = models.PositiveIntegerField(null=True,blank=True,default=0)
     slug = models.SlugField(unique=True,max_length=300,blank=False)
     author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE,related_name='post')
-    room = models.ForeignKey('post.Room',on_delete=models.NULL,null=True,blank=True,related_name='post')
-    tag = models.ForeignKey('post.Tag',on_delete=models.NULL,null=True,blank=True,related_name='post')
+    room = models.ForeignKey('post.Room',on_delete=models.SET_NULL,null=True,blank=True,related_name='post')
+    tag = models.ForeignKey('post.Tag',on_delete=models.SET_NULL,null=True,blank=True,related_name='post',default=None)
 
     expire_date = models.DateTimeField(null=True,blank=True,default=None)
     is_expirable = models.BooleanField(null=True,blank=True,default=False)
@@ -70,6 +70,7 @@ class Post(models.Model):
 
 class Room(models.Model):
     title = models.CharField(max_length=200)
+    room_id = models.IntegerField(default=0,unique=True)
     # related_name = ['Room.post']
 
     def __str__(self) -> str:
