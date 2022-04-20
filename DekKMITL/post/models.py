@@ -5,15 +5,30 @@ from django.db.models.signals import pre_save
 from DekKMITL.utils import unique_slug_generator
 from datetime import timezone,datetime,timedelta
 from django.utils.timesince import timeuntil
-
+from django.db.models import Q
 
 from account.models import Account
 
-class PostActiveManager(models.Manager):
-    def get_queryset(self):
-        all_ = super().get_queryset()
-        active_posts = [post for post in all_ if post.is_active]
+class PostManager(models.Manager):
+    def all(self):
+        return super().get_queryset()
+
+    def active(self):
+        qs = super().get_queryset()
+        active_posts = [post for post in qs if post.is_active]
+
+        active_posts = Post.objects.none()
+        for obj in qs:
+            if obj.is_active():        
+                active_posts |= Post.objects.filter(slug=obj.slug)
+
         return active_posts
+
+    def search(self,query):
+        lookups = Q(title__icontains=query) | Q(author__first_name__icontains=query) | Q(author__last_name__icontains=query) | Q(content__icontains=query) | Q(slug__icontains=query)
+        qs = super().get_queryset().order_by('-date_created').filter(lookups)
+        return qs
+
     
 
 def get_cover_image_filepath(self,*args,**kwargs):
@@ -39,7 +54,7 @@ class Post(models.Model):
     is_expirable = models.BooleanField(null=True,blank=True,default=False)
     
     # active_posts = PostActiveManager()
-    objects=models.Manager()
+    objects = PostManager()
     
     
     @admin.display(boolean=True)
@@ -57,7 +72,6 @@ class Post(models.Model):
     @admin.display(boolean=True)
     def is_active(self):
         if self.is_expired() :
-            print(self.title)
             return False
         return True
     
