@@ -1,8 +1,4 @@
-{% extends 'components/base.html' %}
-{% load post_tags %}
-
-{% block content%}
-this is post detail - {{post.title}}
+{% extends 'components/base.html' %} {% load post_tags %} {% load humanize %} {% block content%} this is post detail - {{post.title}}
 <div> POST_ID :{{post.id}} </div>
 <div> POST_TITLE{{post.title}} </div>
 <div> POST_VIEWS {{post.views}} </div>
@@ -10,7 +6,7 @@ this is post detail - {{post.title}}
 <div> POST_CONTENT{{post.content}} </div>
 <div> POST_AUTHOR{{post.author}} </div>
 <div> LINK-TO-THIS-POST(ABSOLUTE_URL)=<a href="{{ post.get_absolute_url }}"> {{post.get_absolute_url}}</a> </div>
-
+<div> {{post.date_created|naturaltime}}</div>
 <!-- Like Button -->
 <form action="{% url 'post:like_view' post.pk %}" method="POST">
     {% csrf_token %}

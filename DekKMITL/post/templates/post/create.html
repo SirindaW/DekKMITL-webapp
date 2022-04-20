@@ -5,7 +5,7 @@
         <div class="blog-header-container style-container">
             <div class="title">
                 <div class="title-text">หัวข้อกระทู้</div>
-                <div id="header_count" class="count-text">0/120</div>
+                <div id="header_count" class="count-text"></div>
             </div>
             <div class="blog-header">
                 <input type="text" id="header_text" class="header-input blogfont" autocomplete="off" placeholder="หัวข้อกระทู้" required>
@@ -14,7 +14,7 @@
         <div class="blog-body-container style-container">
             <div class="title">
                 <div class="title-text">เนื้อหากระทู้</div>
-                <div id="body_count" class="count-text">0/4000</div>
+                <div id="body_count" class="count-text"></div>
             </div>
             <div class="blog-body">
                 <textarea id="body_text" class="body-input blogfont" rows="10" placeholder="เนื้อหากระทู้" required></textarea>
@@ -100,11 +100,12 @@
         <div class="tag-container style-container">
             <div class="title">
                 <div class="title-text">แท็ก</div>
-                <div id="tag_count" class="count-text">0/50</div>
+                <div id="tag_count" class="count-text"></div>
             </div>
             <div class="blog-tag-container">
                 <div class="all-tag">
                     <textarea maxlength="50" rows="1" id="tag_input" class="tag-input" placeholder="เพิ่มแท็ก" autocomplete="off"></textarea>
+                    <input type="text" id="tag_list" class="tag-list">
                 </div>
             </div>
         </div>
@@ -143,125 +144,202 @@
         room = false,
         unsetTime = false,
         setTime = false;
+    //เช็คถ้าเลข < 10 ใส่ 0 ข้างหน้า 
+    function checkOnesNum(num) {
+        if (num < 10) {
+            num = '0' + num;
+        }
+        return num;
+    }
+    //รวมวันที่เต็ม
+    function getFullDate(date) {
+        var day = date.getDate();
+        var month = date.getMonth() + 1; //January is 0!
+        var year = date.getFullYear();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+
+        day = checkOnesNum(day);
+        month = checkOnesNum(month);
+        hour = checkOnesNum(hour);
+        minute = checkOnesNum(minute);
+        return year + '-' + month + '-' + day + 'T' + hour + ":" + minute;
+    }
+    //disable button ถ้ากรอกข้อมูลที่จำเป็นไม่ครบ
+    function buttonAble() {
+        if (header && body && room && (unsetTime || setTime)) {
+            document.getElementById("submit_form").disabled = false;
+        } else {
+            document.getElementById("submit_form").disabled = true;
+        }
+    }
+    //function count word
+    function countWord(val) {
+        var wom = val.match(/.+/g);
+        var len = 0;
+        if (wom) {
+            len = wom[0].length;
+        }
+        return len;
+    }
+    //limit text and button disable enable
+    function limitText(textID, showID, min, max) {
+        var len = countWord(textID.value);
+        var check;
+        showID.innerHTML = String(len) + "/" + String(max);
+        if (len > max || (len < min && len != 0)) {
+            showID.classList.add("overflow-text");
+        } else {
+            showID.classList.remove("overflow-text");
+        }
+        //---------------enable disable submit button-------------
+        if (len > max || len < min) {
+            check = false;
+        } else {
+            check = true;
+        }
+        return check;
+    }
+    //remove special text on keyboard only
+    function removeSpChar(text) {
+        return text.replace(/[&\/\\#^+()$~%.'":;, ฿=_\-*?\n<>{}!@`\[\]|]/g, '');
+    }
+    //----------------limit header text---------------------
+    var headerTextContent = document.getElementById("header_text");
+    var headerShowWordCount = document.getElementById("header_count");
+
+    //ค่าเริ่มต้น
+    limitText(headerTextContent, headerShowWordCount, 4, 120);
+
+    headerTextContent.addEventListener("input", function() {
+        header = limitText(headerTextContent, headerShowWordCount, 4, 120);
+        buttonAble()
+    });
+
+    //----------------limit body text---------------------
+    var bodyTextContent = document.getElementById("body_text");
+    var bodyShowWordCount = document.getElementById("body_count");
+
+    //ค่าเริ่มต้น
+    limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
+
+    bodyTextContent.addEventListener("input", function() {
+        body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
+        buttonAble()
+    });
+    //---------------tag--------------------
+    var TagTextContent = document.getElementById("tag_input");
+    var TagShowWordCount = document.getElementById("tag_count");
+    let container = document.querySelector('.all-tag')
+    var tagList = document.getElementById('tag_list');
+
+    //ค่าเริ่มต้น
+    limitText(TagTextContent, TagShowWordCount, 0, 50);
+
+    //limit tag text
+    function countTag() {
+        var tagLen = 0;
+        let tag = document.querySelectorAll('.post-tag');
+        if (tag) {
+            tagLen = tag.length;
+        }
+        return tagLen;
+    }
+    TagTextContent.addEventListener("input", function() {
+        limitText(TagTextContent, TagShowWordCount, 0, 50);
+        TagTextContent.value = TagTextContent.value.substring(0, 49);
+    });
+    TagTextContent.addEventListener('keyup', (event) => {
+        TagTextContent.classList.remove('no-sp-text');
+        if ((event.which == 32 || event.which == 13) && TagTextContent.value.length > 0) { //spacebar or enter to add tag
+            var p = document.createElement('p');
+            var text = removeSpChar(TagTextContent.value);
+            tagLen = countTag();
+
+            //add tag
+            if (text && tagLen < 10) {
+                TagShowWordCount.innerHTML = "0/50";
+
+                //keep value to backend
+                tagList.value += text + ',';
+
+                text = '#' + text;
+                var text_node = document.createTextNode(text);
+                TagTextContent.parentNode.insertBefore(p, TagTextContent);
+                p.appendChild(text_node);
+                p.classList.add('post-tag');
+                TagTextContent.value = '';
+                tagLen = countTag();
+            } else {
+                TagTextContent.classList.add('no-sp-text');
+            }
+
+            //show input if tag length <10
+            if (tagLen >= 10) {
+                TagTextContent.disabled = true;
+                TagTextContent.style.display = 'none';
+            } else {
+                TagTextContent.disabled = false;
+                TagTextContent.style.display = 'flex';
+            }
+
+            let tag = document.querySelectorAll('.post-tag');
+            //delete tag
+            for (let i = 0; i < tag.length; i++) {
+                tag[i].addEventListener('click', () => {
+                    tagLen = countTag();
+                    //limit 10 tag
+                    if (tagLen >= 10) {
+                        TagTextContent.disabled = true;
+                        TagTextContent.style.display = 'none';
+                    } else {
+                        TagTextContent.disabled = false;
+                        TagTextContent.style.display = 'flex';
+                    }
+                    tag[i].parentNode.removeChild(tag[i]);
+                });
+            }
+        }
+    });
+
     //----------------set min max date today (+7 day from today)---------------------
     var dateTime = document.getElementById("date_time")
     dateTime.addEventListener("click", function() {
         //today date
         var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-        var hours = today.getHours();
-        var minutes = today.getMinutes();
+        var todayFullDate = getFullDate(today);
         //max date
         var adddate = today.setDate(today.getDate() + 7);
         var maxdate = new Date(adddate);
-        var maxdd = maxdate.getDate();
-        var maxmm = maxdate.getMonth() + 1; //January is 0!
-        var maxyyyy = maxdate.getFullYear();
-        var maxhours = maxdate.getHours();
-        var maxminutes = maxdate.getMinutes();
-        //check today date
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-
-        if (hours < 10) {
-            hours = '0' + hours;
-        }
-
-        if (minutes < 10) {
-            minutes = '0' + minutes;
-        }
-        //check max date
-        if (maxdd < 10) {
-            maxdd = '0' + maxdd;
-        }
-
-        if (maxmm < 10) {
-            maxmm = '0' + maxmm;
-        }
-
-        if (maxhours < 10) {
-            maxhours = '0' + maxhours;
-        }
-
-        if (maxminutes < 10) {
-            maxminutes = '0' + maxminutes;
-        }
-        today = yyyy + '-' + mm + '-' + dd + 'T' + hours + ":" + minutes;
-        maxdate = maxyyyy + '-' + maxmm + '-' + maxdd + 'T' + maxhours + ":" + maxminutes;
-        dateTime.setAttribute('min', today)
+        //get full date
+        maxdate = getFullDate(maxdate);
+        //set min max date
+        dateTime.setAttribute('min', todayFullDate)
         dateTime.setAttribute('max', maxdate)
 
     });
     //----------------set min time today (+10min from now)---------------------
     dateTime.addEventListener("input", function() {
         //today plus 10 minutes date
-        var today = new Date();
-        var adddate = today.setMinutes(today.getMinutes() + 10);
-        var todayPlus = new Date(adddate);
-        var ddPlus = todayPlus.getDate();
-        var mmPlus = todayPlus.getMonth() + 1; //January is 0!
-        var yyyyPlus = todayPlus.getFullYear();
-        var hoursPlus = todayPlus.getHours();
-        var minutesPlus = todayPlus.getMinutes();
-        //check today plus 10 minutes date
-        if (ddPlus < 10) {
-            ddPlus = '0' + ddPlus;
-        }
+        var todayPlus = new Date();
+        var adddate = todayPlus.setMinutes(todayPlus.getMinutes() + 10);
+        todayPlus = new Date(adddate);
+        todayPlusFullDate = getFullDate(todayPlus);
 
-        if (mmPlus < 10) {
-            mmPlus = '0' + mmPlus;
-        }
-
-        if (hoursPlus < 10) {
-            hoursPlus = '0' + hoursPlus;
-        }
-
-        if (minutesPlus < 10) {
-            minutesPlus = '0' + minutesPlus;
-        }
-        var todayPlusFullDate = yyyyPlus + '-' + mmPlus + '-' + ddPlus + 'T' + hoursPlus + ':' + minutesPlus;
-        var todayPlusDate = yyyyPlus + '-' + mmPlus + '-' + ddPlus;
         //input date
         if (dateTime.value) {
-            var input = dateTime.value;
-            var inputDate = input.split('T')[0];
-            var inputTime = input.split('T')[1];
-            var inputdd = inputDate.split('-')[2];
-            var inputmm = inputDate.split('-')[1];
-            var inputyyyy = inputDate.split('-')[0];
-            var inputMinutes = inputTime.split(':')[1];
-            var inputHours = inputTime.split(':')[0];
-            if (inputyyyy <= yyyyPlus) {
-                if (inputmm <= mmPlus) {
-                    if (inputdd <= ddPlus) {
-                        if (inputHours <= hoursPlus) {
-                            if (inputMinutes <= minutesPlus) {
-                                $('#date_time').val(todayPlusFullDate);
-                            }
-                        }
-                    }
-                }
+            var inputDate = new Date(dateTime.value);
+            if (inputDate < todayPlus) {
+                $('#date_time').val(todayPlusFullDate);
             }
         }
         //-----------time set checked------------
-        console.log(dateTime.value);
         if (dateTime.value == '') {
             setTime = false;
         } else {
             setTime = true;
         }
-        if (header && body && room && (unsetTime || setTime)) {
-            document.getElementById("submit_form").disabled = false;
-        } else {
-            document.getElementById("submit_form").disabled = true;
-        }
+        buttonAble();
     });
 
     //-----------time set checked------------
@@ -280,16 +358,6 @@
         }
     });
 
-    //----------------limit text---------------------
-    function count_word(val) {
-        var wom = val.match(/.+/g);
-        var len = 0;
-        if (wom) {
-            len = wom[0].length;
-        }
-        return len;
-    }
-
     //-----------room checked------------
     var roomArray = document.querySelectorAll('input[name=room]');
     for (var i = 0; i < roomArray.length; i++) {
@@ -300,106 +368,13 @@
         });
     }
 
-
-    //----------------limit header text---------------------
-    var headerTextContent = document.getElementById("header_text");
-    var headerShowWordCount = document.getElementById("header_count");
-    headerTextContent.addEventListener("input", function() {
-        var len = count_word(this.value);
-        var limit_text_min = 4;
-        var limit_text_max = 120;
-        headerShowWordCount.innerHTML = String(len) + "/" + String(limit_text_max);
-        if (len > limit_text_max || (len < limit_text_min && len != 0)) {
-            headerShowWordCount.classList.add("overflow-text");
-        } else {
-            headerShowWordCount.classList.remove("overflow-text");
-        }
-        //---------------enable disable submit button-------------
-        if (len > limit_text_max || len < limit_text_min) {
-            header = false;
-        } else {
-            header = true;
-        }
-        if (header && body && room && (unsetTime || setTime)) {
-            document.getElementById("submit_form").disabled = false;
-        } else {
-            document.getElementById("submit_form").disabled = true;
-        }
-    });
-
-    //----------------limit body text---------------------
-    var bodyTextContent = document.getElementById("body_text");
-    var bodyShowWordCount = document.getElementById("body_count");
-    bodyTextContent.addEventListener("input", function() {
-        var len = count_word(this.value);
-        var limit_text_min = 6;
-        var limit_text_max = 4000;
-        bodyShowWordCount.innerHTML = String(len) + "/" + String(limit_text_max);
-        if (len > limit_text_max || (len < limit_text_min && len != 0)) {
-            bodyShowWordCount.classList.add("overflow-text");
-        } else {
-            bodyShowWordCount.classList.remove("overflow-text");
-        }
-        //---------------enable disable submit button-------------
-        if (len > limit_text_max || len < limit_text_min) {
-            body = false;
-        } else {
-            body = true;
-        }
-        if (header && body && room && (unsetTime || setTime)) {
-            document.getElementById("submit_form").disabled = false;
-        } else {
-            document.getElementById("submit_form").disabled = true;
-        }
-    });
-    //----------------limit tag text---------------------
-    var TagTextContent = document.getElementById("tag_input");
-    var TagShowWordCount = document.getElementById("tag_count");
-    TagTextContent.addEventListener("input", function() {
-        var len = count_word(this.value);
-        var limit_text_max = 50;
-        TagShowWordCount.innerHTML = String(len) + "/" + String(limit_text_max);
-    });
-    //---------------tag--------------------
-    let container = document.querySelector('.all-tag')
-    let input = document.getElementById('tag_input');
-    input.addEventListener('keyup', (event) => {
-        input.classList.remove('no-sp-text');
-        if ((event.which == 32 || event.which == 13) && input.value.length > 0) {
-            var p = document.createElement('p');
-            var text = input.value;
-            text = text.replace(/[&\/\\#^+()$~%.'":;, ฿=_\-*?\n<>{}!@`\[\]|]/g, '');
-            if (text) {
-                text = '#' + text;
-                var text_node = document.createTextNode(text);
-                input.parentNode.insertBefore(p, input);
-                p.appendChild(text_node);
-                p.classList.add('post-tag');
-                input.value = '';
-            } else {
-                input.classList.add('no-sp-text');
-            }
-
-            let deleteTags = document.querySelectorAll('.post-tag');
-
-            for (let i = 0; i < deleteTags.length; i++) {
-                deleteTags[i].addEventListener('click', () => {
-                    container.removeChild(deleteTags[i]);
-                });
-            }
-        }
-    });
     //----------------prevent form submit---------------   
     document.querySelector('form').addEventListener("click", function() {
-        //---------------enable disable submit button-------------
-        if (header && body && room && (unsetTime || setTime)) {
-            document.getElementById("submit_form").disabled = false;
-        } else {
-            document.getElementById("submit_form").disabled = true;
-        }
+        buttonAble()
     });
     $('form').submit(function(event) {
         if (header && body && room && (unsetTime || setTime)) {
+            tagLen = 0;
             return true;
         } else {
             return false;
