@@ -16,16 +16,22 @@ class PostActiveManager(models.Manager):
         return active_posts
     
 
+def get_cover_image_filepath(self,*args,**kwargs):
+    return f'post_cover_image/{self.slug}/post_cover_image.png'
+
+def get_default_cover_image():
+    return "post/defaultcover.svg"
+
 class Post(models.Model):
     title = models.CharField(max_length=120)
     content = models.TextField(max_length=4000)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     last_modified = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(Account,related_name='post_likes',null=True,blank=True)
-    # post_fav = models.PositiveBigIntegerField(default=0,null=False)
     views = models.PositiveIntegerField(null=True,blank=True,default=0)
     slug = models.SlugField(unique=True,max_length=300,blank=False)
     author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE,related_name='post')
+    cover_image = models.ImageField(max_length=255, upload_to=get_cover_image_filepath, default=get_default_cover_image)
     room = models.ForeignKey('post.Room',on_delete=models.SET_NULL,null=True,blank=True,related_name='post')
     tag = models.ForeignKey('post.Tag',on_delete=models.SET_NULL,null=True,blank=True,related_name='post',default=None)
 
