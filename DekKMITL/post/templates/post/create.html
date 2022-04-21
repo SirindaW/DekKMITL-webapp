@@ -1,6 +1,6 @@
-{% extends 'components/base.html' %} {% load static %} {% block content %}
+{% extends 'components/base.html' %} {% load static %} {% block content %} {% load widget_tweaks %}
 <link rel="stylesheet" href="{%static '/css/create_post.css'%}">
-<form method="POST"> {% csrf_token %}
+<form method="POST" enctype="multipart/form-data""> {% csrf_token %}
     <div class="container">
         <div class="blog-header-container style-container">
             <div class="title">
@@ -8,7 +8,8 @@
                 <div id="header_count" class="count-text"></div>
             </div>
             <div class="blog-header">
-                <input type="text" id="header_text" class="header-input blogfont" autocomplete="off" placeholder="หัวข้อกระทู้" required>
+                {% comment %} <input type="text" id="header_text" class="header-input blogfont" autocomplete="off" placeholder="หัวข้อกระทู้" required> {% endcomment %}
+                {% render_field form.title type="text" id="header_text" class="header-input blogfont" autocomplete="off" placeholder="หัวข้อกระทู้" required="" %}
             </div>
         </div>
         <div class="blog-body-container style-container">
@@ -17,7 +18,8 @@
                 <div id="body_count" class="count-text"></div>
             </div>
             <div class="blog-body">
-                <textarea id="body_text" class="body-input blogfont" rows="10" placeholder="เนื้อหากระทู้" required></textarea>
+                {% comment %} <textarea id="body_text" class="body-input blogfont" rows="10" placeholder="เนื้อหากระทู้" required></textarea> {% endcomment %}
+                {% render_field form.content id="body_text" class="body-input blogfont" rows="10" placeholder="เนื้อหากระทู้" required=""%}
             </div>
         </div>
         <div class="chooseroom-container style-container">
@@ -105,7 +107,8 @@
             <div class="blog-tag-container">
                 <div class="all-tag">
                     <textarea maxlength="50" rows="1" id="tag_input" class="tag-input" placeholder="เพิ่มแท็ก" autocomplete="off"></textarea>
-                    <input type="text" id="tag_list" class="tag-list">
+                    {% comment %} <input type="text" id="tag_list" name="tag_string" class="tag-list"> {% endcomment %}
+                    {% render_field form.tag_string type="text" id="tag_list" name="tag_string" class="tag-list" %}
                 </div>
             </div>
         </div>
@@ -130,7 +133,7 @@
                     <div class="time-container">
                         <label for="unset_time">ไม่กำหนด</label>
                     </div>
-                    <input type="datetime-local" class="date-time" id="date_time">
+                    <input type="datetime-local" class="date-time" name="expire_date" id="date_time">
                 </div>
             </div>
         </div>

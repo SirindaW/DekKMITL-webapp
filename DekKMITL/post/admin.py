@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post, Comment
+from .models import Post, Comment, Room, Tag
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
@@ -10,4 +10,6 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ['-date_created']
 
 admin.site.register(Post, PostAdmin)
+admin.site.register(Room)
+admin.site.register(Tag)
 admin.site.register(Comment)

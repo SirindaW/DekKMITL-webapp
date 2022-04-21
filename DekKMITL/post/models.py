@@ -5,16 +5,37 @@ from django.db.models.signals import pre_save
 from DekKMITL.utils import unique_slug_generator
 from datetime import timezone,datetime,timedelta
 from django.utils.timesince import timeuntil
-
+from django.db.models import Q
 
 from account.models import Account
 
-class PostActiveManager(models.Manager):
-    def get_queryset(self):
-        all_ = super().get_queryset()
-        active_posts = [post for post in all_ if post.is_active]
+class PostManager(models.Manager):
+    def all(self):
+        return super().get_queryset()
+
+    def active(self):
+        qs = super().get_queryset()
+        active_posts = [post for post in qs if post.is_active]
+
+        active_posts = Post.objects.none()
+        for obj in qs:
+            if obj.is_active():        
+                active_posts |= Post.objects.filter(slug=obj.slug)
+
         return active_posts
+
+    def search(self,query):
+        lookups = Q(title__icontains=query) | Q(author__first_name__icontains=query) | Q(author__last_name__icontains=query) | Q(content__icontains=query) | Q(slug__icontains=query)
+        qs = super().get_queryset().order_by('-date_created').filter(lookups)
+        return qs
+
     
+
+def get_cover_image_filepath(self,*args,**kwargs):
+    return f'post_cover_image/{self.slug}/post_cover_image.png'
+
+def get_default_cover_image():
+    return "post/defaultcover.svg"
 
 class Post(models.Model):
     title = models.CharField(max_length=120)
@@ -22,16 +43,21 @@ class Post(models.Model):
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     last_modified = models.DateTimeField(auto_now=True)
     likes = models.ManyToManyField(Account,related_name='post_likes',null=True,blank=True)
-    # post_fav = models.PositiveBigIntegerField(default=0,null=False)
     views = models.PositiveIntegerField(null=True,blank=True,default=0)
     slug = models.SlugField(unique=True,max_length=300,blank=False)
     author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE,related_name='post')
-
+    cover_image = models.ImageField(max_length=255, upload_to=get_cover_image_filepath, default=get_default_cover_image)
+    room = models.ForeignKey('post.Room',on_delete=models.SET_NULL,null=True,blank=True,related_name='post')
+    tag = models.ManyToManyField('post.Tag',related_name='posts',blank=True)
     expire_date = models.DateTimeField(null=True,blank=True,default=None)
     is_expirable = models.BooleanField(null=True,blank=True,default=False)
+
+    ### Tag ###
+    # to get all tags in a particular post use post.tag.all()
+    # to get all posts in a particular tag use Post.objects.filter(tag__title='tagname')
     
     # active_posts = PostActiveManager()
-    objects=models.Manager()
+    objects = PostManager()
     
     
     @admin.display(boolean=True)
@@ -49,7 +75,6 @@ class Post(models.Model):
     @admin.display(boolean=True)
     def is_active(self):
         if self.is_expired() :
-            print(self.title)
             return False
         return True
     
@@ -58,6 +83,8 @@ class Post(models.Model):
             return None
         return timeuntil(self.expire_date)
         
+    def get_cover_image_url(self):
+        return self.cover_image.url
 
     def __str__(self) -> str:
         return self.title
@@ -66,6 +93,20 @@ class Post(models.Model):
         return reverse("post:details_view", kwargs={"post_slug": self.slug})
     
 
+class Room(models.Model):
+    title = models.CharField(max_length=200)
+    room_id = models.IntegerField(default=0,unique=True)
+    # related_name = ['Room.post']
+
+    def __str__(self) -> str:
+        return self.title
+
+class Tag(models.Model):
+    title = models.CharField(max_length=200)
+    # related_name = ['Tag.post']
+
+    def __str__(self) -> str:
+        return self.title
         
 class Comment(models.Model):
     post= models.ForeignKey(Post,blank=True,null=True,on_delete=models.CASCADE)

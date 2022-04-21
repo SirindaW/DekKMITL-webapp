@@ -39,12 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'crispy_forms',
+    'widget_tweaks',
 
     'account',
     'post',
     # 'taggit',
 
-    'crispy_forms',
 ]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'

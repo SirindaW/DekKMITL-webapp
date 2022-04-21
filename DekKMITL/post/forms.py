@@ -1,3 +1,5 @@
+from distutils.command.build_scripts import first_line_re
+from random import choices
 from django import forms
 from .models import Post,Comment
 
@@ -24,3 +26,21 @@ class PostForm(forms.ModelForm):
 
         }
 
+class PostCreateForm(forms.ModelForm):
+
+    tag_string = forms.CharField(widget=forms.TextInput())
+    class Meta:
+        model = Post
+        fields = ['title','content','tag_string','cover_image','is_expirable','expire_date']
+
+    # CHOICES_ROOM = ['a','b','c'] 
+
+    widgets = {
+        'title':forms.Textarea(),
+        'content':forms.Textarea(),
+        # 'room':forms.RadioSelect(attrs={'name':'room'}),
+        # 'tag':forms.TextInput(),
+        'cover_image':forms.FileInput(),
+        'is_expirable':forms.CheckboxInput(),
+        'expire_date':forms.DateTimeInput(),
+    }
