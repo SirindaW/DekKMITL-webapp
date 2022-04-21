@@ -209,7 +209,7 @@
     var headerShowWordCount = document.getElementById("header_count");
 
     //ค่าเริ่มต้น
-    limitText(headerTextContent, headerShowWordCount, 4, 120);
+    header = limitText(headerTextContent, headerShowWordCount, 4, 120);
 
     headerTextContent.addEventListener("input", function() {
         header = limitText(headerTextContent, headerShowWordCount, 4, 120);
@@ -221,7 +221,7 @@
     var bodyShowWordCount = document.getElementById("body_count");
 
     //ค่าเริ่มต้น
-    limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
+    body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
 
     bodyTextContent.addEventListener("input", function() {
         body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
@@ -232,6 +232,7 @@
     var TagShowWordCount = document.getElementById("tag_count");
     let container = document.querySelector('.all-tag')
     var tagList = document.getElementById('tag_list');
+    tagList.value = '';
 
     //ค่าเริ่มต้น
     limitText(TagTextContent, TagShowWordCount, 0, 50);
@@ -380,5 +381,6 @@
             return false;
         }
     });
+    buttonAble();
 </script>
 {% endblock content %}

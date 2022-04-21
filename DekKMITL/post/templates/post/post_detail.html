@@ -1,4 +1,43 @@
-{% extends 'components/base.html' %} {% load post_tags %} {% load humanize %} {% block content%} this is post detail - {{post.title}}
+{% extends 'components/base.html' %} {% load post_tags %}{% load static %} {% load humanize %} {% block content%}
+
+<link rel="stylesheet" href="{%static '/css/post_detail.css'%}">
+
+<div class="container">
+    <div class="post-container">
+        <div class="owner-pic"></div>
+        <div class="owner-post">
+            <div class="post-header"></div>
+            <div class="post-detail">
+                <div class="post-tag"></div>
+                <div class="post-date"></div>
+            </div>
+            <div class="post-body"></div>
+            <div class="post-room"><img src="{% static 'images/travel.png'%}" style="width:30px">ห้องเที่ยวกัน</div>
+        </div>
+    </div>
+    <div class="comment-container">
+        <div class="comment-write">
+            <div class="comment-input">
+                <div class="write-user"></div>
+                <textarea class="comment-textarea" id="" rows="4"></textarea>
+            </div>
+            <div class="comment-submit">
+                <button type="submit">ส่ง</button>
+            </div>
+        </div>
+        <div class="comment-read">
+            <div class="comment-count">x ความคิดเห็น</div>
+            <div class="all-comment">
+                <!-- -------------------loop comment------------------ -->
+                <div class="comment">
+                    <div class="comment-user"></div>
+                    <div class="comment-content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--this is post detail - {{post.title}}
 <div> POST_ID :{{post.id}} </div>
 <div> POST_TITLE{{post.title}} </div>
 <div> POST_VIEWS {{post.views}} </div>
@@ -6,15 +45,13 @@
 <div> POST_CONTENT{{post.content}} </div>
 <div> POST_AUTHOR{{post.author}} </div>
 <div> LINK-TO-THIS-POST(ABSOLUTE_URL)=<a href="{{ post.get_absolute_url }}"> {{post.get_absolute_url}}</a> </div>
-<div> {{post.date_created|naturaltime}}</div>
+<div> {{post.date_created|naturaltime}}</div> -->
 <!-- Like Button -->
-<form action="{% url 'post:like_view' post.pk %}" method="POST">
+<!-- <form action="{% url 'post:like_view' post.pk %}" method="POST">
     {% csrf_token %}
     <button type="submit" name="post_id" value="{{post.id}}"> Like </button>
-</form>
+</form> -->
 
 <!-- Like Status -->
-<div> Liked : {% like_status request post.pk%}</div>
+<!-- <div> Liked : {% like_status request post.pk%}</div> -->
 {% endblock %}
-
-<div>
