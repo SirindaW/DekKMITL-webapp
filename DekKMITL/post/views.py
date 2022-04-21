@@ -8,6 +8,11 @@ from django.utils.timezone import make_aware
 from .models import Post, Room, Tag
 from .forms import PostCreateForm
 
+def room_list_view(request):
+    context = {}
+    template = "post/room_list.html"
+    return render(request,template,context)
+
 def post_create_view(request):
     form = PostCreateForm()
     if request.method == "POST":
