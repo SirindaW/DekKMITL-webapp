@@ -1,7 +1,7 @@
 //search not found display 
-function displayCheck(id, show) {
-    var notfound = document.getElementById(show);
-    var table = document.getElementById(id);
+function displayCheck(tableID, notfoundID) {
+    var notfound = document.getElementById(notfoundID);
+    var table = document.getElementById(tableID);
     var tr = table.getElementsByTagName("tr");
     var display = true;
     for (i = 0; i < tr.length; i++) {
@@ -37,3 +37,7 @@ function search(notfoundID, inputID, tableID, checkRow) {
     }
     displayCheck(tableID, notfoundID);
 }
+
+// displayCheck('tag_table', 'not_found');
+// displayCheck('follower_table', 'user_not_found');
+// displayCheck('following_table', 'following_not_found');

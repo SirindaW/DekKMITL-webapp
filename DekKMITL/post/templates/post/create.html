@@ -203,10 +203,12 @@
         }
         return check;
     }
+    
     //remove special text on keyboard only
     function removeSpChar(text) {
         return text.replace(/[&\/\\#^+()$~%.'":;, ฿=_\-*?\n<>{}!@`\[\]|]/g, '');
     }
+    
     //----------------limit header text---------------------
     var headerTextContent = document.getElementById("header_text");
     var headerShowWordCount = document.getElementById("header_count");
