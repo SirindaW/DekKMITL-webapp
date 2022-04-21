@@ -1,8 +1,93 @@
-{% extends 'components/base.html' %}
+{% extends 'components/base.html' %}{% load static%} {% block content %}
+<link rel="stylesheet" href="{%static '/css/room_list.css'%}">
+<div class="container">
+    <div class="title">เลือกห้อง</div>
+    <div class="all-room">
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/review.png"><br>รีวิว
+            </div>
+        </a>
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/news.png"><br>ข่าวสาร
+            </div>
+        </a>
 
-{% block content %}
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/educate.png"><br>เด็กเรียน
+            </div>
+        </a>
 
-อะจ๊ะเอ๋
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/dorm.png"><br>หอพัก
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/food.png"><br>มุมอร่อย
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/sport.png"><br>กีฬา
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/travel.png"><br>ท่องเที่ยว
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/art.png"><br>งานอาร์ต
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/pet.png"><br>สัตว์เลี้ยง
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/fashion.png"><br>แฟชั่น
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/camera.png"><br>ถ่ายรูป
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/party.png"><br>ปาร์ตี้
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/talk.png"><br>คุยเล่น
+            </div>
+        </a>
+
+        <a href="#">
+            <div class="room-container">
+                <img src="/statics/images/other.png"><br>อื่น ๆ
+            </div>
+        </a>
+    </div>
+
+</div>
 
 
 {% endblock content %}
