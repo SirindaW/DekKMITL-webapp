@@ -37,7 +37,7 @@ def post_create_view(request):
             # Expire date
             if request.POST.get('expire_date'):
                 instance.expire_date = make_aware(parse_datetime(request.POST.get('expire_date')))
-                instance.is_expired = True
+                instance.is_expirable= True
 
             # Save to db
             instance.save()     
@@ -59,18 +59,7 @@ def post_create_view(request):
         else:
             print("FORM IS NOT VALID")
 
-        # print(form.errors)
-
-
-        # if form.is_valid():
-        #     form.save(commit=False)
-        #     instance = Post()
-        #     instance.title= form.cleaned_data['title']
-        #     instance.content = form.cleaned_data['content']
-        #     instance.author = request.user
-        #     instance.save()
-        #     messages.success(request,"Post created successfully.")
-        #     return redirect(reverse('profile_view'))
+        return redirect(reverse('post:details_view',kwargs={'post_slug':instance.slug}))
         
     context = {
         'form':form,
