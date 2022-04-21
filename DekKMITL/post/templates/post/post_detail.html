@@ -1,28 +1,51 @@
 {% extends 'components/base.html' %} {% load post_tags %}{% load static %} {% load humanize %} {% block content%}
 
+<link rel="stylesheet" href="{%static '/css/home.css'%}">
 <link rel="stylesheet" href="{%static '/css/post_detail.css'%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="container">
-    <div class="post-container">
-        <div class="owner-pic"></div>
+    <div class="post-container vhcenter">
+        <div class="owner-pic user-profile-container vcenter" style="width:15%">
+            <a href="#link to blog's user profile">
+                <div class="user-profile-pic" style="background-image: url({{post.author.get_profile_image_url}});height:100px;width:100px"></div>
+            </a>
+        </div>
         <div class="owner-post">
-            <div class="post-header"></div>
-            <div class="post-detail">
-                <div class="post-tag"></div>
-                <div class="post-date"></div>
+            <div class="post-header blogfont">{{post.title}}</div>
+            <div class="post-detail spc-btw">
+                <div class="post-tag blogfont">#blabla #bear</div>
+                <div class="post-user-date">{{post.author}} : {{post.date_created|naturaltime}}</div>
             </div>
-            <div class="post-body"></div>
-            <div class="post-room"><img src="{% static 'images/travel.png'%}" style="width:30px">ห้องเที่ยวกัน</div>
+            <div class="post-body blogfont">{{post.content}}</div>
+            <div class="post-room-like spc-btw">
+                <div class="post-room"><img src="{% static 'images/travel.png'%}" style="width:25px">&nbsp;&nbsp;ห้องเที่ยวกัน</div>
+                <div class="post-like">
+                    {{post.likes.count}}&nbsp;&nbsp;
+                    <!-- Like Button -->
+                    <form action="{% url 'post:like_view' post.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" name="post_id" id="like_btn" class="like-btn fa" value="{{post.id}}"></button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <div class="comment-container">
         <div class="comment-write">
             <div class="comment-input">
-                <div class="write-user"></div>
-                <textarea class="comment-textarea" id="" rows="4"></textarea>
+                <div class="user-profile-container vcenter" style="width:10%;margin-right:10px">
+                    <a href="{% url 'profile_view' %}">
+                        <div class="user-profile-pic" style="background-image: url({{request.user.get_profile_image_url}});height:80px;width:80px"></div>
+                    </a>
+                </div>
+                <textarea class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..."></textarea>
             </div>
             <div class="comment-submit">
-                <button type="submit">ส่ง</button>
+                <form method="POST" id="comment_submit">
+                    {% csrf_token %}
+                    <button class="redorange" type="submit">ส่ง</button>
+                </form>
             </div>
         </div>
         <div class="comment-read">
@@ -30,29 +53,81 @@
             <div class="all-comment">
                 <!-- -------------------loop comment------------------ -->
                 <div class="comment">
-                    <div class="comment-user"></div>
-                    <div class="comment-content"></div>
+                    <div class="user-profile-container vcenter" style="width:10%;margin-right:10px">
+                        <a href="#link to comment's user profile">
+                            <div class="user-profile-pic" style="background-image: url('/statics/images/defaultprofilepic.svg');height:80px;width:80px"></div>
+                        </a>
+                    </div>
+                    <div class="comment-content">
+                        <div class="content blogfont">ตลกจุง</div>
+                        <div class="username-like">
+                            <div class="username">username : comment date</div>
+                            <div class="like">
+                                3&nbsp;<button type="submit" id="comment_like_btn" class="like-btn fa fa-heart-o"></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- ---------------------------------------------------- -->
             </div>
         </div>
     </div>
 </div>
-<!--this is post detail - {{post.title}}
-<div> POST_ID :{{post.id}} </div>
-<div> POST_TITLE{{post.title}} </div>
-<div> POST_VIEWS {{post.views}} </div>
-<div> POST_LIKES {{post.likes.count}} </div>
-<div> POST_CONTENT{{post.content}} </div>
-<div> POST_AUTHOR{{post.author}} </div>
-<div> LINK-TO-THIS-POST(ABSOLUTE_URL)=<a href="{{ post.get_absolute_url }}"> {{post.get_absolute_url}}</a> </div>
-<img src={{post.get_cover_image_url}}>
-<div> {{post.date_created|naturaltime}}</div> -->
-<!-- Like Button -->
-<!-- <form action="{% url 'post:like_view' post.pk %}" method="POST">
-    {% csrf_token %}
-    <button type="submit" name="post_id" value="{{post.id}}"> Like </button>
-</form> -->
 
-<!-- Like Status -->
-<!-- <div> Liked : {% like_status request post.pk%}</div> -->
+<!-- ------------javascript----------------- -->
+<script>
+    //remove spacebar
+    function removeSpace(text) {
+        return text.replace(/[ \n]/g, '');
+    }
+
+    //function count word
+    function countWord(val) {
+        var wom = val.match(/.+/g);
+        var len = 0;
+        if (wom) {
+            len = wom[0].length;
+        }
+        return len;
+    }
+    //---------------comment--------------------
+    var comment = document.getElementById("comment_input");
+
+    //ค่าเริ่มต้น
+    commentCount = countWord(comment.value);
+
+    //limit comment text
+    comment.addEventListener("input", function() {
+        countWord(comment.value)
+        comment.value = comment.value.substring(0, 999);
+    });
+
+    //like button 
+    var like = document.querySelector("#like_btn");
+    if ('{% like_status request post.pk%}' == 'True') {
+        like.classList.add('fa-heart'); //like
+    } else {
+        like.classList.add('fa-heart-o'); //not like
+    }
+
+    //comment like button 
+    /*var commentlike = document.querySelector("#comment_like_btn");
+    if ('{% like_status request post.pk%}' == 'True') {
+        commentlike.classList.add('fa-heart'); //like
+    } else {
+        commentlike.classList.add('fa-heart-o'); //not like
+    }*/
+
+    //----------------prevent comment submit---------------   
+    $('#comment_submit').submit(function(event) {
+        var text = removeSpace(comment.value);
+        if (text == '') {
+            console.log('false')
+            return false;
+        } else {
+            console.log('true')
+            return true;
+        }
+    });
+</script>
 {% endblock %}
