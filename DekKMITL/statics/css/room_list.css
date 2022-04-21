@@ -1,0 +1,45 @@
+/* ---------------------------------profile--------------------------------------- */
+
+
+/* container */
+
+.container {
+    max-width: 1000px;
+    min-height: 400px;
+    margin: auto;
+    background: #131313dc;
+    border-radius: 50px;
+    padding: 35px;
+}
+
+.title {
+    font-size: 27px;
+    border-bottom: 2px solid #fff;
+}
+
+.room-container {
+    text-align: center;
+    width: 125px;
+    padding: 5px;
+    margin: 3px;
+    border-radius: 15px;
+    transition: all .2s ease;
+}
+
+.all-room {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    /* grid-template-columns: repeat(7, 1fr); */
+    /* gap: 7px;
+    row-gap: 10px; */
+}
+
+.room-container img {
+    width: 70px;
+}
+
+.room-container:hover {
+    background-color: rgba(126, 126, 126, 0.26);
+}
