@@ -107,7 +107,8 @@
             <div class="blog-tag-container">
                 <div class="all-tag">
                     <textarea maxlength="50" rows="1" id="tag_input" class="tag-input" placeholder="เพิ่มแท็ก" autocomplete="off"></textarea>
-                    <input type="text" id="tag_list" class="tag-list">
+                    {% comment %} <input type="text" id="tag_list" name="tag_string" class="tag-list"> {% endcomment %}
+                    {% render_field form.tag_string type="text" id="tag_list" name="tag_string" class="tag-list" %}
                 </div>
             </div>
         </div>

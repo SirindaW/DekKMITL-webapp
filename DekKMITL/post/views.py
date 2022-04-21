@@ -34,6 +34,8 @@ def post_create_view(request):
             # TAGS
             ts = form.cleaned_data.get('tag_string').split(',')
             ts = list(set(ts))
+            ts.remove('')
+            print(ts)
             for tag in ts:
                 if Tag.objects.filter(title=tag).exists():
                     # Tag already existed
