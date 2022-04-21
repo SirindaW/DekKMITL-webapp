@@ -4,7 +4,7 @@
 /* container */
 
 .container {
-    max-width: 650px;
+    max-width: 600px;
     min-height: 720px;
     margin: auto;
     background: #282828;
@@ -64,27 +64,42 @@
     max-height: 500px;
 }
 
-.user {
-    padding: 15px;
+.follower-table {
+    width: 100%;
+}
+
+.follower-table tr {
+    display: flex;
+    justify-content: flex-start;
+    padding: 12px;
     border-radius: 10px;
     transition: all .15s ease;
 }
 
-.user:hover {
-    background-color: #E4D8D840;
-}
-
-.user-detail {
-    min-width: 85%;
-    justify-content: space-between;
-}
-
-.username {
-    font-weight: 500;
-    width: 300px;
+.user-name {
+    margin-left: 20px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+.user-name a {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.follower-table tr:hover {
+    background-color: #444444b9;
+}
+
+
+/* user not found */
+
+.user-not-found {
+    display: none;
+    padding: 10px;
+    font-size: 27px;
+    color: rgba(161, 161, 161, 0.582);
 }
 
 

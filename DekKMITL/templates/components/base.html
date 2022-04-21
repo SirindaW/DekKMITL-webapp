@@ -16,6 +16,7 @@
 <body>
     {% include 'components/navbar.html' %}
     <div class="mainbg">{% block content %} {% endblock %}</div> {% include 'components/footer.html' %}
+    <script src="{% static 'js/main.js'%}"></script>
 </body>
 <link rel="stylesheet" href="{%static '/css/media_query.css'%}">
 
