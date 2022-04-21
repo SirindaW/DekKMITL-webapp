@@ -1,5 +1,3 @@
-from distutils.command.build_scripts import first_line_re
-from random import choices
 from django import forms
 from .models import Post,Comment
 
