@@ -83,6 +83,8 @@ class Post(models.Model):
             return None
         return timeuntil(self.expire_date)
         
+    def get_cover_image_url(self):
+        return self.cover_image.url
 
     def __str__(self) -> str:
         return self.title

@@ -45,6 +45,7 @@
 <div> POST_CONTENT{{post.content}} </div>
 <div> POST_AUTHOR{{post.author}} </div>
 <div> LINK-TO-THIS-POST(ABSOLUTE_URL)=<a href="{{ post.get_absolute_url }}"> {{post.get_absolute_url}}</a> </div>
+<img src={{post.get_cover_image_url}}>
 <div> {{post.date_created|naturaltime}}</div> -->
 <!-- Like Button -->
 <!-- <form action="{% url 'post:like_view' post.pk %}" method="POST">

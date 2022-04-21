@@ -1,6 +1,6 @@
 {% extends 'components/base.html' %} {% load static %} {% block content %} {% load widget_tweaks %}
 <link rel="stylesheet" href="{%static '/css/create_post.css'%}">
-<form method="POST"> {% csrf_token %}
+<form method="POST" enctype="multipart/form-data""> {% csrf_token %}
     <div class="container">
         <div class="blog-header-container style-container">
             <div class="title">

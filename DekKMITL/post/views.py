@@ -9,7 +9,7 @@ from .forms import PostCreateForm, PostForm
 def post_create_view(request):
     form = PostCreateForm()
     if request.method == "POST":
-        form = PostCreateForm(request.POST) 
+        form = PostCreateForm(request.POST,request.FILES) 
         
         if form.is_valid():
             form.save(commit=False)
@@ -28,6 +28,11 @@ def post_create_view(request):
                 room = Room.objects.get(title='other')
             instance.room = room
             
+            # Cover Image
+            print(request.FILES.get('cover_image'))
+            if request.FILES.get('cover_image'):
+                instance.cover_image = request.FILES.get('cover_image')
+
             # Save to db
             instance.save()     
             
@@ -35,7 +40,7 @@ def post_create_view(request):
             ts = form.cleaned_data.get('tag_string').split(',')
             ts = set(ts).difference(set(['',' ']))
             ts = list(ts)
-            print(ts)
+            # print(ts)
             for tag in ts:
                 if Tag.objects.filter(title=tag).exists():
                     # Tag already existed
