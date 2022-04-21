@@ -28,7 +28,7 @@ class PostForm(forms.ModelForm):
 
 class PostCreateForm(forms.ModelForm):
 
-    tag_string = forms.CharField(widget=forms.TextInput())
+    tag_string = forms.CharField(widget=forms.TextInput(),required=False)
     class Meta:
         model = Post
         fields = ['title','content','tag_string','cover_image','is_expirable','expire_date']
