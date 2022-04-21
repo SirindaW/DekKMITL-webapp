@@ -83,7 +83,7 @@ def post_list_view(request):
 
 def post_detail_view(request,post_slug):
     post = get_object_or_404(Post,slug=post_slug)
-    liked = post.likes.filter(id=request.user.id).exists()
+    liked = post.liker.filter(id=request.user.id).exists()
     context = {
         'post':post
     } 
@@ -94,10 +94,10 @@ def post_detail_view(request,post_slug):
 
 def like_view(request,pk):
     post = get_object_or_404(Post,id=pk)
-    if post.likes.filter(id=request.user.id).exists():
-        post.likes.remove(request.user)
+    if post.liker.filter(id=request.user.id).exists():
+        post.liker.remove(request.user)
     else:
-        post.likes.add(request.user)
+        post.liker.add(request.user)
     return HttpResponseRedirect(reverse('post:details_view',args=[str(post.slug)]))
 
 def tag_view(request):
