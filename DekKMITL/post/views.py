@@ -32,7 +32,7 @@ def post_create_view(request):
                 room = room.first()
             else:
                 # selected room does not match any existed room
-                room = Room.objects.get(title='other')
+                room = Room.objects.get(title='room_other')
             instance.room = room
             
             # Cover Image
