@@ -2,9 +2,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse,reverse_lazy
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.utils.dateparse import parse_datetime
+from django.utils.timezone import make_aware
 
 from .models import Post, Room, Tag
-from .forms import PostCreateForm, PostForm
+from .forms import PostCreateForm
 
 def post_create_view(request):
     form = PostCreateForm()
@@ -29,9 +31,13 @@ def post_create_view(request):
             instance.room = room
             
             # Cover Image
-            print(request.FILES.get('cover_image'))
             if request.FILES.get('cover_image'):
                 instance.cover_image = request.FILES.get('cover_image')
+
+            # Expire date
+            if request.POST.get('expire_date'):
+                instance.expire_date = make_aware(parse_datetime(request.POST.get('expire_date')))
+                instance.is_expired = True
 
             # Save to db
             instance.save()     
