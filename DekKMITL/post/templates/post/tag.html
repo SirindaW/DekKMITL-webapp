@@ -2,4 +2,62 @@
 
 <!---------- Prompt Messages ----->
 {% block content %}
-<link rel="stylesheet" href="{%static '/css/tag.css'%}"> {% endblock %}
+<link rel="stylesheet" href="{%static '/css/follow_list.css'%}">
+<link rel="stylesheet" href="{%static '/css/tag.css'%}">
+
+<div class="container">
+    <div class="search-container follow-search vhcenter">
+        <img src="/statics/images/search.svg" style="width:30px;margin-left:6px">
+        <input type="text" id="search_input" onkeyup="search()" placeholder="ค้นหาแท็ก..." class="user-search tag-search">
+    </div>
+
+    <table id="tag_table" class="tag-table">
+        <!-- ------------search not found--------------- -->
+        <div class="search-not-found vhcenter" id="not_found">ไม่พบแท็ก</div>
+        <!-- ------------loop tag--------------- -->
+        <tr>
+            <td class="hashtag"><a href="#link to tag's post">#12345678901234567890123456789012345678901234567890</a></td>
+            <td class="post-count">100&nbsp;กระทู้</td>
+        </tr>
+        <!-- ------------------------------------ -->
+    </table>
+</div>
+
+<!-- javascript -->
+<script>
+    function displayCheck(id, show) {
+        notfound = document.getElementById(show);
+        table = document.getElementById(id);
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            if (tr[i].style.display == 'none') {
+                notfound.style.display = "flex";
+            } else {
+                notfound.style.display = "none";
+            }
+        }
+    }
+
+    function search() {
+        var input, filter, table, tr, td, i, txtValue;
+        notfound = document.getElementById("not_found");
+        input = document.getElementById("search_input");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("tag_table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+        displayCheck('tag_table', 'not_found');
+    }
+    displayCheck('tag_table', 'not_found');
+</script>
+{% endblock %}
