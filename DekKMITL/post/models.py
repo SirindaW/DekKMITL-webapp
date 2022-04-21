@@ -42,7 +42,7 @@ class Post(models.Model):
     content = models.TextField(max_length=4000)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     last_modified = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(Account,related_name='post_likes',null=True,blank=True)
+    liker = models.ManyToManyField(Account,related_name='post_liked',null=True,blank=True)
     views = models.PositiveIntegerField(null=True,blank=True,default=0)
     slug = models.SlugField(unique=True,max_length=300,blank=False)
     author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE,related_name='post')

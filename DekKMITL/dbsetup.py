@@ -1,7 +1,9 @@
 from post.models import Post, Tag, Room
+from account.models import Account
 posts = Post.objects.all()
 tags = Tag.objects.all()
 rooms = Room.objects.all()
+accounts = Account.objects.all()
 
 rooms_info = [
     {'title':'room_review','id':0},
@@ -26,3 +28,4 @@ if not rooms:
         new_room.save()
 
     rooms = Room.objects.all()
+

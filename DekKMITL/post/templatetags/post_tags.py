@@ -14,7 +14,7 @@ def total_posts():
 @register.simple_tag
 def like_status(request,pk,*args,**kwargs):
     post = get_object_or_404(Post,id=pk)
-    if post.likes.filter(id=request.user.id).exists():
+    if post.liker.filter(id=request.user.id).exists():
         status = True
     else:
         status = False
