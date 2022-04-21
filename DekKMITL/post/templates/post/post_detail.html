@@ -21,7 +21,7 @@
             <div class="post-room-like spc-btw">
                 <div class="post-room"><img src="{% static 'images/travel.png'%}" style="width:25px">&nbsp;&nbsp;ห้องเที่ยวกัน</div>
                 <div class="post-like">
-                    {{post.likes.count}}&nbsp;&nbsp;
+                    {{post.liker.count}}&nbsp;&nbsp;
                     <!-- Like Button -->
                     <form action="{{post.get_like_toggle_url}}" method="POST">
                         {% csrf_token %}
