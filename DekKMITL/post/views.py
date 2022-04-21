@@ -72,14 +72,13 @@ def post_create_view(request):
 
     return render(request,'post/create.html',context)
 
-def post_list_view(request):
-    posts = Post.objects.all()
-    
+def feed_page_view(request):
+    posts = Post.objects.active()
     context = {
         'posts':posts
     } 
-    
-    return render(request,'post/posts_list.html',context)
+    return render(request,'post/feed_page.html',context)
+
 
 def post_detail_view(request,post_slug):
     post = get_object_or_404(Post,slug=post_slug)
@@ -92,8 +91,8 @@ def post_detail_view(request,post_slug):
     post.save()
     return render(request,'post/post_detail.html',context)
 
-def like_view(request,pk):
-    post = get_object_or_404(Post,id=pk)
+def like_view(request,slug):
+    post = get_object_or_404(Post,slug=slug)
     if post.liker.filter(id=request.user.id).exists():
         post.liker.remove(request.user)
     else:

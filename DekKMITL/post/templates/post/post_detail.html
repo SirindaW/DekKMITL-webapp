@@ -23,7 +23,7 @@
                 <div class="post-like">
                     {{post.likes.count}}&nbsp;&nbsp;
                     <!-- Like Button -->
-                    <form action="{% url 'post:like_view' post.pk %}" method="POST">
+                    <form action="{{post.get_like_toggle_url}}" method="POST">
                         {% csrf_token %}
                         <button type="submit" name="post_id" id="like_btn" class="like-btn fa" value="{{post.id}}"></button>
                     </form>

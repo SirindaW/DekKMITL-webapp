@@ -1,23 +1,23 @@
-{% extends 'components/base.html' %}
+{% extends 'components/base.html' %} {% load humanize %}
 
 {% block content %}
 
 <!--   This is Posts page  -->
 
 
-{% for post in posts%}
+{% for post in posts %}
 ---------
     <div> POST_ID :{{post.id}} </div>
     <div> POST_TITLE : {{post.title}} </div>
     <div> POST_CONTENT : {{post.content}} </div>
     <div> POST_AUTHOR : {{post.author}} </div>
-    {% if post.slug %}
     <div> POST_SLUG : {{post.slug}} </div>
+    <div> POST_CREATED : {{post.date_created}} {{post.date_created|naturaltime}}</div>
     <div> <a style="text-decoration:underline;"href="{{ post.get_absolute_url }}">LINK(ABSOLUTE_URL)</a></div>
     
-    {% endif%}
-    {% comment %} <div><a href="{% url 'post_detail_view' post.slug %}"> {{post.slug}}</a> </div> {% endcomment %}
-    {% comment %} <div> LINK-TO-THIS-POST=<a href="{% url 'post:details_view' {{post.slug}} %}"> {{post.slug}}</a> </div> {% endcomment %}
+    
+    
+
 ---------
 {% endfor %}
 

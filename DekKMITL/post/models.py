@@ -86,6 +86,9 @@ class Post(models.Model):
     def get_cover_image_url(self):
         return self.cover_image.url
 
+    def get_like_toggle_url(self):
+        return reverse('post:like_view',kwargs={'slug':self.slug})
+
     def __str__(self) -> str:
         return self.title
 
