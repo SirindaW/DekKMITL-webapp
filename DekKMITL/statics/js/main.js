@@ -1,21 +1,25 @@
 //search not found display 
 function displayCheck(id, show) {
-    notfound = document.getElementById(show);
-    table = document.getElementById(id);
-    tr = table.getElementsByTagName("tr");
+    var notfound = document.getElementById(show);
+    var table = document.getElementById(id);
+    var tr = table.getElementsByTagName("tr");
+    var display = true;
     for (i = 0; i < tr.length; i++) {
-        if (tr[i].style.display == 'none') {
-            notfound.style.display = "flex";
-        } else {
-            notfound.style.display = "none";
+        if (tr[i].style.display == '') {
+            display = false;
         }
     }
+    if (display) {
+        notfound.style.display = "flex";
+    } else {
+        notfound.style.display = "none";
+    }
+
 }
 
 //search
 function search(notfoundID, inputID, tableID, checkRow) {
     var input, filter, table, tr, td, i, txtValue;
-    notfound = document.getElementById(notfoundID);
     input = document.getElementById(inputID);
     filter = input.value.toUpperCase();
     table = document.getElementById(tableID);
