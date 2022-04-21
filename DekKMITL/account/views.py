@@ -25,8 +25,10 @@ def profile_view(request,user_id=None,*args, **kwargs):
 
 def toggle_follow_view(request,user_id):
     user = get_object_or_404(Account,id=user_id)
+    print("account",user)
     request.user.toggle_follow(user)
-    print("TOGGLE")
+    print(request.user.followings())
+    
     return redirect(user.get_absolute_url())
     
 def logout_view(request, *args, **kwargs):
@@ -110,10 +112,16 @@ def profile_edit_password_view(request):
     context = {}
     return render(request,'account/password_edit.html',context)
     
-def follower_list_view(request):
-    context = {}
+def follower_list_view(request,user_id):
+    instance = get_object_or_404(Account,pk=user_id)
+    context = {
+        'instance':instance
+    }
     return render(request,'account/follower_list.html',context)
 
-def following_list_view(request):
-    context = {}
+def following_list_view(request,user_id):
+    instance = get_object_or_404(Account,pk=user_id)
+    context = {
+        'instance':instance,
+    }
     return render(request,'account/following_list.html',context)

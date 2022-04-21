@@ -45,10 +45,10 @@
 
     <!-- 4. user follower and following -->
     <div class="profile-follow profile-margin">
-        <a href="{% url 'account:following_list_view' %}">
+        <a href="{{instance.get_following_list_url}}">
             <div class="profile-follow-text">{% total_followings instance %} กำลังติดตาม</div>
         </a>
-        <a href="{% url 'account:follower_list_view' %}">
+        <a href="{{instance.get_follower_list_url}}">
             <div class="profile-follow-text">{% total_followers instance %} ผู้ติดตาม</div>
         </a>
     </div>
@@ -70,11 +70,15 @@
 
     <!-- 6. user blog -->
 
+    {% if request.user.pk == instance.pk %}
+    <!-- Yourself -->
 
-    {% if not instance.post.all %}
+    {% if not instance.get_all_post %}
+
     <!-- ******************blog not found*****************8 -->
     <div class="notfound-blog no-thumbnail-blog vhcenter profile-margin" style="font-size:35px;margin-top:25px">ยังไม่มีกระทู้</div>
-    {% endif %} {% for post in instance|post_list %}
+    {% endif %} 
+    {% for post in instance.get_all_post %}
 
     <div class="profile-margin" style="display:block;margin-top:25px">
         <!-- ********************loop blog*********************** -->
@@ -106,15 +110,55 @@
                 </div>
             </div>
         </div>
-        <!-- ************************************************* -->
-
     </div>
+    {% endfor %}
+    <!-- ************************************************* -->
+    {% else %}
 
+    <!-- Others view -->
 
+    {% if not instance.get_active_post %}
+
+    <!-- ******************blog not found*****************8 -->
+    <div class="notfound-blog no-thumbnail-blog vhcenter profile-margin" style="font-size:35px;margin-top:25px">ยังไม่มีกระทู้</div>
+    {% endif %} 
+    {% for post in instance.get_active_post %}
+
+    <div class="profile-margin" style="display:block;margin-top:25px">
+        <!-- ********************loop blog*********************** -->
+        <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%">
+            <div class="user-profile-container vhcenter" style="width:15%">
+                <a href="{{post.author.get_absolute_url}}">
+                    <div class="user-profile-pic" style="background-image: url({{post.author.profile_image.url}})"></div>
+                </a>
+            </div>
+            <div class="blog-detail" style="width:85%;margin-right:20px">
+                <div class="blog-name wrap-name" style="max-width:100%">
+
+                    <a href="{{post.get_absolute_url}}" class="blogfont">{{post.title}}</a>
+
+                </div>
+                <div class="blog-detail-2">
+                    <div class="blog-username-date"><a href="{{post.get_absolute_url}}">
+                        {{post.author.first_name|title}} : 
+                        {{post.date_created|naturaltime}} 
+                        {% if post|is_expired %}
+                         กระทู้หมดอายุแล้ว
+                         {% endif %}
+                        
+                        </a></div>
+                    <div class="blog-like-comment vhcenter">
+                        <img src="{% static 'images/like.png'%}" style="width:15px">{{post.likes.count}} &nbsp;
+                        <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endfor %}
 
+    <!-- ************************************************* -->
 
+    {% endif %}
 
-
-</div>
 {% endblock %}

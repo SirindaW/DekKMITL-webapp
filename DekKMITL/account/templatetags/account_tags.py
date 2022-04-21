@@ -17,6 +17,6 @@ def total_followings(user):
 def is_following(request, user):
     return request.user.is_following(user)
 
-@register.filter
-def toggle_follow_url(request, user):
-    return request.user.is_following(user)
+# @register.filter
+# def toggle_follow_url(request, user):
+#     return request.user.is_following(user)

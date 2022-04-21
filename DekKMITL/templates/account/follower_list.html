@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="{%static '/css/follow_list.css'%}">
 
 <div class="container">
-    <div class="follow-count">200&nbsp;กำลังติดตาม</div>
-    <a href="#link back to profile">
+    <div class="follow-count">{{instance.total_followers}}&nbsp;ผู้ติดตาม</div>
+    <a href="{{instance.get_absolute_url}}">
         <div class="back-to-profile">◂ กลับสู่หน้าโปรไฟล์ </div>
     </a>
     <div class="follow-search vhcenter">
@@ -14,25 +14,34 @@
     </div>
     <div class="user-info">
         <!--******************** no follower ********************-->
-        <!-- <div class="user-not-found">ไม่พบผู้ใช้</div> -->
+        {% if not instance.followers %}
+        <div class="user-not-found">ไม่พบผู้ใช้</div>
+        {% else %}
         <!-- ******************loop user********************* -->
-        <a href="#link to user profile">
+        {% for user in instance.followers %}
+        <a href="{{user.get_absolute_url}}">
             <div class="user vcenter" style="justify-content:space-between">
                 <div class="user-profile-container vcenter" style="width:100%">
-                    <div class="user-profile-pic" style="background-image: url('/statics/images/defaultprofilepic.svg')"></div>
+                    <div class="user-profile-pic" style="background-image: url({{user.get_profile_image_url}})"></div>
                 </div>
                 <div class="user-detail vcenter">
-                    <div class="username">Doremon angangang</div>
+                    <div class="username">{{user.first_name}} {{user.last_name}}</div>
                     <div class="button">
-                        {% if request|is_following:instance %}
-                        <div class="unfollow-button vhcenter resize-btn"><a href="{{ instance.get_toggle_follow_url }}" class="unfollow-button-link" id="unfollow_btn" onmouseover="changeText('เลิกติดตาม')" onmouseout="changeBack('ติดตามอยู่')">ติดตามอยู่</a></div>
+                        {% if user.pk == request.user.pk%}
+                        <!-- Yourself-->
                         {% else %}
-                        <div class="follow-button vhcenter resize-btn"><a href="{{ instance.get_toggle_follow_url}}" class="follow-button-link">ติดตาม</a></div>
+                            {% if request|is_following:user %}
+                            <div class="unfollow-button vhcenter resize-btn"><a href="{{ instance.get_toggle_follow_url }}" class="unfollow-button-link" id="unfollow_btn" onmouseover="changeText('เลิกติดตาม')" onmouseout="changeBack('ติดตามอยู่')">ติดตามอยู่</a></div>
+                            {% else %}
+                            <div class="follow-button vhcenter resize-btn"><a href="{{ instance.get_toggle_follow_url}}" class="follow-button-link">ติดตาม</a></div>
+                            {% endif %}
                         {% endif %}
                     </div>
                 </div>
             </div>
         </a>
+        {% endfor %}
+        {% endif %}
         <!-- ***************************************************** -->
     </div>
 

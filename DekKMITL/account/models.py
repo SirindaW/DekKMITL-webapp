@@ -103,6 +103,12 @@ class Account(AbstractBaseUser):
     def get_cover_image_url(self):
         return self.cover_image.url
 
+    def get_follower_list_url(self):
+        return reverse('account:follower_list_view',kwargs={'user_id':self.pk})
+    
+    def get_following_list_url(self):
+        return reverse('account:following_list_view',kwargs={'user_id':self.pk})
+
     def followings(self):
         table = AccountFollowing.objects.filter(fp=self) 
         user_ids = table.values_list('sp',flat=True)
@@ -114,6 +120,12 @@ class Account(AbstractBaseUser):
         user_ids = table.values_list('fp',flat=True)
         followers_ = Account.objects.filter(pk__in=user_ids)
         return followers_
+
+    def total_followings(self):
+        return self.followings().count()
+
+    def total_followers(self):
+        return self.followers().count()
 
     def is_following(self,user):
         return user in self.followings() 
@@ -151,6 +163,14 @@ class Account(AbstractBaseUser):
 
     def get_toggle_follow_url(self):
         return reverse('account:toggle_follow_view',kwargs={'user_id':self.id})
+
+    def get_all_post(self):
+        from post.models import Post
+        return Post.objects.filter(author=self).order_by('-date_created')
+
+    def get_active_post(self):
+        from post.models import Post
+        return Post.objects.active().filter(author=self).order_by('-date_created')
 
     def __str__(self) -> str:
         return str(self.first_name) + " " +str(self.last_name)
