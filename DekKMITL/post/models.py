@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib import admin
 from django.urls import reverse
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save,post_delete
 from DekKMITL.utils import unique_slug_generator
 from datetime import timezone,datetime,timedelta
 from django.utils.timesince import timeuntil
@@ -53,8 +53,8 @@ class Post(models.Model):
     is_expirable = models.BooleanField(null=True,blank=True,default=False)
 
     ### Tag ###
-    # to get all tags in a particular post use post.tag.all()
-    # to get all posts in a particular tag use Post.objects.filter(tag__title='tagname')
+    # to get all tags from a particular post use post.tag.all()
+    # to get all posts from a particular tag use Post.objects.filter(tag__title='tagname')
     
     # active_posts = PostActiveManager()
     objects = PostManager()
@@ -103,7 +103,11 @@ class Room(models.Model):
 
 class Tag(models.Model):
     title = models.CharField(max_length=200)
-    # related_name = ['Tag.post']
+    # related_name = ['tag.posts']
+
+    def get_post(self):
+        posts = Post.objects.filter(tag__title=self.title)
+        return posts
 
     def __str__(self) -> str:
         return self.title
@@ -124,4 +128,12 @@ def slug_generator(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
 
+def check_remaining_post_in_tag(sender,instance,*args,**kwargs):
+    # Delete the tag that does not have any post using.
+    for tag in Tag.objects.all():
+        if not Post.objects.filter(tag=tag).exists():
+            tag.delete()
+    
+
 pre_save.connect(slug_generator,sender=Post)
+post_delete.connect(check_remaining_post_in_tag,sender=Post)

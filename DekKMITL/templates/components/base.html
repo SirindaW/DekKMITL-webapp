@@ -15,7 +15,14 @@
 
 <body>
     {% include 'components/navbar.html' %}
-    <div class="mainbg">{% block content %} {% endblock %}</div> {% include 'components/footer.html' %}
+    <div class="mainbg">
+        
+        {% block content %} 
+        {% endblock %}
+    
+    </div> 
+    
+    {% include 'components/footer.html' %}
 </body>
 <link rel="stylesheet" href="{%static '/css/media_query.css'%}">
 

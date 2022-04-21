@@ -15,10 +15,12 @@
         <!-- ------------search not found--------------- -->
         <div class="search-not-found vhcenter" id="not_found">ไม่พบแท็ก</div>
         <!-- ------------loop tag--------------- -->
+        {% for tag in tags %}
         <tr>
-            <td class="hashtag"><a href="#link to tag's post">#12345678901234567890123456789012345678901234567890</a></td>
-            <td class="post-count">100&nbsp;กระทู้</td>
+            <td class="hashtag"><a href="#link to tag's post">#{{tag.title}}</a></td>
+            <td class="post-count">{{tag.get_post.count}}&nbsp;กระทู้</td>
         </tr>
+        {% endfor %}
         <!-- ------------------------------------ -->
     </table>
 </div>
