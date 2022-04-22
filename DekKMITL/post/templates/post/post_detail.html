@@ -5,13 +5,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="container">
+
+    <!-- 1. เนื้อหากระทู้นั้น ๆ และรูปโปรเจ้าของกระทู้นั้น ๆ -->
     <div class="post-container vhcenter">
+        <!-- 1.1 รูปโปรเจ้าของกระทู้ -->
         <div class="owner-pic user-profile-container vcenter" style="width:15%">
             <a href="#link to blog's user profile">
                 <div class="user-profile-pic" style="background-image: url({{post.author.get_profile_image_url}});height:100px;width:100px"></div>
             </a>
         </div>
+        <!-- 1.2 เนื้อหากระทู้  -->
         <div class="owner-post">
+            <!-- 1.2.1 หัวข้อกระทู้ และปุ่มแก้ไข -->
             <div class="title-edit-container spc-btw">
                 <div class="post-header blogfont">{{post.title}}</div>
                 <div class="edit-post-dropdown">
@@ -22,11 +27,14 @@
                     </div>
                 </div>
             </div>
+            <!-- 1.2.2 แท็ก ชื่อเจ้าของกระทู้ และ วันที่สร้างกระทู้ -->
             <div class="post-detail spc-btw">
                 <div class="post-tag blogfont">#blabla #bear</div>
                 <div class="post-user-date">{{post.author}} : {{post.date_created|naturaltime}}</div>
             </div>
+            <!-- 1.2.3 เนื้อหากระทู้ -->
             <div class="post-body blogfont">{{post.content}}</div>
+            <!-- 1.2.4 ชื่อห้อง และปุ่มไลค์ -->
             <div class="post-room-like spc-btw">
                 <div class="post-room"><img src="{% static 'images/travel.png'%}" style="width:25px">&nbsp;&nbsp;ห้องเที่ยวกัน</div>
                 <div class="post-like">
@@ -40,7 +48,10 @@
             </div>
         </div>
     </div>
+
+    <!-- 2. comment -->
     <div class="comment-container">
+        <!-- 2.1 ส่วนเขียน comment -->
         <div class="comment-write">
             <div class="comment-input">
                 <div class="user-profile-container vcenter" style="width:10%;margin-right:10px">
@@ -57,6 +68,7 @@
                 </form>
             </div>
         </div>
+        <!-- 2.2 ส่วนความคิดเห็นคนอื่น -->
         <div class="comment-read">
             <div class="comment-count">x ความคิดเห็น</div>
             <div class="all-comment">
