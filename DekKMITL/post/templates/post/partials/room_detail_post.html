@@ -1,0 +1,32 @@
+{% load static %}
+{% load humanize %}
+{% load post_tags%}
+{% for post in posts %} 
+<a href="{{ post.get_absolute_url }}">
+  <div class="post-container">
+    <div class="user-profile-container vcenter" style="width: 15%">
+      <a href="{{post.author.get_absolute_url}}">
+        <div
+          class="user-profile-pic"
+          style="
+            background-image: url('/statics/images/defaultprofilepic.svg');
+            height: 60px;
+            width: 60px;
+          "
+        ></div>
+      </a>
+    </div>
+    <div class="post-content">
+      <div class="post-title">{{post.title}}</div>
+      <div class="post-detail">
+        {{post.author}} : {{post.date_created|naturaltime}}
+      </div>
+      <div class="post-body">{{post.content}}</div>
+      <div class="like-comment-count">
+        <img src="{% static 'images/like.png'%}" style="width: 15px" />{{post.liker.count}} &nbsp;
+        <img src="{% static 'images/comment.png'%}" style="width: 15px" />2
+      </div>
+    </div>
+  </div>
+</a>
+{% endfor %}

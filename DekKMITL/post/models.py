@@ -101,6 +101,12 @@ class Room(models.Model):
     room_id = models.IntegerField(default=0,unique=True)
     # related_name = ['Room.post']
 
+    def get_hx_latest_post(self):
+        return reverse('post:hx_room_detail',kwargs={'room_name':self.title,'status':'latest'})
+
+    def get_hx_temp_post(self):
+        return reverse('post:hx_room_detail',kwargs={'room_name':self.title,'status':'temp'})
+
     def __str__(self) -> str:
         return self.title
 

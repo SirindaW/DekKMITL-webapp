@@ -8,6 +8,27 @@ from django.utils.timezone import make_aware
 from .models import Post, Room, Tag
 from .forms import PostCreateForm
 
+
+def hx_room_detail(request,room_name,status):
+    if status == 'latest':
+        posts = Post.objects.active().filter(room__title=room_name).order_by('-date_created')
+    if status == 'temp':
+        posts = Post.objects.active().filter(room__title=room_name,is_expirable=True).order_by('-date_created')
+    context = {
+    'posts':posts,
+    }
+    template = "post/partials/room_detail_post.html" 
+    return render(request,template,context)
+
+def room_detail_view(request,room_name):
+    posts = Post.objects.active().filter(room__title=room_name).order_by('-date_created')
+    room = get_object_or_404(Room,title=room_name)
+    context = {
+        'posts':posts,
+        'room':room,
+    }
+    return render(request,'post/feed_page.html',context)
+
 def room_list_view(request):
     context = {}
     template = "post/room_list.html"

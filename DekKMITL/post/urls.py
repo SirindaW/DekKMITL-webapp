@@ -7,6 +7,8 @@ urlpatterns = [
     path('create/', views.post_create_view,name='create_view'),
     path('feed-page/',views.feed_page_view,name='feed_page_view'),
     path('room/',views.room_list_view,name='room_list_view'),
+    path('room/<str:room_name>',views.room_detail_view,name='room_detail_view'),
+    path('room/hx/<str:room_name>/<str:status>',views.hx_room_detail,name='hx_room_detail'),
     path('like/<slug:slug>',views.like_view,name='like_view'),
     path('tag/',views.tag_view,name='tag_view')
 ]
