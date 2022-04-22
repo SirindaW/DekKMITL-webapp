@@ -13,12 +13,13 @@
         <input type="text" id="following_search" onkeyup="search('following_not_found','following_search','following_table',1)" placeholder="ค้นหา" class="user-search">
     </div>
     <div class="user-info">
+        <!-- ------------user not found--------------- -->
+        <div class="user-not-found vhcenter" id="following_not_found">ไม่พบผู้ใช้</div>
+
         <table id="following_table" class="follower-table">
-            <!-- ------------user not found--------------- -->
-            <div class="user-not-found vhcenter" id="following_not_found">ไม่พบผู้ใช้</div>
             <!-- ******************loop user********************* -->
             {% for user in instance.followings %}
-            <tr>
+            <tr class="following_tr">
                 <td class="user-pic">
                     <a href="{{user.get_absolute_url}}">
                         <div class="user-profile-pic" style="background-image: url({{user.get_profile_image_url}})"></div>

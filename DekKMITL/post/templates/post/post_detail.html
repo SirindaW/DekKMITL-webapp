@@ -12,7 +12,16 @@
             </a>
         </div>
         <div class="owner-post">
-            <div class="post-header blogfont">{{post.title}}</div>
+            <div class="title-edit-container spc-btw">
+                <div class="post-header blogfont">{{post.title}}</div>
+                <div class="edit-post-dropdown">
+                    <div class="edit-post-dropdown-btn" onclick="showEdit()">● ● ●</div>
+                    <div class="edit-post-dropdown-content" id="edit_post_content">
+                        <a href="#">แก้ไข</a>
+                        <a href="#">ลบ</a>
+                    </div>
+                </div>
+            </div>
             <div class="post-detail spc-btw">
                 <div class="post-tag blogfont">#blabla #bear</div>
                 <div class="post-user-date">{{post.author}} : {{post.date_created|naturaltime}}</div>

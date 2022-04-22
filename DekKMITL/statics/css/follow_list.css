@@ -93,19 +93,10 @@
 }
 
 
-/* user not found */
-
-.user-not-found {
-    display: none;
-    padding: 10px;
-    font-size: 27px;
-    color: rgba(161, 161, 161, 0.582);
-}
-
-
 /* user not found if no user follow */
 
 .user-not-found {
+    display: none;
     font-size: 30px;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.507);

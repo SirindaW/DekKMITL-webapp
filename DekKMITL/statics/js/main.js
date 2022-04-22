@@ -37,7 +37,3 @@ function search(notfoundID, inputID, tableID, checkRow) {
     }
     displayCheck(tableID, notfoundID);
 }
-
-// displayCheck('tag_table', 'not_found');
-// displayCheck('follower_table', 'user_not_found');
-// displayCheck('following_table', 'following_not_found');
