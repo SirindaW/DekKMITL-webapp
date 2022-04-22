@@ -1,0 +1,16 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block site_title %}
+{{tag.title}}
+{% endblock %}
+
+{% block content %}
+
+
+<!-- Loop posts -->
+{% for post in posts %}
+{{post.title}}
+{% endfor %}
+<!-- Endloop -->
+
+{% endblock %}

@@ -118,13 +118,16 @@ class Room(models.Model):
         return self.title
 
 class Tag(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200,unique=True)
     # related_name = ['tag.posts']
 
     def get_post(self):
         posts = Post.objects.filter(tag__title=self.title)
         return posts
 
+    def get_absolute_url(self):
+        return reverse('post:tag_detail_view', kwargs={"tag": self.title})
+    
     def __str__(self) -> str:
         return self.title
         

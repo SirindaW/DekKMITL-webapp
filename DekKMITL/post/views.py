@@ -9,6 +9,7 @@ from .models import Post, Room, Tag
 from .forms import PostCreateForm
 
 
+
 def hx_room_detail(request,room_name,status):
     if status == 'latest':
         posts = Post.objects.active().filter(room__title=room_name).order_by('-date_created')
@@ -128,3 +129,11 @@ def tag_view(request):
     }
     return render(request,'post/tag.html',context)
     
+def tag_detail_view(request,tag):
+    tag = get_object_or_404(Tag,title=tag)
+    posts_in_tag = Post.objects.filter(tag__title=tag.title)
+    context = {
+        'tag':tag,
+        'posts':posts_in_tag,
+    }
+    return render(request,'post/tag_detail.html',context)

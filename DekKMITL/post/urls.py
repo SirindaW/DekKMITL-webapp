@@ -10,5 +10,6 @@ urlpatterns = [
     path('room/<str:room_name>',views.room_detail_view,name='room_detail_view'),
     path('room/hx/<str:room_name>/<str:status>',views.hx_room_detail,name='hx_room_detail'),
     path('like/<slug:slug>',views.like_view,name='like_view'),
-    path('tag/',views.tag_view,name='tag_view')
+    path('tag/',views.tag_view,name='tag_view'),
+    path('tag/<str:tag>',views.tag_detail_view,name='tag_detail_view'),
 ]
