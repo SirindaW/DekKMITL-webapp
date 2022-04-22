@@ -3,7 +3,16 @@
 <div class="container">
     <div class="title">เลือกห้อง</div>
     <div class="all-room">
-        <a href="#">
+        
+        {% for room in rooms %}
+        <a href="{{room.get_absolute_url}}">
+            <div class="room-container">
+                <img src="/statics/images/review.png"><br>{{room.title}}
+            </div>
+        </a>
+        {% endfor %}
+
+        {% comment %} <a href="">
             <div class="room-container">
                 <img src="/statics/images/review.png"><br>รีวิว
             </div>
@@ -84,7 +93,7 @@
             <div class="room-container">
                 <img src="/statics/images/other.png"><br>อื่น ๆ
             </div>
-        </a>
+        </a> {% endcomment %}
     </div>
 
 </div>

@@ -107,6 +107,10 @@ class Room(models.Model):
     def get_hx_temp_post(self):
         return reverse('post:hx_room_detail',kwargs={'room_name':self.title,'status':'temp'})
 
+    def get_absolute_url(self):
+        return reverse("post:room_detail_view", kwargs={"room_name": self.title})
+    
+
     def __str__(self) -> str:
         return self.title
 

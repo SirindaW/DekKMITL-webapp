@@ -21,16 +21,17 @@ def hx_room_detail(request,room_name,status):
     return render(request,template,context)
 
 def room_detail_view(request,room_name):
-    posts = Post.objects.active().filter(room__title=room_name).order_by('-date_created')
     room = get_object_or_404(Room,title=room_name)
     context = {
-        'posts':posts,
         'room':room,
     }
     return render(request,'post/feed_page.html',context)
 
 def room_list_view(request):
-    context = {}
+    rooms = Room.objects.all()
+    context = {
+        'rooms':rooms,
+    }
     template = "post/room_list.html"
     return render(request,template,context)
 
