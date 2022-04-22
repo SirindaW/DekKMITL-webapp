@@ -1,7 +1,39 @@
 {% extends 'components/base.html' %} {% load humanize %} {% load static %}{% block content %}
 
-<link rel="stylesheet" href="{%static '/css/feed_page.css'%}"> {% for post in posts %}
+<link rel="stylesheet" href="{%static '/css/home.css'%}">
+<link rel="stylesheet" href="{%static '/css/feed_page.css'%}">
 
+<div class="container">
+    <div class="filter">
+        <div class="latest">ล่าสุด</div>
+        <div class="temp">ชั่วคราว</div>
+    </div>
+    <div class="all-post">
+        <!-- ---------loop post----------- -->
+        {% for post in posts %}
+        <a href="{{ post.get_absolute_url }}">
+            <div class="post-container">
+                <div class="user-profile-container vcenter" style="width:15%">
+                    <a href="#link to blog's user profile">
+                        <div class="user-profile-pic" style="background-image: url('/statics/images/defaultprofilepic.svg');height:60px;width:60px"></div>
+                    </a>
+                </div>
+                <div class="post-content">
+                    <div class="post-title">{{post.title}}</div>
+                    <div class="post-detail">{{post.author}} : {{post.date_created|naturaltime}}</div>
+                    <div class="post-body">{{post.content}}</div>
+                    <div class="like-comment-count">
+                        <img src="{% static 'images/like.png'%}" style="width:15px">3 &nbsp;
+                        <img src="{% static 'images/comment.png'%}" style="width:15px">2
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+        <!-- ----------------------------- -->
+    </div>
+</div>
+<!-- 
 <div> POST_ID :{{post.id}} </div>
 <div> POST_TITLE : {{post.title}} </div>
 <div> POST_CONTENT : {{post.content}} </div>
@@ -9,5 +41,7 @@
 <div> POST_SLUG : {{post.slug}} </div>
 <div> POST_CREATED : {{post.date_created}} {{post.date_created|naturaltime}}</div>
 <div> <a style="text-decoration:underline;" href="{{ post.get_absolute_url }}">LINK(ABSOLUTE_URL)</a></div>
+  -->
 
-{% endfor %} {% endblock %}
+
+{% endblock %}
