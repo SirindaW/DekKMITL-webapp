@@ -1,10 +1,7 @@
-{% extends 'components/base.html' %} {% load humanize %} {% block content %}
+{% extends 'components/base.html' %} {% load humanize %} {% load static %}{% block content %}
 
-<link rel="stylesheet" href="{%static '/css/feed_page.css'%}">
-<!--   This is Posts page  -->
+<link rel="stylesheet" href="{%static '/css/feed_page.css'%}"> {% for post in posts %}
 
-
-{% for post in posts %} ---------
 <div> POST_ID :{{post.id}} </div>
 <div> POST_TITLE : {{post.title}} </div>
 <div> POST_CONTENT : {{post.content}} </div>
@@ -13,7 +10,4 @@
 <div> POST_CREATED : {{post.date_created}} {{post.date_created|naturaltime}}</div>
 <div> <a style="text-decoration:underline;" href="{{ post.get_absolute_url }}">LINK(ABSOLUTE_URL)</a></div>
 
-
-
-
---------- {% endfor %} {% endblock %}
+{% endfor %} {% endblock %}
