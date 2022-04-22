@@ -77,8 +77,7 @@
 
     <!-- ******************blog not found*****************8 -->
     <div class="notfound-blog no-thumbnail-blog vhcenter profile-margin" style="font-size:35px;margin-top:25px">ยังไม่มีกระทู้</div>
-    {% endif %} 
-    {% for post in instance.get_all_post %}
+    {% endif %} {% for post in instance.get_all_post %}
 
     <div class="profile-margin" style="display:block;margin-top:25px">
         <!-- ********************loop blog*********************** -->
@@ -104,7 +103,7 @@
                         
                         </a></div>
                     <div class="blog-like-comment vhcenter">
-                        <img src="{% static 'images/like.png'%}" style="width:15px">{{post.likes.count}} &nbsp;
+                        <img src="{% static 'images/like.png'%}" style="width:15px">{{post.liker.count}} &nbsp;
                         <img src="{% static 'images/comment.png'%}" style="width:15px">50
                     </div>
                 </div>
@@ -121,8 +120,7 @@
 
     <!-- ******************blog not found*****************8 -->
     <div class="notfound-blog no-thumbnail-blog vhcenter profile-margin" style="font-size:35px;margin-top:25px">ยังไม่มีกระทู้</div>
-    {% endif %} 
-    {% for post in instance.get_active_post %}
+    {% endif %} {% for post in instance.get_active_post %}
 
     <div class="profile-margin" style="display:block;margin-top:25px">
         <!-- ********************loop blog*********************** -->
@@ -148,7 +146,7 @@
                         
                         </a></div>
                     <div class="blog-like-comment vhcenter">
-                        <img src="{% static 'images/like.png'%}" style="width:15px">{{post.likes.count}} &nbsp;
+                        <img src="{% static 'images/like.png'%}" style="width:15px">{{post.liker.count}} &nbsp;
                         <img src="{% static 'images/comment.png'%}" style="width:15px">50
                     </div>
                 </div>
@@ -160,7 +158,7 @@
     <!-- ************************************************* -->
 
     {% endif %}
-    </div>
+</div>
 
 <script src="{% static 'js/htmx.js' %}" defer></script>
 
