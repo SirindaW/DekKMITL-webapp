@@ -111,13 +111,6 @@
     .tempblog {
         display: block;
     }
-    .all-poproom {
-        display: grid;
-        justify-content: center;
-        grid-template-columns: repeat(5, 1fr);
-        padding: 25px;
-        gap: 15px;
-    }
     .edublog {
         display: block;
     }
@@ -243,13 +236,6 @@
     }
     .tempblog {
         display: block;
-    }
-    .all-poproom {
-        display: grid;
-        justify-content: center;
-        grid-template-columns: repeat(3, 1fr);
-        padding: 25px;
-        gap: 15px;
     }
     .edublog {
         display: block;
@@ -395,13 +381,6 @@
     }
     .tempblog {
         display: block;
-    }
-    .all-poproom {
-        display: grid;
-        justify-content: center;
-        grid-template-columns: repeat(3, 1fr);
-        padding: 25px;
-        gap: 15px;
     }
     .edublog {
         display: block;
