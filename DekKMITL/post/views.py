@@ -87,9 +87,12 @@ def post_create_view(request):
             print("FORM IS NOT VALID")
 
         return redirect(reverse('post:details_view',kwargs={'post_slug':instance.slug}))
-        
+    
+    tag_list_string = ",".join(str(tag.title) for tag in Tag.objects.all())
+    
     context = {
         'form':form,
+        'tag_list_string':tag_list_string,
     }
 
     return render(request,'post/create.html',context)

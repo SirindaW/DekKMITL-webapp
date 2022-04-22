@@ -187,6 +187,40 @@
     display: none;
 }
 
+.autocomplete-items {
+    z-index: 90;
+    max-height: 185px;
+    overflow: auto;
+    margin: 5px;
+}
+
+.autocomplete-items div {
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Bai Jamjuree', sans-serif;
+    background-color: rgb(39, 39, 39);
+    width: 730px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all .2s ease;
+}
+
+
+/*when hovering an item:*/
+
+.autocomplete-items div:hover {
+    background-color: rgb(68, 68, 68);
+}
+
+
+/*when navigating through the items using the arrow keys:*/
+
+.autocomplete-active {
+    background-color: rgb(68, 68, 68) !important;
+}
+
 
 /* add cover */
 
