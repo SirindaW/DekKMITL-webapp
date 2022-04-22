@@ -1,4 +1,4 @@
-{% extends 'components/base.html' %} {% load static%} {% block site_title%} Home {% endblock %}
+{% extends 'components/base.html' %} {% load static%} {% block site_title%} Tag {% endblock %}
 
 <!---------- Prompt Messages ----->
 {% block content %}
@@ -20,7 +20,7 @@
         <!-- ------------loop tag--------------- -->
         {% for tag in tags %}
         <tr id="tag_tr">
-            <td class="hashtag"><a href="#link to tag's post">#{{tag.title}}</a></td>
+            <td class="hashtag"><a href="{{tag.get_absolute_url}}">#{{tag.title}}</a></td>
             <td class="post-count">{{tag.get_post.count}}&nbsp;กระทู้</td>
         </tr>
         {% endfor %}
