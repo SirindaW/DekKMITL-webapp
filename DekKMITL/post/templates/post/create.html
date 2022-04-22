@@ -1,157 +1,153 @@
 {% extends 'components/base.html' %} {% load static %} {% block content %} {% load widget_tweaks %}
 <link rel="stylesheet" href="{%static '/css/create_post.css'%}">
-<form method="POST" enctype="multipart/form-data" "> {% csrf_token %}
-    <div class="container ">
+<form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="container">
 
         <!-- 1. หัวข้อกระทู้ -->
-        <div class="blog-header-container style-container ">
-            <div class="title ">
-                <div class="title-text ">หัวข้อกระทู้</div>
-                <div id="header_count " class="count-text "></div>
+        <div class="blog-header-container style-container">
+            <div class="title">
+                <div class="title-text">หัวข้อกระทู้</div>
+                <div id="header_count" class="count-text"></div>
             </div>
-            <div class="blog-header ">
-                {% comment %} <input type="text " id="header_text " class="header-input blogfont " autocomplete="off " placeholder="หัวข้อกระทู้ " required> {% endcomment %}
-                {% render_field form.title type="text " id="header_text " class="header-input blogfont " autocomplete="off " placeholder="หัวข้อกระทู้ " required=" " %}
+            <div class="blog-header">
+                {% render_field form.title type="text" id="header_text" class="header-input blogfont" autocomplete="off" placeholder="หัวข้อกระทู้" required="" %}
             </div>
         </div>
 
         <!-- 2. เนื้อหากระทู้ -->
-        <div class="blog-body-container style-container ">
-            <div class="title ">
-                <div class="title-text ">เนื้อหากระทู้</div>
-                <div id="body_count " class="count-text "></div>
+        <div class="blog-body-container style-container">
+            <div class="title">
+                <div class="title-text">เนื้อหากระทู้</div>
+                <div id="body_count" class="count-text"></div>
             </div>
-            <div class="blog-body ">
-                {% comment %} <textarea id="body_text " class="body-input blogfont " rows="10 " placeholder="เนื้อหากระทู้ " required></textarea> {% endcomment %}
-                {% render_field form.content id="body_text " class="body-input blogfont " rows="10 " placeholder="เนื้อหากระทู้ " required=" "%}
+            <div class="blog-body">
+                {% render_field form.content id="body_text" class="body-input blogfont" rows="10" placeholder="เนื้อหากระทู้"required=""%}
             </div>
         </div>
 
         <!-- 3. เลือกห้อง -->
-        <div class="chooseroom-container style-container ">
-            <div class="title ">
-                <div class="title-text ">เลือกห้อง</div>
-                <div class="need ">*จำเป็น</div>
+        <div class="chooseroom-container style-container">
+            <div class="title">
+                <div class="title-text">เลือกห้อง</div>
+                <div class="need">*จำเป็น</div>
             </div>
-            <div class="all-room ">
-                <input type="radio " class="input " id="review " name="room " value="room_review ">
-                <div class="room-container ">
-                    <label for="review "><img src="/statics/images/review.png "><br>รีวิว</label>
+            <div class="all-room">
+                <input type="radio" class="input" id="review" name="room" value="room_review">
+                <div class="room-container">
+                    <label for="review"><img src="/statics/images/review.png"><br>รีวิว</label>
                 </div>
 
-                <input type="radio " class="input " id="news " name="room " value="room_news ">
-                <div class="room-container ">
-                    <label for="news "><img src="/statics/images/news.png "><br>ข่าวสาร</label>
+                <input type="radio" class="input" id="news" name="room" value="room_news">
+                <div class="room-container">
+                    <label for="news"><img src="/statics/images/news.png"><br>ข่าวสาร</label>
                 </div>
 
-                <input type="radio " class="input " id="educate " name="room " value="room_educate ">
-                <div class="room-container ">
-                    <label for="educate "><img src="/statics/images/educate.png "><br>เด็กเรียน</label>
+                <input type="radio" class="input" id="educate" name="room" value="room_educate">
+                <div class="room-container">
+                    <label for="educate"><img src="/statics/images/educate.png"><br>เด็กเรียน</label>
                 </div>
 
-                <input type="radio " class="input " id="dorm " name="room " value="room_dorm ">
-                <div class="room-container ">
-                    <label for="dorm "><img src="/statics/images/dorm.png "><br>หอพัก</label>
+                <input type="radio" class="input" id="dorm" name="room" value="room_dorm">
+                <div class="room-container">
+                    <label for="dorm"><img src="/statics/images/dorm.png"><br>หอพัก</label>
                 </div>
 
-                <input type="radio " class="input " id="food " name="room " value="room_food ">
-                <div class="room-container ">
-                    <label for="food "><img src="/statics/images/food.png "><br>มุมอร่อย</label>
+                <input type="radio" class="input" id="food" name="room" value="room_food">
+                <div class="room-container">
+                    <label for="food"><img src="/statics/images/food.png"><br>มุมอร่อย</label>
                 </div>
 
-                <input type="radio " class="input " id="sport " name="room " value="room_sport ">
-                <div class="room-container ">
-                    <label for="sport "><img src="/statics/images/sport.png "><br>กีฬา</label>
+                <input type="radio" class="input" id="sport" name="room" value="room_sport">
+                <div class="room-container">
+                    <label for="sport"><img src="/statics/images/sport.png"><br>กีฬา</label>
                 </div>
 
-                <input type="radio " class="input " id="travel " name="room " value="room_travel ">
-                <div class="room-container ">
-                    <label for="travel "><img src="/statics/images/travel.png "><br>ท่องเที่ยว</label>
+                <input type="radio" class="input" id="travel" name="room" value="room_travel">
+                <div class="room-container">
+                    <label for="travel"><img src="/statics/images/travel.png"><br>ท่องเที่ยว</label>
                 </div>
 
-                <input type="radio " class="input " id="art " name="room " value="room_art ">
-                <div class="room-container ">
-                    <label for="art "><img src="/statics/images/art.png "><br>งานอาร์ต</label>
+                <input type="radio" class="input" id="art" name="room" value="room_art">
+                <div class="room-container">
+                    <label for="art"><img src="/statics/images/art.png"><br>งานอาร์ต</label>
                 </div>
 
-                <input type="radio " class="input " id="pet " name="room " value="room_pet ">
-                <div class="room-container ">
-                    <label for="pet "><img src="/statics/images/pet.png "><br>สัตว์เลี้ยง</label>
+                <input type="radio" class="input" id="pet" name="room" value="room_pet">
+                <div class="room-container">
+                    <label for="pet"><img src="/statics/images/pet.png"><br>สัตว์เลี้ยง</label>
                 </div>
 
-                <input type="radio " class="input " id="fashion " name="room " value="room_fashion ">
-                <div class="room-container ">
-                    <label for="fashion "><img src="/statics/images/fashion.png "><br>แฟชั่น</label>
+                <input type="radio" class="input" id="fashion" name="room" value="room_fashion">
+                <div class="room-container">
+                    <label for="fashion"><img src="/statics/images/fashion.png"><br>แฟชั่น</label>
                 </div>
 
-                <input type="radio " class="input " id="camera " name="room " value="room_camera ">
-                <div class="room-container ">
-                    <label for="camera "><img src="/statics/images/camera.png "><br>ถ่ายรูป</label>
+                <input type="radio" class="input" id="camera" name="room" value="room_camera">
+                <div class="room-container">
+                    <label for="camera"><img src="/statics/images/camera.png"><br>ถ่ายรูป</label>
                 </div>
 
-                <input type="radio " class="input " id="party " name="room " value="room_party ">
-                <div class="room-container ">
-                    <label for="party "><img src="/statics/images/party.png "><br>ปาร์ตี้</label>
+                <input type="radio" class="input" id="party" name="room" value="room_party">
+                <div class="room-container">
+                    <label for="party"><img src="/statics/images/party.png"><br>ปาร์ตี้</label>
                 </div>
 
-                <input type="radio " class="input " id="talk " name="room " value="room_talk ">
-                <div class="room-container ">
-                    <label for="talk "><img src="/statics/images/talk.png "><br>คุยเล่น</label>
+                <input type="radio" class="input" id="talk" name="room" value="room_talk">
+                <div class="room-container">
+                    <label for="talk"><img src="/statics/images/talk.png"><br>คุยเล่น</label>
                 </div>
 
-                <input type="radio " class="input " id="other " name="room " value="room_other ">
-                <div class="room-container ">
-                    <label for="other "><img src="/statics/images/other.png "><br>อื่น ๆ</label>
+                <input type="radio" class="input" id="other" name="room" value="room_other">
+                <div class="room-container">
+                    <label for="other"><img src="/statics/images/other.png"><br>อื่น ๆ</label>
                 </div>
             </div>
         </div>
 
         <!-- 4. ใส่แท็ก -->
-        <div class="tag-container style-container ">
-            <div class="title ">
-                <div class="title-text ">แท็ก</div>
-                <div id="tag_count " class="count-text "></div>
+        <div class="tag-container style-container">
+            <div class="title">
+                <div class="title-text">แท็ก</div>
+                <div id="tag_count" class="count-text"></div>
             </div>
-            <div class="blog-tag-container ">
-                <div class="all-tag ">
-                    <textarea maxlength="50 " rows="1 " id="tag_input " class="tag-input " placeholder="เพิ่มแท็ก " autocomplete="off "></textarea>
-                    {% comment %} <input type="text " id="tag_list " name="tag_string " class="tag-list "> {% endcomment %}
-                    {% render_field form.tag_string type="text " id="tag_list " name="tag_string " class="tag-list " %}
+            <div class="blog-tag-container">
+                <div class="all-tag">
+                    <textarea maxlength="50" rows="1" id="tag_input" class="tag-input" placeholder="เพิ่มแท็ก" autocomplete="off"></textarea> {% render_field form.tag_string type="text" id="tag_list" name="tag_string" class="tag-list" %}
                 </div>
             </div>
         </div>
 
         <!-- 5. ใส่ปกกระทู้ -->
-        <div class="blog-cover-container style-container ">
-            <div class="title-text " style="margin-bottom:5px ">ปกกระทู้</div>
-            <label for="cover_blog_img " class="add-cover ">เพิ่มรูปปก</label>
-            <input type="file " accept="image/* " name="cover_image " id="cover_blog_img " style="pointer-events: none; ">
+        <div class="blog-cover-container style-container">
+            <div class="title-text" style="margin-bottom:5px">ปกกระทู้</div>
+            <label for="cover_blog_img" class="add-cover">เพิ่มรูปปก</label>
+            <input type="file" accept="image/*" name="cover_image" id="cover_blog_img" style="pointer-events: none;">
         </div>
 
         <!-- 6. ตั้งเวลาลบกระทู้ -->
-        <div class="blog-set-time-container style-container ">
-            <div class="title ">
-                <div class="title-text ">ตั้งเวลาลบกระทู้</div>
-                <div class="need ">*จำเป็น</div>
+        <div class="blog-set-time-container style-container">
+            <div class="title">
+                <div class="title-text">ตั้งเวลาลบกระทู้</div>
+                <div class="need">*จำเป็น</div>
             </div>
-            <div class="set-time ">
-                <div class="choose-set-time ">
-                    <input type="radio " class="time-input " id="set_time " name="time " value="time_set ">
-                    <div class="time-container ">
-                        <label for="set_time ">กำหนดเวลา</label>
+            <div class="set-time">
+                <div class="choose-set-time">
+                    <input type="radio" class="time-input" id="set_time" name="time" value="time_set">
+                    <div class="time-container">
+                        <label for="set_time">กำหนดเวลา</label>
                     </div>
 
-                    <input type="radio " class="time-input " id="unset_time " name="time " value="time_unset ">
-                    <div class="time-container ">
-                        <label for="unset_time ">ไม่กำหนด</label>
+                    <input type="radio" class="time-input" id="unset_time" name="time" value="time_unset">
+                    <div class="time-container">
+                        <label for="unset_time">ไม่กำหนด</label>
                     </div>
-                    <input type="datetime-local " class="date-time " name="expire_date " id="date_time ">
+                    <input type="datetime-local" class="date-time" name="expire_date" id="date_time">
                 </div>
             </div>
         </div>
 
         <!-- 7. ปุ่มตั้งกระทู้ -->
-        <button type="submit " id="submit_form " class="create-blog-btn redorange vhcenter " disabled>ตั้งกระทู้เลย</button>
+        <button type="submit" id="submit_form" class="create-blog-btn redorange vhcenter" disabled>ตั้งกระทู้เลย</button>
     </div>
 </form>
 
@@ -180,14 +176,14 @@
         month = checkOnesNum(month);
         hour = checkOnesNum(hour);
         minute = checkOnesNum(minute);
-        return year + '-' + month + '-' + day + 'T' + hour + ": " + minute;
+        return year + '-' + month + '-' + day + 'T' + hour + ":" + minute;
     }
     //disable button ถ้ากรอกข้อมูลที่จำเป็นไม่ครบ
     function buttonAble() {
         if (header && body && room && (unsetTime || setTime)) {
-            document.getElementById("submit_form ").disabled = false;
+            document.getElementById("submit_form").disabled = false;
         } else {
-            document.getElementById("submit_form ").disabled = true;
+            document.getElementById("submit_form").disabled = true;
         }
     }
     //function count word
@@ -203,11 +199,11 @@
     function limitText(textID, showID, min, max) {
         var len = countWord(textID.value);
         var check;
-        showID.innerHTML = String(len) + "/ " + String(max);
+        showID.innerHTML = String(len) + "/" + String(max);
         if (len > max || (len < min && len != 0)) {
-            showID.classList.add("overflow-text ");
+            showID.classList.add("overflow-text");
         } else {
-            showID.classList.remove("overflow-text ");
+            showID.classList.remove("overflow-text");
         }
         //---------------enable disable submit button-------------
         if (len > max || len < min) {
@@ -217,27 +213,206 @@
         }
         return check;
     }
-    
     //remove special text on keyboard only
     function removeSpChar(text) {
-        return text.replace(/[&\/\\#^+()$~%.'":;, ฿=_\-*?\n<>{}!@`\[\]|]/g, ''); } //----------------limit header text--------------------- var headerTextContent = document.getElementById("header_text"); var headerShowWordCount = document.getElementById("header_count"); //ค่าเริ่มต้น header = limitText(headerTextContent,
-    headerShowWordCount, 4, 120); headerTextContent.addEventListener("input", function() { header = limitText(headerTextContent, headerShowWordCount, 4, 120); buttonAble() }); //----------------limit body text--------------------- var bodyTextContent
-    = document.getElementById("body_text"); var bodyShowWordCount = document.getElementById("body_count"); //ค่าเริ่มต้น body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000); bodyTextContent.addEventListener("input", function() { body = limitText(bodyTextContent,
-    bodyShowWordCount, 6, 4000); buttonAble() }); //---------------tag-------------------- var TagTextContent = document.getElementById("tag_input"); var TagShowWordCount = document.getElementById("tag_count"); let container = document.querySelector('.all-tag')
-    var tagList = document.getElementById('tag_list'); tagList.value = ''; //ค่าเริ่มต้น limitText(TagTextContent, TagShowWordCount, 0, 50); //limit tag text function countTag() { var tagLen = 0; let tag = document.querySelectorAll('.post-tag'); if (tag)
-    { tagLen = tag.length; } return tagLen; } TagTextContent.addEventListener("input", function() { limitText(TagTextContent, TagShowWordCount, 0, 50); TagTextContent.value = TagTextContent.value.substring(0, 49); }); TagTextContent.addEventListener('keyup',
-    (event) => { TagTextContent.classList.remove('no-sp-text'); if ((event.which == 32 || event.which == 13) && TagTextContent.value.length > 0) { //spacebar or enter to add tag var p = document.createElement('p'); var text = removeSpChar(TagTextContent.value);
-    tagLen = countTag(); //add tag if (text && tagLen
-    < 10) { TagShowWordCount.innerHTML="0/50" ; //keep value to backend tagList.value +=t ext + ','; text='#' + text; var text_node=d ocument.createTextNode(text); TagTextContent.parentNode.insertBefore(p, TagTextContent); p.appendChild(text_node); p.classList.add(
-        'post-tag'); TagTextContent.value='' ; tagLen=c ountTag(); } else { TagTextContent.classList.add( 'no-sp-text'); } //show input if tag length <10 if (tagLen>= 10) { TagTextContent.disabled = true; TagTextContent.style.display = 'none'; } else { TagTextContent.disabled = false; TagTextContent.style.display = 'flex'; } let tag = document.querySelectorAll('.post-tag'); //delete tag for (let i = 0; i
-        < tag.length; i++) { tag[i].addEventListener( 'click', ()=> { tagLen = countTag(); //limit 10 tag if (tagLen >= 10) { TagTextContent.disabled = true; TagTextContent.style.display = 'none'; } else { TagTextContent.disabled = false; TagTextContent.style.display = 'flex'; } tag[i].parentNode.removeChild(tag[i]);
-            }); } } }); //----------------set min max date today (+7 day from today)--------------------- var dateTime = document.getElementById("date_time") dateTime.addEventListener("click", function() { //today date var today = new Date(); var todayFullDate
-            = getFullDate(today); //max date var adddate = today.setDate(today.getDate() + 7); var maxdate = new Date(adddate); //get full date maxdate = getFullDate(maxdate); //set min max date dateTime.setAttribute('min', todayFullDate) dateTime.setAttribute('max',
-            maxdate) }); //----------------set min time today (+10min from now)--------------------- dateTime.addEventListener("input", function() { //today plus 10 minutes date var todayPlus = new Date(); var adddate = todayPlus.setMinutes(todayPlus.getMinutes()
-            + 10); todayPlus = new Date(adddate); todayPlusFullDate = getFullDate(todayPlus); //input date if (dateTime.value) { var inputDate = new Date(dateTime.value); if (inputDate
-            < todayPlus) { $( '#date_time').val(todayPlusFullDate); } } //-----------time set checked------------ if (dateTime.value=='' ) { setTime=f alse; } else { setTime=t rue; } buttonAble(); }); //-----------time set checked------------ var unset=d ocument.querySelector(
-                '#unset_time'); var set=d ocument.querySelector( '#set_time'); unset.addEventListener( "click", function() { if (unset.checked==t rue) { dateTime.value='' ; setTime=f alse; unsetTime=t rue; } }); set.addEventListener( "click", function() { if (set.checked==t
-                rue) { unsetTime=f alse; } }); //-----------room checked------------ var roomArray=d ocument.querySelectorAll( 'input[name=room]'); for (var i=0 ; i < roomArray.length; i++) { roomArray[i].addEventListener( "click", function() { console.log(header,
-                body, room, unsetTime, setTime); console.log(header && body && room && (unsetTime || setTime)); room=t rue; }); } //----------------prevent form submit--------------- document.querySelector( 'form').addEventListener( "click", function() {
-                buttonAble() }); $( 'form').submit(function(event) { if (header && body && room && (unsetTime || setTime)) { tagLen=0 ; return true; } else { return false; } }); buttonAble(); </script>
-                {% endblock content %}
+        return text.replace(/[&\/\\#^+()$~%.'":;, ฿=_\-*?\n<>{}!@`\[\]|]/g, '');
+    }
+
+    //----------------limit header text---------------------
+    var headerTextContent = document.getElementById("header_text");
+    var headerShowWordCount = document.getElementById("header_count");
+
+
+    //ค่าเริ่มต้น
+    header = limitText(headerTextContent, headerShowWordCount, 4, 120);
+
+
+    headerTextContent.addEventListener("input", function() {
+        header = limitText(headerTextContent, headerShowWordCount, 4, 120);
+        buttonAble()
+    });
+
+
+    //----------------limit body text---------------------
+    var bodyTextContent = document.getElementById("body_text");
+    var bodyShowWordCount = document.getElementById("body_count");
+
+
+    //ค่าเริ่มต้น
+    body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
+
+
+    bodyTextContent.addEventListener("input", function() {
+        body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
+        buttonAble()
+    });
+    //---------------tag--------------------
+    var TagTextContent = document.getElementById("tag_input");
+    var TagShowWordCount = document.getElementById("tag_count");
+    let container = document.querySelector('.all-tag')
+    var tagList = document.getElementById('tag_list');
+    tagList.value = '';
+
+
+    //ค่าเริ่มต้น
+    limitText(TagTextContent, TagShowWordCount, 0, 50);
+
+
+    //limit tag text
+    function countTag() {
+        var tagLen = 0;
+        let tag = document.querySelectorAll('.post-tag');
+        if (tag) {
+            tagLen = tag.length;
+        }
+        return tagLen;
+    }
+    TagTextContent.addEventListener("input", function() {
+        limitText(TagTextContent, TagShowWordCount, 0, 50);
+        TagTextContent.value = TagTextContent.value.substring(0, 49);
+    });
+    TagTextContent.addEventListener('keyup', (event) => {
+        TagTextContent.classList.remove('no-sp-text');
+        if ((event.which == 32 || event.which == 13) && TagTextContent.value.length > 0) { //spacebar or enter to add tag
+            var p = document.createElement('p');
+            var text = removeSpChar(TagTextContent.value);
+            tagLen = countTag();
+
+
+            //add tag
+            if (text && tagLen < 10) {
+                TagShowWordCount.innerHTML = "0/50";
+
+
+                //keep value to backend
+                tagList.value += text + ',';
+
+
+                text = '#' + text;
+                var text_node = document.createTextNode(text);
+                TagTextContent.parentNode.insertBefore(p, TagTextContent);
+                p.appendChild(text_node);
+                p.classList.add('post-tag');
+                TagTextContent.value = '';
+                tagLen = countTag();
+            } else {
+                TagTextContent.classList.add('no-sp-text');
+            }
+
+
+            //show input if tag length <10
+            if (tagLen >= 10) {
+                TagTextContent.disabled = true;
+                TagTextContent.style.display = 'none';
+            } else {
+                TagTextContent.disabled = false;
+                TagTextContent.style.display = 'flex';
+            }
+
+
+            let tag = document.querySelectorAll('.post-tag');
+            //delete tag
+            for (let i = 0; i < tag.length; i++) {
+                tag[i].addEventListener('click', () => {
+                    tagLen = countTag();
+                    //limit 10 tag
+                    if (tagLen >= 10) {
+                        TagTextContent.disabled = true;
+                        TagTextContent.style.display = 'none';
+                    } else {
+                        TagTextContent.disabled = false;
+                        TagTextContent.style.display = 'flex';
+                    }
+                    tag[i].parentNode.removeChild(tag[i]);
+                });
+            }
+        }
+    });
+
+
+    //----------------set min max date today (+7 day from today)---------------------
+    var dateTime = document.getElementById("date_time")
+    dateTime.addEventListener("click", function() {
+        //today date
+        var today = new Date();
+        var todayFullDate = getFullDate(today);
+        //max date
+        var adddate = today.setDate(today.getDate() + 7);
+        var maxdate = new Date(adddate);
+        //get full date
+        maxdate = getFullDate(maxdate);
+        //set min max date
+        dateTime.setAttribute('min', todayFullDate)
+        dateTime.setAttribute('max', maxdate)
+
+
+    });
+    //----------------set min time today (+10min from now)---------------------
+    dateTime.addEventListener("input", function() {
+        //today plus 10 minutes date
+        var todayPlus = new Date();
+        var adddate = todayPlus.setMinutes(todayPlus.getMinutes() + 10);
+        todayPlus = new Date(adddate);
+        todayPlusFullDate = getFullDate(todayPlus);
+
+
+        //input date
+        if (dateTime.value) {
+            var inputDate = new Date(dateTime.value);
+            if (inputDate < todayPlus) {
+                $('#date_time').val(todayPlusFullDate);
+            }
+        }
+        //-----------time set checked------------
+        if (dateTime.value == '') {
+            setTime = false;
+        } else {
+            setTime = true;
+        }
+        buttonAble();
+    });
+
+
+    //-----------time set checked------------
+    var unset = document.querySelector('#unset_time');
+    var set = document.querySelector('#set_time');
+    unset.addEventListener("click", function() {
+        if (unset.checked == true) {
+            dateTime.value = '';
+            setTime = false;
+            unsetTime = true;
+        }
+    });
+    set.addEventListener("click", function() {
+        if (set.checked == true) {
+            unsetTime = false;
+        }
+    });
+
+
+    //-----------room checked------------
+    var roomArray = document.querySelectorAll('input[name=room]');
+    for (var i = 0; i < roomArray.length; i++) {
+        roomArray[i].addEventListener("click", function() {
+            console.log(header, body, room, unsetTime, setTime);
+            console.log(header && body && room && (unsetTime || setTime));
+            room = true;
+        });
+    }
+
+
+    //----------------prevent form submit---------------   
+    document.querySelector('form').addEventListener("click", function() {
+        buttonAble()
+    });
+    $('form').submit(function(event) {
+        if (header && body && room && (unsetTime || setTime)) {
+            tagLen = 0;
+            return true;
+        } else {
+            return false;
+        }
+    });
+    buttonAble();
+</script>
+{% endblock content %}
