@@ -70,6 +70,7 @@ function closeDropdown(contentClass, showClass) {
         }
     }
 }
+
 window.onclick = function(event) {
     // Close the dropdown if the user clicks outside of it
     if (!event.target.matches('.edit-post-dropdown-btn')) {
