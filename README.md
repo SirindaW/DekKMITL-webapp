@@ -1,3 +1,4 @@
+
 # Welcome to DekKMITL!
 DekKMITL-webapp
 Software Development Project (Y2/2)
@@ -8,6 +9,9 @@ DekKMITL is web blog application that helps you in contact with KMITL community.
 
 # Installation
 You can follow these steps to install the demo project.
+
+## Clone the repository
+Clone this repository with `git clone https://github.com/SirindaW/DekKMITL-webapp.git`
 
 ## Install Pipenv
 
