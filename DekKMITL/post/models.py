@@ -6,6 +6,7 @@ from DekKMITL.utils import unique_slug_generator
 from datetime import timezone,datetime,timedelta
 from django.utils.timesince import timeuntil
 from django.db.models import Q
+from django.apps import apps
 
 from account.models import Account
 
@@ -59,7 +60,13 @@ class Post(models.Model):
     # active_posts = PostActiveManager()
     objects = PostManager()
     
+    ### Comment ###
+    # post.comments.all() -> QuerySet of comments on that post
+    # 
     
+    def total_comments(self):
+        return self.comments.all().count()        
+
     @admin.display(boolean=True)
     def is_expired(self):
         if self.is_expirable:
@@ -132,15 +139,30 @@ class Tag(models.Model):
         return self.title
         
 class Comment(models.Model):
-    post= models.ForeignKey(Post,blank=True,null=True,on_delete=models.CASCADE)
-    content = models.TextField(max_length=1200)
-    author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE)
-    date_created = models.DateTimeField(auto_now_add=True,blank=True)
-    comment_likes = models.PositiveIntegerField(default=0,null=False)
-    replies = models.ForeignKey('post.Comment',blank=True,null=True,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,related_name='comments',on_delete=models.CASCADE) 
+    content = models.TextField(max_length=1000)
+    author = models.ForeignKey(Account,related_name='comments',on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def total_likes(self):
+        return self.likers.all().count()
+
+    ### CommentLiker ###
+    # comment.likers.all()
+    # def liker(self):
+    #     cms = CommentLike.objects.filter(comments=self)
+    #     return cms.values_list('liker',flat=True)
 
     def __str__(self) -> str:
-        return f"comment id_{self.id} : " + str(self.post)
+        return f'Comment by {self.author} on {self.post}'
+
+class CommentLike(models.Model):
+    liker=models.ForeignKey(Account,related_name='liked_comments',on_delete=models.CASCADE)
+    comment=models.ForeignKey(Comment,related_name='likers',on_delete = models.CASCADE) 
+    date_created=models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return f'{self.liker} liked {self.comment}'
 
 # https://www.youtube.com/watch?v=d5LYM3C_A98
 def slug_generator(sender, instance, *args, **kwargs):

@@ -1,4 +1,4 @@
-{% extends 'components/base.html' %} {% load post_tags %}{% load static %} {% load humanize %} {% block content%}
+{% extends 'components/base.html' %} {% load post_tags %}{% load static %} {% load humanize %} {% block content%} {% load widget_tweaks %}
 
 <link rel="stylesheet" href="{%static '/css/home.css'%}">
 <link rel="stylesheet" href="{%static '/css/post_detail.css'%}">
@@ -59,6 +59,7 @@
                         <div class="user-profile-pic" style="background-image: url({{request.user.get_profile_image_url}});height:80px;width:80px"></div>
                     </a>
                 </div>
+                {% render_field comment_form.content%}
                 <textarea class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..."></textarea>
             </div>
             <div class="comment-submit">
