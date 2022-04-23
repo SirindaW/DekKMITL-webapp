@@ -24,3 +24,57 @@
     text-align: center;
     font-size: 32px;
 }
+
+
+/* post container */
+
+.post-container {
+    display: flex;
+    justify-content: center;
+    background-color: #131313B2;
+    border: 1px solid #FFFFFFBF;
+    border-radius: 33px;
+    padding: 22px 28px 22px 28px;
+    margin: 15px;
+}
+
+.post-title {
+    line-height: .8cm;
+}
+
+.post-body {
+    padding: 15px 0;
+}
+
+
+/* post text  */
+
+.post-title a {
+    font-size: 28px;
+    font-weight: 500;
+    font-family: 'Bai Jamjuree', sans-serif;
+}
+
+.post-detail a,
+.post-detail {
+    font-size: 15px;
+    color: rgba(172, 172, 172, 0.582);
+}
+
+.post-body a {
+    font-size: 20px;
+    font-family: 'Bai Jamjuree', sans-serif;
+    line-height: 0.9cm;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+/* like and comment */
+
+.like-comment-count {
+    font-size: 17px;
+    color: rgba(172, 172, 172, 0.76);
+}

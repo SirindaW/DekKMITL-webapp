@@ -422,7 +422,6 @@
 
     const tags = "{{tag_list_string}}";
     var tagArray = tags.split(',')
-    console.log(tagArray)
 
     function autocomplete(inp, arr) {
         /*the autocomplete function takes two arguments,
@@ -431,6 +430,7 @@
         /*execute a function when someone writes in the text field:*/
         inp.addEventListener("input", function(e) {
             var a, b, i, val = this.value;
+            val = removeSpChar(val);
             /*close any already open lists of autocompleted values*/
             closeAllLists();
             if (!val) {

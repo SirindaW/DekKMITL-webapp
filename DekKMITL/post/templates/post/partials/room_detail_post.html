@@ -1,35 +1,23 @@
-{% load static %}
-{% load humanize %}
-{% load post_tags%}
-{% if not posts%}
+{% load static %} {% load humanize %} {% load post_tags%} {% if not posts%}
 <div style="text-align:center">ไม่มีกระทู้ในห้องนี้</div>
-{% endif %}
-{% for post in posts %} 
-<a href="{{ post.get_absolute_url }}">
-  <div class="post-container">
-    <div class="user-profile-container vcenter" style="width: 15%">
-      <a href="{{post.author.get_absolute_url}}">
-        <div
-          class="user-profile-pic"
-          style="
-            background-image: url({{post.author.get_profile_image_url}});
-            height: 60px;
-            width: 60px;
-          "
-        ></div>
-      </a>
+{% endif %} {% for post in posts %}
+
+<div class="post-container">
+    <div class="user-profile-container vcenter" style="width:10%;align-items:flex-start;">
+        <a href="{{post.author.get_absolute_url}}">
+            <div class="user-profile-pic" style="background-image: url({{post.author.get_profile_image_url}});height: 60px;width: 60px;"></div>
+        </a>
     </div>
-    <div class="post-content">
-      <div class="post-title">{{post.title}}</div>
-      <div class="post-detail">
-        {{post.author}} : {{post.date_created|naturaltime}}
-      </div>
-      <div class="post-body">{{post.content}}</div>
-      <div class="like-comment-count">
-        <img src="{% static 'images/like.png'%}" style="width: 15px" />{{post.liker.count}} &nbsp;
-        <img src="{% static 'images/comment.png'%}" style="width: 15px" />2
-      </div>
+    <div class="post-content" style="width:90%">
+        <div class="post-title"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></div>
+        <div class="post-detail">
+            <a href="{{post.author.get_absolute_url}}">{{post.author}}</a> : <a href="{{ post.get_absolute_url }}">{{post.date_created|naturaltime}}</a>
+        </div>
+        <div class="post-body"><a href="{{ post.get_absolute_url }}">{{post.content}}</a></div>
+        <div class="like-comment-count">
+            <img src="{% static 'images/like.png'%}" style="width: 12px" />{{post.liker.count}}
+            <img src="{% static 'images/comment.png'%}" style="width: 12px" />2
+        </div>
     </div>
-  </div>
-</a>
+</div>
 {% endfor %}
