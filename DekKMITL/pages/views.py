@@ -14,3 +14,9 @@ def rules_view(request):
     context = {
     }
     return render(request,'pages/rules.html',context)
+
+def report_view(request):
+    context = {
+    }
+    return render(request,'pages/reports.html',context)
+    
