@@ -5,19 +5,19 @@
 <div class="profile-container">
 
     <!-- 1. cover photo  -->
-    <div class="profile-cover cover-effect" id="cover_img" onclick="fullCoverImg()" style="background-image: url({{instance.get_cover_image_url}})"></div>
+    <div class="profile-cover cover-effect" id="cover_img" onclick="addClass('full_cover_img','img-show')" style="background-image: url({{instance.get_cover_image_url}})"></div>
     <!-- *popup cover image -->
     <div class="popup popup_cover_img" id="full_cover_img">
-        <div class="close" onclick="closeFullCoverImg()" id="close_cover_img">✕</div>
+        <div class="close" onclick="removeClass('full_cover_img','img-show')" id="close_cover_img">✕</div>
         <img src="{{instance.get_cover_image_url}}" class="large-image">
     </div>
     <!-- 2. profile image, name and edit profile button -->
     <div class="profile-detail-pic-name">
         <!-- 2.1 profile image -->
-        <div class="profile-picture cover-effect" id="profile_img" onclick="fullProfileImg()" style="background-image: url({{instance.profile_image.url}})"></div>
+        <div class="profile-picture cover-effect" id="profile_img" onclick="addClass('full_profile_img','img-show')" style="background-image: url({{instance.profile_image.url}})"></div>
         <!-- *popup profile image -->
         <div class="popup popup_profile_img" id="full_profile_img">
-            <div class="close" onclick="closeFullProfileImg()" id="close_profile_img">✕</div>
+            <div class="close" onclick="removeClass('full_profile_img','img-show')" id="close_profile_img">✕</div>
             <img src="{{instance.profile_image.url}}" class="large-image">
         </div>
         <!-- 2.2 profile name and edit profile button -->
@@ -33,7 +33,7 @@
             {% else %}
             <!-- ------------ *if not your profile use follow button ------------------ -->
             {% if request|is_following:instance %}
-            <div class="unfollow-button vhcenter"><a href="{{ instance.get_toggle_follow_url }}" class="unfollow-button-link " id="unfollow_btn" style="font-size:20px" onmouseover="changeText('เลิกติดตาม')" onmouseout="changeBack('ติดตามอยู่')">ติดตามอยู่</a></div>
+            <div class="unfollow-button vhcenter"><a href="{{ instance.get_toggle_follow_url }}" class="unfollow-button-link " id="unfollow_btn" style="font-size:20px" onmouseover="changeText('เลิกติดตาม','unfollow_btn')" onmouseout="changeText('ติดตามอยู่','unfollow_btn')">ติดตามอยู่</a></div>
             {% else %}
             <div class="follow-button vhcenter"><a href="{{ instance.get_toggle_follow_url}}" class="follow-button-link " style="font-size:20px">ติดตาม</a></div>
             {% endif %} {% endif %}
@@ -159,6 +159,8 @@
 
     {% endif %}
 </div>
+<!-- back to top btn -->
+<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top">
 
 <script src="{% static 'js/htmx.js' %}" defer></script>
 

@@ -91,12 +91,12 @@
     }
 
     //function add and remove class
-    function addClass(bgID, textID) {
+    function addBGClass(bgID, textID) {
         document.getElementById(bgID).classList.add("change-bg");
         document.getElementById(textID).classList.add("change-text");
     }
 
-    function removeClass(bgID, textID) {
+    function removeBGClass(bgID, textID) {
         document.getElementById(bgID).classList.remove("change-bg");
         document.getElementById(textID).classList.remove("change-text");
     }
@@ -104,23 +104,23 @@
     //function for onclick button
     function removeProfileImg() {
         document.querySelector("#profile_preview_img").style.backgroundImage = "url('/statics/images/default_profile_image.svg')";
-        removeClass("change_p_bg", "change_p_text");
+        removeBGClass("change_p_bg", "change_p_text");
     }
 
     function removeCoverImg() {
         document.querySelector("#cover_preview_img").style.backgroundImage = "url('/statics/images/defaultcover.svg')";
-        removeClass("change_c_bg", "change_c_text");
+        removeBGClass("change_c_bg", "change_c_text");
     }
 
     //image uploaded event
     document.querySelector("#profile_input_img").onchange = evt => {
         previewImg("#profile_input_img", "#profile_preview_img")
-        addClass("change_p_bg", "change_p_text");
+        addBGClass("change_p_bg", "change_p_text");
     }
 
     document.querySelector("#cover_input_img").onchange = evt => {
         previewImg("#cover_input_img", "#cover_preview_img")
-        addClass("change_c_bg", "change_c_text");
+        addBGClass("change_c_bg", "change_c_text");
     }
 </script>
 {% endblock %}

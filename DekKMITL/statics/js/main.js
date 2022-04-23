@@ -66,45 +66,10 @@ function removeSpChar(text) {
     return text.replace(/[&\/\\#^+()$~%.'":;, ฿=_\-*?\n<>{}!@`\[\]|]/g, '');
 }
 
-//----------------limit header text---------------------
-var headerTextContent = document.getElementById("header_text");
-var headerShowWordCount = document.getElementById("header_count");
-
-
-//ค่าเริ่มต้น
-header = limitText(headerTextContent, headerShowWordCount, 4, 120);
-
-
-headerTextContent.addEventListener("input", function() {
-    header = limitText(headerTextContent, headerShowWordCount, 4, 120);
-    buttonAble()
-});
-
-
-//----------------limit body text---------------------
-var bodyTextContent = document.getElementById("body_text");
-var bodyShowWordCount = document.getElementById("body_count");
-
-
-//ค่าเริ่มต้น
-body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
-
-
-bodyTextContent.addEventListener("input", function() {
-    body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
-    buttonAble()
-});
 //---------------tag--------------------
 var TagTextContent = document.getElementById("tag_input");
 var TagShowWordCount = document.getElementById("tag_count");
 let container = document.querySelector('.all-tag')
-var tagList = document.getElementById('tag_list');
-tagList.value = '';
-
-
-//ค่าเริ่มต้น
-limitText(TagTextContent, TagShowWordCount, 0, 50);
-
 
 //limit tag text
 function countTag() {
@@ -115,64 +80,6 @@ function countTag() {
     }
     return tagLen;
 }
-TagTextContent.addEventListener("input", function() {
-    limitText(TagTextContent, TagShowWordCount, 0, 50);
-    TagTextContent.value = TagTextContent.value.substring(0, 49);
-});
-
-//submit tag
-TagTextContent.addEventListener('keyup', (event) => {
-    TagTextContent.classList.remove('no-sp-text');
-    if ((event.which == 32 || event.which == 13) && TagTextContent.value.length > 0) { //spacebar or enter to add tag
-        var p = document.createElement('p');
-        var text = removeSpChar(TagTextContent.value);
-        tagLen = countTag();
-
-        //add tag
-        if (text && tagLen < 10) {
-            TagShowWordCount.innerHTML = "0/50";
-
-            //keep value to backend
-            tagList.value += text + ',';
-
-            text = '#' + text;
-            var text_node = document.createTextNode(text);
-            TagTextContent.parentNode.insertBefore(p, TagTextContent);
-            p.appendChild(text_node);
-            p.classList.add('post-tag');
-            TagTextContent.value = '';
-            tagLen = countTag();
-        } else {
-            TagTextContent.classList.add('no-sp-text');
-        }
-
-        //show input if tag length <10
-        if (tagLen >= 10) {
-            TagTextContent.disabled = true;
-            TagTextContent.style.display = 'none';
-        } else {
-            TagTextContent.disabled = false;
-            TagTextContent.style.display = 'flex';
-        }
-
-        let tag = document.querySelectorAll('.post-tag');
-        //delete tag
-        for (let i = 0; i < tag.length; i++) {
-            tag[i].addEventListener('click', () => {
-                tagLen = countTag();
-                //limit 10 tag
-                if (tagLen >= 10) {
-                    TagTextContent.disabled = true;
-                    TagTextContent.style.display = 'none';
-                } else {
-                    TagTextContent.disabled = false;
-                    TagTextContent.style.display = 'flex';
-                }
-                tag[i].parentNode.removeChild(tag[i]);
-            });
-        }
-    }
-});
 
 //---------------- Tags suggestion ---------------  
 function autocomplete(inp, arr) {
@@ -278,95 +185,18 @@ function autocomplete(inp, arr) {
     });
 }
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("tag_input"), tagArray);
-
-//----------------set min max date today (+7 day from today)---------------------
-var dateTime = document.getElementById("date_time")
-dateTime.addEventListener("click", function() {
-    //today date
-    var today = new Date();
-    var todayFullDate = getFullDate(today);
-    //max date
-    var adddate = today.setDate(today.getDate() + 7);
-    var maxdate = new Date(adddate);
-    //get full date
-    maxdate = getFullDate(maxdate);
-    //set min max date
-    dateTime.setAttribute('min', todayFullDate)
-    dateTime.setAttribute('max', maxdate)
-
-
-});
-//----------------set min time today (+10min from now)---------------------
-dateTime.addEventListener("input", function() {
-    //today plus 10 minutes date
-    var todayPlus = new Date();
-    var adddate = todayPlus.setMinutes(todayPlus.getMinutes() + 10);
-    todayPlus = new Date(adddate);
-    todayPlusFullDate = getFullDate(todayPlus);
-
-
-    //input date
-    if (dateTime.value) {
-        var inputDate = new Date(dateTime.value);
-        if (inputDate < todayPlus) {
-            $('#date_time').val(todayPlusFullDate);
-        }
+//preview image function
+function previewImg(inputImg, outputImg) {
+    let input = document.querySelector(inputImg);
+    let preview = document.querySelector(outputImg);
+    const [file] = input.files;
+    var tmp_path = URL.createObjectURL(file);
+    if (file) {
+        preview.src = tmp_path;
     }
-    //-----------time set checked------------
-    if (dateTime.value == '') {
-        setTime = false;
-    } else {
-        setTime = true;
-    }
-    buttonAble();
-});
-
-
-//-----------time set checked------------
-var unset = document.querySelector('#unset_time');
-var set = document.querySelector('#set_time');
-unset.addEventListener("click", function() {
-    if (unset.checked == true) {
-        dateTime.value = '';
-        setTime = false;
-        unsetTime = true;
-    }
-});
-set.addEventListener("click", function() {
-    if (set.checked == true) {
-        unsetTime = false;
-    }
-});
-
-
-//-----------room checked------------
-var roomArray = document.querySelectorAll('input[name=room]');
-for (var i = 0; i < roomArray.length; i++) {
-    roomArray[i].addEventListener("click", function() {
-        console.log(header, body, room, unsetTime, setTime);
-        console.log(header && body && room && (unsetTime || setTime));
-        room = true;
-    });
 }
 
-
-//----------------prevent form submit---------------   
-document.querySelector('form').addEventListener("click", function() {
-    buttonAble()
-});
-$('form').submit(function(event) {
-    if (header && body && room && (unsetTime || setTime)) {
-        tagLen = 0;
-        return true;
-    } else {
-        return false;
-    }
-});
-buttonAble();
-
-
+// -----------------------search--------------------------
 //search not found display 
 function displayCheck(tableID, notfoundID) {
     var notfound = document.getElementById(notfoundID);
@@ -406,3 +236,26 @@ function search(notfoundID, inputID, tableID, checkRow) {
     }
     displayCheck(tableID, notfoundID);
 }
+
+// ------------back to top button-------------
+//Get the button
+var backtopBtn = document.getElementById("back_to_top");
+
+function scrollFunction() {
+    if (document.documentElement.scrollTop > 50) {
+        backtopBtn.style.width = "75px";
+    } else {
+        backtopBtn.style.width = "0";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {
+    scrollFunction();
+};

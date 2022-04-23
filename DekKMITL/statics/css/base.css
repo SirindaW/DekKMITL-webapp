@@ -414,3 +414,21 @@ body {
 .footer-pic {
     align-self: flex-end;
 }
+
+
+/* back to top */
+
+.back-to-top {
+    cursor: pointer;
+    width: 0;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-right: 65px;
+    margin-bottom: 50px;
+    transition: all .4s ease;
+}
+
+.back-to-top:hover {
+    transform: rotate(360deg);
+}

@@ -3,7 +3,7 @@
     <div class="navbar-container vcenter">
         <!-- 0. hide toolbar (media query) -->
         <div class="hide-navbar">
-            <img src="{% static 'images/hidebar.svg'%}" onclick="showToolbar()" class="hide-toolbar" style="width:100%">
+            <img src="{% static 'images/hidebar.svg'%}" onclick="toggleClass('toolbar_container','toolbar-show')" class="hide-toolbar" style="width:100%">
         </div>
 
         <!-- 1. logo -->
@@ -63,7 +63,7 @@
             {% if request.user.is_authenticated %}
             <div class="already-login-container" id="already_login" style="min-width:100%">
                 <div class="user-profile-container vcenter" style="min-width:15%">
-                    <div class="user-profile-navbar box-shadow-effect" onclick="showDropdown()" style="background-image: url({{request.user.profile_image.url}})"></div>
+                    <div class="user-profile-navbar box-shadow-effect" onclick="toggleClass('profile_dropdown','profile-show')" style="background-image: url({{request.user.profile_image.url}})"></div>
                     <div class="profile-dropdown-content" id="profile_dropdown">
                         <div class="navbar-name">{{request.user.first_name|title}}&nbsp;{{request.user.last_name|title}}</div>
                         <a href="{%url 'profile_view'%}">หน้าโปรไฟล์ของคุณ</a>

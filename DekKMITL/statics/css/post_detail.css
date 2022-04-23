@@ -42,6 +42,7 @@
 
 .post-detail {
     padding: 5px 0;
+    align-items: flex-start;
 }
 
 .post-like {
@@ -102,14 +103,21 @@
 
 .post-header {
     font-size: 30px;
+    overflow-wrap: anywhere;
 }
 
 
 /* edit post */
 
+.edit-post-dropdown {
+    align-self: flex-start;
+}
+
 .edit-post-dropdown-btn {
     cursor: pointer;
     font-size: 15px;
+    min-width: 45px;
+    text-align: right;
 }
 
 .edit-post-dropdown-content {
@@ -143,11 +151,14 @@
 
 .post-tag {
     font-size: 19px;
+    width: 49%;
 }
 
 .post-user-date {
     font-size: 16px;
     color: #9C9B9B;
+    width: 49%;
+    text-align: right;
 }
 
 

@@ -250,6 +250,14 @@ input[type=file] {
     background-color: #363636;
 }
 
+#show_img {
+    display: block;
+    margin: auto;
+    min-width: 500px;
+    max-width: 600px;
+    padding: 10px;
+}
+
 
 /* set blog delete time */
 

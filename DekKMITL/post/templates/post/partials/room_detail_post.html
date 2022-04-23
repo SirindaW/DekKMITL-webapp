@@ -1,8 +1,8 @@
 {% load static %} {% load humanize %} {% load post_tags%} {% if not posts%}
-<div style="text-align:center">ไม่มีกระทู้ในห้องนี้</div>
+<div class="not-found-post">ยังไม่มีกระทู้</div>
 {% endif %} {% for post in posts %}
 
-<div class="post-container">
+<div class="post-container" onclick="window.location='{{post.get_absolute_url}}'">
     <div class="user-profile-container vcenter" style="width:10%;align-items:flex-start;">
         <a href="{{post.author.get_absolute_url}}">
             <div class="user-profile-pic" style="background-image: url({{post.author.get_profile_image_url}});height: 60px;width: 60px;"></div>
