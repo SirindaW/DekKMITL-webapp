@@ -1,5 +1,5 @@
 
-# Welcome to DekKMITL!
+# Welcome to DekKMITL! 😄
 DekKMITL-webapp
 Software Development Project (Y2/2)
 Computer Engineering KMITL
@@ -7,7 +7,7 @@ Computer Engineering KMITL
 DekKMITL is web blog application that helps you in contact with KMITL community.
 
 
-# Installation
+# Installation 💻
 You can follow these steps to install the demo project.
 
 ## Clone the repository
@@ -25,7 +25,7 @@ It’s possible to install Pipenv with Homebrew on MacOS, or with Linuxbrew on L
 
 More detailed installation instructions can be found in the  [☤ Installing Pipenv](https://pipenv.pypa.io/en/latest/install/#installing-pipenv)  chapter.
 
-## Install the requirements 
+## Install the requirements 💼
 This project is using Django as a framework as well as a bundle of packages. Easily use pipenv to install the requirements. Note that requirements.txt is in the DekKMITL-webapp\DekKMITL directory.
 
 `pipenv install -r requirements.txt`
@@ -44,7 +44,7 @@ Starts the Django Python interactive interpreter
 `exec(open('dbsetup.py').read())`
 exit the shell
 `exit()`
-## Runserver
+## Runserver ✈️
 runserver
 `python manage.py runserver`
     
