@@ -12,4 +12,5 @@ urlpatterns = [
     path('like/<slug:slug>',views.like_view,name='like_view'),
     path('tag/',views.tag_view,name='tag_view'),
     path('tag/<str:tag>',views.tag_detail_view,name='tag_detail_view'),
+    path('comment-like-toggle/<int:id>',views.comment_like_toggle_view,name='comment_like_toggle_view')
 ]

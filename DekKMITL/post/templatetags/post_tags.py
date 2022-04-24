@@ -35,3 +35,7 @@ def is_active(post):
 @register.filter
 def is_expired(post):
     return post.is_expired()
+
+@register.filter
+def is_liked_comment(user,comment):
+    return comment.is_liked_by(user)

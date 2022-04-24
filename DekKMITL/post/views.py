@@ -5,8 +5,8 @@ from django.http import HttpResponseRedirect
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import make_aware
 
-from .models import Post, Room, Tag
-from .forms import PostCreateForm
+from .models import Post, Room, Tag, Comment
+from .forms import PostCreateForm,CommentForm
 
 
 
@@ -109,12 +109,30 @@ def feed_page_view(request):
 def post_detail_view(request,post_slug):
     post = get_object_or_404(Post,slug=post_slug)
     liked = post.liker.filter(id=request.user.id).exists()
-    context = {
-        'post':post
-    } 
     # Update views
     post.views += 1
     post.save()
+
+    comment_form = CommentForm(request.POST)
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment_form.save(commit=False)
+            comment = Comment()
+            comment.content = comment_form.cleaned_data.get('content')
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+            
+            return redirect(reverse('post:details_view',kwargs={'post_slug':post.slug}))
+        else:
+            print("FORM IS NOT VALID")
+    
+    context = {
+        'post':post,
+        'comment_form':comment_form,
+    } 
+    
     return render(request,'post/post_detail.html',context)
 
 def like_view(request,slug):
@@ -140,3 +158,10 @@ def tag_detail_view(request,tag):
         'posts':posts_in_tag,
     }
     return render(request,'post/tag_detail.html',context)
+
+    
+def comment_like_toggle_view(request,id):
+    comment = get_object_or_404(Comment,id=id)
+    comment.toggle_like(request.user)
+    post_slug = comment.post.slug
+    return redirect(reverse('post:details_view',kwargs={'post_slug':post_slug}))

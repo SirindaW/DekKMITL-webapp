@@ -52,6 +52,7 @@
     <!-- 2. comment -->
     <div class="comment-container">
         <!-- 2.1 ส่วนเขียน comment -->
+    <form method="POST" id="comment_submit">
         <div class="comment-write">
             <div class="comment-input">
                 <div class="user-profile-container vcenter" style="width:10%;margin-right:10px">
@@ -59,37 +60,60 @@
                         <div class="user-profile-pic" style="background-image: url({{request.user.get_profile_image_url}});height:80px;width:80px"></div>
                     </a>
                 </div>
-                {% render_field comment_form.content%}
-                <textarea class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..."></textarea>
+                <!-- {{ comment_form.content }} -->
+                {% render_field comment_form.content name="content" class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..." %}
+                <!-- <textarea class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..."></textarea> -->
             </div>
             <div class="comment-submit">
-                <form method="POST" id="comment_submit">
                     {% csrf_token %}
                     <button class="redorange" type="submit">ส่ง</button>
-                </form>
             </div>
         </div>
+    </form>
         <!-- 2.2 ส่วนความคิดเห็นคนอื่น -->
         <div class="comment-read">
-            <div class="comment-count">x ความคิดเห็น</div>
+            <div class="comment-count">{{post.total_comments}} ความคิดเห็น</div>
             <div class="all-comment">
+                <script>
+                    var i=0;
+                </script>
                 <!-- -------------------loop comment------------------ -->
+                {% for comment in post.get_comments %}
+
+
+
                 <div class="comment">
                     <div class="user-profile-container vcenter" style="width:10%;margin-right:10px">
-                        <a href="#link to comment's user profile">
-                            <div class="user-profile-pic" style="background-image: url('/statics/images/defaultprofilepic.svg');height:80px;width:80px"></div>
+                        <a href="{{comment.author.get_absolute_url}}">
+                            <div class="user-profile-pic" style="background-image: url('{{comment.author.get_profile_image_url}}');height:80px;width:80px"></div>
                         </a>
                     </div>
                     <div class="comment-content">
-                        <div class="content blogfont">ตลกจุง</div>
+                        <div class="content blogfont">{{comment.content}}</div>
                         <div class="username-like">
-                            <div class="username">username : comment date</div>
+                            <div class="username">{{comment.author.first_name}} : {{comment.date_created|naturaltime}}</div>
                             <div class="like">
-                                3&nbsp;<button type="submit" id="comment_like_btn" class="like-btn fa fa-heart-o"></button>
+                                {{comment.total_likes}}&nbsp; <a href="{{comment.get_like_toggle_url}}"><button type="submit" id="comment_like_btn" class="like-btn fa"></button></a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <script>
+                    var riable = '{{request.user|is_liked_comment:comment}}'
+                    console.log(riable)
+
+                    var commentlike = document.querySelectorAll("#comment_like_btn");
+                    console.log(i);
+                    if (riable == 'True') {
+                        console.log("like");
+                        commentlike[i].classList.add('fa-heart'); //like
+                    } else {
+                        console.log("not like");
+                        commentlike[i].classList.add('fa-heart-o'); //not like
+                    }
+                    i++;
+                </script>
+                {% endfor %}
                 <!-- ---------------------------------------------------- -->
             </div>
         </div>
@@ -133,12 +157,16 @@
     }
 
     //comment like button 
-    /*var commentlike = document.querySelector("#comment_like_btn");
-    if ('{% like_status request post.pk%}' == 'True') {
-        commentlike.classList.add('fa-heart'); //like
-    } else {
-        commentlike.classList.add('fa-heart-o'); //not like
-    }*/
+    /*
+    var commentlike = document.querySelectorAll("#comment_like_btn");
+    for(let i=0; i<commentlike.length;i++) {
+        if ('' == 'True') {
+            commentlike[i].classList.add('fa-heart'); //like
+        } else {
+            commentlike[i].classList.add('fa-heart-o'); //not like
+        }
+    }
+    */
 
     //----------------prevent comment submit---------------   
     $('#comment_submit').submit(function(event) {

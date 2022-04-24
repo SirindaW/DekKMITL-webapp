@@ -63,6 +63,6 @@ class CommentForm(forms.ModelForm):
             "content",
         ]
 
-    widgets = {
-        "content": forms.Textarea(),
-    }
+    # widgets = {
+    #     "content": forms.Textarea(),
+    # }

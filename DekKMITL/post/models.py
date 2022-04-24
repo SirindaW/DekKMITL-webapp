@@ -63,6 +63,9 @@ class Post(models.Model):
     ### Comment ###
     # post.comments.all() -> QuerySet of comments on that post
     # 
+
+    def get_comments(self):
+        return self.comments.all().order_by('-date_created')
     
     def total_comments(self):
         return self.comments.all().count()        
@@ -143,6 +146,30 @@ class Comment(models.Model):
     content = models.TextField(max_length=1000)
     author = models.ForeignKey(Account,related_name='comments',on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def get_like_toggle_url(self):
+        return reverse('post:comment_like_toggle_view',kwargs={'id':self.pk})
+
+    def is_liked_by(self,user):
+        return self.likers.all().filter(liker=user).exists()
+
+    def _like(self,user):
+        if self.is_liked_by(user):
+            return False
+        cml = CommentLike(liker=user,comment=self)
+        return cml.save()
+
+    def _unlike(self,user):
+        if not self.is_liked_by(user):
+            return False
+        cml = CommentLike.objects.get(liker=user,comment=self)
+        return cml.delete()
+    
+    def toggle_like(self,user):
+        if self.is_liked_by(user):
+            return self._unlike(user)
+        else:
+            return self._like(user)
 
     def total_likes(self):
         return self.likers.all().count()
