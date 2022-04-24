@@ -80,8 +80,6 @@
                 <!-- -------------------loop comment------------------ -->
                 {% for comment in post.get_comments %}
 
-
-
                 <div class="comment">
                     <div class="user-profile-container vcenter" style="width:10%;margin-right:10px">
                         <a href="{{comment.author.get_absolute_url}}">
@@ -121,7 +119,7 @@
 </div>
 
 <!-- back to top btn -->
-<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top"> {% endblock %}
+<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top">
 
 <!-- ------------javascript----------------- -->
 <script>
@@ -130,15 +128,6 @@
         return text.replace(/[ \n]/g, '');
     }
 
-    //function count word
-    function countWord(val) {
-        var wom = val.match(/.+/g);
-        var len = 0;
-        if (wom) {
-            len = wom[0].length;
-        }
-        return len;
-    }
     //---------------comment--------------------
     var comment = document.getElementById("comment_input");
 
@@ -158,18 +147,6 @@
     } else {
         like.classList.add('fa-heart-o'); //not like
     }
-
-    //comment like button 
-    /*
-    var commentlike = document.querySelectorAll("#comment_like_btn");
-    for(let i=0; i<commentlike.length;i++) {
-        if ('' == 'True') {
-            commentlike[i].classList.add('fa-heart'); //like
-        } else {
-            commentlike[i].classList.add('fa-heart-o'); //not like
-        }
-    }
-    */
 
     //----------------prevent comment submit---------------   
     $('#comment_submit').submit(function(event) {
