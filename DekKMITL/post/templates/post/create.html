@@ -152,21 +152,16 @@
         <button type="submit" id="submit_form" class="create-blog-btn redorange vhcenter" disabled>ตั้งกระทู้เลย</button>
     </div>
 </form>
+<a href="{%url 'rules_view'%}" class="blog-rule">ดูกฎการตั้งกระทู้</a>
 
 <script>
-    //ค่าเริ่มต้น
-    header = limitText(headerTextContent, headerShowWordCount, 4, 120);
-    //ค่าเริ่มต้น
-    body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
-    //ค่าเริ่มต้น
-    limitText(TagTextContent, TagShowWordCount, 0, 50);
     //----------------limit header text---------------------
     var headerTextContent = document.getElementById("header_text");
     var headerShowWordCount = document.getElementById("header_count");
 
     headerTextContent.addEventListener("input", function() {
         header = limitText(headerTextContent, headerShowWordCount, 4, 120);
-        buttonAble()
+        buttonAble('submit_form');
     });
 
     //----------------limit body text---------------------
@@ -175,15 +170,18 @@
 
     bodyTextContent.addEventListener("input", function() {
         body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
-        buttonAble()
+        buttonAble('submit_form');
     });
 
     //---------------tag--------------------
+    var TagTextContent = document.getElementById("tag_input");
+    var TagShowWordCount = document.getElementById("tag_count");
+    let container = document.querySelector('.all-tag')
     var tagList = document.getElementById('tag_list');
     tagList.value = '';
     TagTextContent.addEventListener("input", function() {
         limitText(TagTextContent, TagShowWordCount, 0, 50);
-        TagTextContent.value = TagTextContent.value.substring(0, 49);
+        TagTextContent.value = TagTextContent.value.substring(0, 50);
     });
 
     //event tag
@@ -287,7 +285,7 @@
         } else {
             setTime = true;
         }
-        buttonAble();
+        buttonAble('submit_form');
     });
 
 
@@ -321,7 +319,7 @@
 
     //----------------prevent form submit---------------   
     document.querySelector('form').addEventListener("click", function() {
-        buttonAble()
+        buttonAble('submit_form');
     });
     $('form').submit(function(event) {
         if (header && body && room && (unsetTime || setTime)) {
@@ -331,11 +329,18 @@
             return false;
         }
     });
-    buttonAble();
+    buttonAble('submit_form');
 
     //image uploaded event
     document.querySelector("#cover_blog_img").onchange = evt => {
         previewImg("#cover_blog_img", "#show_img")
     }
+
+    //ค่าเริ่มต้น
+    header = limitText(headerTextContent, headerShowWordCount, 4, 120);
+    //ค่าเริ่มต้น
+    body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
+    //ค่าเริ่มต้น
+    limitText(TagTextContent, TagShowWordCount, 0, 50);
 </script>
 {% endblock content %}

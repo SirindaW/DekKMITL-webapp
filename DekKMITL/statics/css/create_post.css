@@ -352,3 +352,20 @@ input[type=file] {
     box-shadow: inset 0px 100px 4px rgba(255, 255, 255, 0.507);
     cursor: default;
 }
+
+
+/* blog create rule */
+
+.blog-rule {
+    display: block;
+    margin: auto;
+    width: fit-content;
+    margin-top: 40px;
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.459);
+    transition: all .2s ease;
+}
+
+.blog-rule:hover {
+    color: #E05F4C;
+}

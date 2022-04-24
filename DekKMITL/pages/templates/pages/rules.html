@@ -1,1 +1,22 @@
-<div>Rules</div>
+{% extends 'components/base.html' %} {% load static%} {% block site_title%} Rules {% endblock %}
+
+<!-- Prompt Messages -->
+{% block content %}
+<link rel="stylesheet" href="{%static '/css/rule.css'%}">
+
+<div class="container">
+    <div class="title">กฎการตั้งกระทู้</div>
+    <div class="back-to-create-blog"><a href="{%url 'post:create_view'%}">◂ กลับสู่หน้าตั้งกระทู้</a></div>
+    <div class="rules-content">
+        1. ห้ามลงกระทู้กระทบสถาบันฯ ชาติ ศาสน์ กษัตริย์
+        <br>2. ห้ามเผยแพร่ข้อมูลมีลิขสิทธิ์ ทั้งภาพและเสียง
+        <br>3. ห้ามการซื้อขายสินค้าในบอร์ด
+        <br>4. ห้ามลงเนื้อหาลามกอนาจาร หรือหยาบคาย
+        <br>5. ละเว้นการวิพากษ์วิจารณ์ทางการเมือง
+        <br>6. ห้ามแทรก link โฆษณาไปเว็บอื่น (เชิงพาณิชย์)
+        <br>7. งดการลงข้อมูลส่วนตัวใด ๆ ของตนเองและผู้อื่น เช่น เบอร์โทรศัพท์ อีเมล
+        <br>8. ห้าม Hotlink รูปจากเว็บอื่นโดยไม่ได้รับอนุญาต
+    </div>
+</div>
+
+{% endblock %}

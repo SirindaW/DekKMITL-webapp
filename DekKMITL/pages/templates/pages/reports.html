@@ -1,1 +1,48 @@
-<div>Reports</div>
+{% extends 'components/base.html' %} {% load static%} {% block site_title%} Reports {% endblock %}
+
+<!-- Prompt Messages -->
+{% block content %}
+<link rel="stylesheet" href="{%static '/css/report.css'%}">
+
+<form method="POST"> {% csrf_token %}
+    <div class="container">
+        <!-- 1. เนื้อหารายงาน -->
+        <div class="report-container">
+            <div class="title">แจ้งปัญหา</div>
+            <div class="blog-body">
+                <textarea id="report" rows="8" class="report-text" placeholder="เขียนเนื้อหาที่ต้องการรายงาน..."></textarea>
+            </div>
+        </div>
+
+        <!-- 2. ปุ่มตั้งกระทู้ -->
+        <button type="submit" id="submit_report" class="report-btn redorange" disabled>ส่ง</button>
+    </div>
+
+</form>
+
+<script>
+    //----------------limit text---------------------
+    var report = document.getElementById("report");
+
+    report.addEventListener("input", function() {
+        canSubmit = limitMinText(report, 4);
+        report.value = report.value.substring(0, 1000);
+        buttonReportAble('submit_report')
+    });
+    //----------------prevent form submit---------------   
+    document.querySelector('form').addEventListener("click", function() {
+        buttonReportAble('submit_report');
+    });
+    $('form').submit(function(event) {
+        if (canSubmit) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    buttonReportAble('submit_report');
+
+    //ค่าเริ่มต้น
+    canSubmit = limitMinText(report, 4);
+</script>
+{% endblock %}
