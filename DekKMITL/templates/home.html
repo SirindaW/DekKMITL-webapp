@@ -15,7 +15,7 @@
                 <div class="time-choose vhcenter">
                     <div class="in" style="font-size:19px">ใน</div>
                     <div class="time-choose-dropdown">
-                        <button onclick="showTime()" class="time-choose-dropbtn" id="period">หนึ่งสัปดาห์ ▾</button>
+                        <button onclick="toggleClass('time_choose_dropdown', 'time-show')" class="time-choose-dropbtn" id="period">หนึ่งสัปดาห์ ▾</button>
                         <div id="time_choose_dropdown" class="time-choose-dropdown-content">
                             <a href="#" id="oneday">หนึ่งวัน</a>
                             <a href="#" id="oneweek">หนึ่งสัปดาห์</a>
@@ -181,5 +181,5 @@
         </div>
     </div>
 </div>
-
-{% endblock %}
+<!-- back to top btn -->
+<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top"> {% endblock %}

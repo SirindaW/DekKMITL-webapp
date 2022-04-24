@@ -119,6 +119,7 @@
     max-width: 700px;
     margin: auto;
     height: 400px;
+    cursor: pointer;
 }
 
 
@@ -131,6 +132,7 @@
     border: 1px solid #FFFFFFBF;
     border-radius: 33px;
     transition: all .2s ease;
+    cursor: pointer;
 }
 
 

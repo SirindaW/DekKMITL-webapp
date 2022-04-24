@@ -8,23 +8,17 @@
 <div class="container">
     <div class="filter">
         <div hx-trigger="revealed" hx-swap="innerHTML" hx-target="#all_post" hx-get="{{ room.get_hx_latest_post }}"></div>
-        <div class="latest" hx-trigger="click" hx-swap="innerHTML" hx-target="#all_post" hx-get="{{ room.get_hx_latest_post }}">ล่าสุด</div>
-        <div class="temp" hx-trigger="click" hx-swap="innerHTML" hx-target="#all_post" hx-get="{{ room.get_hx_temp_post }}">ชั่วคราว</div>
+        <div class="latest" id="latest_post" onclick="removeClass('underline_effect', 'underline')" hx-trigger="click" hx-swap="innerHTML" hx-target="#all_post" hx-get="{{ room.get_hx_latest_post }}">ล่าสุด</div>
+        <div class="temp" id="temp_post" onclick="addClass('underline_effect', 'underline')" hx-trigger="click" hx-swap="innerHTML" hx-target="#all_post" hx-get="{{ room.get_hx_temp_post }}">ชั่วคราว</div>
     </div>
+    <div class="highlight redorange" id="underline_effect"></div>
+    <div class="line"></div>
     <div class="all-post" id="all_post">
         <!-- ---------loop post----------- -->
         <!-- Moved to room_detail_post.html -->
         <!-- ----------------------------- -->
     </div>
 </div>
-<!-- 
-<div> POST_ID :{{post.id}} </div>
-<div> POST_TITLE : {{post.title}} </div>
-<div> POST_CONTENT : {{post.content}} </div>
-<div> POST_AUTHOR : {{post.author}} </div>
-<div> POST_SLUG : {{post.slug}} </div>
-<div> POST_CREATED : {{post.date_created}} {{post.date_created|naturaltime}}</div>
-<div> <a style="text-decoration:underline;" href="{{ post.get_absolute_url }}">LINK(ABSOLUTE_URL)</a></div>
-  -->
 
-{% endblock %}
+<!-- back to top btn -->
+<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top"> {% endblock %}

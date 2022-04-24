@@ -15,7 +15,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    border-bottom: 1px solid #fff;
 }
 
 .latest,
@@ -23,12 +22,40 @@
     width: 100%;
     text-align: center;
     font-size: 32px;
+    cursor: pointer;
+}
+
+.highlight {
+    height: 7px;
+    width: 50%;
+    border-radius: 8px;
+    transition: all .5s ease;
+}
+
+.line {
+    border-bottom: 1px solid #fff;
+}
+
+.underline {
+    transform: translateX(100%);
+}
+
+
+/* not found post */
+
+.not-found-post {
+    text-align: center;
+    padding: 85px 10px;
+    font-size: 35px;
+    font-weight: 300;
+    color: rgb(177, 177, 177);
 }
 
 
 /* post container */
 
 .post-container {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     background-color: #131313B2;
@@ -36,10 +63,26 @@
     border-radius: 33px;
     padding: 22px 28px 22px 28px;
     margin: 15px;
+    transition: all .2s ease;
+}
+
+.post-container:hover {
+    background-color: #313131bd;
 }
 
 .post-title {
     line-height: .8cm;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.post-detail {
+    font-size: 15px;
+    color: rgba(172, 172, 172, 0.582);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .post-body {
@@ -50,13 +93,12 @@
 /* post text  */
 
 .post-title a {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 500;
     font-family: 'Bai Jamjuree', sans-serif;
 }
 
-.post-detail a,
-.post-detail {
+.post-detail a {
     font-size: 15px;
     color: rgba(172, 172, 172, 0.582);
 }

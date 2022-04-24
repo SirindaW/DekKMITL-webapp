@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 
-from pages.views import home_view, about_view
+from pages.views import home_view, about_view, rules_view, report_view
 from account.views import register_view,login_view,logout_view,profile_view,profile_edit_view,profile_edit_password_view
 
 from django.conf import settings
@@ -23,6 +23,8 @@ urlpatterns = [
     path("profile/edit/password",profile_edit_password_view,name="profile_edit_password_view"),
     path("post/",include('post.urls')),
     path("account/",include('account.urls')),
+    path("rules/",rules_view,name="rules_view"),
+    path("reports/",report_view,name="report_view"),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
