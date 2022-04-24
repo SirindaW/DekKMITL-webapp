@@ -35,7 +35,10 @@ function changeClass(objID, classAdd, classRemove) {
     document.getElementById(objID).classList.add(classAdd);
     document.getElementById(objID).classList.remove(classRemove);
 }
-
+//display class
+function displayClass(objID) {
+    document.getElementById(objID).style.display = "block";
+}
 //close dropdown
 function closeDropdown(contentClass, showClass) {
     // Close the dropdown if the user clicks outside of it
