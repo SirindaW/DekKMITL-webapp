@@ -10,7 +10,7 @@
     <div class="post-container vhcenter">
         <!-- 1.1 รูปโปรเจ้าของกระทู้ -->
         <div class="owner-pic user-profile-container vcenter" style="width:15%">
-            <a href="#link to blog's user profile">
+            <a href="{{post.author.get_absolute_url}}">
                 <div class="user-profile-pic" style="background-image: url({{post.author.get_profile_image_url}});height:100px;width:100px"></div>
             </a>
         </div>
@@ -52,30 +52,30 @@
     <!-- 2. comment -->
     <div class="comment-container">
         <!-- 2.1 ส่วนเขียน comment -->
-    <form method="POST" id="comment_submit">
-        <div class="comment-write">
-            <div class="comment-input">
-                <div class="user-profile-container vcenter" style="width:10%;margin-right:10px">
-                    <a href="{% url 'profile_view' %}">
-                        <div class="user-profile-pic" style="background-image: url({{request.user.get_profile_image_url}});height:80px;width:80px"></div>
-                    </a>
+        <form method="POST" id="comment_submit">
+            <div class="comment-write">
+                <div class="comment-input">
+                    <div class="user-profile-container vcenter" style="width:10%;margin-right:10px">
+                        <a href="{% url 'profile_view' %}">
+                            <div class="user-profile-pic" style="background-image: url({{request.user.get_profile_image_url}});height:80px;width:80px"></div>
+                        </a>
+                    </div>
+                    <!-- {{ comment_form.content }} -->
+                    {% render_field comment_form.content name="content" class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..." %}
+                    <!-- <textarea class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..."></textarea> -->
                 </div>
-                <!-- {{ comment_form.content }} -->
-                {% render_field comment_form.content name="content" class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..." %}
-                <!-- <textarea class="comment-textarea blogfont" id="comment_input" rows="4" placeholder="เขียนความคิดเห็น..."></textarea> -->
-            </div>
-            <div class="comment-submit">
+                <div class="comment-submit">
                     {% csrf_token %}
                     <button class="redorange" type="submit">ส่ง</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
         <!-- 2.2 ส่วนความคิดเห็นคนอื่น -->
         <div class="comment-read">
             <div class="comment-count">{{post.total_comments}} ความคิดเห็น</div>
             <div class="all-comment">
                 <script>
-                    var i=0;
+                    var i = 0;
                 </script>
                 <!-- -------------------loop comment------------------ -->
                 {% for comment in post.get_comments %}
@@ -119,6 +119,9 @@
         </div>
     </div>
 </div>
+
+<!-- back to top btn -->
+<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top"> {% endblock %}
 
 <!-- ------------javascript----------------- -->
 <script>

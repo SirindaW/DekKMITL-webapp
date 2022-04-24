@@ -307,22 +307,20 @@ function search(notfoundID, inputID, tableID, checkRow) {
 }
 
 // ------------back to top button-------------
-//Get the button
-var backtopBtn = document.getElementById("back_to_top");
 
 function scrollFunction() {
+    var backtopBtn = document.getElementById('back_to_top');
     if (backtopBtn) {
         if (document.documentElement.scrollTop > 50) {
-            backtopBtn.style.width = "75px";
+            backtopBtn.style.width = "75px"
         } else {
-            backtopBtn.style.width = "0";
+            backtopBtn.style.width = "0px"
         }
     }
 }
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-    document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
 
@@ -330,6 +328,7 @@ function topFunction() {
 window.onscroll = function() {
     scrollFunction();
 };
+
 window.onclick = function(event) {
     // Close the dropdown if the user clicks outside of it
     if (!event.target.matches('.edit-post-dropdown-btn')) {
