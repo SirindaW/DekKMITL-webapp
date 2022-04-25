@@ -130,7 +130,7 @@
 
     <div class="profile-margin" style="display:block;margin-top:25px">
         <!-- ********************loop blog*********************** -->
-        <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%">
+        <div class="no-thumbnail-blog profile-myblog vhcenter" style="width:100%" onclick="window.location='{{post.get_absolute_url}}'">
             <div class="user-profile-container vhcenter" style="width:15%">
                 <a href="{{post.author.get_absolute_url}}">
                     <div class="user-profile-pic" style="background-image: url({{post.author.profile_image.url}})"></div>
