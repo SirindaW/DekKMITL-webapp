@@ -28,9 +28,9 @@
                 <div class="edit-post-dropdown">
                     <div class="edit-post-dropdown-btn" onclick="toggleClass('edit_post_content','edit-show')">● ● ●</div>
                     <div class="edit-post-dropdown-content" id="edit_post_content">
-                        {%if request.user == post.author%}
+                        {%if request.user == post.author or request.user.is_admin %}
                         <a href="#">แก้ไข</a>
-                        <a href="#">ลบ</a> {%endif%}
+                        <a href="{{post.get_delete_url}}">ลบ</a> {%endif%}
                         <button type="submit" class="report-post" onclick="displayClass('alert')">รายงาน</a>
                     </div>
                 </div>
@@ -40,6 +40,10 @@
                 <div class="post-tag blogfont">{%for tag in post.tag.all%} #{{tag}} {% endfor %}</div>
                 <div class="post-user-date">{{post.author}} : {% if post.is_expirable %} {% if post|is_expired %} หมดอายุแล้ว {% else %}<br> จะหมดอายุเมื่อ {{post.expire_date}} {% endif %}{% else %} {{post.date_created|naturaltime}} {% endif %}</div>
             </div>
+            <!-- รูปภาพปกกระทู้ -->
+            {% if not post.is_cover_image_default %}
+            <img src="{{post.get_cover_image_url}}">
+            {% endif %}
             <!-- 1.2.3 เนื้อหากระทู้ -->
             <div class="post-body blogfont">{{post.content}}</div>
             <!-- 1.2.4 ชื่อห้อง และปุ่มไลค์ -->

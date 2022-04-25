@@ -98,6 +98,14 @@ def post_create_view(request):
 
     return render(request,'post/create.html',context)
 
+def post_delete_view(request,post_slug):
+    post = get_object_or_404(Post,slug=post_slug)
+    if (request.user.pk == post.author) or request.user.is_admin:
+        post.delete()
+    else:
+        return redirect(reverse('post:details_view'),kwargs={'post_slug':post.slug})
+    return redirect(reverse('profile_view'))
+
 def feed_page_view(request):
     posts = Post.objects.active()
     context = {

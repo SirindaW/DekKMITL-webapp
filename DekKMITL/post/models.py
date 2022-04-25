@@ -33,6 +33,8 @@ class PostManager(models.Manager):
     
 
 def get_cover_image_filepath(self,*args,**kwargs):
+    # custom cover image
+    self.is_cover_image_default = False    
     return f'post_cover_image/{self.slug}/post_cover_image.png'
 
 def get_default_cover_image():
@@ -48,6 +50,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True,max_length=300,blank=False)
     author = models.ForeignKey(Account,blank=True,null=True,on_delete=models.CASCADE,related_name='post')
     cover_image = models.ImageField(max_length=255, upload_to=get_cover_image_filepath, default=get_default_cover_image)
+    is_cover_image_default = models.BooleanField(default=True)
     room = models.ForeignKey('post.Room',on_delete=models.SET_NULL,null=True,blank=True,related_name='post')
     tag = models.ManyToManyField('post.Tag',related_name='posts',blank=True)
     expire_date = models.DateTimeField(null=True,blank=True,default=None)
@@ -99,11 +102,14 @@ class Post(models.Model):
     def get_like_toggle_url(self):
         return reverse('post:like_view',kwargs={'slug':self.slug})
 
-    def __str__(self) -> str:
-        return self.title
-
     def get_absolute_url(self):
         return reverse("post:details_view", kwargs={"post_slug": self.slug})
+    
+    def get_delete_url(self):
+        return reverse("post:delete_view",kwargs={'post_slug':self.slug})
+
+    def __str__(self) -> str:
+        return self.title
     
 def get_room_icon_file_path(self,*args,**kwargs):
     return f'room_icon/{self.title}.png'
