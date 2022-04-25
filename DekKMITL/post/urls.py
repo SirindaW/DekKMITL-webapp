@@ -13,7 +13,8 @@ urlpatterns = [
     path('like/<slug:slug>',views.like_view,name='like_view'),
     path('tag/',views.tag_view,name='tag_view'),
     path('tag/<str:tag>',views.tag_detail_view,name='tag_detail_view'),
-    path('comment-like-toggle/<int:id>',views.comment_like_toggle_view,name='comment_like_toggle_view')
+    path('comment-like-toggle/<int:id>',views.comment_like_toggle_view,name='comment_like_toggle_view'),
+    path('comment-delete/<int:id>',views.delete_comment_view,name='delete_comment_view'),
 ]
 hx_patterns = [    
     path('room/hx/<str:room_name>/<str:status>',views.hx_room_detail,name='hx_room_detail'),

@@ -141,7 +141,7 @@ def feed_page_view(request):
     } 
     return render(request,'post/feed_page.html',context)
 
-
+# post detail and comments
 def post_detail_view(request,post_slug):
     post = get_object_or_404(Post,slug=post_slug)
     liked = post.liker.filter(id=request.user.id).exists()
@@ -170,6 +170,13 @@ def post_detail_view(request,post_slug):
     } 
     
     return render(request,'post/post_detail.html',context)
+
+def delete_comment_view(request,id):
+    comment = get_object_or_404(Comment,id=id)
+    post = comment.post
+    if (request.user == comment.author) or request.user.is_admin:
+        comment.delete() 
+    return redirect(reverse('post:details_view',kwargs={'post_slug':post.slug}))
 
 def like_view(request,slug):
     post = get_object_or_404(Post,slug=slug)

@@ -170,6 +170,9 @@ class Comment(models.Model):
     author = models.ForeignKey(Account,related_name='comments',on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def get_delete_url(self):
+        return reverse('post:delete_comment_view',kwargs={'id':self.pk})
+
     def get_like_toggle_url(self):
         return reverse('post:comment_like_toggle_view',kwargs={'id':self.pk})
 

@@ -109,13 +109,17 @@
                             </a>
                         </div>
                         <div class="comment-content">
+
                             <div class="comment-and-delete">
                                 <div class="content blogfont">{{comment.content}}</div>
+                                {% if request.user.pk == comment.author.pk or request.user.is_admin%}
                                 <div class="edit-post-dropdown-btn comment-del" onclick="toggleClass('edit_comment_content','edit-show')">● ● ●</div>
                                 <div class="edit-post-dropdown-content" id="edit_comment_content" style="right:8px;top:45px;">
-                                    <a href="#">ลบ</a>
+                                    <a href="{{comment.get_delete_url}}">ลบ</a>
                                 </div>
+                                {% endif %}
                             </div>
+
                             <div class="username-like">
                                 <div class="username">{{comment.author.first_name}} : {{comment.date_created|naturaltime}}</div>
                                 <div class="like">
