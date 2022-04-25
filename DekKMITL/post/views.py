@@ -50,6 +50,19 @@ def room_list_view(request):
     template = "post/room_list.html"
     return render(request,template,context)
 
+def post_edit_view(request,post_slug):
+    post = get_object_or_404(Post,slug=post_slug)
+    if not (request.user.pk == post.author.pk or request.user.is_admin):
+        return redirect(reverse('post:details_view'),kwargs={'post_slug':post.slug})
+    if request.method=='POST':
+        pass
+        
+
+    context = {
+        
+    }
+    return render(request,'post/edit_post.html',context)
+
 def post_create_view(request):
     form = PostCreateForm()
     if request.method == "POST":

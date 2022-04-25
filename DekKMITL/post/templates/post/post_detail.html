@@ -29,7 +29,7 @@
                     <div class="edit-post-dropdown-btn" onclick="toggleClass('edit_post_content','edit-show')">● ● ●</div>
                     <div class="edit-post-dropdown-content" id="edit_post_content">
                         {%if request.user == post.author or request.user.is_admin %}
-                        <a href="#">แก้ไข</a>
+                        <a href="{{post.get_edit_url}}">แก้ไข</a>
                         <a href="{{post.get_delete_url}}">ลบ</a> {%endif%}
                         <button type="submit" class="report-post" onclick="displayClass('alert')">รายงาน</a>
                     </div>
