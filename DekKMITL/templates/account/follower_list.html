@@ -14,8 +14,10 @@
     </div>
     <div class="user-info">
         <!-- ------------user not found--------------- -->
-        <div class="user-not-found vhcenter" id="user_not_found">ไม่พบผู้ใช้</div>
-
+        <!-- <div class="user-not-found vhcenter" id="user_not_found">ไม่พบผู้ใช้</div> -->
+        {% if not instance.followers %}
+        <div class="vhcenter" id="">ไม่พบผู้ใช้</div>
+        {% else %}
         <table id="follower_table" class="follower-table">
             <!-- ******************loop user********************* -->
             {% for user in instance.followers %}
@@ -32,6 +34,7 @@
             <!-- ***************************************************** -->
             {% endfor %}
         </table>
+        {% endif %}
     </div>
 </div>
 
