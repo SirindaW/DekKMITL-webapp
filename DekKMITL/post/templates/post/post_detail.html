@@ -37,7 +37,7 @@
             </div>
             <!-- 1.2.2 แท็ก ชื่อเจ้าของกระทู้ และ วันที่สร้างกระทู้ -->
             <div class="post-detail spc-btw">
-                <div class="post-tag blogfont">#blabla #bear</div>
+                <div class="post-tag blogfont">{%for tag in post.tag.all%} #{{tag}} {% endfor %}</div>
                 <div class="post-user-date">{{post.author}} : {{post.date_created|naturaltime}}</div>
             </div>
             <!-- 1.2.3 เนื้อหากระทู้ -->
