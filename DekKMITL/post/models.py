@@ -108,6 +108,9 @@ class Post(models.Model):
     def get_delete_url(self):
         return reverse("post:delete_view",kwargs={'post_slug':self.slug})
 
+    def get_edit_url(self):
+        return reverse('post:edit_view',kwargs={'post_slug':self.slug})
+
     def __str__(self) -> str:
         return self.title
     
