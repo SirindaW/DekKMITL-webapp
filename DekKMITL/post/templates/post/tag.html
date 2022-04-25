@@ -20,7 +20,7 @@
         {% for tag in tags %}
         <tr id="tag_tr">
             <td class="hashtag"><a href="{{tag.get_absolute_url}}">#{{tag.title}}</a></td>
-            <td class="post-count">{{tag.get_post.count}}&nbsp;กระทู้</td>
+            <td class="post-count">{{tag.get_active_post.count}}&nbsp;กระทู้</td>
         </tr>
         {% endfor %}
         <!-- ------------------------------------ -->

@@ -187,7 +187,7 @@ def like_view(request,slug):
     return HttpResponseRedirect(reverse('post:details_view',args=[str(post.slug)]))
 
 def tag_view(request):
-    tags = Tag.objects.all()
+    tags = Tag.objects.active()
     context = {
         'tags':tags,
     }

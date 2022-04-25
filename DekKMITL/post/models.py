@@ -144,9 +144,25 @@ class Room(models.Model):
     def __str__(self) -> str:
         return self.title
 
+class TagManager(models.Manager):
+    def all(self):
+        return self.get_queryset()
+
+    def active(self):
+        tags = self.get_queryset()
+        active_tags = Tag.objects.none()
+        for tag in tags:
+            if tag.get_active_post().exists():
+                # if there are posts in the tag
+                active_tags|=Tag.objects.filter(title=tag.title)
+        return active_tags
+    
+
 class Tag(models.Model):
     title = models.CharField(max_length=200,unique=True)
     # related_name = ['tag.posts']
+
+    objects = TagManager()
 
     def get_hx_latest_post(self):
         return reverse('post:hx_tag_detail',kwargs={'tag_name':self.title,'status':'latest'})
@@ -157,6 +173,16 @@ class Tag(models.Model):
     def get_post(self):
         posts = Post.objects.filter(tag__title=self.title)
         return posts
+
+    def get_active_post(self):
+        posts = Post.objects.active().filter(tag__title=self.title)
+        return posts
+
+    def total_post(self):
+        return self.get_post().count()
+
+    def total_active_post(self):
+        return self.get_active_post().count()
 
     def get_absolute_url(self):
         return reverse('post:tag_detail_view', kwargs={"tag": self.title})
