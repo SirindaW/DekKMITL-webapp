@@ -60,6 +60,7 @@ coverage.xml
 local_settings.py
 
 db.sqlite3-journal
+db.sqlite3
 
 # Flask stuff:
 instance/
@@ -130,4 +131,3 @@ dmypy.json
 
 Pipfile
 Pipfile.lock
-DekKMITL/db.sqlite3
