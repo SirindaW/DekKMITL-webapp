@@ -101,16 +101,6 @@
 }
 
 
-/* blog not found */
-
-.notfound-blog {
-    height: 300px;
-    font-size: 40px;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.308);
-}
-
-
 /* blog with thumbnail */
 
 .thumbnail-blog {
@@ -131,8 +121,29 @@
     border: 1px solid #FFFFFFBF;
     border-radius: 33px;
     transition: all .2s ease;
-    cursor: pointer;    
+    cursor: pointer;
     margin: 20px;
+}
+
+
+/* blog not found */
+
+.notfound-blog {
+    font-size: 40px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.308);
+    cursor: context-menu;
+}
+
+
+/* big blog not found */
+
+.notfound-bigblog {
+    height: 300px;
+    font-size: 40px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.308);
+    cursor: context-menu;
 }
 
 
@@ -279,6 +290,7 @@
     min-width: 150px;
     min-height: 150px;
     margin: 10px;
+    padding: 10px;
 }
 
 .poproom:hover {
@@ -294,8 +306,4 @@
 
 .no-thumbnail-blog:hover {
     background-color: #464646b2;
-}
-
-.notfound-blog:hover {
-    background-color: #131313B2;
 }

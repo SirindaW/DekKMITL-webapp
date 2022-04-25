@@ -73,6 +73,7 @@
 }
 
 .comment-content {
+    position: relative;
     width: 100%;
     background: rgba(19, 19, 19, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.75);
@@ -89,6 +90,12 @@
 .title-edit-container {
     padding: 10px 0;
     border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+}
+
+.comment-and-delete {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
 }
 
 
@@ -276,6 +283,12 @@
 }
 
 .content {
-    padding-bottom: 10px;
     line-break: anywhere;
+}
+
+
+/* delete comment */
+
+.comment-del {
+    font-size: 12px;
 }

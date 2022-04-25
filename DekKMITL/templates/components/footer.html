@@ -13,21 +13,21 @@
             <div class="footer-toolbar">
                 <div class="createblog vcenter footer-margin">
                     <div class="createblog-icon">
-                        <a href="#" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="max-width:100%"></a>
+                        <a href="{%url 'post:create_view'%}" class="vcenter"><img src="{% static 'images/createblog.svg'%}" style="max-width:100%"></a>
                     </div>
-                    <div class="createblog-text"><a href="#" class="footer-effect-shadow">ตั้งกระทู้</a></div>
+                    <div class="createblog-text"><a href="{%url 'post:create_view'%}" class="footer-effect-shadow">ตั้งกระทู้</a></div>
                 </div>
                 <div class="chooseroom vcenter footer-margin">
                     <div class="chooseroom-icon">
-                        <a href="#" class="vcenter"><img src="{% static 'images/room.svg'%}" style="max-width:100%"></a>
+                        <a href="{% url 'post:room_list_view' %}" class="vcenter"><img src="{% static 'images/room.svg'%}" style="max-width:100%"></a>
                     </div>
-                    <div class="chooseroom-text"><a href="#" class="footer-effect-shadow">เลือกห้อง</a></div>
+                    <div class="chooseroom-text"><a href="{% url 'post:room_list_view' %}" class="footer-effect-shadow">เลือกห้อง</a></div>
                 </div>
                 <div class="tag vcenter footer-margin">
                     <div class="tag-icon">
-                        <a href="#" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="max-width:100%"></a>
+                        <a href="{%url 'post:tag_view'%}" class="vcenter"><img src="{% static 'images/hashtag.svg'%}" style="max-width:100%"></a>
                     </div>
-                    <div class="tag-text"><a href="#" class="footer-effect-shadow">แท็ก</a></div>
+                    <div class="tag-text"><a href="{%url 'post:tag_view'%}" class="footer-effect-shadow">แท็ก</a></div>
                 </div>
             </div>
             <!-- 2.2 social -->

@@ -34,7 +34,7 @@
             <div class="allpopblog" style="min-height:300px">
                 <!-- ******************blog not found*****************8 -->
                 {% if not top_posts %}
-                <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div>
+                <div class="notfound-bigblog vhcenter">ยังไม่มีกระทู้</div>
                 {% endif %}
                 <!-- ********************loop blog*********************** -->
                 {% for post in posts %}
@@ -74,7 +74,7 @@
             <div class="all-latest-blog" style="min-height:170px">
                 <!-- ******************blog not found*****************8 -->
                 {% if not latest_posts %}
-                <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้ล่าสุด</div>
+                <div class="no-thumbnail-blog notfound-blog vhcenter">ยังไม่มีกระทู้ล่าสุด</div>
                 {% else %}
                 <!-- ********************loop blog*********************** -->
                 {% for post in latest_posts %}
@@ -110,7 +110,7 @@
         <div class="tempblog" style="min-height:150px">
             <!-- ******************blog not found*****************8 -->
             {% if not temporary_posts %}
-            <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้</div>
+            <div class="no-thumbnail-blog notfound-blog vhcenter">ยังไม่มีกระทู้</div>
             {% else %}
             <!-- ********************loop blog*********************** -->
             {% for post in temporary_posts %}
@@ -164,7 +164,7 @@
         <div class="edublog ">
             <!-- ******************blog not found*****************8 -->
             {% if not room_educate.get_post %}
-            <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div>
+            <div class="notfound-bigblog vhcenter">ยังไม่มีกระทู้</div>
             {% else %}
             <!-- ********************loop blog*********************** -->
             {% for post in room_educate.get_post %}
