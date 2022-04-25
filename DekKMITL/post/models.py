@@ -137,6 +137,12 @@ class Tag(models.Model):
     title = models.CharField(max_length=200,unique=True)
     # related_name = ['tag.posts']
 
+    def get_hx_latest_post(self):
+        return reverse('post:hx_tag_detail',kwargs={'tag_name':self.title,'status':'latest'})
+
+    def get_hx_temp_post(self):
+        return reverse('post:hx_tag_detail',kwargs={'tag_name':self.title,'status':'temp'})
+
     def get_post(self):
         posts = Post.objects.filter(tag__title=self.title)
         return posts

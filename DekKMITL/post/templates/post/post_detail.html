@@ -38,7 +38,7 @@
             <!-- 1.2.2 แท็ก ชื่อเจ้าของกระทู้ และ วันที่สร้างกระทู้ -->
             <div class="post-detail spc-btw">
                 <div class="post-tag blogfont">{%for tag in post.tag.all%} #{{tag}} {% endfor %}</div>
-                <div class="post-user-date">{{post.author}} : {% if post.is_expirable %} {% if post|is_expired %} หมดอายุแล้ว {% else %}<br> จะหมดอายุเมื่อ {{post.expire_date}} {% endif %}{% else %} {{post.date_created|naturaltime}} {% endif %}</div>
+                <div class="post-user-date">{{post.author}} : {% if post.is_expirable %} {% if post|is_expired %} หมดอายุแล้ว {% else %}<br> จะหมดอายุเมื่อ {{post.expire_date}} {% endif %}{% else %} {{post.date_created}} {% endif %}</div>
             </div>
             <!-- รูปภาพปกกระทู้ -->
             {% if not post.is_cover_image_default %}

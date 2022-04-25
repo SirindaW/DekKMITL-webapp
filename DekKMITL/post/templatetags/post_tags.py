@@ -1,5 +1,6 @@
 from django import template
 from django.shortcuts import get_object_or_404
+import datetime
 
 from ..models import Post
 
@@ -39,3 +40,12 @@ def is_expired(post):
 @register.filter
 def is_liked_comment(user,comment):
     return comment.is_liked_by(user)
+
+@register.filter
+def is_n_day_past(post,days):
+    now = datetime.datetime.now(datetime.timezone.utc)
+    diff = now - post.date_created
+    if diff > datetime.timedelta(days=days):
+            # exipired
+            return True    
+    return False

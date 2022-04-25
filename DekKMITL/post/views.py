@@ -10,6 +10,18 @@ from .forms import PostCreateForm,CommentForm
 
 
 
+def hx_tag_detail(request,tag_name,status):
+    if status == 'latest':
+        posts = Post.objects.active().filter(tag__title=tag_name).order_by('-date_created')
+    if status == 'temp':
+        posts = Post.objects.active().filter(tag__title=tag_name,is_expirable=True).order_by('-date_created')
+
+    context = {
+        'posts':posts,
+    }
+    template = "post/partials/tag_detail_post.html"
+    return render(request,template,context)
+
 def hx_room_detail(request,room_name,status):
     if status == 'latest':
         posts = Post.objects.active().filter(room__title=room_name).order_by('-date_created')
@@ -163,7 +175,7 @@ def tag_detail_view(request,tag):
     posts_in_tag = Post.objects.filter(tag__title=tag.title)
     context = {
         'tag':tag,
-        'posts':posts_in_tag,
+        # 'posts':posts_in_tag,
     }
     return render(request,'post/tag_detail.html',context)
 
