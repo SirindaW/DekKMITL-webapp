@@ -10,10 +10,7 @@ def home_view(request):
     latest_posts = Post.objects.active().order_by('-date_created')[:7] # Recent 7 active posts
     temporary_posts = Post.objects.active().filter(is_expirable=True).order_by('-date_created')[:2]
     pop_rooms = Room.objects.all()[:7]
-    try:
-        room_educate = Room.objects.get(title='room_educate')
-    except Room.DoesNotExist:
-        room_educate = []
+    room_educate = Room.objects.get(title='room_educate')
         
     print(room_educate.title)
     

@@ -163,7 +163,7 @@
         <div class="home-title ">Update เรื่องเรียน</div>
         <div class="edublog ">
             <!-- ******************blog not found*****************8 -->
-            {% if not room_educate %}
+            {% if not room_educate.get_post %}
             <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div>
             {% else %}
             <!-- ********************loop blog*********************** -->
