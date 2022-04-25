@@ -1,1 +1,72 @@
-edit post
+{% extends 'components/base.html' %} {% load static %} {% block content %} {% load widget_tweaks %}
+<link rel="stylesheet" href="{%static '/css/create_post.css'%}">
+<link rel="stylesheet" href="{%static '/css/edit_post.css'%}">
+
+<form method="POST"> {% csrf_token %}
+    <div class="container">
+        <!-- 1. หัวข้อกระทู้ -->
+        <div class="blog-header-container style-container">
+            <div class="title">
+                <div class="title-text">หัวข้อกระทู้</div>
+                <div id="header_edit_count" class="count-text"></div>
+            </div>
+            <div class="blog-header">
+                <input type="text" required="" placeholder="หัวข้อกระทู้" autocomplete="off" class="header-input blogfont" id="header_edit_text">
+            </div>
+        </div>
+
+        <!-- 2. เนื้อหากระทู้ -->
+        <div class="blog-body-container">
+            <div class="title">
+                <div class="title-text">เนื้อหากระทู้</div>
+                <div id="body_edit_count" class="count-text"></div>
+            </div>
+            <div class="blog-body">
+                <textarea cols="40" rows="10" placeholder="เนื้อหากระทู้" class="body-input blogfont" id="body_edit_text" required=""></textarea>
+            </div>
+        </div>
+    </div>
+    <!-- 3. ปุ่มตั้งกระทู้ -->
+    <div class="button-container vhcenter">
+        <button type="submit" id="submit_edit_post" class="create-blog-btn redorange vhcenter" disabled>แก้ไขกระทู้</button>
+        <a href="#" class="create-blog-btn vhcenter" style="background:#fff;color: #E05F4C;font-weight:500">ยกเลิก</a>
+    </div>
+</form>
+
+<script>
+    //----------------limit header text---------------------
+    var headerTextEdit = document.getElementById("header_edit_text");
+    var headerWordCount = document.getElementById("header_edit_count");
+
+    headerTextEdit.addEventListener("input", function() {
+        headerEdit = limitText(headerTextEdit, headerWordCount, 4, 120);
+        buttonAble('submit_edit_post', headerEdit && bodyEdit);
+    });
+
+    //----------------limit body text---------------------
+    var bodyTextEdit = document.getElementById("body_edit_text");
+    var bodyWordCount = document.getElementById("body_edit_count");
+
+    bodyTextEdit.addEventListener("input", function() {
+        bodyEdit = limitText(bodyTextEdit, bodyWordCount, 6, 4000);
+        buttonAble('submit_edit_post', headerEdit && bodyEdit);
+    });
+    //----------------prevent form submit---------------   
+    document.querySelector('form').addEventListener("click", function() {
+        buttonAble('submit_edit_post', headerEdit && bodyEdit);
+    });
+    $('form').submit(function(event) {
+        if (headerEdit && bodyEdit) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    buttonAble('submit_edit_post', headerEdit && bodyEdit);
+
+    //ค่าเริ่มต้น
+    headerEdit = limitText(headerTextEdit, headerWordCount, 4, 120);
+    //ค่าเริ่มต้น
+    bodyEdit = limitText(bodyTextEdit, bodyWordCount, 6, 4000);
+</script>
+{% endblock content %}
