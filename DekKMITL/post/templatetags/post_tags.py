@@ -39,6 +39,8 @@ def is_expired(post):
 
 @register.filter
 def is_liked_comment(user,comment):
+    if not user.is_authenticated:
+        return False
     return comment.is_liked_by(user)
 
 @register.filter

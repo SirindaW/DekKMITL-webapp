@@ -1,4 +1,4 @@
-{% extends 'components/base.html' %} {% load static%} {% block site_title%} Home {% endblock %}
+{% extends 'components/base.html' %} {% load static%} {% block site_title%} Home {% endblock %} {% load humanize %}
 
 <!-- Prompt Messages -->
 {% block content %}
@@ -33,12 +33,15 @@
             </div>
             <div class="allpopblog" style="min-height:300px">
                 <!-- ******************blog not found*****************8 -->
-                <!-- <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div> -->
+                {% if not top_posts %}
+                <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div>
+                {% endif %}
                 <!-- ********************loop blog*********************** -->
+                {% for post in posts %}
                 <div class="thumbnail-blog">
                     <div class="blog-cover-container">
-                        <a href="#link to blog">
-                            <div class="blog-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div>
+                        <a href="{{post.get_absolute_url}}">
+                            <div class="blog-cover" style="background-image: url('{{post.get_cover_image_url}}')"></div>
                         </a>
                     </div>
                     <div class="blog-detail-container vhcenter">
@@ -61,6 +64,7 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
                 <!-- ************************************************* -->
             </div>
         </div>
@@ -69,28 +73,33 @@
             <div class="home-title" style="border:0">กระทู้ล่าสุด</div>
             <div class="all-latest-blog" style="min-height:170px">
                 <!-- ******************blog not found*****************8 -->
-                <!-- <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้ล่าสุด</div> -->
+                {% if not latest_posts %}
+                <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้ล่าสุด</div>
+                {% else %}
                 <!-- ********************loop blog*********************** -->
-                <div class="no-thumbnail-blog vhcenter">
+                {% for post in latest_posts %}
+                <div class="no-thumbnail-blog vhcenter" onclick="window.location='{{post.get_absolute_url}}'">
                     <div class="user-profile-container profile-center vcenter" style="width:15%">
-                        <a href="#link to user profile">
-                            <div class="user-profile-pic" style="background-image: url('/statics/images/defaultprofilepic.svg')"></div>
+                        <a href="{{post.author.get_absolute_url}}">
+                            <div class="user-profile-pic" style="background-image: url('{{post.author.get_profile_image_url}}')"></div>
                         </a>
                     </div>
                     <div class="blog-detail" style="width:85%">
                         <div class="blog-name wrap-name" style="max-width:100%">
-                            <a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริอุอิอุอิ</a>
+                            <a href="{{post.get_absolute_url}}" class="blogfont">{{post.title}}</a>
                         </div>
                         <div class="blog-detail-2">
-                            <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
+                            <div class="blog-username-date"><a href="{{post.author.get_absolute_url}}">{{post.author.first_name}} : {{post.date_created}}</a></div>
                             <div class="blog-like-comment vhcenter">
-                                <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
-                                <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                                <img src="{% static 'images/like.png'%}" style="width:15px">{{post.liker.count}} &nbsp;
+                                <img src="{% static 'images/comment.png'%}" style="width:15px">{{post.comments.all.count}}
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
                 <!-- ************************************************* -->
+                {% endif %}
             </div>
         </div>
     </div>
@@ -100,28 +109,33 @@
         <div class="home-title">กระทู้ชั่วคราว</div>
         <div class="tempblog" style="min-height:150px">
             <!-- ******************blog not found*****************8 -->
-            <!-- <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้</div> -->
+            {% if not temporary_posts %}
+            <div class="notfound-blog no-thumbnail-blog vhcenter">ยังไม่มีกระทู้</div>
+            {% else %}
             <!-- ********************loop blog*********************** -->
-            <div class="no-thumbnail-blog vhcenter">
+            {% for post in temporary_posts %}
+            <div class="no-thumbnail-blog vhcenter" onclick="window.location='{{post.get_absolute_url}}'">
                 <div class="user-profile-container vcenter" style="width:15%">
-                    <a href="#link to user profile">
-                        <div class="user-profile-pic" style="background-image: url('/statics/images/defaultprofilepic.svg')"></div>
+                    <a href="{{post.author.get_absolute_url}}">
+                        <div class="user-profile-pic" style="background-image: url('{{post.author.get_profile_image_url}}')"></div>
                     </a>
                 </div>
                 <div class="blog-detail" style="width:85%">
                     <div class="blog-name wrap-name" style="max-width:100%">
-                        <a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริ</a>
+                        <a href="{{post.get_absolute_url}}" class="blogfont">{{post.title}}</a>
                     </div>
                     <div class="blog-detail-2">
-                        <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
+                        <div class="blog-username-date"><a href="{{post.author.get_absolute_url}}">{{post.author.first_name}} : {{post.expire_date|naturaltime}}</a></div>
                         <div class="blog-like-comment vhcenter">
-                            <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
-                            <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                            <img src="{% static 'images/like.png'%}" style="width:15px">{{post.liker.count}} &nbsp;
+                            <img src="{% static 'images/comment.png'%}" style="width:15px">{{post.comments.all.count}}
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
             <!-- ************************************************* -->
+            {% endif %}
         </div>
         <div class="see-all redorange vhcenter"><a href="#link to all blog (latest,temp)" class="see-all-text">ดูทั้งหมด ></a></div>
     </div>
@@ -131,12 +145,14 @@
         <div class="home-title">ห้องยอดนิยม</div>
         <div class="all-poproom">
             <!-- ********************loop room*********************** -->
+            {% for room in pop_rooms %}
             <div class="poproom">
                 <div class="poproom-pic vhcenter">
-                    <a href=""><img src="{% static 'images/music.png'%}" style="width:90px;height:90px"></a>
+                    <a href="{{room.get_absolute_url}}"><img src="{{room.get_icon_url}}" style="width:90px;height:90px"></a>
                 </div>
-                <div class="poproom-name vhcenter"><a href="">เพลง</a></div>
+                <div class="poproom-name vhcenter"><a href="{{room.get_absolute_url}}">{{room.verbose}}</a></div>
             </div>
+            {% endfor %}
             <!-- ************************************************* -->
         </div>
         <div class="see-all redorange vhcenter"><a href="{% url 'post:room_list_view' %}" class="see-all-text">ดูทั้งหมด ></a></div>
@@ -147,37 +163,42 @@
         <div class="home-title ">Update เรื่องเรียน</div>
         <div class="edublog ">
             <!-- ******************blog not found*****************8 -->
-            <!-- <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div> -->
+            {% if not room_educate %}
+            <div class="notfound-blog vhcenter">ยังไม่มีกระทู้</div>
+            {% else %}
             <!-- ********************loop blog*********************** -->
+            {% for post in room_educate.get_post %}
             <div class="thumbnail-blog">
                 <div class="blog-cover-container">
-                    <a href="#link to blog">
-                        <div class="blog-cover" style="background-image: url('/statics/images/defaultcover.svg')"></div>
+                    <a href="{{post.get_absolute_url}}">
+                        <div class="blog-cover" style="background-image: url('{{post.get_cover_image_url}}')"></div>
                     </a>
                 </div>
                 <div class="blog-detail-container vhcenter">
                     <div class="user-profile-container vcenter" style="width:15%">
-                        <a href="#link to user profile">
-                            <div class="user-profile-pic" style="background-image: url('/statics/images/defaultprofilepic.svg');height:60px;width:60px"></div>
+                        <a href="{{post.author.get_absolute_url}}">
+                            <div class="user-profile-pic" style="background-image: url('{{post.author.get_profile_image_url}}');height:60px;width:60px"></div>
                         </a>
                     </div>
                     <div class="blog-detail" style="width:85%">
                         <div class=" two-line-wrap" style="max-width:100%">
-                            <a href="#link to blog" class="blogfont">ขอรีวิววิชา softdev อยากเรียนมากๆ มุแง ครุคริครุคริ</a>
+                            <a href="{{post.get_absolute_url}}" class="blogfont">{{post.title}}</a>
                         </div>
                         <div class="blog-detail-2">
-                            <div class="blog-username-date"><a href="#link to user profile">user11234 : 29 01 65</a></div>
+                            <div class="blog-username-date"><a href="{{post.author.get_absolute_url}}">{{post.author.first_name}} : {{post.date_created}}</a></div>
                             <div class="blog-like-comment vhcenter">
-                                <img src="{% static 'images/like.png'%}" style="width:15px">987 &nbsp;
-                                <img src="{% static 'images/comment.png'%}" style="width:15px">50
+                                <img src="{% static 'images/like.png'%}" style="width:15px">{{post.liker.count}} &nbsp;
+                                <img src="{% static 'images/comment.png'%}" style="width:15px">{{post.total_comments}}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
             <!-- ************************************************* -->
+            {% endif %}
         </div>
-        <div class="see-all redorange vhcenter "><a href="#link to education room " class="see-all-text">ดูทั้งหมด ></a>
+        <div class="see-all redorange vhcenter "><a href="{{room_educate.get_absolute_url}}" class="see-all-text">ดูทั้งหมด ></a>
         </div>
     </div>
 </div>

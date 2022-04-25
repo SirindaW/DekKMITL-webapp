@@ -120,6 +120,15 @@ class Room(models.Model):
     verbose = models.CharField(max_length=200,null=True,blank=True)
     # related_name = ['Room.post']
 
+    def total_post(self):
+        return self.post.all().count()
+
+    def get_post(self):
+        return Post.objects.active().filter(room=self).order_by('-date_created')
+
+    def get_icon_url(self):
+        return self.icon.url
+
     def get_hx_latest_post(self):
         return reverse('post:hx_room_detail',kwargs={'room_name':self.title,'status':'latest'})
 
@@ -129,7 +138,6 @@ class Room(models.Model):
     def get_absolute_url(self):
         return reverse("post:room_detail_view", kwargs={"room_name": self.title})
     
-
     def __str__(self) -> str:
         return self.title
 

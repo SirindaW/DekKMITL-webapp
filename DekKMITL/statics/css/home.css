@@ -50,8 +50,7 @@
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 45px;
 }
 
 
@@ -116,7 +115,7 @@
 
 .thumbnail-blog {
     padding: 30px;
-    max-width: 700px;
+    width: 590px;
     margin: auto;
     height: 400px;
     cursor: pointer;
@@ -132,7 +131,8 @@
     border: 1px solid #FFFFFFBF;
     border-radius: 33px;
     transition: all .2s ease;
-    cursor: pointer;
+    cursor: pointer;    
+    margin: 20px;
 }
 
 

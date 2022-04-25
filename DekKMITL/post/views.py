@@ -11,10 +11,12 @@ from .forms import PostCreateForm,CommentForm
 
 
 def hx_tag_detail(request,tag_name,status):
+    print('SOMETHING')
     if status == 'latest':
         posts = Post.objects.active().filter(tag__title=tag_name).order_by('-date_created')
     if status == 'temp':
         posts = Post.objects.active().filter(tag__title=tag_name,is_expirable=True).order_by('-date_created')
+    print("GETTING LATEST")
 
     context = {
         'posts':posts,
