@@ -26,7 +26,9 @@
             <div class="title-edit-container spc-btw">
                 <div class="post-header blogfont">{{post.title}}</div>
                 <div class="edit-post-dropdown">
+                    {% if request.user.is_authenticated %}
                     <div class="edit-post-dropdown-btn" onclick="toggleClass('edit_post_content','edit-show')">● ● ●</div>
+                    {% endif %}
                     <div class="edit-post-dropdown-content" id="edit_post_content">
 
                         {% if request.user.is_admin %}
