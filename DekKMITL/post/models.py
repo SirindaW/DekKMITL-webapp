@@ -41,8 +41,8 @@ def get_default_cover_image():
     return "post/defaultcover.svg"
 
 class Post(models.Model):
-    title = models.CharField(max_length=120)
-    content = models.TextField(max_length=4000)
+    title = models.CharField(max_length=200)
+    content = models.TextField(max_length=5000)
     date_created = models.DateTimeField(auto_now_add=True,blank=True)
     last_modified = models.DateTimeField(auto_now=True)
     liker = models.ManyToManyField(Account,related_name='post_liked',null=True,blank=True)

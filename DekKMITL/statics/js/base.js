@@ -54,7 +54,7 @@ function closeDropdown(contentClass, showClass) {
 // --------------create post------------------
 
 //var for enable disable submit
-var header, body,
+var header, body, headerEdit, bodyEdit,
     room = false,
     unsetTime = false,
     setTime = false;
@@ -79,19 +79,9 @@ function getFullDate(date) {
     minute = checkOnesNum(minute);
     return year + '-' + month + '-' + day + 'T' + hour + ":" + minute;
 }
-//disable submit form button ถ้ากรอกข้อมูลที่จำเป็นไม่ครบ
-function buttonAble(buttonID) {
-    if (header && body && room && (unsetTime || setTime)) {
-        document.getElementById(buttonID).disabled = false;
-    } else {
-        document.getElementById(buttonID).disabled = true;
-    }
-}
-//disable report button ถ้ากรอกข้อมูลไม่ครบ
-var canSubmit;
-
-function buttonReportAble(buttonID) {
-    if (canSubmit) {
+//disable button ถ้ากรอกข้อมูลไม่ครบ
+function buttonAble(buttonID, condition) {
+    if (condition) {
         document.getElementById(buttonID).disabled = false;
     } else {
         document.getElementById(buttonID).disabled = true;

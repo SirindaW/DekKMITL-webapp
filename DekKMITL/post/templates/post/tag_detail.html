@@ -6,6 +6,7 @@
 
 
 <div class="container">
+    <div class="feed-title">#{{tag.title}}</div>
     <div class="filter">
         <div hx-trigger="revealed" hx-swap="innerHTML" hx-target="#all_post" hx-get="{{tag.get_hx_latest_post}}"></div>
         <div class="latest" id="latest_post" onclick="removeClass('underline_effect', 'underline')" hx-trigger="click" hx-swap="innerHTML" hx-target="#all_post" hx-get="{{ tag.get_hx_latest_post }}">ล่าสุด</div>

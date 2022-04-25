@@ -58,7 +58,7 @@
             <div class="post-body blogfont">{{post.content}}</div>
             <!-- 1.2.4 ชื่อห้อง และปุ่มไลค์ -->
             <div class="post-room-like spc-btw">
-                <div class="post-room"><img src="{{post.room.icon.url}}" style="width:25px">&nbsp;&nbsp;{{post.room.verbose}}</div>
+                <div class="post-room"><img src="{{post.room.icon.url}}" style="width:25px">&nbsp;&nbsp;ห้อง{{post.room.verbose}}</div>
                 <div class="post-like">
                     {{post.liker.count}}&nbsp;&nbsp;
                     <!-- Like Button -->
@@ -109,7 +109,13 @@
                             </a>
                         </div>
                         <div class="comment-content">
-                            <div class="content blogfont">{{comment.content}}</div>
+                            <div class="comment-and-delete">
+                                <div class="content blogfont">{{comment.content}}</div>
+                                <div class="edit-post-dropdown-btn comment-del" onclick="toggleClass('edit_comment_content','edit-show')">● ● ●</div>
+                                <div class="edit-post-dropdown-content" id="edit_comment_content" style="right:8px;top:45px;">
+                                    <a href="#">ลบ</a>
+                                </div>
+                            </div>
                             <div class="username-like">
                                 <div class="username">{{comment.author.first_name}} : {{comment.date_created|naturaltime}}</div>
                                 <div class="like">

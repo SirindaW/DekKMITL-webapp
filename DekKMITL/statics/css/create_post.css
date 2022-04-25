@@ -51,6 +51,7 @@
     width: 100%;
     padding: 5px 8px 8px 5px;
     font-size: 25px;
+    line-height: 1cm;
 }
 
 .body-input {
@@ -338,8 +339,8 @@ input[type=file] {
     width: 150px;
     height: 45px;
     border-radius: 30px;
+    margin: 0 10px;
     border: 1px solid #fff;
-    margin: auto;
     transition: all .2s ease;
     cursor: pointer;
 }

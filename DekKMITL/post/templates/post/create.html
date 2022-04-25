@@ -152,7 +152,7 @@
         <button type="submit" id="submit_form" class="create-blog-btn redorange vhcenter" disabled>ตั้งกระทู้เลย</button>
     </div>
 </form>
-<a href="{%url 'rules_view'%}" class="blog-rule">ดูกฎการตั้งกระทู้</a>
+<a href="{%url 'rules_view'%}" class="blog-rule" target="_blank">ดูกฎการตั้งกระทู้</a>
 
 <script>
     //----------------limit header text---------------------
@@ -161,7 +161,7 @@
 
     headerTextContent.addEventListener("input", function() {
         header = limitText(headerTextContent, headerShowWordCount, 4, 120);
-        buttonAble('submit_form');
+        buttonAble('submit_form', header && body && room && (unsetTime || setTime));
     });
 
     //----------------limit body text---------------------
@@ -170,7 +170,7 @@
 
     bodyTextContent.addEventListener("input", function() {
         body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
-        buttonAble('submit_form');
+        buttonAble('submit_form', header && body && room && (unsetTime || setTime));
     });
 
     //---------------tag--------------------
@@ -298,7 +298,7 @@
         } else {
             setTime = true;
         }
-        buttonAble('submit_form');
+        buttonAble('submit_form', header && body && room && (unsetTime || setTime));
     });
 
 
@@ -332,7 +332,7 @@
 
     //----------------prevent form submit---------------   
     document.querySelector('form').addEventListener("click", function() {
-        buttonAble('submit_form');
+        buttonAble('submit_form', header && body && room && (unsetTime || setTime));
     });
     $('form').submit(function(event) {
         if (header && body && room && (unsetTime || setTime)) {
@@ -342,7 +342,7 @@
             return false;
         }
     });
-    buttonAble('submit_form');
+    buttonAble('submit_form', header && body && room && (unsetTime || setTime));
 
     //image uploaded event
     document.querySelector("#cover_blog_img").onchange = evt => {

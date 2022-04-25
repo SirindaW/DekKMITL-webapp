@@ -10,7 +10,6 @@ from .models import Post, Room, Tag, Comment
 from .forms import PostCreateForm,CommentForm
 
 
-
 def hx_tag_detail(request,tag_name,status):
     print('SOMETHING')
     if status == 'latest':
