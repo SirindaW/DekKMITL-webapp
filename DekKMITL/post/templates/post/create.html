@@ -220,11 +220,21 @@
                 TagTextContent.style.display = 'flex';
             }
 
+            //delete tag 1
             let tag = document.querySelectorAll('.post-tag');
-            //delete tag
             for (let i = 0; i < tag.length; i++) {
                 tag[i].addEventListener('click', () => {
                     tagLen = countTag();
+
+                    //remove value from backend
+                    var data = tagList.value.split(',');
+                    for (var j = 0; j < data.length; j++) {
+                        if (data[j] == tag[i].innerText.substring(1)) {
+                            data.splice(j, 1);
+                        }
+                    }
+                    tagList.value = data;
+
                     //limit 10 tag
                     if (tagLen >= 10) {
                         TagTextContent.disabled = true;
@@ -233,9 +243,12 @@
                         TagTextContent.disabled = false;
                         TagTextContent.style.display = 'flex';
                     }
-                    tag[i].parentNode.removeChild(tag[i]);
+                    if (i + 1 == tag.length) {
+                        tag[i].parentNode.removeChild(tag[i]);
+                    }
                 });
             }
+
         }
     });
 
