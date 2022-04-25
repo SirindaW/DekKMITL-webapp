@@ -38,13 +38,13 @@
             <!-- 1.2.2 แท็ก ชื่อเจ้าของกระทู้ และ วันที่สร้างกระทู้ -->
             <div class="post-detail spc-btw">
                 <div class="post-tag blogfont">{%for tag in post.tag.all%} #{{tag}} {% endfor %}</div>
-                <div class="post-user-date">{{post.author}} : {{post.date_created|naturaltime}}</div>
+                <div class="post-user-date">{{post.author}} : {% if post.is_expirable %} {% if post|is_expired %} หมดอายุแล้ว {% else %}<br> จะหมดอายุเมื่อ {{post.expire_date}} {% endif %}{% else %} {{post.date_created|naturaltime}} {% endif %}</div>
             </div>
             <!-- 1.2.3 เนื้อหากระทู้ -->
             <div class="post-body blogfont">{{post.content}}</div>
             <!-- 1.2.4 ชื่อห้อง และปุ่มไลค์ -->
             <div class="post-room-like spc-btw">
-                <div class="post-room"><img src="{% static 'images/travel.png'%}" style="width:25px">&nbsp;&nbsp;ห้องเที่ยวกัน</div>
+                <div class="post-room"><img src="{{post.room.icon.url}}" style="width:25px">&nbsp;&nbsp;{{post.room.verbose}}</div>
                 <div class="post-like">
                     {{post.liker.count}}&nbsp;&nbsp;
                     <!-- Like Button -->
