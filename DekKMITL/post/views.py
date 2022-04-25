@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import make_aware
+from django.contrib.auth.decorators import login_required
 
 from .models import Post, Room, Tag, Comment
 from .forms import PostCreateForm,CommentForm
@@ -63,6 +64,7 @@ def post_edit_view(request,post_slug):
     }
     return render(request,'post/edit_post.html',context)
 
+@login_required(login_url='login_view')
 def post_create_view(request):
     form = PostCreateForm()
     if request.method == "POST":
