@@ -11,13 +11,15 @@ def home_view(request):
     temporary_posts = Post.objects.active().filter(is_expirable=True).order_by('-date_created')[:2]
     pop_rooms = Room.objects.all()[:7]
     room_educate = Room.objects.get(title='room_educate')
-        
+    
+    room_educate_posts = room_educate.get_post()[:2] 
 
     context = {
         'latest_posts':latest_posts,
         'temporary_posts':temporary_posts,
         'pop_rooms':pop_rooms,
         'room_educate':room_educate,
+        'room_educate_posts':room_educate_posts,
     }
     return render(request, "home.html", context)
 
