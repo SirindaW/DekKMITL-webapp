@@ -12,8 +12,6 @@ def home_view(request):
     pop_rooms = Room.objects.all()[:7]
     room_educate = Room.objects.get(title='room_educate')
         
-    print(room_educate.title)
-    
 
     context = {
         'latest_posts':latest_posts,
