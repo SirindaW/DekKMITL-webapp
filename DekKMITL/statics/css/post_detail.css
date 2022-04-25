@@ -191,6 +191,16 @@
 }
 
 
+/* post cover */
+
+.post-page-cover {
+    width: 550px;
+    display: block;
+    margin: auto;
+    padding: 20px 0;
+}
+
+
 /* post body */
 
 .post-body {
