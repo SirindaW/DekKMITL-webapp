@@ -178,6 +178,7 @@ def delete_comment_view(request,id):
         comment.delete() 
     return redirect(reverse('post:details_view',kwargs={'post_slug':post.slug}))
 
+@login_required(login_url='login_view')
 def like_view(request,slug):
     post = get_object_or_404(Post,slug=slug)
     if post.liker.filter(id=request.user.id).exists():
