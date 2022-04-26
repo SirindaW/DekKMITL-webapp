@@ -55,6 +55,11 @@ class PostCreateForm(forms.ModelForm):
         "expire_date": forms.DateTimeInput(),
     }
 
+class PostEditForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','content']
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

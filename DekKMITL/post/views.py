@@ -7,7 +7,7 @@ from django.utils.timezone import make_aware
 from django.contrib.auth.decorators import login_required
 
 from .models import Post, Room, Tag, Comment
-from .forms import PostCreateForm,CommentForm
+from .forms import PostCreateForm,CommentForm,PostEditForm
 
 
 def hx_tag_detail(request,tag_name,status):
@@ -128,11 +128,30 @@ def post_create_view(request):
 
 def post_delete_view(request,post_slug):
     post = get_object_or_404(Post,slug=post_slug)
-    if (request.user.pk == post.author) or request.user.is_admin:
+    if (request.user.pk == post.author.pk) or request.user.is_admin:
         post.delete()
+        return redirect(reverse('profile_view'))
     else:
         return redirect(reverse('post:details_view'),kwargs={'post_slug':post.slug})
-    return redirect(reverse('profile_view'))
+
+@login_required(login_url='login_view')
+def post_edit_view(request,post_slug):
+    post = get_object_or_404(Post,slug=post_slug)
+    if (request.user.pk != post.author.pk) and not request.user.is_admin:
+        return redirect(reverse('post:details_view',kwargs={'post_slug':post_slug}))
+
+    form = PostEditForm(instance=post)
+    if request.method == 'POST':
+        form = PostEditForm(request.POST,instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('post:details_view',kwargs={'post_slug':post_slug}))
+
+    context = {
+        'post':post,
+        'form':form,
+    }
+    return render(request,'post/edit_post.html',context)
 
 def feed_page_view(request):
     posts = Post.objects.active()

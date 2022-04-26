@@ -8,10 +8,12 @@
         <div class="blog-header-container style-container">
             <div class="title">
                 <div class="title-text">หัวข้อกระทู้</div>
+                <!-- {{form.title}} -->
                 <div id="header_edit_count" class="count-text"></div>
             </div>
             <div class="blog-header">
-                <input type="text" required="" placeholder="หัวข้อกระทู้" autocomplete="off" class="header-input blogfont" id="header_edit_text">
+                <!-- <input type="text" required="" placeholder="หัวข้อกระทู้" autocomplete="off" class="header-input blogfont" id="header_edit_text"> -->
+                {% render_field form.title type="text" required="" placeholder="หัวข้อกระทู้" autocomplete="off" class="header-input blogfont" id="header_edit_text" %}
             </div>
         </div>
 
@@ -22,14 +24,15 @@
                 <div id="body_edit_count" class="count-text"></div>
             </div>
             <div class="blog-body">
-                <textarea cols="40" rows="10" placeholder="เนื้อหากระทู้" class="body-input blogfont" id="body_edit_text" required=""></textarea>
+                <!-- <textarea cols="40" rows="10" placeholder="เนื้อหากระทู้" class="body-input blogfont" id="body_edit_text" required=""></textarea> -->
+                {% render_field form.content cols="40" rows="10" placeholder="เนื้อหากระทู้" class="body-input blogfont" id="body_edit_text" required="" %}
             </div>
         </div>
     </div>
     <!-- 3. ปุ่มตั้งกระทู้ -->
     <div class="button-container vhcenter">
         <button type="submit" id="submit_edit_post" class="create-blog-btn redorange vhcenter" disabled>แก้ไขกระทู้</button>
-        <a href="#" class="create-blog-btn vhcenter" style="background:#fff;color: #E05F4C;font-weight:500">ยกเลิก</a>
+        <a href="{{post.get_absolute_url}}" class="create-blog-btn vhcenter" style="background:#fff;color: #E05F4C;font-weight:500">ยกเลิก</a>
     </div>
 </form>
 
