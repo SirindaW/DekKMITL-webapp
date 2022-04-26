@@ -34,20 +34,19 @@
                         {% if request.user.is_admin %}
                         <a href="{{post.get_edit_url}}">แก้ไข</a>
                         <a href="{{post.get_delete_url}}">ลบ</a> 
-                        <button type="submit" class="report-post" onclick="displayClass('alert')">รายงาน</a>
+                        <a href="{{post.get_report_url}}" class="report-post" onclick="displayClass('alert')">รายงาน</a>
                         {% else %}
                         {% if request.user.pk == post.author.pk %}
                         <a href="{{post.get_edit_url}}">แก้ไข</a>
                         <a href="{{post.get_delete_url}}">ลบ</a> 
                         {% endif %}
                         {% if request.user.pk != post.author.pk %}
-                        <a href="{{post.get_report_url}}"><button type="submit" class="report-post" onclick="displayClass('alert')">รายงาน</a>
+                        <a href="{{post.get_report_url}}" class="report-post" onclick="displayClass('alert')">รายงาน</a>
                         {% endif %}
                         {% endif %}
                     </div>
                 </div>
             </div>
-            <a href="{{post.get_report_url}}">ReportButton</a>
             <!-- 1.2.2 แท็ก ชื่อเจ้าของกระทู้ และ วันที่สร้างกระทู้ -->
             <div class="post-detail spc-btw">
                 <div class="post-tag blogfont">{%for tag in post.tag.all%} #{{tag}} {% endfor %}</div>
