@@ -160,7 +160,11 @@
     var headerShowWordCount = document.getElementById("header_count");
 
     headerTextContent.addEventListener("input", function() {
+        limitText(headerTextContent, headerShowWordCount, 4, 120);
         header = limitText(headerTextContent, headerShowWordCount, 4, 120);
+        if (removeSpace(headerTextContent.value) == '') {
+            header = false;
+        }
         buttonAble('submit_form', header && body && room && (unsetTime || setTime));
     });
 
@@ -169,7 +173,11 @@
     var bodyShowWordCount = document.getElementById("body_count");
 
     bodyTextContent.addEventListener("input", function() {
+        limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
         body = limitText(bodyTextContent, bodyShowWordCount, 6, 4000);
+        if (removeSpace(bodyTextContent.value) == '') {
+            body = false;
+        }
         buttonAble('submit_form', header && body && room && (unsetTime || setTime));
     });
 

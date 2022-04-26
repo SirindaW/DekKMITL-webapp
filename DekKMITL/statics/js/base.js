@@ -133,6 +133,11 @@ function removeSpChar(text) {
     return text.replace(/[&\/\\#^+()$~%.'":;, ฿=_\-*?\n<>{}!@`\[\]|]/g, '');
 }
 
+//remove spacebar
+function removeSpace(text) {
+    return text.replace(/[ \n]/g, '');
+}
+
 //limit tag text
 function countTag() {
     var tagLen = 0;
