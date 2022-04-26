@@ -10,6 +10,7 @@ urlpatterns = [
     path('edit/<slug:post_slug>', views.post_edit_view,name='edit_view'),
     path('delete/<slug:post_slug>', views.post_delete_view,name='delete_view'),
     path('feed-page/',views.feed_page_view,name='feed_page_view'),
+    path('your-feed/',views.following_feed_view,name='following_feed_view'),
     path('room/',views.room_list_view,name='room_list_view'),
     path('room/<str:room_name>',views.room_detail_view,name='room_detail_view'),
     path('like/<slug:slug>',views.like_view,name='like_view'),

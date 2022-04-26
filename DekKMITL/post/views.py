@@ -9,14 +9,32 @@ from django.contrib.auth.decorators import login_required
 from .models import Post, Room, Tag, Comment
 from .forms import PostCreateForm,CommentForm,PostEditForm
 
+@login_required(login_url='login_view')
+def following_feed_view(request):
+    user = request.user
+    posts = Post.objects.none()
+
+    for followee in user.followings():
+        post_from_followings = Post.objects.active().filter(author=followee)
+        if post_from_followings.exists():
+            posts |= post_from_followings
+    
+    context={
+        'posts':posts,
+    }
+
+    if request.htmx:
+        template = 'post/partials/post_loop_hx.html'
+        return render(request,template,context)
+
+    template = 'post/following-feed.html'
+    return render(request,template,context)
 
 def hx_tag_detail(request,tag_name,status):
-    print('SOMETHING')
     if status == 'latest':
         posts = Post.objects.active().filter(tag__title=tag_name).order_by('-date_created')
     if status == 'temp':
         posts = Post.objects.active().filter(tag__title=tag_name,is_expirable=True).order_by('-date_created')
-    print("GETTING LATEST")
 
     context = {
         'posts':posts,
@@ -41,7 +59,6 @@ def all_post_view(request,status='latest'):
     if status == 'temp':
         posts=Post.objects.active().filter(is_expirable=True).order_by('-date_created')
 
-    print(posts)
     context = {
         'posts':posts
     }
