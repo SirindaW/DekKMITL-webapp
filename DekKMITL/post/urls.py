@@ -3,6 +3,8 @@ from . import views
 
 app_name='post'
 urlpatterns = [
+    path('all-post/', views.all_post_view,name='all_post_view'),
+    path('all-post/<str:status>', views.all_post_view,name='all_post_view'),
     path('details/<slug:post_slug>/', views.post_detail_view,name='details_view'),
     path('create/', views.post_create_view,name='create_view'),
     path('edit/<slug:post_slug>', views.post_edit_view,name='edit_view'),

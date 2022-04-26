@@ -1,0 +1,18 @@
+{% extends 'post/feed_page_base.html' %}
+
+{% block feed_title %}
+กระทู้ทั้งหมด
+{% endblock %}
+
+{% block default_hx %}
+{% url 'post:all_post_view' 'temp' %}
+{% endblock %}
+
+
+{% block get_hx_latest_post %}
+{% url 'post:all_post_view' 'latest' %}
+{% endblock %}
+
+{% block get_hx_temp_post %}
+{% url 'post:all_post_view' 'temp' %}
+{% endblock %}

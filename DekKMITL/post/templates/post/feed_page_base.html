@@ -1,0 +1,26 @@
+{% extends 'components/base.html' %} {% load humanize %} {% load static %}{% block content %}
+
+<link rel="stylesheet" href="{%static '/css/home.css'%}">
+<link rel="stylesheet" href="{%static '/css/feed_page.css'%}">
+<script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
+
+
+<div class="container">
+    <div class="feed-title">{% block feed_title %} {% endblock %}</div>
+    <div class="filter">
+        <div hx-trigger="revealed" hx-swap="innerHTML" hx-target="#all_post" hx-get="{% block default_hx %}{% endblock %}"></div>
+        <div class="latest" id="latest_post" onclick="removeClass('underline_effect', 'underline')" hx-trigger="click" hx-swap="innerHTML" hx-target="#all_post" hx-get="{% block get_hx_latest_post %}{% endblock %}">ล่าสุด</div>
+        <div class="temp" id="temp_post" onclick="addClass('underline_effect', 'underline')" hx-trigger="click" hx-swap="innerHTML" hx-target="#all_post" hx-get="{% block get_hx_temp_post %}{% endblock %}">ชั่วคราว</div>
+    </div>
+    <div class="highlight redorange" id="underline_effect"></div>
+    <div class="line"></div>
+    <div class="all-post" id="all_post">
+        <!-- ---------loop post----------- -->
+        <!-- Moved to room_detail_post.html -->
+        <!-- ----------------------------- -->
+    </div>
+</div>
+
+
+<!-- back to top btn -->
+<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top"> {% endblock %}

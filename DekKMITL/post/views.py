@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse,reverse_lazy
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.dateparse import parse_datetime
 from django.utils.timezone import make_aware
 from django.contrib.auth.decorators import login_required
@@ -34,6 +34,25 @@ def hx_room_detail(request,room_name,status):
     }
     template = "post/partials/room_detail_post.html" 
     return render(request,template,context)
+
+def all_post_view(request,status='latest'):
+    if status == 'latest':
+        posts=Post.objects.active().order_by('-date_created')
+    if status == 'temp':
+        posts=Post.objects.active().filter(is_expirable=True).order_by('-date_created')
+
+    print(posts)
+    context = {
+        'posts':posts
+    }
+        
+
+    if request.htmx:
+        template = 'post/partials/post_loop_hx.html'
+        return render(request,template,context)
+    
+
+    return render(request,'post/all_post.html',context)
 
 def room_detail_view(request,room_name):
     room = get_object_or_404(Room,title=room_name)

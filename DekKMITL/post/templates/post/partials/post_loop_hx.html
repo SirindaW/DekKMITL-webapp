@@ -1,0 +1,23 @@
+{% load static %} {% load humanize %} {% load post_tags%} {% if not posts%}
+<div class="not-found-post">ยังไม่มีกระทู้</div>
+{% endif %} {% for post in posts %}
+
+<div class="post-container" onclick="window.location='{{post.get_absolute_url}}'">
+    <div class="user-profile-container vcenter" style="width:10%;align-items:flex-start;">
+        <a href="{{post.author.get_absolute_url}}">
+            <div class="user-profile-pic" style="background-image: url({{post.author.get_profile_image_url}});height: 60px;width: 60px;"></div>
+        </a>
+    </div>
+    <div class="post-content" style="width:90%">
+        <div class="post-title"><a href="{{ post.get_absolute_url }}">{{post.title}}</a></div>
+        <div class="post-detail">
+            <a href="{{post.author.get_absolute_url}}">{{post.author}}</a> : <a href="{{ post.get_absolute_url }}">{{post.date_created|naturaltime}}</a>
+        </div>
+        <div class="post-body"><a href="{{ post.get_absolute_url }}">{{post.content}}</a></div>
+        <div class="like-comment-count">
+            <img src="{% static 'images/like.png'%}" style="width: 12px" />{{post.liker.count}}
+            <img src="{% static 'images/comment.png'%}" style="width: 12px" />2
+        </div>
+    </div>
+</div>
+{% endfor %}
