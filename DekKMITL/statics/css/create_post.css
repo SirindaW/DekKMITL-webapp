@@ -339,7 +339,7 @@ input[type=file] {
     width: 150px;
     height: 45px;
     border-radius: 30px;
-    margin: 0 10px;
+    margin: auto;
     border: 1px solid #fff;
     transition: all .2s ease;
     cursor: pointer;

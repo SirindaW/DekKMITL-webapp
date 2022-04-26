@@ -7,6 +7,7 @@ from account.models import Account
 
 def home_view(request):
     
+    top3 = Post.objects.active()
     latest_posts = Post.objects.active().order_by('-date_created')[:7] # Recent 7 active posts
     temporary_posts = Post.objects.active().filter(is_expirable=True).order_by('-date_created')[:2]
     room_educate = Room.objects.get(title='room_educate')
