@@ -25,9 +25,7 @@ def profile_view(request,user_id=None,*args, **kwargs):
 
 def toggle_follow_view(request,user_id):
     user = get_object_or_404(Account,id=user_id)
-    print("account",user)
     request.user.toggle_follow(user)
-    print(request.user.followings())
     
     return redirect(user.get_absolute_url())
     

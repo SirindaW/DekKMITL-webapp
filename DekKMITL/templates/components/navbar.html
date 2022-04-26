@@ -67,7 +67,7 @@
                     <div class="profile-dropdown-content" id="profile_dropdown">
                         <div class="navbar-name">{{request.user.first_name|title}}&nbsp;{{request.user.last_name|title}}</div>
                         <a href="{%url 'profile_view'%}">หน้าโปรไฟล์ของคุณ</a>
-                        <a href="#link to user's following blog">หน้าฟีดของคุณ</a>
+                        <a href="{% url 'post:following_feed_view' %}">หน้าฟีดของคุณ</a>
                         <a href="{%url 'logout_view'%}">ออกจากระบบ</a>
                     </div>
                 </div>
