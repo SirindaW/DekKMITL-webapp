@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'pages',
     'account',
     'post',
+    'postreport',
     # 'taggit',
 
 ]
