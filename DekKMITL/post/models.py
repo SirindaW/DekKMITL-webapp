@@ -67,6 +67,10 @@ class Post(models.Model):
     # post.comments.all() -> QuerySet of comments on that post
     # 
 
+    def get_report_url(self):
+        return reverse('postreport:post_report_view',kwargs={'post_slug':self.slug})
+
+
     def get_comments(self):
         return self.comments.all().order_by('-date_created')
     

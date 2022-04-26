@@ -25,6 +25,7 @@ urlpatterns = [
     path("account/",include('account.urls')),
     path("rules/",rules_view,name="rules_view"),
     path("reports/",report_view,name="report_view"),
+    path("report",include('postreport.urls')),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
