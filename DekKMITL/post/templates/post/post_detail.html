@@ -76,6 +76,7 @@
         <!-- 2. comment -->
         <div class="comment-container">
             <!-- 2.1 ส่วนเขียน comment -->
+            {% if request.user.is_authenticated %}
             <form method="POST" id="comment_submit">
                 <div class="comment-write">
                     <div class="comment-input">
@@ -94,6 +95,7 @@
                     </div>
                 </div>
             </form>
+            {% endif %}
             <!-- 2.2 ส่วนความคิดเห็นคนอื่น -->
             <div class="comment-read">
                 <div class="comment-count">{{post.total_comments}} ความคิดเห็น</div>
@@ -163,6 +165,7 @@
         }
 
         //---------------comment--------------------
+        if('{{request.user.is_authenticated}}'=='True'){
         var comment = document.getElementById("comment_input");
 
         //ค่าเริ่มต้น
@@ -172,7 +175,7 @@
         comment.addEventListener("input", function() {
             countWord(comment.value)
             comment.value = comment.value.substring(0, 1000);
-        });
+        });}
 
         //like button 
         var like = document.querySelector("#like_btn");
