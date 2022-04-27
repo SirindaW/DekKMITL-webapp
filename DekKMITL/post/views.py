@@ -258,7 +258,7 @@ def tag_detail_view(request,tag):
     }
     return render(request,'post/tag_detail.html',context)
 
-    
+@login_required(login_url='login_view')
 def comment_like_toggle_view(request,id):
     comment = get_object_or_404(Comment,id=id)
     comment.toggle_like(request.user)
