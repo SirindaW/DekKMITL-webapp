@@ -32,6 +32,10 @@
     transition: all .5s ease;
 }
 
+.scalewidth {
+    width: 100%;
+}
+
 .line {
     border-bottom: 1px solid #fff;
 }

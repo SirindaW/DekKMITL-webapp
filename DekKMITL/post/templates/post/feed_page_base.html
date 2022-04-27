@@ -6,7 +6,7 @@
 
 
 <div class="container">
-    <div class="feed-title">{% block feed_title %} {% endblock %}</div>
+    <div class="feed-title" id="feed_title">{% block feed_title %} {% endblock %}</div>
     <div class="filter">
         <div hx-trigger="revealed" hx-swap="innerHTML" hx-target="#all_post" hx-get="{% block default_hx %}{% endblock %}"></div>
         <div class="latest" id="latest_post" onclick="removeClass('underline_effect', 'underline')" hx-trigger="click" hx-swap="innerHTML" hx-target="#all_post" hx-get="{% block get_hx_latest_post %}{% endblock %}">{% block first_tab_name %}ล่าสุด {% endblock %}</div>
@@ -25,4 +25,15 @@
 
 
 <!-- back to top btn -->
-<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top"> {% endblock %}
+<img src="{% static 'images/arrowup.png'%}" onclick="topFunction()" class="back-to-top" id="back_to_top">
+
+<script>
+    var titleText = document.getElementById('feed_title').innerText;
+    if (titleText == 'ฟีดของคุณ') {
+        addClass('underline_effect', 'scalewidth')
+    } else if (titleText == 'กระทู้ทั้งหมด') {
+        addClass('underline_effect', 'underline')
+    }
+</script>
+
+{% endblock %}

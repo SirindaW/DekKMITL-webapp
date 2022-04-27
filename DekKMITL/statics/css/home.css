@@ -260,6 +260,7 @@
 .time-show {
     display: block;
     height: 228px;
+    cursor: pointer;
 }
 
 

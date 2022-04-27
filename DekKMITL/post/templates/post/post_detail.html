@@ -5,13 +5,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <div class="container">
-
     <!-- 0. แจ้งเตือนรายงานสำเร็จ -->
     <div class="alert" id="alert">
         รายงานสำเร็จ
         <span class="closebtn" onclick="this.parentElement.style.display='none';">✕</span>
     </div>
-
+    {% for message in messages %}
+    <script>
+        if ('{{message}}') {
+            displayClass('alert')
+        }
+    </script>
+    {% endfor %}
     <!-- 1. เนื้อหากระทู้นั้น ๆ และรูปโปรเจ้าของกระทู้นั้น ๆ -->
     <div class="post-container vhcenter">
         <!-- 1.1 รูปโปรเจ้าของกระทู้ -->
@@ -34,10 +39,10 @@
                         {% if request.user.is_admin %}
                         <a href="{{post.get_edit_url}}">แก้ไข</a>
                         <a href="{{post.get_delete_url}}">ลบ</a>
-                        <a href="{{post.get_report_url}}" class="report-post" onclick="displayClass('alert')">รายงาน</a> {% else %} {% if request.user.pk == post.author.pk %}
+                        <a href="{{post.get_report_url}}" class="report-post">รายงาน</a> {% else %} {% if request.user.pk == post.author.pk %}
                         <a href="{{post.get_edit_url}}">แก้ไข</a>
                         <a href="{{post.get_delete_url}}">ลบ</a> {% endif %} {% if request.user.pk != post.author.pk %}
-                        <a href="{{post.get_report_url}}" class="report-post" onclick="displayClass('alert')">รายงาน</a> {% endif %} {% endif %}
+                        <a href="{{post.get_report_url}}" class="report-post">รายงาน</a> {% endif %} {% endif %}
                     </div>
                 </div>
             </div>
