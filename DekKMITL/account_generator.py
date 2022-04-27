@@ -4,20 +4,19 @@ import string
 import random
 import names
 
-AMOUNT = 50
-
 def password_gen(lenght=16):
     letters = string.ascii_lowercase+string.ascii_uppercase + string.digits + string.punctuation
     return ''.join(random.choice(letters) for _ in range(lenght))
 
 def email_gen(name,domainname='mail.com'):
-    return name.lower()+'@'+domainname.lower()
+    number = random.randint(1000,9999)
+    return name.lower()+str(number)+'@'+domainname.lower()
 
 
-def generate_accounts_to_json(file_name='dummy_account.json'):
+def generate_accounts_to_json(amount=10,file_name='dummy_account.json'):
     accounts = []
 
-    for i in range(1,AMOUNT+1):
+    for i in range(1,amount+1):
         first_name = names.get_first_name()
         last_name = names.get_last_name()
         email = email_gen(name=first_name,domainname='kmitl.ac.th')
@@ -38,7 +37,10 @@ def generate_accounts_to_json(file_name='dummy_account.json'):
         file.write(dmp)
         print(f"{len(dmp)} wrote to {file_name}")
 
-def register_accounts(accounts):
+def register_accounts_from_json(file='dummy_account.json'):
+    with open(file,'r') as file:
+        content = file.read()
+    accounts = json.loads(content) 
     for account in accounts:
         email = account.get('email')
         first_name = account.get('first_name')
