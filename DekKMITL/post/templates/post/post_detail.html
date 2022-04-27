@@ -55,7 +55,17 @@
             {% if not post.is_cover_image_default %}
             <img src="{{post.get_cover_image_url}}" class="post-page-cover"> {% endif %}
             <!-- 1.2.3 เนื้อหากระทู้ -->
-            <div class="post-body blogfont">{{post.content}}</div>
+            <div class="post-body blogfont" id="post_body">
+                <script>
+                    var text = `{{post.content}}`;
+                    var postContent = '';
+                    text = text.split('\n');
+                    for (var i = 0; i < text.length; i++) {
+                        postContent += text[i] + '<br>'
+                    }
+                    document.getElementById('post_body').innerHTML = postContent;
+                </script>
+            </div>
             <!-- 1.2.4 ชื่อห้อง และปุ่มไลค์ -->
             <div class="post-room-like spc-btw">
                 <div class="post-room"><img src="{{post.room.icon.url}}" style="width:25px">&nbsp;&nbsp;ห้อง{{post.room.verbose}}</div>
