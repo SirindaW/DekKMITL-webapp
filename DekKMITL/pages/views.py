@@ -49,7 +49,7 @@ def hx_home_filter_view(request, period='ONE_WEEK',verbose_only=False):
 
     context = {
         'posts':top3_posts,
-        'current_filter_verbose':Top3Filter.get_verbose(period)
+        'selected_filter_verbose':Top3Filter.get_verbose(period)
     }
 
     if request.htmx:

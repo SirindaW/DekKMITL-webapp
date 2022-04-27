@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{%static '/css/feed_page.css'%}">
 <script src="https://unpkg.com/htmx.org@1.7.0" integrity="sha384-EzBXYPt0/T6gxNp0nuPtLkmRpmDBbjg6WmCUZRLXBBwYYmwAUxzlSGej0ARHX0Bo" crossorigin="anonymous" defer></script>
 
-<div hx-trigger="revealed" hx-swap="innerHTML" hx-target="#post_loop" hx-get="{% url 'hx_home_filter_view' 'ONE_WEEK' %}"></div>
+<div hx-trigger="revealed" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ONE_WEEK' %}"></div>
 
 <div class="homeblog-container" style="min-width:49%">
     <div class="top3-container">
@@ -14,10 +14,10 @@
             <div class="time-choose-dropdown">
                 <button onclick="toggleClass('time_choose_dropdown', 'time-show')" class="time-choose-dropbtn" id="period">หนึ่งสัปดาห์ ▾</button>
                 <div id="time_choose_dropdown" class="time-choose-dropdown-content" hx-trigger="click" hx-target="#period" hx-swap="innerHTML">
-                    <a id="oneday" hx-trigger="click" hx-swap="innerHTML" hx-target="#post_loop" hx-get="{% url 'hx_home_filter_view' 'ONE_DAY' %}">หนึ่งวัน</a>
-                    <a id="oneweek" hx-trigger="click" hx-swap="innerHTML" hx-target="#post_loop" hx-get="{% url 'hx_home_filter_view' 'ONE_WEEK' %}">หนึ่งสัปดาห์</a>
-                    <a id="onemonth" hx-trigger="click" hx-swap="innerHTML" hx-target="#post_loop" hx-get="{% url 'hx_home_filter_view' 'ONE_MONTH' %}">หนึ่งเดือน</a>
-                    <a id="alltime" hx-trigger="click" hx-swap="innerHTML" hx-target="#post_loop" hx-get="{% url 'hx_home_filter_view' 'ALLTIME' %}">เวลาทั้งหมด</a>
+                    <a id="oneday" hx-trigger="click" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ONE_DAY' %}">หนึ่งวัน</a>
+                    <a id="oneweek" hx-trigger="click" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ONE_WEEK' %}">หนึ่งสัปดาห์</a>
+                    <a id="onemonth" hx-trigger="click" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ONE_MONTH' %}">หนึ่งเดือน</a>
+                    <a id="alltime" hx-trigger="click" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ALLTIME' %}">เวลาทั้งหมด</a>
                 </div>
                 <!-- <select id="period" class="choose-period">
                     <option value="oneday">หนึ่งวัน</option>
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="allpopblog" style="min-height:300px">
-        <div id="post_loop">
+        <div id="hx_swap_target">
         <!-- ******************** Loop Blog ********************* -->
         <!-- Moved to pages/components/hx_partials/post_loop.html -->
         <!-- **************************************************** -->
