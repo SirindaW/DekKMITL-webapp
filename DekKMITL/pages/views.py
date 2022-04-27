@@ -16,7 +16,7 @@ class Top3Filter:
 
     verbose = {
         str(ONE_DAY):'หนึ่งวัน',
-        str(ONE_WEEK):'หนึ่งอาทิตย์',
+        str(ONE_WEEK):'หนึ่งสัปดาห์',
         str(ONE_MONTH):'หนึ่งเดือน',
         str(ALLTIME):'เวลาทั้งหมด',
     }
