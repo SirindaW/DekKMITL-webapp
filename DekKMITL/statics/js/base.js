@@ -89,7 +89,7 @@ function buttonAble(buttonID, condition) {
 }
 //function count word
 function countWord(val) {
-    var wom = val.match(/.+/g);
+    var wom = val.match(/.+/s);
     var len = 0;
     if (wom) {
         len = wom[0].length;
