@@ -1,13 +1,65 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from django.apps import apps
 from post.models import Post, Comment, CommentLike, Tag, Room
 from account.models import Account
+from DekKMITL.utils import sort_queryset_by_key
 
+from datetime import timedelta,timezone,datetime
+
+class Top3Filter:
+    ONE_DAY = timedelta(days=1)
+    ONE_WEEK = timedelta(days=7)
+    ONE_MONTH = timedelta(days=30)
+    ALLTIME = 'ALLTIME'
+
+    verbose = {
+        str(ONE_DAY):'หนึ่งวัน',
+        str(ONE_WEEK):'หนึ่งอาทิตย์',
+        str(ONE_MONTH):'หนึ่งเดือน',
+        str(ALLTIME):'เวลาทั้งหมด',
+    }
+
+    def get_verbose(period):
+        return Top3Filter.verbose.get(str(period))
+
+def hx_home_filter_verbose_view(request):
+    return
+
+def hx_home_filter_view(request, period='ONE_WEEK',verbose_only=False):
+    period = Top3Filter.__dict__.get(period)
+    if verbose_only:    
+        return HttpResponse(Top3Filter.get_verbose(period))
+
+    posts = Post.objects.none()
+    active_posts = Post.objects.active()
+
+    if period is not Top3Filter.ALLTIME:
+        # do the time calculation and filter out the posts those have passed period time
+        now = datetime.now(timezone.utc)
+        for post in active_posts:
+            diff = now-post.date_created
+            if diff <= period:
+                posts |= Post.objects.filter(pk=post.pk)
+    else:
+        posts = active_posts
+            
+    top3_posts = sort_queryset_by_key(posts,key=lambda post: post.liker.count(),amount=3)
+
+    context = {
+        'posts':top3_posts,
+        'current_filter_verbose':Top3Filter.get_verbose(period)
+    }
+
+    if request.htmx:
+        template = 'pages/components/hx_partials/post_loop.html'
+        return render(request,template,context)
+
+    return HttpResponse('')
 
 def home_view(request):
     
-    top3 = Post.objects.active()
     latest_posts = Post.objects.active().order_by('-date_created')[:7] # Recent 7 active posts
     temporary_posts = Post.objects.active().filter(is_expirable=True).order_by('-date_created')[:2]
     room_educate = Room.objects.get(title='room_educate')
