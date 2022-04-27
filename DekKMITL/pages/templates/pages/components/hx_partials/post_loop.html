@@ -1,6 +1,8 @@
 {% load static %} {% load humanize %}
 
 <!-- ******************blog not found*****************8 -->
+<div style="display: none;" id="filterName">{{selected_filter_verbose}}</div>
+
 {% if not posts %}
 <div class="notfound-bigblog vhcenter">ยังไม่มีกระทู้</div>
 {% endif %}
@@ -33,3 +35,9 @@
     </div>
 </div>
 {% endfor %}
+
+<script> 
+    getFilterName = () => document.getElementById("filterName").childNodes[0];
+    console.log(getFilterName())
+
+</script>
