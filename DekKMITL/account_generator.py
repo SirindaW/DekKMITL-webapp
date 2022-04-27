@@ -47,7 +47,7 @@ def register_accounts_from_json(file='dummy_account.json'):
         last_name = account.get('last_name')
         password = account.get('password')
 
-        Account.objects.create(
+        Account.objects.create_user(
             email=email,
             first_name=first_name,
             last_name=last_name,
