@@ -3,7 +3,9 @@ from django.contrib import admin
 from django.urls import reverse
 from django.db.models.signals import pre_save,post_delete
 from DekKMITL.utils import unique_slug_generator
-from datetime import timezone,datetime,timedelta
+# from datetime import timezone,datetime,timedelta
+import datetime
+from django.utils import timezone
 from django.utils.timesince import timeuntil
 from django.db.models import Q
 from django.apps import apps
@@ -43,7 +45,7 @@ def get_default_cover_image():
 class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField(max_length=5000)
-    date_created = models.DateTimeField(auto_now_add=True,blank=True)
+    date_created = models.DateTimeField(default=timezone.now,blank=True,editable=True)
     last_modified = models.DateTimeField(auto_now=True)
     liker = models.ManyToManyField(Account,related_name='post_liked',null=True,blank=True)
     views = models.PositiveIntegerField(null=True,blank=True,default=0)
@@ -80,9 +82,9 @@ class Post(models.Model):
     @admin.display(boolean=True)
     def is_expired(self):
         if self.is_expirable:
-            now = datetime.now(timezone.utc)
+            now = datetime.datetime.now(datetime.timezone.utc)
             diff = now - self.expire_date
-            if diff > timedelta(0):
+            if diff > datetime.timedelta(0):
                 # exipired
                 return True
 
