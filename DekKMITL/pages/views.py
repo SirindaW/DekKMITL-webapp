@@ -45,7 +45,7 @@ def hx_home_filter_view(request, period='ONE_WEEK',verbose_only=False):
     else:
         posts = active_posts
             
-    top3_posts = sort_queryset_by_key(posts,key=lambda post: post.liker.count(),amount=3)
+    top3_posts = sort_queryset_by_key(posts,key=lambda post: post.liker.count(),model=Post,amount=3)
 
     context = {
         'posts':top3_posts,
