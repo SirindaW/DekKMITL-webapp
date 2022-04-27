@@ -1,4 +1,4 @@
-{% load static%} {% load humanize %} 
+{% load static%} {% load humanize %}
 
 <link rel="stylesheet" href="{%static '/css/home.css'%}">
 <link rel="stylesheet" href="{%static '/css/feed_page.css'%}">
@@ -12,27 +12,21 @@
         <div class="time-choose vhcenter">
             <div class="in" style="font-size:19px">ใน</div>
             <div class="time-choose-dropdown">
-                <button onclick="toggleClass('time_choose_dropdown', 'time-show')" class="time-choose-dropbtn" id="period">หนึ่งสัปดาห์ ▾</button>
+                <button onclick="toggleClass('time_choose_dropdown', 'time-show')" class="time-choose-dropbtn" id="period"></button>
                 <div id="time_choose_dropdown" class="time-choose-dropdown-content" hx-trigger="click" hx-target="#period" hx-swap="innerHTML">
                     <a id="oneday" hx-trigger="click" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ONE_DAY' %}">หนึ่งวัน</a>
                     <a id="oneweek" hx-trigger="click" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ONE_WEEK' %}">หนึ่งสัปดาห์</a>
                     <a id="onemonth" hx-trigger="click" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ONE_MONTH' %}">หนึ่งเดือน</a>
                     <a id="alltime" hx-trigger="click" hx-swap="innerHTML" hx-target="#hx_swap_target" hx-get="{% url 'hx_home_filter_view' 'ALLTIME' %}">เวลาทั้งหมด</a>
                 </div>
-                <!-- <select id="period" class="choose-period">
-                    <option value="oneday">หนึ่งวัน</option>
-                    <option value="oneweek" >หนึ่งสัปดาห์</option>
-                    <option value="onemonth"selected>หนึ่งเดือน</option>
-                    <option value="alltime">เวลาทั้งหมด</option>
-                </select> -->
             </div>
         </div>
     </div>
     <div class="allpopblog" style="min-height:300px">
         <div id="hx_swap_target">
-        <!-- ******************** Loop Blog ********************* -->
-        <!-- Moved to pages/components/hx_partials/post_loop.html -->
-        <!-- **************************************************** -->
+            <!-- ******************** Loop Blog ********************* -->
+            <!-- Moved to pages/components/hx_partials/post_loop.html -->
+            <!-- **************************************************** -->
         </div>
     </div>
 </div>
