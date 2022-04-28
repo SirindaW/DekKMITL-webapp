@@ -20,7 +20,7 @@
         </div>
         <div class="blog-detail" style="width:85%">
             <div class="blog-name two-line-wrap" style="max-width:100%">
-                <a href="#link to blog" class="blogfont">{{post.title}}</a>
+                <a href="{{post.get_absolute_url}}" class="blogfont">{{post.title}}</a>
             </div>
             <div class="blog-detail-2">
                 <div class="blog-username-date"><a href="{{post.author.get_absolute_url}}">{{post.author.first_name}} : {{post.date_created|naturaltime}}</a></div>

@@ -16,9 +16,8 @@
         <div class="post-body"><a href="{{ post.get_absolute_url }}">{{post.content}}</a></div>
         <div class="like-comment-count">
             <img src="{% static 'images/like.png'%}" style="width: 12px" />{{post.liker.count}}
-            <img src="{% static 'images/comment.png'%}" style="width: 12px" />2
+            <img src="{% static 'images/comment.png'%}" style="width: 12px" />{{post.total_comments}}
         </div>
     </div>
 </div>
 {% endfor %}
-
